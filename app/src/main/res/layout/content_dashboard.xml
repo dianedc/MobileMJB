@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.jasper.capstone.impl_classes.Dashboard"
+    tools:showIn="@layout/app_bar_dashboard"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/textView1"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_marginTop="150dp"-->
+    <!--android:gravity="center"-->
+    <!--android:text="@string/Dashboard"-->
+    <!--tools:ignore="Missing Constraints"-->
+    <!--tools:layout_editor_absoluteX="162dp"-->
+    <!--tools:layout_editor_absoluteY="246dp"-->
+    <!--/>-->
+    <!--<GridView-->
+    <!--android:id="@+id/dashboard_grid"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:listSelector="@android:color/transparent"-->
+    <!--android:stretchMode="columnWidth"-->
+    <!--android:verticalSpacing="1dp"-->
+    <!--android:horizontalSpacing="1dp"-->
+    <!--android:layout_margin="5dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--style="@style/dashboard"        />-->
+
+
+    <Button
+        android:id="@+id/btnProjects"
+        android:layout_width="300dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="42dp"
+        android:backgroundTint="@color/colorGreen"
+        android:drawableLeft="@drawable/ic_work_black_60dp"
+        android:drawableTint="@android:color/white"
+        android:text="Project: "
+        android:fontFamily="sans-serif-light"
+        android:textColor="@android:color/white"
+        android:textSize="10pt"
+        android:textStyle="bold|normal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:id="@+id/btnTasks"
+        android:layout_width="150dp"
+        android:layout_height="90dp"
+        android:drawableLeft="@drawable/ic_assignment_black_60dp"
+        android:drawableTint="@android:color/white"
+        android:backgroundTint="@color/colorOrange"
+        android:fontFamily="sans-serif-light"
+        android:textSize="20pt"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/btnProjects"
+        android:layout_alignLeft="@+id/btnProjects"
+        android:layout_alignStart="@+id/btnProjects"
+        android:layout_marginTop="28dp"
+        android:layout_alignRight="@+id/btnProjects"
+        android:layout_alignEnd="@+id/btnProjects" />
+
+
+
+    <Button
+        android:id="@+id/btnTaskss"
+        android:layout_width="150dp"
+        android:layout_height="90dp"
+        android:drawableLeft="@drawable/ic_assignment_black_60dp"
+        android:drawableTint="@android:color/white"
+        android:backgroundTint="@color/colorLightBlue"
+        android:fontFamily="sans-serif-light"
+        android:textSize="20pt"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/btnTasks"
+        android:layout_alignLeft="@+id/btnTasks"
+        android:layout_alignStart="@+id/btnTasks"
+        android:layout_marginTop="31dp"
+        android:layout_alignRight="@+id/btnTasks"
+        android:layout_alignEnd="@+id/btnTasks" />
+
+    <Button
+        android:id="@+id/btnSc"
+        android:layout_width="150dp"
+        android:layout_height="90dp"
+        android:drawableLeft="@drawable/ic_assignment_black_60dp"
+        android:drawableTint="@android:color/white"
+        android:backgroundTint="@color/colorRed"
+        android:fontFamily="sans-serif-light"
+        android:textSize="20pt"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btnTaskss"
+        android:layout_alignLeft="@+id/btnTaskss"
+        android:layout_alignStart="@+id/btnTaskss"
+        android:layout_alignRight="@+id/btnTaskss"
+        android:layout_alignEnd="@+id/btnTaskss" />
+
+</RelativeLayout>

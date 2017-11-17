@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_task"
+        android:icon="@drawable/ic_menu_task"
+        android:title="@string/title_task" />
+
+    <item
+        android:id="@+id/navigation_team"
+        android:icon="@drawable/ic_users"
+        android:title="@string/title_team" />
+
+    <item
+        android:id="@+id/navigation_pr"
+        android:icon="@drawable/ic_menu_forms"
+        android:title="@string/title_pr" />
+
+    <item
+        android:id="@+id/navigation_po"
+        android:icon="@drawable/ic_nav_po"
+        android:title="@string/title_po" />
+
+</menu>

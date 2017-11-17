@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="taskStatus">
+        <item>Select Task Status</item>
+        <item>Waiting</item>
+        <item>Active</item>
+        <item>Completed</item>
+        <item>Late</item>
+    </string-array>
+    <string-array name="projectStatus">
+        <item>Select Project Status</item>
+        <item>Active</item>
+        <item>Inactive</item>
+    </string-array>
+    <string-array name="projectname">
+        <item>Select Project Name</item>
+    </string-array>
+    <string-array name="taskOwner">
+        <item>Select Task Owner</item>
+    </string-array>
+    <string-array name="taskManager">
+        <item>Select Task Manager</item>
+    </string-array>
+    <string-array name="requestedby">
+        <item>Requested By</item>
+    </string-array>
+    <string-array name="approvalStatus">
+        <item>Select Approval Status</item>
+        <item>Approved</item>
+        <item>Denied</item>
+    </string-array>
+
+    <string-array name="projType">
+        <item>Select Project Type</item>
+        <item>Renovation</item>
+        <item>Construction</item>
+        <item>Demolition Only</item>
+        <item>Demolition w/ Construction</item>
+    </string-array>
+</resources>

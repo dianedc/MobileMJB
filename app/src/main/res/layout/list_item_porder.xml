@@ -1,0 +1,54 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/pord_id"
+        android:layout_width="107dp"
+        android:layout_height="40dp"
+        android:paddingLeft="13dp"
+        android:paddingTop="16dp"
+        android:text="tesxt"
+        android:textColor="#000000"
+        android:textSize="9pt"
+        android:textStyle="bold"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintRight_toLeftOf="@+id/btnEditPord" />
+
+    <TextView
+        android:id="@+id/pord_projman"
+        android:layout_width="108dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="0dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="13dp"
+        android:paddingTop="12dp"
+        android:text="TextView"
+        android:textSize="6pt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintRight_toLeftOf="@+id/btnEditPord"
+        app:layout_constraintTop_toBottomOf="@+id/pord_id" />
+
+    <Button
+        android:id="@+id/btnEditPord"
+        android:layout_width="27dp"
+        android:layout_height="26dp"
+        android:drawableLeft="@drawable/arrowright"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_button"
+        android:layout_marginRight="26dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteX="331dp" />
+
+</android.support.constraint.ConstraintLayout>
