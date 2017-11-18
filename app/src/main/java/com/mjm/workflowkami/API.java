@@ -4,6 +4,7 @@ package com.mjm.workflowkami;
  */
 
 import com.mjm.workflowkami.service_classes.ProjectService;
+import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.PurchaseOrderService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
@@ -27,6 +28,7 @@ public class API {
     private PurchaseRequestItemService purchaseRequestItemService;
     private PurchaseOrderService purchaseOrderService;
     private PurchaseRequestService purchaseRequestService;
+    private ProjectTeamService projectTeamService;
 
     public static API getInstance() {
         if (instance == null) {
@@ -49,6 +51,8 @@ public class API {
         this.purchaseRequestService = retrofit.create(PurchaseRequestService.class);
         this.purchaseOrderService = retrofit.create(PurchaseOrderService.class);
         this.purchaseRequestItemService = retrofit.create(PurchaseRequestItemService.class);
+        this.projectTeamService = retrofit.create(ProjectTeamService.class);
+
     }
 
     public UserService getUserService() {
@@ -72,4 +76,6 @@ public class API {
     }
 
     public PurchaseRequestItemService getPurchaseRequestItemService() {return this.purchaseRequestItemService; }
+
+    public ProjectTeamService getProjectTeamService () { return this.projectTeamService; }
 }

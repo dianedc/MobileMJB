@@ -145,8 +145,8 @@ public class AddUserr extends AppCompatActivity {
             case R.id.action_back:
                 startActivity(new Intent(this, Users.class));
                 return true;
-            case R.id.action_settings:
-                return true;
+//            case R.id.action_settings:
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
 

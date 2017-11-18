@@ -6,28 +6,28 @@
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_menu_dashboard"
             android:title="Dashboard" />
-        <item
-            android:id="@+id/nav_tasks"
-            android:icon="@drawable/ic_menu_task"
-            android:title="Tasks" />
-        <item
-            android:id="@+id/nav_schedule"
-            android:icon="@drawable/ic_menu_schedule"
-            android:title="Schedule" />
+        <!--<item-->
+            <!--android:id="@+id/nav_tasks"-->
+            <!--android:icon="@drawable/ic_menu_task"-->
+            <!--android:title="Tasks" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_schedule"-->
+            <!--android:icon="@drawable/ic_menu_schedule"-->
+            <!--android:title="Schedule" />-->
         <item
             android:id="@+id/nav_project"
             android:icon="@drawable/ic_menu_project"
             android:title="Project" />
 
-        <item
-            android:id="@+id/nav_purchaseRequest"
-            android:icon="@drawable/ic_menu_forms"
-            android:title="Purchase Request" />
+        <!--<item-->
+            <!--android:id="@+id/nav_purchaseRequest"-->
+            <!--android:icon="@drawable/ic_menu_forms"-->
+            <!--android:title="Purchase Request" />-->
 
-        <item
-            android:id="@+id/nav_purchaseOrder"
-            android:icon="@drawable/ic_menu_forms"
-            android:title="Purchase Order" />
+        <!--<item-->
+            <!--android:id="@+id/nav_purchaseOrder"-->
+            <!--android:icon="@drawable/ic_menu_forms"-->
+            <!--android:title="Purchase Order" />-->
 
         <item
             android:id="@+id/nav_files"

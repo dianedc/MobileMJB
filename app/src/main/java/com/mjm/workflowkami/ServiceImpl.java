@@ -4,11 +4,13 @@ package com.mjm.workflowkami;
 import android.util.Log;
 
 import com.mjm.workflowkami.model_classes.ProjectClass;
+import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.ProjectService;
+import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import com.mjm.workflowkami.service_classes.TaskService;
@@ -33,6 +35,7 @@ public class ServiceImpl {
     private ProjectService projectService = API.getInstance().getProjectService();
     private PurchaseRequestService purchaseRequestService = API.getInstance().getPurchaseRequestService();
     private PurchaseRequestItemService pItemService = API.getInstance().getPurchaseRequestItemService();
+    private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
     public List<UserClass> usersList;
     public ArrayList<String> userIDList = new ArrayList<String>();
     public List<TaskClass> tasksList = new ArrayList<TaskClass>();
@@ -40,6 +43,7 @@ public class ServiceImpl {
     public UserClass userClass = new UserClass();;
     public List<PurchaseRequestClass> prList = new ArrayList<PurchaseRequestClass>();
     public List<PurchaseRequestItemClass> pItemList = new ArrayList<PurchaseRequestItemClass>();
+    public List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
 
     public List<UserClass> GetAllUsers() {
 
@@ -261,6 +265,37 @@ public class ServiceImpl {
         });
 
         return pItemList;
+    }
+
+    public List<ProjectTeamClass> GetAllTeams() {
+
+        Call<List<ProjectTeamClass>> getTeams = projectTeamService.getAllProjTeams();
+
+        getTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
+            @Override
+            public void onResponse(Call<List<ProjectTeamClass>> call, Response<List<ProjectTeamClass>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectTeamClass> teamClassList = response.body();
+
+
+                    Log.d(TAG, response.toString());
+
+                    try {
+                        for (int i = 0; i < teamClassList.size(); i++) {
+                            pTeamList.add(new ProjectTeamClass(teamClassList.get(i).getProjteamID(),
+                                    teamClassList.get(i).getProjectID(),
+                                    teamClassList.get(i).getUserID(),
+                                    teamClassList.get(i).getProjuserrole()));
+
+                        }
+                    } catch (final Exception e) { e.printStackTrace(); }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) { t.printStackTrace(); }
+        });
+
+        return pTeamList;
     }
 
 }

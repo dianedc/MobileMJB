@@ -152,7 +152,13 @@
     <string name="title_activity_add_project">Project</string>
     <string name="title_activity_add_purchase_request">Purchase Request</string>
     <string name="title_activity_add_purchase_order">Purchase Order</string>
+    <string name="title_activity_add_project_team">Project Team</string>
+    <string name="title_activity_project_team">Project Team</string>
+    <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_purchase_order">Purchase Order</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
     <string name="projectname">Project Name</string>
     <string name="title_activity_settings">Settings</string>
@@ -162,6 +168,7 @@
     <string name="title_pr">Purchase Request</string>
     <string name="title_po">Purchase Order</string>
     <string name="title_attendance">Attendance</string>
+    <string name="title_activity_workers">Workers</string>
 
     <string name="DialogItem">Item</string>
     <string name="DialogQuantity">Qty</string>
@@ -172,5 +179,13 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="tab1">Engineers / Architects</string>
+    <string name="tab2">Workers</string>
+    <string name="tab3">Attendance</string>
+    <string name="workers">MJM Konstruct &amp; Management Inc.</string>
+
+    <string name="title_file_list">Files</string>
+    <string name="title_file_detail">File Detail</string>
 
 </resources>
