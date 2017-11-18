@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_project"
+            android:icon="@drawable/ic_menu_project"
+            android:title="Projects" />
+
+        <!--<item-->
+        <!--android:id="@+id/nav_purchaseRequest"-->
+        <!--android:icon="@drawable/ic_menu_forms"-->
+        <!--android:title="Purchase Request" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_purchaseOrder"-->
+        <!--android:icon="@drawable/ic_menu_forms"-->
+        <!--android:title="Purchase Order" />-->
+
+        <item
+            android:id="@+id/nav_files"
+            android:icon="@drawable/ic_menu_file"
+            android:title="Files" />
+
+        <item
+            android:id="@+id/nav_reports"
+            android:icon="@drawable/ic_reports"
+            android:title="Reports" />
+
+        <item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/ic_users"
+            android:title="Users" />
+
+        <item
+            android:id="@+id/nav_workers"
+            android:icon="@drawable/ic_nav_workers"
+            android:title="Workers"/>
+
+    </group>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>
