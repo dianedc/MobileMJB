@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.example.jasper.capstone.add_classes.AddPRequest$PlaceholderFragment">
+    tools:context="com.mjm.workflowkami.add_classes.AddPRequest$PlaceholderFragment">
 
     <!--<TextView-->
         <!--android:id="@+id/section_label"-->

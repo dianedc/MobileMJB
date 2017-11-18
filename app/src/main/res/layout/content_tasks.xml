@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.jasper.capstone.impl_classes.Tasks"
+    tools:context="com.mjm.workflowkami.impl_classes.Tasks"
     tools:showIn="@layout/app_bar_tasks">
 
     <ListView

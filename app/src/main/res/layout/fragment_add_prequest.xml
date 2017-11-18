@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jasper.capstone.add_classes.AddPRequest$PlaceholderFragment">
+    tools:context="com.mjm.workflowkami.add_classes.AddPRequest$PlaceholderFragment">
 
     <!--<TextView-->
         <!--android:id="@+id/section_label"-->
@@ -239,7 +239,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/radioButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
@@ -316,14 +316,14 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/radioButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:text="Approved" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -398,14 +398,14 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/radioButton5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:text="Approved" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButton6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
