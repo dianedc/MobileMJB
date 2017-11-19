@@ -120,17 +120,17 @@ public class AddProject extends AppCompatActivity
 
         if (projectIntent != null) {
             projID.setText(String.valueOf(projectIntent.getProjID()));
-            projname.setText(projectIntent.getProjectname());
-            fromDate.setText(projectIntent.getProjectstartdate());
-            toDate.setText(projectIntent.getProjectenddate());
+            projname.setText(projectIntent.getProjname());
+            fromDate.setText(projectIntent.getProjstartdate());
+            toDate.setText(projectIntent.getProjenddate());
             for (int i = 0; i < projStatus.getCount(); i++) {
-                if (projStatus.getItemAtPosition(i).toString().equals(projectIntent.getProjectstatus())) {
+                if (projStatus.getItemAtPosition(i).toString().equals(projectIntent.getProjstatus())) {
                     projStatus.setSelection(i);
                     break;
                 }
             }
-            viewProjMan.setText(projectIntent.getProjectmanager().getLastname() + ", " + projectIntent.getProjectmanager().getFirstname());
-            projProgress.setText(projectIntent.getProjectprogress().toString());
+            viewProjMan.setText(projectIntent.getProjmanager().getLastname() + ", " + projectIntent.getProjmanager().getFirstname());
+            projProgress.setText(projectIntent.getProjprogress().toString());
         }
         Call<List<UserClass>> getUsers = userService.getAllUsers();
 
@@ -163,36 +163,36 @@ public class AddProject extends AppCompatActivity
             }
         });
 
-        saveProject.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!projID.getText().toString().matches("")) {
-                    //update
-                    Toast.makeText(AddProject.this, "inside update", Toast.LENGTH_SHORT).show();
-                    project = new ProjectClass(Integer.valueOf(projID.getText().toString()),
-                            projname.getText().toString().trim(),
-                            fromDate.getText().toString().trim(),
-                            toDate.getText().toString().trim(),
-                            projStatus.getSelectedItem().toString().trim(),
-                            userClass1,
-                            Double.parseDouble(projProgress.getText().toString()));
-
-                    Toast.makeText(AddProject.this, project.toString(), Toast.LENGTH_SHORT).show();
-                    UpdateProject(projectIntent.getProjID(), project);
-                } else {
-                    //add
-                    Toast.makeText(AddProject.this, "inside add", Toast.LENGTH_SHORT).show();
-                    project = new ProjectClass(projname.getText().toString().trim(),
-                            fromDate.getText().toString().trim(),
-                            toDate.getText().toString().trim(),
-                            projStatus.getSelectedItem().toString().trim(),
-                            userClass1,
-                            Double.parseDouble(projProgress.getText().toString()));
-                    AddProjects(project);
-                }
-            }
-        });
+//        saveProject.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (!projID.getText().toString().matches("")) {
+//                    //update
+//                    Toast.makeText(AddProject.this, "inside update", Toast.LENGTH_SHORT).show();
+//                    project = new ProjectClass(Integer.valueOf(projID.getText().toString()),
+//                            projname.getText().toString().trim(),
+//                            fromDate.getText().toString().trim(),
+//                            toDate.getText().toString().trim(),
+//                            projStatus.getSelectedItem().toString().trim(),
+//                            userClass1,
+//                            Double.parseDouble(projProgress.getText().toString()));
+//
+//                    Toast.makeText(AddProject.this, project.toString(), Toast.LENGTH_SHORT).show();
+//                    UpdateProject(projectIntent.getProjID(), project);
+//                } else {
+//                    //add
+//                    Toast.makeText(AddProject.this, "inside add", Toast.LENGTH_SHORT).show();
+//                    project = new ProjectClass(projname.getText().toString().trim(),
+//                            fromDate.getText().toString().trim(),
+//                            toDate.getText().toString().trim(),
+//                            projStatus.getSelectedItem().toString().trim(),
+//                            userClass1,
+//                            Double.parseDouble(projProgress.getText().toString()));
+//                    AddProjects(project);
+//                }
+//            }
+//        });
 
 
 

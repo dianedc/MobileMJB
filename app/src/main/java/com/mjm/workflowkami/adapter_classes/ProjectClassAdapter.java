@@ -38,9 +38,9 @@ public class ProjectClassAdapter extends ArrayAdapter<ProjectClass> {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.list_item_projects, parent, false);
         TextView txtProjname = (TextView) view.findViewById(R.id.projname);
-        txtProjname.setText(projects.get(position).getProjectname());
+        txtProjname.setText(projects.get(position).getProjname());
         TextView txtProjectManager = (TextView) view.findViewById(R.id.projmanager);
-        txtProjectManager.setText(projects.get(position).getProjectmanager().getLastname());
+        txtProjectManager.setText(projects.get(position).getProjmanager().getLastname());
 
         Button btnEdit = (Button) view.findViewById(R.id.btnEditProj);
         btnEdit.setOnClickListener(new View.OnClickListener() {

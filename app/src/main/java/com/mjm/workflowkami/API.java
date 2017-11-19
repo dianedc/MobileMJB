@@ -11,15 +11,19 @@ import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import com.mjm.workflowkami.service_classes.TaskService;
 import com.mjm.workflowkami.service_classes.UserService;
 
+import java.net.URLEncoder;
+
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class API {
-    public final String BASE_URL = "http://192.168.2.108:8081/rest/";
-//    public final String BASE_URL = "http://192.168.2.144:8081/rest/";
+//    public final String BASE_URL = "http://192.168.2.108:8081/rest/";
+    public final String BASE_URL = "http://192.168.2.123:8081/rest/";
 //    public final String BASE_URL = "http://192.168.2.144:8080/";
 //    public final String BASE_URL = "http://172.20.10.5:8081/rest/";
     //    public final String BASE_URL = "http://10.1.15.97:8081/rest/";
+//    public static final String BASE_URL = "http://mjmdb-182915.appspot.com/";
     private static API instance = null;
 
     private UserService userService;
@@ -43,7 +47,7 @@ public class API {
 
     private void buildRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL).build();
         this.userService = retrofit.create(UserService.class);
         this.taskService = retrofit.create(TaskService.class);

@@ -44,10 +44,10 @@ public class AddPRequestHdr extends Fragment {
         projs = (ProjectClass) intent.getSerializableExtra("projs");
 
 
-        Toast.makeText(getActivity(), preq.toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(), preq.toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
         if (preq != null) {
-            projname.setText(projs.getProjectname());
+            projname.setText(projs.getProjname());
             preq_daterequested.setText(preq.getPreqdate());
 //            preqProjMan.setText(preq.getPreqprojman().getLastname());
             projman_dateapproved.setText(preq.getPreqpmdate());

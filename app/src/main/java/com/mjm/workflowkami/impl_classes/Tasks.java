@@ -76,8 +76,10 @@ public class Tasks extends AppCompatActivity
                         break;
 
                     case R.id.navigation_team:
-                        Toast.makeText(Tasks.this, "Going to teams", Toast.LENGTH_LONG).show();
-                        break;
+                        loader.show();
+                        Intent te = new Intent(Tasks.this, ProjectTeam.class);
+                        startActivity(te);
+                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(Tasks.this, Forms.class);

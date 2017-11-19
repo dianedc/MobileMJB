@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.model_classes;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by Jasper on 15 Sep 2017.
@@ -14,25 +15,31 @@ public class PurchaseRequestItemClass implements Serializable{
     private String prequnit;
     private String preqdesc;
     private String preqjob;
+    private Double prequnitprice;
+    private Double preqlinetotal;
 
     public PurchaseRequestItemClass() {
 
     }
 
-    public PurchaseRequestItemClass(int preqItemID, int preqID, int preqqty, String prequnit, String preqdesc, String preqjob) {
+    public PurchaseRequestItemClass(int preqItemID, int preqID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, Double preqlinetotal) {
         this.preqItemID = preqItemID;
         this.preqID = preqID;
         this.preqqty = preqqty;
         this.prequnit = prequnit;
         this.preqdesc = preqdesc;
         this.preqjob = preqjob;
+        this.prequnitprice = prequnitprice;
+        this.preqlinetotal = preqlinetotal;
     }
-    public PurchaseRequestItemClass( int preqID, int preqqty, String prequnit, String preqdesc, String preqjob) {
+    public PurchaseRequestItemClass(int preqID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, Double preqlinetotal) {
         this.preqID = preqID;
         this.preqqty = preqqty;
         this.prequnit = prequnit;
         this.preqdesc = preqdesc;
         this.preqjob = preqjob;
+        this.prequnitprice = prequnitprice;
+        this.preqlinetotal = preqlinetotal;
     }
 
     public int getPreqItemID() {
@@ -81,5 +88,21 @@ public class PurchaseRequestItemClass implements Serializable{
 
     public void setPreqjob(String preqjob) {
         this.preqjob = preqjob;
+    }
+
+    public Double getPrequnitprice() {
+        return prequnitprice;
+    }
+
+    public void setPrequnitprice(Double prequnitprice) {
+        this.prequnitprice = prequnitprice;
+    }
+
+    public Double getPreqlinetotal() {
+        return preqlinetotal;
+    }
+
+    public void setPreqlinetotal(Double preqlinetotal) {
+        this.preqlinetotal = preqlinetotal;
     }
 }

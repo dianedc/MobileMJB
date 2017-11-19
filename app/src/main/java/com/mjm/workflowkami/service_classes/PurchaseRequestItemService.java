@@ -31,7 +31,7 @@ public interface PurchaseRequestItemService {
     Call<ProjectClass> getPRequestById(@Path("prequestID") int preqID, @Path("preqitemID") int preqitemID);
 
     @POST("prequest/{prequestID}/item/add")
-    Call<PurchaseRequestItemClass> addPReqItem(@Body PurchaseRequestItemClass preqItem);
+    Call<PurchaseRequestItemClass> addPReqItem(@Path("prequestID") int preqID, @Body PurchaseRequestItemClass preqItem);
 
     @POST("prequest/{prequestID}/item/update/{preqitemID}")
     Call<Void> editPReqItem(@Path("prequestID") int preqID, @Path("preqitemID") int preqitemID, @Body PurchaseRequestItemClass preqitem);

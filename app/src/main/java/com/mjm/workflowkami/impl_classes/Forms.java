@@ -28,6 +28,8 @@ import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
+
 public class Forms extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,6 +39,7 @@ public class Forms extends AppCompatActivity
     private ServiceImpl serviceImpl = new ServiceImpl();
     private List<PurchaseRequestClass> preqList = new ArrayList<PurchaseRequestClass>();
     private PurchaseRequestService purchaseRequestService = API.getInstance().getPurchaseRequestService();
+    private SpotsDialog loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +65,10 @@ public class Forms extends AppCompatActivity
                         break;
 
                     case R.id.navigation_team:
-                        Toast.makeText(Forms.this, "Going to teams", Toast.LENGTH_LONG).show();
-                        break;
+                        loader.show();
+                        Intent te = new Intent(Forms.this, ProjectTeam.class);
+                        startActivity(te);
+                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(Forms.this, Forms.class);

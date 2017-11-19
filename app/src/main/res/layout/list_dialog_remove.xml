@@ -45,16 +45,16 @@
         <!--app:layout_constraintTop_toTopOf="@+id/vItem"-->
         <!--app:layout_constraintVertical_bias="1.0" />-->
 
-    <Button
-        android:id="@+id/btnRemoveItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:text="@string/remove"
-        app:layout_constraintBottom_toBottomOf="@+id/vItem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/vItem" />
+    <!--<Button-->
+        <!--android:id="@+id/btnRemoveItem"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:text="@string/remove"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/vItem"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/vItem" />-->
 
 
 </RelativeLayout>

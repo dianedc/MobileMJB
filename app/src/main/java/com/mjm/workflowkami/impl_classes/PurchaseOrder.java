@@ -29,6 +29,7 @@ import com.mjm.workflowkami.service_classes.PurchaseOrderService;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,7 +42,7 @@ public class PurchaseOrder extends AppCompatActivity
     private ServiceImpl serviceImpl = new ServiceImpl();
     List<PurchaseOrderClass> pordList = new ArrayList<PurchaseOrderClass>();
     private PurchaseOrderService purchaseOrderService = API.getInstance().getPurchaseOrderService();
-
+    private SpotsDialog loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,8 +121,10 @@ public class PurchaseOrder extends AppCompatActivity
                         break;
 
                     case R.id.navigation_team:
-                        Toast.makeText(PurchaseOrder.this, "Going to teams", Toast.LENGTH_LONG).show();
-                        break;
+                        loader.show();
+                        Intent t = new Intent(PurchaseOrder.this, ProjectTeam.class);
+                        startActivity(t);
+                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(PurchaseOrder.this, Forms.class);

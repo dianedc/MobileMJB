@@ -1,5 +1,6 @@
 package com.mjm.workflowkami.add_classes;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mjm.workflowkami.R;
+import com.mjm.workflowkami.impl_classes.Forms;
 
 public class AddPRequest extends AppCompatActivity {
 
@@ -86,6 +88,9 @@ public class AddPRequest extends AppCompatActivity {
         if (id == android.R.id.home) {
             finish();
             return true;
+        } else if (id == R.id.action_back_dtl_item) {
+            Intent add = new Intent(getApplicationContext(), Forms.class);
+            startActivity(add);
         }
 
         return super.onOptionsItemSelected(item);

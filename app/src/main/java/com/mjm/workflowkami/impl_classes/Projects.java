@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.ServiceImpl;
@@ -27,6 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Projects extends AppCompatActivity
@@ -35,12 +41,10 @@ public class Projects extends AppCompatActivity
     private String TAG = Projects.class.getSimpleName();
     private ListView listOfProjects;
     private SpotsDialog loader;
-    //private ArrayAdapter<String> adapter;
     private ProjectService projectService = API.getInstance().getProjectService();
-    private ProjectClass project;
-    //private Object[] projectClassList;
     List<ProjectClass> projectsList = new ArrayList<ProjectClass>();
     private ServiceImpl serviceImpl = new ServiceImpl();
+    private List<String> strings = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,42 +52,52 @@ public class Projects extends AppCompatActivity
         setContentView(R.layout.activity_projects);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        String[] arr = {"prj1", "proj2"};
 
         loader = new SpotsDialog(Projects.this);
 
         listOfProjects = (ListView) findViewById(R.id.lstProjects);
-        serviceImpl.GetAllProjects();
-        listOfProjects.setAdapter(new ProjectClassAdapter(this, serviceImpl.projectsList));
-        loader.dismiss();
+//        serviceImpl.GetAllProjects();
+        Call<List<ProjectClass>> getProjects = projectService.getAllProjects();
 
-//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId())
-//                {
-//                    case R.id.navigation_task:
-//                        Intent n = new Intent(Projects.this, Tasks.class);
-//                        startActivity(n);
-//                        break;
-//
-//                    case R.id.navigation_team:
-//                        Toast.makeText(Projects.this, "Going to teams", Toast.LENGTH_LONG).show();
-//                        break;
-//
-//                    case R.id.navigation_pr:
-//                        Intent p = new Intent(Projects.this, Forms.class);
-//                        startActivity(p);
-//                        break;
-//
-//                    case R.id.navigation_po:
-//                        Intent po =  new Intent(Projects.this, PurchaseOrder.class);
-//                        startActivity(po);
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
+        getProjects.enqueue(new Callback<List<ProjectClass>>() {
+            @Override
+            public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectClass> projectClassList = response.body();
+
+//                    Toast.makeText(Projects.this, response.body().toString(), Toast.LENGTH_LONG).show();
+//                    Log.d(TAG, response.toString());
+                    try {
+                        for (int i = 0; i < projectClassList.size(); i++) {
+                            projectsList.add(new ProjectClass(projectClassList.get(i).getProjID(),
+                                    projectClassList.get(i).getProjname(),
+                                    projectClassList.get(i).getProjclient(),
+                                    projectClassList.get(i).getProjdesc(),
+                                    projectClassList.get(i).getProjtype(),
+                                    projectClassList.get(i).getProjstartdate(),
+                                    projectClassList.get(i).getProjenddate(),
+                                    projectClassList.get(i).getProjdatecompleted(),
+                                    projectClassList.get(i).getProjstatus(),
+                                    projectClassList.get(i).getProjmanager(),
+                                    projectClassList.get(i).getProjcontractbudget(),
+                                    projectClassList.get(i).getProjtargetbudget(),
+                                    projectClassList.get(i).getProjprogress(),
+                                    projectClassList.get(i).getProjduration()));
+//                            strings.add(projectClassList.get(i).getProjname());
+
+                        }
+                    } catch (final Exception e) { e.printStackTrace(); }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ProjectClass>> call, Throwable t) {
+                Toast.makeText(Projects.this, t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        Toast.makeText(Projects.this, projectsList.toString(), Toast.LENGTH_LONG).show();
+        listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, projectsList));
+        loader.dismiss();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,29 +161,8 @@ public class Projects extends AppCompatActivity
                 Intent d = new Intent(Projects.this, Dashboard.class);
                 startActivity(d);
                 break;
-//            case R.id.nav_tasks:
-//                Intent t = new Intent(Projects.this, Tasks.class );
-//                startActivity(t);
-//                break;
-//            case R.id.nav_schedule:
-//                Intent s = new Intent(Projects.this, Schedule.class);
-//                startActivity(s);
-//                break;
             case R.id.nav_project:
-//                Intent p = new Intent(Projects.this, Projects.class);
-//                startActivity(p);
-//                getAllProjects();
-//                adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, projectClassList);
-//                listOfProjects.setAdapter(adapter);
                 break;
-//            case R.id.nav_purchaseRequest:
-//                Intent f = new Intent(Projects.this, Forms.class);
-//                startActivity(f);
-//                break;
-//            case R.id.nav_purchaseOrder:
-//                Intent e = new Intent(Projects.this, PurchaseOrder.class);
-//                startActivity(e);
-//                break;
             case R.id.nav_files:
                 Intent fi = new Intent(Projects.this, Files.class);
                 startActivity(fi);

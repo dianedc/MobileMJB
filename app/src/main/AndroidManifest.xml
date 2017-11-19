@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.LoginActivity"
+            android:name=".impl_classes.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,70 +25,83 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.Dashboard"
+            android:name=".impl_classes.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.Tasks"
+            android:name=".impl_classes.Tasks"
             android:label="@string/title_activity_tasks"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.Projects"
+            android:name=".impl_classes.Projects"
             android:label="@string/title_activity_projects"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.Files"
+            android:name=".impl_classes.Files"
             android:label="@string/title_activity_files"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.Reports"
+            android:name=".impl_classes.Reports"
             android:label="@string/title_activity_reports"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.Schedule"
+            android:name=".impl_classes.Schedule"
             android:label="@string/title_activity_schedule"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.Forms"
+            android:name=".impl_classes.Forms"
             android:label="@string/title_activity_forms"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.Users"
+            android:name=".impl_classes.Users"
             android:label="@string/title_activity_users"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.add_classes.AddUserr"
+            android:name=".add_classes.AddUserr"
             android:label="@string/title_activity_add_userr"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.add_classes.AddTask"
+            android:name=".add_classes.AddTask"
             android:label="@string/title_activity_add_task"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.add_classes.AddProject"
+            android:name=".add_classes.AddProject"
             android:label="@string/title_activity_add_project"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.add_classes.AddPurchaseRequest"
+            android:name=".add_classes.AddPurchaseRequest"
             android:label="@string/title_activity_add_purchase_request"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.add_classes.AddPurchaseOrder"
+            android:name=".add_classes.AddPurchaseOrder"
             android:label="@string/title_activity_add_purchase_order"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.impl_classes.PurchaseOrder"
+            android:name=".impl_classes.PurchaseOrder"
             android:label="@string/title_activity_purchase_order"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.mjm.workflowkami.Settings"
+            android:name=".Settings"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme" />
-        <activity android:name="com.mjm.workflowkami.Splash" />
+        <activity android:name=".Splash" />
         <activity
-            android:name="com.mjm.workflowkami.add_classes.AddPRequest"
+            android:name=".add_classes.AddPRequest"
             android:label="@string/title_activity_add_prequest"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".impl_classes.ProjectTeam"
+            android:label="@string/title_activity_project_team"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".add_classes.AddProjectTeam"
+            android:label="@string/title_activity_add_project_team"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".impl_classes.Workers"
+            android:label="@string/title_activity_workers"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".add_classes.AddPrequestDtlItem"></activity>
     </application>
 
 </manifest>

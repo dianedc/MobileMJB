@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.mjm.workflowkami.add_classes.AddPRequest$PlaceholderFragment">
+    tools:context="com.mjm.workflowkami.add_classes.AddPRequestDtl">
 
     <!--<TextView-->
         <!--android:id="@+id/section_label"-->
@@ -117,10 +117,17 @@
 
 
     <ListView
-        android:id="@+id/container"
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
     </ListView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_preq_dtl_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add"/>
 </LinearLayout>

@@ -41,7 +41,7 @@ public class PurchaseRequestAdapter extends ArrayAdapter<PurchaseRequestClass> {
         txtProjID.setText(String.valueOf(preqs.get(position).getPreqID()));
 
         TextView txtProjName = (TextView) view.findViewById(R.id.proj_name);
-        txtProjName.setText(String.valueOf(preqs.get(position).getProjectID().getProjectname()));
+        txtProjName.setText(String.valueOf(preqs.get(position).getProjectID().getProjname()));
 
         Button btnEdit = (Button) view.findViewById(R.id.btnEditPreq);
         btnEdit.setOnClickListener(new View.OnClickListener() {

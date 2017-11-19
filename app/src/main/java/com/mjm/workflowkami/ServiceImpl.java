@@ -16,6 +16,8 @@ import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import com.mjm.workflowkami.service_classes.TaskService;
 import com.mjm.workflowkami.service_classes.UserService;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -179,12 +181,19 @@ public class ServiceImpl {
                     try {
                         for (int i = 0; i < projectClassList.size(); i++) {
                             projectsList.add(new ProjectClass(projectClassList.get(i).getProjID(),
-                                    projectClassList.get(i).getProjectname(),
-                                    projectClassList.get(i).getProjectstartdate(),
-                                    projectClassList.get(i).getProjectenddate(),
-                                    projectClassList.get(i).getProjectstatus(),
-                                    projectClassList.get(i).getProjectmanager(),
-                                    projectClassList.get(i).getProjectprogress()));
+                                    projectClassList.get(i).getProjname(),
+                                    projectClassList.get(i).getProjclient(),
+                                    projectClassList.get(i).getProjdesc(),
+                                    projectClassList.get(i).getProjtype(),
+                                    projectClassList.get(i).getProjstartdate(),
+                                    projectClassList.get(i).getProjenddate(),
+                                    projectClassList.get(i).getProjdatecompleted(),
+                                    projectClassList.get(i).getProjstatus(),
+                                    projectClassList.get(i).getProjmanager(),
+                                    projectClassList.get(i).getProjcontractbudget(),
+                                    projectClassList.get(i).getProjtargetbudget(),
+                                    projectClassList.get(i).getProjprogress(),
+                                    projectClassList.get(i).getProjduration()));
                         }
                     } catch (final Exception e) { e.printStackTrace(); }
                 }
@@ -253,14 +262,16 @@ public class ServiceImpl {
                                 iList.get(i).getPreqqty(),
                                 iList.get(i).getPrequnit(),
                                 iList.get(i).getPreqdesc(),
-                                iList.get(i).getPreqjob()));
+                                iList.get(i).getPreqjob(),
+                                iList.get(i).getPrequnitprice(),
+                                iList.get(i).getPreqlinetotal()));
                     }
                 } catch (final Exception e) { e.printStackTrace(); }
             }
 
             @Override
             public void onFailure(Call<List<PurchaseRequestItemClass>> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
 

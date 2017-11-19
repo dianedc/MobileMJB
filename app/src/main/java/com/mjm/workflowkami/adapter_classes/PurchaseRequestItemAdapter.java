@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.adapter_classes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mjm.workflowkami.R;
+import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
 
 import java.util.List;
@@ -23,13 +25,11 @@ public class PurchaseRequestItemAdapter extends ArrayAdapter<PurchaseRequestItem
 
     private Context context;
     private List<PurchaseRequestItemClass> item;
-    private LayoutInflater inflater;
 
     public PurchaseRequestItemAdapter(@NonNull Context context, List<PurchaseRequestItemClass> item) {
         super(context, R.layout.list_dialog_remove, item);
         this.context = context;
         this.item = item;
-        inflater = LayoutInflater.from(this.context);
     }
 
     @NonNull
@@ -39,21 +39,20 @@ public class PurchaseRequestItemAdapter extends ArrayAdapter<PurchaseRequestItem
         View view = layoutInflater.inflate(R.layout.list_dialog_remove, parent, false);
 
         TextView txtPReqID = (TextView) view.findViewById(R.id.vItem);
-        txtPReqID.setText(String.valueOf(item.get(position).getPreqID()) + " " +
-        item.get(position).getPreqdesc());
-
-        Button btnRemove = (Button) view.findViewById(R.id.btnRemoveItem);
-        btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        txtPReqID.setText(item.get(position).getPreqdesc());
+//        String.valueOf(item.get(position).getPreqItemID()) +"\n"+
+//        Button btnRemove = (Button) view.findViewById(R.id.btnRemoveItem);
+//        btnRemove.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 //                PurchaseRequestItemClass pItem = item.get(position);
-                item.remove(position);
+//                item.remove(position);
 //                Intent i = new Intent(context, AddPRequest.class);
 
 //                i.putExtra("item", pItem);
 //                context.startActivity(i);
-            }
-        });
+//            }
+//        });
 //        TextView txtofficeengr = (TextView) view.findViewById(R.id.firstname);
 //        txtofficeengr.setText("SAMPLE1");
 
