@@ -10,6 +10,7 @@ import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import com.mjm.workflowkami.service_classes.TaskService;
 import com.mjm.workflowkami.service_classes.UserService;
+import com.mjm.workflowkami.service_classes.WorkerService;
 
 import java.net.URLEncoder;
 
@@ -19,11 +20,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class API {
 //    public final String BASE_URL = "http://192.168.2.108:8081/rest/";
-//    public final String BASE_URL = "http://192.168.2.123:8081/rest/";
+//    public final String BASE_URL = "http://192.168.2.123:8082/rest/";
+//    public final String BASE_URL = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/";
 //    public final String BASE_URL = "http://192.168.2.144:8080/";
 //    public final String BASE_URL = "http://172.20.10.5:8081/rest/";
     //    public final String BASE_URL = "http://10.1.15.97:8081/rest/";
-    public static final String BASE_URL = "http://mjmdb-182915.appspot.com/";
+//    public static final String BASE_URL = "http://mjmdb-182915.appspot.com/";
+    public final String BASE_URL = "http://192.168.2.144:8083/";
     private static API instance = null;
 
     private UserService userService;
@@ -33,6 +36,7 @@ public class API {
     private PurchaseOrderService purchaseOrderService;
     private PurchaseRequestService purchaseRequestService;
     private ProjectTeamService projectTeamService;
+    private WorkerService workerService;
 
     public static API getInstance() {
         if (instance == null) {
@@ -56,6 +60,7 @@ public class API {
         this.purchaseOrderService = retrofit.create(PurchaseOrderService.class);
         this.purchaseRequestItemService = retrofit.create(PurchaseRequestItemService.class);
         this.projectTeamService = retrofit.create(ProjectTeamService.class);
+        this.workerService = retrofit.create(WorkerService.class);
 
     }
 
@@ -82,4 +87,6 @@ public class API {
     public PurchaseRequestItemService getPurchaseRequestItemService() {return this.purchaseRequestItemService; }
 
     public ProjectTeamService getProjectTeamService () { return this.projectTeamService; }
+
+    public WorkerService getWorkerService() { return this.workerService; }
 }

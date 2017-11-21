@@ -37,4 +37,16 @@
         <item>Demolition Only</item>
         <item>Demolition w/ Construction</item>
     </string-array>
+
+    <string-array name="workerRole">
+        <item>Select Role</item>
+        <item>Carpenter</item>
+        <item>Driver</item>
+        <item>Foreman</item>
+        <item>Laborer</item>
+        <item>Mason</item>
+        <item>Painter</item>
+        <item>Steelman</item>
+        <item>Timekeeper</item>
+    </string-array>
 </resources>

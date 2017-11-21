@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.mjm.workflowkami.Fragments.Worker;
 import com.mjm.workflowkami.R;
 
 import dmax.dialog.SpotsDialog;
@@ -248,6 +249,24 @@ public class Dashboard extends AppCompatActivity
                 loader.show();
                 Intent u = new Intent(Dashboard.this, Users.class);
                 startActivity(u);
+                break;
+
+            case R.id.nav_workers:
+                loader.show();
+                Intent x = new Intent(Dashboard.this, Workers.class);
+                startActivity(x);
+                break;
+
+            case R.id.nav_settings:
+                loader.show();
+                Intent s = new Intent(Dashboard.this, Settings.class);
+                startActivity(s);
+                break;
+
+            case R.id.nav_logout:
+                loader.show();
+                Intent l = new Intent(Dashboard.this, LoginActivity.class);
+                startActivity(l);
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

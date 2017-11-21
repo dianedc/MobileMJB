@@ -13,10 +13,6 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -31,14 +27,11 @@ import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.ServiceImpl;
-import com.mjm.workflowkami.impl_classes.Dashboard;
-import com.mjm.workflowkami.impl_classes.Files;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.ProjectService;
 import com.mjm.workflowkami.impl_classes.Projects;
 import com.mjm.workflowkami.R;
-import com.mjm.workflowkami.impl_classes.Users;
 import com.mjm.workflowkami.service_classes.UserService;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
@@ -49,7 +42,7 @@ import retrofit2.Response;
 
 
 public class AddProject extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnClickListener {
+        implements OnClickListener {
 
 
     private SpinnerDialog projManDialog;
@@ -105,14 +98,14 @@ public class AddProject extends AppCompatActivity
         findViewsById();
         setDateTimeField();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
 
         Intent intent = getIntent();
         projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
@@ -246,15 +239,15 @@ public class AddProject extends AppCompatActivity
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }else {
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        }else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -278,56 +271,56 @@ public class AddProject extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item)  {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        switch (id){
-            case R.id.nav_dashboard:
-                Intent d = new Intent(AddProject.this, Dashboard.class);
-                startActivity(d);
-                break;
-//            case R.id.nav_tasks:
-//                Intent t = new Intent(AddProject.this, Tasks.class );
-//                startActivity(t);
+//
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item)  {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//        switch (id){
+//            case R.id.nav_dashboard:
+//                Intent d = new Intent(AddProject.this, Dashboard.class);
+//                startActivity(d);
 //                break;
-//            case R.id.nav_schedule:
-//                Intent s = new Intent(AddProject.this, Schedule.class);
-//                startActivity(s);
+////            case R.id.nav_tasks:
+////                Intent t = new Intent(AddProject.this, Tasks.class );
+////                startActivity(t);
+////                break;
+////            case R.id.nav_schedule:
+////                Intent s = new Intent(AddProject.this, Schedule.class);
+////                startActivity(s);
+////                break;
+//            case R.id.nav_project:
+//                Intent p = new Intent(AddProject.this, Projects.class);
+//                startActivity(p);
 //                break;
-            case R.id.nav_project:
-                Intent p = new Intent(AddProject.this, Projects.class);
-                startActivity(p);
-                break;
-//            case R.id.nav_purchaseRequest:
-//                Intent f = new Intent(AddProject.this, Forms.class);
-//                startActivity(f);
+////            case R.id.nav_purchaseRequest:
+////                Intent f = new Intent(AddProject.this, Forms.class);
+////                startActivity(f);
+////                break;
+////            case R.id.nav_purchaseOrder:
+////                Intent e = new Intent(AddProject.this, PurchaseOrder.class);
+////                startActivity(e);
+////                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(AddProject.this, Files.class);
+//                startActivity(fi);
 //                break;
-//            case R.id.nav_purchaseOrder:
-//                Intent e = new Intent(AddProject.this, PurchaseOrder.class);
-//                startActivity(e);
+////            case R.id.nav_reports:
+////                Intent r = new Intent(AddProject.this, Reports.class);
+////                startActivity(r);
+////                break;
+//            case R.id.nav_users:
+//                Intent u = new Intent(AddProject.this, Users.class);
+//                startActivity(u);
 //                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(AddProject.this, Files.class);
-                startActivity(fi);
-                break;
-//            case R.id.nav_reports:
-//                Intent r = new Intent(AddProject.this, Reports.class);
-//                startActivity(r);
-//                break;
-            case R.id.nav_users:
-                Intent u = new Intent(AddProject.this, Users.class);
-                startActivity(u);
-                break;
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 
     public void onClickCancel(View v) {
         Intent cancel = new Intent(AddProject.this, Projects.class);

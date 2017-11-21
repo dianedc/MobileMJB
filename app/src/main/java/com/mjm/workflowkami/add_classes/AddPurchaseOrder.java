@@ -3,29 +3,15 @@ package com.mjm.workflowkami.add_classes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mjm.workflowkami.impl_classes.Forms;
-import com.mjm.workflowkami.impl_classes.Dashboard;
-import com.mjm.workflowkami.impl_classes.Files;
-import com.mjm.workflowkami.impl_classes.Projects;
 import com.mjm.workflowkami.impl_classes.PurchaseOrder;
 import com.mjm.workflowkami.R;
-import com.mjm.workflowkami.impl_classes.Reports;
-import com.mjm.workflowkami.impl_classes.Schedule;
-import com.mjm.workflowkami.impl_classes.Tasks;
-import com.mjm.workflowkami.impl_classes.Users;
 
-public class AddPurchaseOrder extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
+public class AddPurchaseOrder extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,25 +28,25 @@ public class AddPurchaseOrder extends AppCompatActivity
 //            }
 //        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,54 +70,81 @@ public class AddPurchaseOrder extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.nav_dashboard:
-                Intent d = new Intent(AddPurchaseOrder.this, Dashboard.class);
-                startActivity(d);
-                break;
-            case R.id.nav_tasks:
-                Intent t = new Intent(AddPurchaseOrder.this, Tasks.class);
-                startActivity(t);
-                break;
-            case R.id.nav_schedule:
-                Intent s = new Intent(AddPurchaseOrder.this, Schedule.class);
-                startActivity(s);
-                break;
-            case R.id.nav_project:
-                Intent p = new Intent(AddPurchaseOrder.this, Projects.class);
-                startActivity(p);
-                break;
-            case R.id.nav_purchaseRequest:
-                Intent f = new Intent(AddPurchaseOrder.this, Forms.class);
-                startActivity(f);
-                break;
-            case R.id.nav_purchaseOrder:
-                Intent e = new Intent(AddPurchaseOrder.this, PurchaseOrder.class);
-                startActivity(e);
-                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(AddPurchaseOrder.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(AddPurchaseOrder.this, Reports.class);
-                startActivity(r);
-                break;
-            case R.id.nav_users:
-                Intent u = new Intent(AddPurchaseOrder.this, Users.class);
-                startActivity(u);
-                break;
-        }
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//        switch (id){
+//            case R.id.nav_dashboard:
+//                loader.show();
+//                Intent d = new Intent(Tasks.this, Dashboard.class);
+//                startActivity(d);
+//                break;
+////            case R.id.nav_tasks:
+////                Intent t = new Intent(Tasks.this, Tasks.class );
+////                startActivity(t);
+////                break;
+////            case R.id.nav_schedule:
+////                loader.show();
+////                Intent s = new Intent(Tasks.this, Schedule.class);
+////                startActivity(s);
+////                break;
+//            case R.id.nav_project:
+//                loader.show();
+//                Intent p = new Intent(Tasks.this, Projects.class);
+//                startActivity(p);
+//                break;
+////            case R.id.nav_purchaseRequest:
+////                loader.show();
+////                Intent f = new Intent(Tasks.this, Forms.class);
+////                startActivity(f);
+////                break;
+////            case R.id.nav_purchaseOrder:
+////                loader.show();
+////                Intent e = new Intent(Tasks.this, PurchaseOrder.class);
+////                startActivity(e);
+////                break;
+//            case R.id.nav_files:
+//                loader.show();
+//                Intent fi = new Intent(Tasks.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                loader.show();
+//                Intent r = new Intent(Tasks.this, Reports.class);
+//                startActivity(r);
+//                break;
+//            case R.id.nav_users:
+//                loader.show();
+//                Intent u = new Intent(Tasks.this, Users.class);
+//                startActivity(u);
+//                break;
+//
+//            case R.id.nav_workers:
+//                loader.show();
+//                Intent x = new Intent(Tasks.this, Workers.class);
+//                startActivity(x);
+//                break;
+//
+//            case R.id.nav_settings:
+//                loader.show();
+//                Intent s = new Intent(Tasks.this, Settings.class);
+//                startActivity(s);
+//                break;
+//
+//            case R.id.nav_logout:
+//                loader.show();
+//                Intent l = new Intent(Tasks.this, LoginActivity.class);
+//                startActivity(l);
+//                break;
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_tasks);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
     public void onClickCancel(View view) {
         Intent cancel = new Intent(AddPurchaseOrder.this, PurchaseOrder.class);
         startActivity(cancel);

@@ -81,7 +81,7 @@
             android:label="@string/title_activity_purchase_order"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Settings"
+            android:name=".impl_classes.Settings"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme" />
         <activity android:name=".Splash" />
@@ -101,7 +101,8 @@
             android:name=".impl_classes.Workers"
             android:label="@string/title_activity_workers"
             android:theme="@style/AppTheme" />
-        <activity android:name=".add_classes.AddPrequestDtlItem"></activity>
+        <activity android:name=".add_classes.AddPrequestDtlItem" />
+        <activity android:name=".add_classes.AddWorker"></activity>
     </application>
 
 </manifest>

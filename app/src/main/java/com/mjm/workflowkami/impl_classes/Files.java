@@ -13,8 +13,12 @@ import android.view.MenuItem;
 
 import com.mjm.workflowkami.R;
 
+import dmax.dialog.SpotsDialog;
+
 public class Files extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private SpotsDialog loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,10 @@ public class Files extends AppCompatActivity
         setContentView(R.layout.activity_files);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        loader = new SpotsDialog(Files.this);
+
+        loader.dismiss();
+
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +124,26 @@ public class Files extends AppCompatActivity
                 Intent u = new Intent(Files.this, Users.class);
                 startActivity(u);
                 break;
+
+            case R.id.nav_workers:
+                loader.show();
+                Intent x = new Intent(Files.this, Workers.class);
+                startActivity(x);
+                break;
+
+            case R.id.nav_settings:
+                loader.show();
+                Intent s = new Intent(Files.this, Settings.class);
+                startActivity(s);
+                break;
+
+            case R.id.nav_logout:
+                loader.show();
+                Intent l = new Intent(Files.this, LoginActivity.class);
+                startActivity(l);
+                break;
+
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

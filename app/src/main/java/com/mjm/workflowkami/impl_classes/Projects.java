@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -66,7 +64,7 @@ public class Projects extends AppCompatActivity
                 if (response.isSuccessful()) {
                     List<ProjectClass> projectClassList = response.body();
 
-//                    Toast.makeText(Projects.this, response.body().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(Projects.this, response.body().toString(), Toast.LENGTH_LONG).show();
 //                    Log.d(TAG, response.toString());
                     try {
                         for (int i = 0; i < projectClassList.size(); i++) {
@@ -164,16 +162,37 @@ public class Projects extends AppCompatActivity
             case R.id.nav_project:
                 break;
             case R.id.nav_files:
+                loader.show();
                 Intent fi = new Intent(Projects.this, Files.class);
                 startActivity(fi);
                 break;
             case R.id.nav_reports:
+                loader.show();
                 Intent r = new Intent(Projects.this, Reports.class);
                 startActivity(r);
                 break;
             case R.id.nav_users:
+                loader.show();
                 Intent u = new Intent(Projects.this, Users.class);
                 startActivity(u);
+                break;
+
+            case R.id.nav_workers:
+                loader.show();
+                Intent x = new Intent(Projects.this, Workers.class);
+                startActivity(x);
+                break;
+
+            case R.id.nav_settings:
+                loader.show();
+                Intent s = new Intent(Projects.this, Settings.class);
+                startActivity(s);
+                break;
+
+            case R.id.nav_logout:
+                loader.show();
+                Intent l = new Intent(Projects.this, LoginActivity.class);
+                startActivity(l);
                 break;
         }
 

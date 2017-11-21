@@ -3,18 +3,21 @@ package com.mjm.workflowkami;
 
 import android.util.Log;
 
+import com.mjm.workflowkami.impl_classes.Workers;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.model_classes.UserClass;
+import com.mjm.workflowkami.model_classes.WorkerClass;
 import com.mjm.workflowkami.service_classes.ProjectService;
 import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import com.mjm.workflowkami.service_classes.TaskService;
 import com.mjm.workflowkami.service_classes.UserService;
+import com.mjm.workflowkami.service_classes.WorkerService;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -38,6 +41,8 @@ public class ServiceImpl {
     private PurchaseRequestService purchaseRequestService = API.getInstance().getPurchaseRequestService();
     private PurchaseRequestItemService pItemService = API.getInstance().getPurchaseRequestItemService();
     private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
+    private WorkerService workerService = API.getInstance().getWorkerService();
+
     public List<UserClass> usersList;
     public ArrayList<String> userIDList = new ArrayList<String>();
     public List<TaskClass> tasksList = new ArrayList<TaskClass>();
@@ -46,6 +51,7 @@ public class ServiceImpl {
     public List<PurchaseRequestClass> prList = new ArrayList<PurchaseRequestClass>();
     public List<PurchaseRequestItemClass> pItemList = new ArrayList<PurchaseRequestItemClass>();
     public List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
+    public List<WorkerClass> workerList = new ArrayList<WorkerClass>();
 
     public List<UserClass> GetAllUsers() {
 
@@ -309,4 +315,33 @@ public class ServiceImpl {
         return pTeamList;
     }
 
+    public List<WorkerClass> GetAllWorkers() {
+
+        Call<List<WorkerClass>> getWorkers = workerService.getAllWorkers();
+
+        getWorkers.enqueue(new Callback<List<WorkerClass>>() {
+            @Override
+            public void onResponse(Call<List<WorkerClass>> call, Response<List<WorkerClass>> response) {
+                if (response.isSuccessful()) {
+                    List<WorkerClass> workerClassList = response.body();
+
+
+                    Log.d(TAG, response.toString());
+
+                    try {
+                        for (int i = 0; i < workerClassList.size(); i++) {
+                            workerList.add(new WorkerClass(workerClassList.get(i).getWorkersID(),
+                                    workerClassList.get(i).getWorkersfirstname(),
+                                    workerClassList.get(i).getWorkerslastname(),
+                                    workerClassList.get(i).getWorkersrole()));
+                        }
+                    } catch (final Exception e) { e.printStackTrace(); }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<WorkerClass>> call, Throwable t) { t.printStackTrace(); }
+        });
+
+        return workerList;
+    }
 }

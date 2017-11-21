@@ -54,7 +54,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddTask extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnClickListener {
+public class AddTask extends AppCompatActivity implements OnClickListener {
 
     private EditText taskID;
     private EditText taskName;
@@ -211,14 +211,14 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
 //        });
         setDateTimeField();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -269,15 +269,15 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -297,54 +297,54 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        switch (id){
-            case R.id.nav_dashboard:
-                Intent d = new Intent(AddTask.this, Dashboard.class);
-                startActivity(d);
-                break;
-//            case R.id.nav_tasks:
-//                Intent t = new Intent(AddTask.this, Tasks.class );
-//                startActivity(t);
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//        switch (id){
+//            case R.id.nav_dashboard:
+//                Intent d = new Intent(AddTask.this, Dashboard.class);
+//                startActivity(d);
 //                break;
-//            case R.id.nav_schedule:
-//                Intent s = new Intent(AddTask.this, Schedule.class);
-//                startActivity(s);
+////            case R.id.nav_tasks:
+////                Intent t = new Intent(AddTask.this, Tasks.class );
+////                startActivity(t);
+////                break;
+////            case R.id.nav_schedule:
+////                Intent s = new Intent(AddTask.this, Schedule.class);
+////                startActivity(s);
+////                break;
+//            case R.id.nav_project:
+//                Intent p = new Intent(AddTask.this, Projects.class);
+//                startActivity(p);
 //                break;
-            case R.id.nav_project:
-                Intent p = new Intent(AddTask.this, Projects.class);
-                startActivity(p);
-                break;
-            case R.id.nav_purchaseRequest:
-                Intent f = new Intent(AddTask.this, Forms.class);
-                startActivity(f);
-                break;
-            case R.id.nav_purchaseOrder:
-                Intent e = new Intent(AddTask.this, PurchaseOrder.class);
-                startActivity(e);
-                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(AddTask.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(AddTask.this, Reports.class);
-                startActivity(r);
-                break;
-            case R.id.nav_users:
-                Intent u = new Intent(AddTask.this, Users.class);
-                startActivity(u);
-                break;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//            case R.id.nav_purchaseRequest:
+//                Intent f = new Intent(AddTask.this, Forms.class);
+//                startActivity(f);
+//                break;
+//            case R.id.nav_purchaseOrder:
+//                Intent e = new Intent(AddTask.this, PurchaseOrder.class);
+//                startActivity(e);
+//                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(AddTask.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                Intent r = new Intent(AddTask.this, Reports.class);
+//                startActivity(r);
+//                break;
+//            case R.id.nav_users:
+//                Intent u = new Intent(AddTask.this, Users.class);
+//                startActivity(u);
+//                break;
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 
     public void onClickCancel(View v) {
         Intent cancel = new Intent(AddTask.this, Tasks.class);
@@ -371,7 +371,7 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
     }
 
 
-    public void UpdateTask(int id, TaskClass t) {
+    public void UpdateTask(Integer id, TaskClass t) {
         Call<TaskClass> addTask = taskService.editTask(id, t);
 
         addTask.enqueue(new Callback<TaskClass>() {

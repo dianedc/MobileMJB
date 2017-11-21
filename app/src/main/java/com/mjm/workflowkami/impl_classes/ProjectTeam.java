@@ -19,7 +19,6 @@ import android.widget.ListView;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
-import com.mjm.workflowkami.Settings;
 import com.mjm.workflowkami.adapter_classes.ProjectTeamAdapter;
 import com.mjm.workflowkami.add_classes.AddProjectTeam;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;

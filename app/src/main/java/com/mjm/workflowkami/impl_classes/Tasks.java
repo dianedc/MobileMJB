@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,13 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.TaskClassAdapter;
+import com.mjm.workflowkami.add_classes.AddTask;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.service_classes.TaskService;
 
@@ -49,20 +51,20 @@ public class Tasks extends AppCompatActivity
         serviceImpl.GetAllTasks();
         listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
 
-        if (listofTasks != null) {
-            loader.dismiss();
-        }
+//        if (listofTasks != null) {
+//            loader.dismiss();
+//        }
 //        ListViewImpl();
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            Intent add = new Intent(Tasks.this, AddTask.class);
-//            startActivity(add);
-//
-//            }
-//        });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Intent add = new Intent(Tasks.this, AddTask.class);
+            startActivity(add);
+
+            }
+        });
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_tasks);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -147,10 +149,10 @@ public class Tasks extends AppCompatActivity
                 Intent d = new Intent(Tasks.this, Dashboard.class);
                 startActivity(d);
                 break;
-            case R.id.nav_tasks:
+//            case R.id.nav_tasks:
 //                Intent t = new Intent(Tasks.this, Tasks.class );
 //                startActivity(t);
-                break;
+//                break;
 //            case R.id.nav_schedule:
 //                loader.show();
 //                Intent s = new Intent(Tasks.this, Schedule.class);
@@ -185,6 +187,24 @@ public class Tasks extends AppCompatActivity
                 loader.show();
                 Intent u = new Intent(Tasks.this, Users.class);
                 startActivity(u);
+                break;
+
+            case R.id.nav_workers:
+                loader.show();
+                Intent x = new Intent(Tasks.this, Workers.class);
+                startActivity(x);
+                break;
+
+            case R.id.nav_settings:
+                loader.show();
+                Intent s = new Intent(Tasks.this, Settings.class);
+                startActivity(s);
+                break;
+
+            case R.id.nav_logout:
+                loader.show();
+                Intent l = new Intent(Tasks.this, LoginActivity.class);
+                startActivity(l);
                 break;
         }
 

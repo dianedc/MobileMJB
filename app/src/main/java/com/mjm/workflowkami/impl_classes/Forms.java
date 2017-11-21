@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.ServiceImpl;
@@ -162,10 +161,10 @@ public class Forms extends AppCompatActivity
                 Intent p = new Intent(Forms.this, Projects.class);
                 startActivity(p);
                 break;
-            case R.id.nav_purchaseRequest:
-//                Intent f = new Intent(Forms.this, Forms.class);
-//                startActivity(f);
-                break;
+//            case R.id.nav_purchaseRequest:
+////                Intent f = new Intent(Forms.this, Forms.class);
+////                startActivity(f);
+//                break;
 //            case R.id.nav_purchaseOrder:
 //                Intent e = new Intent(Forms.this, PurchaseOrder.class);
 //                startActivity(e);
@@ -181,6 +180,24 @@ public class Forms extends AppCompatActivity
             case R.id.nav_users:
                 Intent u = new Intent(Forms.this, Users.class);
                 startActivity(u);
+                break;
+
+            case R.id.nav_workers:
+                loader.show();
+                Intent x = new Intent(Forms.this, Workers.class);
+                startActivity(x);
+                break;
+
+            case R.id.nav_settings:
+                loader.show();
+                Intent s = new Intent(Forms.this, Settings.class);
+                startActivity(s);
+                break;
+
+            case R.id.nav_logout:
+                loader.show();
+                Intent l = new Intent(Forms.this, LoginActivity.class);
+                startActivity(l);
                 break;
         }
 

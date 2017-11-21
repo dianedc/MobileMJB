@@ -16,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.ServiceImpl;
@@ -53,6 +52,7 @@ public class PurchaseOrder extends AppCompatActivity
 
         listsofPord = (ListView) findViewById(R.id.lstPords);
 //        serviceImpl.GetAllPreq();
+        loader = new SpotsDialog(PurchaseOrder.this);
 
         Call<List<PurchaseOrderClass>> getPords = purchaseOrderService.getAllPord();
 
@@ -222,6 +222,24 @@ public class PurchaseOrder extends AppCompatActivity
             case R.id.nav_users:
                 Intent u = new Intent(PurchaseOrder.this, Users.class);
                 startActivity(u);
+                break;
+
+            case R.id.nav_workers:
+                loader.show();
+                Intent x = new Intent(PurchaseOrder.this, Workers.class);
+                startActivity(x);
+                break;
+
+            case R.id.nav_settings:
+                loader.show();
+                Intent s = new Intent(PurchaseOrder.this, Settings.class);
+                startActivity(s);
+                break;
+
+            case R.id.nav_logout:
+                loader.show();
+                Intent l = new Intent(PurchaseOrder.this, LoginActivity.class);
+                startActivity(l);
                 break;
         }
 

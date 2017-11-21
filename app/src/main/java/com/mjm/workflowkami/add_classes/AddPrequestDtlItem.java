@@ -73,9 +73,9 @@ public class AddPrequestDtlItem extends AppCompatActivity {
             preq_dtl_qty.setText(String.valueOf(pi.getPreqqty()));
             preq_dtl_unit.setText(pi.getPrequnit());
             preq_dtl_job.setText(pi.getPreqjob());
-            preq_dtl_uni_price.setText(pi.getPrequnitprice().toString());
-            preq_dtl_line_tot.setText(pi.getPreqlinetotal().toString());
-        }
+        preq_dtl_uni_price.setText(pi.getPrequnitprice().toString());
+        preq_dtl_line_tot.setText(pi.getPreqlinetotal().toString());
+    }
         btnSavePreqDtlItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

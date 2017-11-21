@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class TaskClass implements Serializable {
 
-    private int taskID;
+    private Integer taskID;
     private ProjectClass projectID;
     private String taskname;
     private String taskdesc;
@@ -24,7 +24,7 @@ public class TaskClass implements Serializable {
 
     }
 
-    public TaskClass(int taskID, ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
+    public TaskClass(Integer taskID, ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
         this.taskID = taskID;
         this.projectID = projectID;
         this.taskname = taskname;
@@ -38,24 +38,41 @@ public class TaskClass implements Serializable {
         this.taskduration = taskduration;
     }
 
-    public TaskClass(ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
-        this.projectID = projectID;
-        this.taskname = taskname;
-        this.taskdesc = taskdesc;
-        this.taskphase = taskphase;
-        this.taskheader = taskheader;
-        this.taskstartdate = taskstartdate;
-        this.taskenddate = taskenddate;
-        this.taskdatecompleted = taskdatecompleted;
-        this.taskstatus = taskstatus;
-        this.taskduration = taskduration;
+//    public TaskClass(ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
+//        this.projectID = projectID;
+//        this.taskname = taskname;
+//        this.taskdesc = taskdesc;
+//        this.taskphase = taskphase;
+//        this.taskheader = taskheader;
+//        this.taskstartdate = taskstartdate;
+//        this.taskenddate = taskenddate;
+//        this.taskdatecompleted = taskdatecompleted;
+//        this.taskstatus = taskstatus;
+//        this.taskduration = taskduration;
+//    }
+
+    @Override
+    public String toString() {
+        return "TaskClass{" +
+                "taskID='" + taskID + '\'' +
+                ", projectID='" + projectID + '\'' +
+                ", taskname='" + taskname + '\'' +
+                ", taskdesc='" + taskdesc + '\'' +
+                ", taskphase='" + taskphase + '\'' +
+                ", taskheader='" + taskheader + '\'' +
+                ", taskstartdate='" + taskstartdate + '\'' +
+                ", taskenddate='" + taskenddate + '\'' +
+                ", taskdatecompleted='" + taskdatecompleted + '\'' +
+                ", taskstatus='" + taskstatus + '\'' +
+                ", taskduration='" + taskduration + '\'' +
+                '}';
     }
 
-    public int getTaskID() {
+    public Integer getTaskID() {
         return taskID;
     }
 
-    public void setTaskID(int taskID) {
+    public void setTaskID(Integer taskID) {
         this.taskID = taskID;
     }
 

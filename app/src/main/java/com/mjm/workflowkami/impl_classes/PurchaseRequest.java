@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import com.mjm.workflowkami.R;
 
 public class PurchaseRequest extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        {
 
 
     @Override
@@ -29,25 +29,25 @@ public class PurchaseRequest extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,52 +71,52 @@ public class PurchaseRequest extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.nav_dashboard:
-                Intent d = new Intent(PurchaseRequest.this, Dashboard.class);
-                startActivity(d);
-                break;
-            case R.id.nav_tasks:
-                Intent t = new Intent(PurchaseRequest.this, Tasks.class);
-                startActivity(t);
-                break;
-            case R.id.nav_schedule:
-                Intent s = new Intent(PurchaseRequest.this, Schedule.class);
-                startActivity(s);
-                break;
-            case R.id.nav_project:
-                Intent p = new Intent(PurchaseRequest.this, Projects.class);
-                startActivity(p);
-                break;
-            case R.id.nav_purchaseRequest:
-//                Intent f = new Intent(PurchaseRequest.this, PurchaseRequest.class);
-//                startActivity(f);
-                break;
-            case R.id.nav_purchaseOrder:
-                Intent e = new Intent(PurchaseRequest.this, PurchaseOrder.class);
-                startActivity(e);
-                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(PurchaseRequest.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(PurchaseRequest.this, Reports.class);
-                startActivity(r);
-                break;
-            case R.id.nav_users:
-                Intent u = new Intent(PurchaseRequest.this, Users.class);
-                startActivity(u);
-                break;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//        switch (id) {
+//            case R.id.nav_dashboard:
+//                Intent d = new Intent(PurchaseRequest.this, Dashboard.class);
+//                startActivity(d);
+//                break;
+//            case R.id.nav_tasks:
+//                Intent t = new Intent(PurchaseRequest.this, Tasks.class);
+//                startActivity(t);
+//                break;
+//            case R.id.nav_schedule:
+//                Intent s = new Intent(PurchaseRequest.this, Schedule.class);
+//                startActivity(s);
+//                break;
+//            case R.id.nav_project:
+//                Intent p = new Intent(PurchaseRequest.this, Projects.class);
+//                startActivity(p);
+//                break;
+//            case R.id.nav_purchaseRequest:
+////                Intent f = new Intent(PurchaseRequest.this, PurchaseRequest.class);
+////                startActivity(f);
+//                break;
+//            case R.id.nav_purchaseOrder:
+//                Intent e = new Intent(PurchaseRequest.this, PurchaseOrder.class);
+//                startActivity(e);
+//                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(PurchaseRequest.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                Intent r = new Intent(PurchaseRequest.this, Reports.class);
+//                startActivity(r);
+//                break;
+//            case R.id.nav_users:
+//                Intent u = new Intent(PurchaseRequest.this, Users.class);
+//                startActivity(u);
+//                break;
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 }

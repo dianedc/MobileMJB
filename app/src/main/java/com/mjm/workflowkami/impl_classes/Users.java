@@ -121,44 +121,62 @@ public class Users extends AppCompatActivity
                 Intent d = new Intent(Users.this, Dashboard.class);
                 startActivity(d);
                 break;
-            case R.id.nav_tasks:
-                loader.show();
-                Intent t = new Intent(Users.this, Tasks.class);
-                startActivity(t);
-                break;
-            case R.id.nav_schedule:
-                loader.show();
-                Intent s = new Intent(Users.this, Schedule.class);
-                startActivity(s);
-                break;
+//            case R.id.nav_tasks:
+//                loader.show();
+//                Intent t = new Intent(Users.this, Tasks.class);
+//                startActivity(t);
+//                break;
+//            case R.id.nav_schedule:
+//                loader.show();
+//                Intent s = new Intent(Users.this, Schedule.class);
+//                startActivity(s);
+//                break;
             case R.id.nav_project:
                 loader.show();
                 Intent p = new Intent(Users.this, Projects.class);
                 startActivity(p);
                 break;
-            case R.id.nav_purchaseRequest:
-                loader.show();
-                Intent f = new Intent(Users.this, Forms.class);
-                startActivity(f);
-                break;
-            case R.id.nav_purchaseOrder:
-                loader.show();
-                Intent e = new Intent(Users.this, PurchaseOrder.class);
-                startActivity(e);
-                break;
+//            case R.id.nav_purchaseRequest:
+//                loader.show();
+//                Intent f = new Intent(Users.this, Forms.class);
+//                startActivity(f);
+//                break;
+//            case R.id.nav_purchaseOrder:
+//                loader.show();
+//                Intent e = new Intent(Users.this, PurchaseOrder.class);
+//                startActivity(e);
+//                break;
             case R.id.nav_files:
                 loader.show();
                 Intent fi = new Intent(Users.this, Files.class);
                 startActivity(fi);
                 break;
-            case R.id.nav_reports:
-                loader.show();
-                Intent r = new Intent(Users.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_reports:
+//                loader.show();
+//                Intent r = new Intent(Users.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
 //                Intent u = new Intent(Users.this, Users.class);
 //                startActivity(u);
+                break;
+
+            case R.id.nav_workers:
+                loader.show();
+                Intent x = new Intent(Users.this, Workers.class);
+                startActivity(x);
+                break;
+
+            case R.id.nav_settings:
+                loader.show();
+                Intent s = new Intent(Users.this, Settings.class);
+                startActivity(s);
+                break;
+
+            case R.id.nav_logout:
+                loader.show();
+                Intent l = new Intent(Users.this, LoginActivity.class);
+                startActivity(l);
                 break;
 
         }
