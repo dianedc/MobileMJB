@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
@@ -37,13 +38,9 @@ import retrofit2.Response;
 
 public class AddPRequestDtl extends ListFragment {
 
-    private PurchaseRequestItemService preqItemServ = API.getInstance().getPurchaseRequestItemService();
-    private PurchaseRequestItemClass p = new PurchaseRequestItemClass();
     private PurchaseRequestClass preq = new PurchaseRequestClass();
     private ServiceImpl serviceImpl = new ServiceImpl();
-//    private PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter();
-    public List<PurchaseRequestItemClass> pItemList = new ArrayList<PurchaseRequestItemClass>();
-    private PurchaseRequestItemService pItemService = API.getInstance().getPurchaseRequestItemService();
+    private PullRefreshLayout layout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,37 +64,21 @@ public class AddPRequestDtl extends ListFragment {
         if (preq != null) {
             preq_id = preq.getPreqID();
         }
-
-
         serviceImpl.GetAllPReqItemList(preq_id);
-//        Call<List<PurchaseRequestItemClass>> getitems = pItemService.getItemByPReqId(preq_id);
-//
-//        getitems.enqueue(new Callback<List<PurchaseRequestItemClass>>() {
-//            @Override
-//            public void onResponse(Call<List<PurchaseRequestItemClass>> call, Response<List<PurchaseRequestItemClass>> response) {
-//                List<PurchaseRequestItemClass> iList = response.body();
-////                Toast.makeText(getActivity(), response.body().toString(), Toast.LENGTH_LONG).show();
-//                try {
-//                    for (int i = 0; i < iList.size(); i++) {
-//                        pItemList.add(new PurchaseRequestItemClass(iList.get(i).getPreqItemID(),
-//                                iList.get(i).getPreqID(),
-//                                iList.get(i).getPreqqty(),
-//                                iList.get(i).getPrequnit(),
-//                                iList.get(i).getPreqdesc(),
-//                                iList.get(i).getPreqjob(),
-//                                iList.get(i).getPrequnitprice(),
-//                                iList.get(i).getPreqlinetotal()));
-//                    }
-//                } catch (final Exception e) { e.printStackTrace(); }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<PurchaseRequestItemClass>> call, Throwable t) {
-//                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
 
+        layout = (PullRefreshLayout) rootView.findViewById(R.id.refreshprdtl);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layout.setRefreshing(false);
+
+                    }
+                }, 3000);
+            }
+        });
         return rootView;
     }
 

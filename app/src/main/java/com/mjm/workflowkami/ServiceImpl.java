@@ -134,9 +134,9 @@ public class ServiceImpl {
         return userIDList;
     }
 
-    public List<TaskClass> GetAllTasks() {
+    public List<TaskClass> GetTaskByProjId(int projID) {
 
-        Call<List<TaskClass>> getTasks = taskService.getAllTasks();
+        Call<List<TaskClass>> getTasks = taskService.getTaskByProjId(projID);
 
         getTasks.enqueue(new Callback<List<TaskClass>>() {
             @Override
@@ -172,6 +172,7 @@ public class ServiceImpl {
 
         return tasksList;
     }
+
     public List<ProjectClass> GetAllProjects() {
 
         Call<List<ProjectClass>> getProjects = projectService.getAllProjects();
@@ -297,15 +298,15 @@ public class ServiceImpl {
 
                     Log.d(TAG, response.toString());
 
-                    try {
-                        for (int i = 0; i < teamClassList.size(); i++) {
-                            pTeamList.add(new ProjectTeamClass(teamClassList.get(i).getProjteamID(),
-                                    teamClassList.get(i).getProjectID(),
-                                    teamClassList.get(i).getUserID(),
-                                    teamClassList.get(i).getProjuserrole()));
-
-                        }
-                    } catch (final Exception e) { e.printStackTrace(); }
+//                    try {
+//                        for (int i = 0; i < teamClassList.size(); i++) {
+//                            pTeamList.add(new ProjectTeamClass(teamClassList.get(i).getProjteamID(),
+//                                    teamClassList.get(i).getProjectID(),
+//                                    teamClassList.get(i).getUserID(),
+//                                    teamClassList.get(i).getProjuserrole()));
+//
+//                        }
+//                    } catch (final Exception e) { e.printStackTrace(); }
                 }
             }
             @Override

@@ -16,11 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.TaskClassAdapter;
 import com.mjm.workflowkami.add_classes.AddTask;
+import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.service_classes.TaskService;
 
@@ -32,12 +34,14 @@ import dmax.dialog.SpotsDialog;
 public class Tasks extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String TAG = Tasks.class.getSimpleName();
+//    private String TAG = Tasks.class.getSimpleName();
     private ListView listofTasks;
     private ServiceImpl serviceImpl = new ServiceImpl();
-    List<TaskClass> tasksList = new ArrayList<TaskClass>();
-    private TaskService taskService = API.getInstance().getTaskService();
+    private ProjectClass projectIntent = new ProjectClass();
+//    List<TaskClass> tasksList = new ArrayList<TaskClass>();
+//    private TaskService taskService = API.getInstance().getTaskService();
     private SpotsDialog loader;
+    private PullRefreshLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +51,27 @@ public class Tasks extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Intent intent = getIntent();
+        projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+
         listofTasks = (ListView) findViewById(R.id.lstTasks);
-        serviceImpl.GetAllTasks();
+        if (projectIntent != null) {
+            serviceImpl.GetTaskByProjId(projectIntent.getProjID());
+        }
         listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
 
-//        if (listofTasks != null) {
-//            loader.dismiss();
-//        }
-//        ListViewImpl();
+        layout = (PullRefreshLayout) findViewById(R.id.refreshTask);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +82,7 @@ public class Tasks extends AppCompatActivity
 
             }
         });
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_tasks);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -213,9 +231,9 @@ public class Tasks extends AppCompatActivity
         return true;
     }
 
-    public void ListViewImpl() {
+//    public void ListViewImpl() {
 
-        listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
+//        listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
 //        listofTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -229,6 +247,6 @@ public class Tasks extends AppCompatActivity
 //
 //            }
 //        });
-    }
+//    }
 
 }

@@ -1,9 +1,11 @@
 package com.mjm.workflowkami.impl_classes;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +18,9 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.ProjectClassAdapter;
@@ -24,7 +28,16 @@ import com.mjm.workflowkami.add_classes.AddProject;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.service_classes.ProjectService;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
@@ -33,9 +46,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Projects extends AppCompatActivity
+public class Projects extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private PullRefreshLayout layout;
+    private SwipeRefreshLayout refreshLayout;
     private String TAG = Projects.class.getSimpleName();
     private ListView listOfProjects;
     private SpotsDialog loader;
@@ -43,68 +58,130 @@ public class Projects extends AppCompatActivity
     List<ProjectClass> projectsList = new ArrayList<ProjectClass>();
     private ServiceImpl serviceImpl = new ServiceImpl();
     private List<String> strings = new ArrayList<String>();
+    private ProjectClassAdapter adapter;
+    private Toolbar supportActionBar;
+
+    private class ProjectTask extends AsyncTask<String, Void, List<ProjectClass>> {
+
+        @Override
+        protected void onPreExecute() {
+            showLoadingDialog();
+
+        }
+
+        @Override
+        protected List<ProjectClass> doInBackground(String... strings) {
+            try {
+                serviceImpl.GetAllProjects();
+                return serviceImpl.projectsList;
+            } catch (Exception eo) {
+                String message = eo.getMessage();
+                return null;
+            }
+        }
+        @Override
+        protected void onPostExecute(List<ProjectClass> projClassResponseEntity) {
+            dismissProgressDialog();
+
+
+            adapter = new ProjectClassAdapter(Projects.this, projClassResponseEntity);
+            listOfProjects.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projects);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarProj);
+        setTitle("Projects");
         setSupportActionBar(toolbar);
-//        String[] arr = {"prj1", "proj2"};
 
         loader = new SpotsDialog(Projects.this);
+//        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshProject);
 
         listOfProjects = (ListView) findViewById(R.id.lstProjects);
 //        serviceImpl.GetAllProjects();
-        Call<List<ProjectClass>> getProjects = projectService.getAllProjects();
 
-        getProjects.enqueue(new Callback<List<ProjectClass>>() {
+        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/projects";
+        new ProjectTask().execute(uri);
+//        listOfProjects.setAdapter(adapter);
+//        Call<List<ProjectClass>> getProjects = projectService.getAllProjects();
+//
+//        getProjects.enqueue(new Callback<List<ProjectClass>>() {
+//            @Override
+//            public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
+//                if (response.isSuccessful()) {
+//                    List<ProjectClass> projectClassList = response.body();
+//
+////                    Toast.makeText(Projects.this, response.body().toString(), Toast.LENGTH_LONG).show();
+////                    Log.d(TAG, response.toString());
+//                    try {
+//                        for (int i = 0; i < projectClassList.size(); i++) {
+//                            projectsList.add(new ProjectClass(projectClassList.get(i).getProjID(),
+//                                    projectClassList.get(i).getProjname(),
+//                                    projectClassList.get(i).getProjclient(),
+//                                    projectClassList.get(i).getProjdesc(),
+//                                    projectClassList.get(i).getProjtype(),
+//                                    projectClassList.get(i).getProjstartdate(),
+//                                    projectClassList.get(i).getProjenddate(),
+//                                    projectClassList.get(i).getProjdatecompleted(),
+//                                    projectClassList.get(i).getProjstatus(),
+//                                    projectClassList.get(i).getProjmanager(),
+//                                    projectClassList.get(i).getProjcontractbudget(),
+//                                    projectClassList.get(i).getProjtargetbudget(),
+//                                    projectClassList.get(i).getProjprogress(),
+//                                    projectClassList.get(i).getProjduration()));
+////                            strings.add(projectClassList.get(i).getProjname());
+//
+//                        }
+//                    } catch (final Exception e) { e.printStackTrace(); }
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<List<ProjectClass>> call, Throwable t) {
+//                Toast.makeText(Projects.this, t.toString(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        Toast.makeText(Projects.this, projectsList.toString(), Toast.LENGTH_LONG).show();
+//        listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, serviceImpl.projectsList));
+//        loader.dismiss();
+
+//        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                fetchProjectAsync(0);
+//            }
+//        });
+
+
+        layout = (PullRefreshLayout) findViewById(R.id.refreshProject);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
-            public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
-                if (response.isSuccessful()) {
-                    List<ProjectClass> projectClassList = response.body();
-
-                    Toast.makeText(Projects.this, response.body().toString(), Toast.LENGTH_LONG).show();
-//                    Log.d(TAG, response.toString());
-                    try {
-                        for (int i = 0; i < projectClassList.size(); i++) {
-                            projectsList.add(new ProjectClass(projectClassList.get(i).getProjID(),
-                                    projectClassList.get(i).getProjname(),
-                                    projectClassList.get(i).getProjclient(),
-                                    projectClassList.get(i).getProjdesc(),
-                                    projectClassList.get(i).getProjtype(),
-                                    projectClassList.get(i).getProjstartdate(),
-                                    projectClassList.get(i).getProjenddate(),
-                                    projectClassList.get(i).getProjdatecompleted(),
-                                    projectClassList.get(i).getProjstatus(),
-                                    projectClassList.get(i).getProjmanager(),
-                                    projectClassList.get(i).getProjcontractbudget(),
-                                    projectClassList.get(i).getProjtargetbudget(),
-                                    projectClassList.get(i).getProjprogress(),
-                                    projectClassList.get(i).getProjduration()));
-//                            strings.add(projectClassList.get(i).getProjname());
-
-                        }
-                    } catch (final Exception e) { e.printStackTrace(); }
-                }
-            }
-            @Override
-            public void onFailure(Call<List<ProjectClass>> call, Throwable t) {
-                Toast.makeText(Projects.this, t.toString(), Toast.LENGTH_LONG).show();
+            public void onRefresh() {
+                layout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.clear();
+                        new ProjectTask().execute(uri);
+//                        adapter.notifyDataSetChanged();
+                        layout.setRefreshing(false);
+                    }
+                }, 3000);
             }
         });
-        Toast.makeText(Projects.this, projectsList.toString(), Toast.LENGTH_LONG).show();
-        listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, projectsList));
-        loader.dismiss();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                    Intent add = new Intent(Projects.this, AddProject.class);
-                    startActivity(add);
-            }
-        });
-        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
+
+
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                    Intent add = new Intent(Projects.this, AddProject.class);
+//                    startActivity(add);
+//            }
+//        });
+//        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_projects);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -115,6 +192,7 @@ public class Projects extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -139,9 +217,10 @@ public class Projects extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 //        int id = item.getItemId();
-//
+
 //        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
+//        if (id == R.id.action_back_proj) {
+//            startActivity(new Intent(this, Users.class));
 //            return true;
 //        }
 
@@ -155,42 +234,42 @@ public class Projects extends AppCompatActivity
         int id = item.getItemId();
         switch (id){
             case R.id.nav_dashboard:
-                loader.show();
+//                loader.show();
                 Intent d = new Intent(Projects.this, Dashboard.class);
                 startActivity(d);
                 break;
             case R.id.nav_project:
                 break;
             case R.id.nav_files:
-                loader.show();
+//                loader.show();
                 Intent fi = new Intent(Projects.this, Files.class);
                 startActivity(fi);
                 break;
             case R.id.nav_reports:
-                loader.show();
+//                loader.show();
                 Intent r = new Intent(Projects.this, Reports.class);
                 startActivity(r);
                 break;
             case R.id.nav_users:
-                loader.show();
+//                loader.show();
                 Intent u = new Intent(Projects.this, Users.class);
                 startActivity(u);
                 break;
 
             case R.id.nav_workers:
-                loader.show();
+//                loader.show();
                 Intent x = new Intent(Projects.this, Workers.class);
                 startActivity(x);
                 break;
 
             case R.id.nav_settings:
-                loader.show();
+//                loader.show();
                 Intent s = new Intent(Projects.this, Settings.class);
                 startActivity(s);
                 break;
 
             case R.id.nav_logout:
-                loader.show();
+//                loader.show();
                 Intent l = new Intent(Projects.this, LoginActivity.class);
                 startActivity(l);
                 break;
@@ -199,5 +278,10 @@ public class Projects extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void setSupportActionBar(Toolbar supportActionBar) {
+        this.supportActionBar = supportActionBar;
     }
 }

@@ -20,13 +20,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class API {
 //    public final String BASE_URL = "http://192.168.2.108:8081/rest/";
-//    public final String BASE_URL = "http://192.168.2.123:8082/rest/";
+    public final String BASE_URL = "http://192.168.2.123:8082/rest/";
 //    public final String BASE_URL = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/";
 //    public final String BASE_URL = "http://192.168.2.144:8080/";
 //    public final String BASE_URL = "http://172.20.10.5:8081/rest/";
     //    public final String BASE_URL = "http://10.1.15.97:8081/rest/";
 //    public static final String BASE_URL = "http://mjmdb-182915.appspot.com/";
-    public final String BASE_URL = "http://192.168.2.144:8083/";
+//    public final String BASE_URL = "http://192.168.2.144:8083/";
     private static API instance = null;
 
     private UserService userService;

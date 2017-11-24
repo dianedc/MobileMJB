@@ -5,11 +5,15 @@
     tools:context="com.mjm.workflowkami.impl_classes.Forms"
     tools:showIn="@layout/app_bar_forms">
 
-    <ListView
-        android:id="@+id/lstPreqs"
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/refreshpr"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lstPreqs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.baoyz.widget.PullRefreshLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation_pr"

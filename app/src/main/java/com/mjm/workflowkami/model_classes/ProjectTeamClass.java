@@ -11,24 +11,25 @@ public class ProjectTeamClass implements Serializable {
     private Integer projteamID;
     private ProjectClass projectID;
     private UserClass userID;
-    private String projuserrole;
+    private WorkerClass workersID;
 
-    public ProjectTeamClass(Integer projteamID, ProjectClass projectID, UserClass userID, String projuserrole) {
+    public ProjectTeamClass(Integer projteamID, ProjectClass projectID, UserClass userID, WorkerClass workersID ) {
         this.projteamID = projteamID;
         this.projectID = projectID;
+        this.workersID = workersID;
         this.userID = userID;
-        this.projuserrole = projuserrole;
+
     }
 
     public ProjectTeamClass() {
 
     }
 
-    public ProjectTeamClass(Integer projteamID, String s, String s1, String trim) {
-    }
-
-    public ProjectTeamClass(String s, String s1, String s2, String trim) {
-    }
+//    public ProjectTeamClass(Integer projteamID, String s, String s1, String trim) {
+//    }
+//
+//    public ProjectTeamClass(String s, String s1, String s2, String trim) {
+//    }
 
     public Integer getProjteamID() {
         return null;
@@ -50,18 +51,15 @@ public class ProjectTeamClass implements Serializable {
         return userID;
     }
 
-    public String getProjuserrole() {
-        return projuserrole;
-    }
-
-    public void setProjuserrole(String projuserrole) {
-        this.projuserrole = projuserrole;
-    }
-
-
     public void setUserID(UserClass userID) {
         this.userID = userID;
     }
+
+    public WorkerClass getWorkersID() { return workersID; }
+
+    public void setWorkersID(WorkerClass workersID) { this.workersID = workersID; }
+
+
 
     @Override
     public String toString() {
@@ -69,7 +67,7 @@ public class ProjectTeamClass implements Serializable {
                 "projteamID='" + projteamID + '\'' +
                 ", projectID='" + projectID + '\'' +
                 ", userID='" + userID + '\'' +
-                ", projuserrole='" + projuserrole +
+                ", workersID='" +  +
                 '}';
     }
 

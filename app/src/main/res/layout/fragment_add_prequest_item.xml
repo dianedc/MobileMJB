@@ -115,19 +115,26 @@
             <!--android:text="Add" />-->
     <!--</RelativeLayout>-->
 
-
-    <ListView
-        android:id="@android:id/list"
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/refreshprdtl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    </ListView>
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </com.baoyz.widget.PullRefreshLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_preq_dtl_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_add"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="310dp"/>
 </LinearLayout>

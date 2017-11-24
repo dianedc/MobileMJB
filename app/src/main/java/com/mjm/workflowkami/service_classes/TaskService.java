@@ -22,15 +22,30 @@ public interface TaskService {
     @GET("project/tasks")
     Call<List<TaskClass>> getAllTasks();
 
-    @GET("project/{task_id}")
+    @GET("project/task/{task_id}")
     Call<TaskClass> getTaskById(@Path("task_id") int task_id);
 
+    //GET TASKS UNDER CON PHASE
+    @GET("{proj_id}/tasks/con")
+    Call<List<TaskClass>> getTaskByCon(@Path("proj_id") int proj_id);
+
+    //GET TASKS UNDER CON PHASE
+    @GET("{proj_id}/tasks/precon")
+    Call<List<TaskClass>> getTaskByPreCon(@Path("proj_id") int proj_id);
+
+    //GET TASKS UNDER CON PHASE
+    @GET("{proj_id}/tasks/postcon")
+    Call<List<TaskClass>> getTaskByPostCon(@Path("proj_id") int proj_id);
+
+    //FIND ALL TASKS BY PROJECT ID
     @GET("project/{proj_id}/task")
-    Call<ProjectClass> getProjectById(@Path("proj_id") int proj_id);
+    Call<List<TaskClass>> getTaskByProjId(@Path("proj_id") int proj_id);
 
-    @POST("task/add")
-    Call<TaskClass> addTask(@Body TaskClass task);
+    //ADD TASK
+    @POST("{proj_id}/task/add")
+    Call<TaskClass> addTask(@Path("proj_id") int proj_id, @Body TaskClass task);
 
-    @POST("task/update/{task_id}")
-    Call<TaskClass> editTask(@Path("task_id") int taskID, @Body TaskClass task);
+    //EDIT TASKn
+    @POST("{proj_id}/task/update/{task_id}")
+    Call<TaskClass> editTask(@Path("proj_id") int proj_id, @Path("task_id") int taskID, @Body TaskClass task);
 }

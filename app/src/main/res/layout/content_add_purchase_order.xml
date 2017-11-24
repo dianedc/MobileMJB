@@ -366,7 +366,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/white"
                 android:fontFamily="sans-serif-medium"
-                android:text="Done"
+                android:text="Save"
                 android:textColor="@android:color/black"
                 android:textStyle="normal|bold"
                 app:layout_constraintBottom_toBottomOf="parent"

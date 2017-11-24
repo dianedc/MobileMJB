@@ -38,12 +38,13 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
         View view = layoutInflater.inflate(R.layout.list_item_tasks, parent, false);
 //        TextView txtID = (TextView) view.findViewById(R.id.userID);
 //        txtID.setText(tasks.get(position).getTaskID().toString());
-        TextView txtTaskname = (TextView) view.findViewById(R.id.taskName);
-        txtTaskname.setText(tasks.get(position).getTaskname());
+        if (tasks != null) {
+            TextView txtTaskname = (TextView) view.findViewById(R.id.taskName);
+            txtTaskname.setText(tasks.get(position).getTaskname());
 
-        TextView txtTaskDescription = (TextView) view.findViewById(R.id.taskDescription);
-        txtTaskDescription.setText(tasks.get(position).getTaskdesc());
-
+            TextView txtTaskDescription = (TextView) view.findViewById(R.id.taskDescription);
+            txtTaskDescription.setText(tasks.get(position).getTaskdesc());
+        }
         Button btnEditTask = (Button) view.findViewById(R.id.btnEditTask);
         btnEditTask.setOnClickListener(new View.OnClickListener() {
             @Override

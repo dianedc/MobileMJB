@@ -37,7 +37,7 @@ public class AddProjectTeam extends AppCompatActivity {
     private EditText projteamID;
     private EditText projectID;
     private EditText userID;
-    private EditText projuserrole;
+    private EditText workersID;
 
     private List<String> array;
     private ProjectTeamClass team;
@@ -64,7 +64,7 @@ public class AddProjectTeam extends AppCompatActivity {
         projteamID = (EditText) findViewById(R.id.projTeam_id);
         projectID = (EditText) findViewById(R.id.project_id);
         userID = (EditText) findViewById(R.id.user_id);
-        projuserrole = (EditText) findViewById(R.id.projUserRole);
+//        workersID = (EditText) findViewById(R.id.workersID);
 
         saveTeam = (Button) findViewById(R.id.btnSaveProjectTeam);
 
@@ -96,7 +96,7 @@ public class AddProjectTeam extends AppCompatActivity {
             projteamID.setText(String.valueOf(teamIntent.getProjteamID()));
             projectID.setText(teamIntent.getProjectID().getProjID());
             userID.setText(teamIntent.getUserID().getUserID());
-            projuserrole.setText(teamIntent.getProjuserrole());
+//            workersID.setText(teamIntent.getWorkersID().getWorkersfirstname());
 
         }
 
@@ -123,28 +123,28 @@ public class AddProjectTeam extends AppCompatActivity {
             }
         });
 
-        saveTeam.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!projteamID.getText().toString().matches("")) {
-                    //update
-                    team = new ProjectTeamClass(Integer.valueOf(projteamID.getText().toString()),
-                            projectID.getText().toString(),
-                            userID.getText().toString(),
-                            projuserrole.getText().toString().trim());
-                    Toast.makeText(AddProjectTeam.this, team.toString(), Toast.LENGTH_SHORT).show();
-                    UpdateTeam(teamIntent.getProjteamID(), team);
-                } else {
-                    //add
-                    team = new ProjectTeamClass(projteamID.getText().toString(),
-                            projectID.getText().toString(),
-                            userID.getText().toString(),
-                            projuserrole.getText().toString().trim());
-                    AddTeam(team);
-                }
-            }
-        });
+//        saveTeam.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (!projteamID.getText().toString().matches("")) {
+//                    //update
+//                    team = new ProjectTeamClass(Integer.valueOf(projteamID.getText().toString()),
+//                            projectID.getText().toString(),
+//                            userID.getText().toString(),
+//                            projuserrole.getText().toString().trim());
+//                    Toast.makeText(AddProjectTeam.this, team.toString(), Toast.LENGTH_SHORT).show();
+//                    UpdateTeam(teamIntent.getProjteamID(), team);
+//                } else {
+//                    //add
+//                    team = new ProjectTeamClass(projteamID.getText().toString(),
+//                            projectID.getText().toString(),
+//                            userID.getText().toString(),
+//                            projuserrole.getText().toString().trim());
+//                    AddTeam(team);
+//                }
+//            }
+//        });
     }
 
     @Override

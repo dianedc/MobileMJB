@@ -177,9 +177,10 @@
             android:layout_gravity="center"
             android:checked="true"
             android:text="Active"
-            android:textAlignment="viewStart"
             android:textOff="N"
             android:textOn="Y" />
+            <!--android:textAlignment="viewStart"-->
+
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -217,7 +218,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/white"
                 android:fontFamily="sans-serif-medium"
-                android:text="Done"
+                android:text="Save"
                 android:textColor="@android:color/black"
                 android:textStyle="normal|bold"
                 app:layout_constraintBottom_toBottomOf="parent"

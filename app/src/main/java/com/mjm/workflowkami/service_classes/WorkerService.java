@@ -26,9 +26,9 @@ public interface WorkerService {
     @GET("worker/{workersID}")
     Call<WorkerClass> getWorkerById(@Path("workersID") int workersID);
 
-    @POST("task/add")
+    @POST("worker/add")
     Call<WorkerClass> addWorker(@Body WorkerClass work);
 
-    @POST("task/update/{task_id}")
-    Call<WorkerClass> editWork(@Path("workersID") int workersID, @Body WorkerClass work);
+    @POST("worker/update/{worker_id}")
+    Call<Void> editWork(@Path("workersID") int workersID, @Body WorkerClass work);
 }

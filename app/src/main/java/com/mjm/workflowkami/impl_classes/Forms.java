@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
@@ -39,6 +40,7 @@ public class Forms extends AppCompatActivity
     private List<PurchaseRequestClass> preqList = new ArrayList<PurchaseRequestClass>();
     private PurchaseRequestService purchaseRequestService = API.getInstance().getPurchaseRequestService();
     private SpotsDialog loader;
+    private PullRefreshLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,18 @@ public class Forms extends AppCompatActivity
 
         listofPreq.setAdapter(new PurchaseRequestAdapter(Forms.this, serviceImpl.prList));
 
+        layout = (PullRefreshLayout) findViewById(R.id.refreshpr);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_pr);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

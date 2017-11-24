@@ -11,105 +11,159 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@android:color/white">
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp"/>
-
-
-        <EditText
-            android:id="@+id/projTeam_id"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:drawablePadding="10dp"
-            android:ems="9"
-            android:singleLine="true"
-            android:enabled="false"
-            android:textColor="@android:color/black"
-            android:textSize="6pt"
-            android:hint="Project Team ID"
-            android:drawableLeft="@drawable/ic_menu_project" />
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            />
+            android:layout_height="65dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/projTeam_id"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="21dp"
+                android:drawableLeft="@drawable/ic_menu_project"
+                android:drawablePadding="10dp"
+                android:ems="9"
+                android:enabled="false"
+                android:hint="Project Team ID"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="6pt" />
+
+            <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="10dp"-->
+            <!--/>-->
 
             <EditText
                 android:id="@+id/project_id"
                 android:layout_width="112dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/projTeam_id"
+                android:drawableLeft="@drawable/ic_menu_project"
                 android:drawablePadding="10dp"
                 android:ems="9"
                 android:enabled="false"
+                android:hint="Project ID"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
-                android:textSize="6pt"
-                android:hint="Project ID"
-                android:drawableLeft="@drawable/ic_menu_project" />
+                android:textSize="6pt" />
+
+        </RelativeLayout>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp" />
 
-        <EditText
-            android:id="@+id/user_id"
-            android:layout_width="112dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:drawableLeft="@drawable/ic_assign"
-            android:drawablePadding="10dp"
-            android:ems="9"
-            android:enabled="false"
-            android:hint="User ID"
-            android:singleLine="true"
-            android:textSize="6pt" />
+        <!--<EditText-->
+        <!--android:id="@+id/user_id"-->
+        <!--android:layout_width="112dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:drawableLeft="@drawable/ic_assign"-->
+        <!--android:drawablePadding="10dp"-->
+        <!--android:ems="9"-->
+        <!--android:enabled="false"-->
+        <!--android:hint="User ID"-->
+        <!--android:singleLine="true"-->
+        <!--android:textSize="6pt" />-->
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_weight="1" />
 
-        <android.support.design.widget.TextInputLayout
+
+        <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<EditText-->
+        <!--android:id="@+id/workersID"-->
+        <!--android:layout_width="278dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:drawableLeft="@drawable/ic_projname"-->
+        <!--android:drawablePadding="10dp"-->
+        <!--android:ems="14"-->
+        <!--android:hint="Project User Role"-->
+        <!--android:singleLine="true"-->
+        <!--android:textSize="6pt" />-->
+
+        <!--</android.support.design.widget.TextInputLayout>-->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/projUserRole"
-                android:layout_width="278dp"
+            <RadioButton
+                android:id="@+id/radio_engarch"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="20dp"
-                android:drawableLeft="@drawable/ic_projname"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="Project User Role"
-                android:singleLine="true"
-                android:textSize="6pt" />
+                android:text="Engineer / Architect"
+                tools:layout_editor_absoluteX="267dp"
+                tools:layout_editor_absoluteY="0dp" />
 
-        </android.support.design.widget.TextInputLayout>
+            <RadioButton
+                android:id="@+id/radio_worker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/radio_engarch"
+                android:text="Workers" />
+
+        </RelativeLayout>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="20dp"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:layout_width="321dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="29dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="25dp">
+
+            </Spinner>
+
+        </RelativeLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:layout_weight="1" />
 
         <android.support.constraint.ConstraintLayout
@@ -122,9 +176,8 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/white"
                 android:fontFamily="sans-serif-medium"
@@ -154,7 +207,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
         </android.support.constraint.ConstraintLayout>
 
