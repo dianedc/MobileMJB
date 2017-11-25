@@ -34,7 +34,7 @@ public class ProjectClassAdapter extends ArrayAdapter<ProjectClass> {
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.list_item_projects, parent, false);
         TextView txtProjname = (TextView) view.findViewById(R.id.projname);
@@ -61,6 +61,7 @@ public class ProjectClassAdapter extends ArrayAdapter<ProjectClass> {
                 ProjectClass projectClass = projects.get(position);
                 Intent i = new Intent(context, Tasks.class);
 
+//                i.setClassName(context, "com.mjm.workflowkami.add_classes.AddTask");
                 i.putExtra("projects", projectClass);
                 context.startActivity(i);
             }

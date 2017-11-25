@@ -75,6 +75,9 @@ public class AddUserr extends AppCompatActivity {
             userMName.setText(userIntent.getMiddlename());
             emailadd.setText(userIntent.getEmail());
             userpassword.setText(userIntent.getPassword());
+            if (userIntent.getPassword() != null) {
+                userpassword.setEnabled(false);
+            }
             if (userIntent.getUserstatus() == true) {
                 userstatus.setChecked(true);
             } else {

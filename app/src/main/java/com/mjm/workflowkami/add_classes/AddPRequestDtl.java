@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.add_classes;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -41,6 +42,36 @@ public class AddPRequestDtl extends ListFragment {
     private PurchaseRequestClass preq = new PurchaseRequestClass();
     private ServiceImpl serviceImpl = new ServiceImpl();
     private PullRefreshLayout layout;
+    int preq_id = 0;
+
+//    private class AddPRequestDtlTask extends AsyncTask<String, Void, List<PurchaseRequestItemClass>> {
+//
+//        @Override
+//        protected void onPreExecute() {
+//            Intent intent = getActivity().getIntent();
+//            preq = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
+//
+//            if (preq != null) {
+//                preq_id = preq.getPreqID();
+//            }
+//        }
+//
+//        @Override
+//        protected List<PurchaseRequestItemClass> doInBackground(String... strings) {
+//            try {
+//                serviceImpl.GetAllPReqItemList(preq_id);
+//                return serviceImpl.pItemList;
+//            } catch (Exception eo) {
+//                String message = eo.getMessage();
+//                return null;
+//            }
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<PurchaseRequestItemClass> purchaseRequestItemClasses) {
+//            super.onPostExecute(purchaseRequestItemClasses);
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

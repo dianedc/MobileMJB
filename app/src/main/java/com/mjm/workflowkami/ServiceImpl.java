@@ -175,6 +175,7 @@ public class ServiceImpl {
 
     public List<ProjectClass> GetAllProjects() {
 
+        projectsList = new ArrayList<ProjectClass>();
         Call<List<ProjectClass>> getProjects = projectService.getAllProjects();
 
         getProjects.enqueue(new Callback<List<ProjectClass>>() {
@@ -182,8 +183,6 @@ public class ServiceImpl {
             public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
                 if (response.isSuccessful()) {
                     List<ProjectClass> projectClassList = response.body();
-
-                    Log.d(TAG, response.toString());
 
                     try {
                         for (int i = 0; i < projectClassList.size(); i++) {

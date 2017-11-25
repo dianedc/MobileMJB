@@ -38,9 +38,9 @@ public class AddPRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prequest);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_add_preq);
         toolbar.setTitle("Purchase Request");
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24px);
+//        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24px);
 //        toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Light);
 //        toolbar.set(R.style.ThemeOverlay_AppCompat_Light);
         setSupportActionBar(toolbar);
@@ -87,7 +87,7 @@ public class AddPRequest extends AppCompatActivity {
         if (id == android.R.id.home) {
             finish();
             return true;
-        } else if (id == R.id.action_back_dtl_item) {
+        } else if (id == R.id.action_back_pr_detail) {
             Intent add = new Intent(getApplicationContext(), Forms.class);
             startActivity(add);
         }

@@ -81,10 +81,9 @@ public class LoginActivity extends LoaderAsync {
         @Override
         protected void onPostExecute(ResponseEntity<UserClass> userClassResponseEntity) {
             dismissProgressDialog();
-            HttpStatus status = userClassResponseEntity.getStatusCode();
-            UserClass user = userClassResponseEntity.getBody();
-            if (status == HttpStatus.OK ) {
-                if (user.getUserstatus() == true){
+            if (userClassResponseEntity != null) {
+                UserClass user = userClassResponseEntity.getBody();
+                if (user.getUserstatus() == true) {
                     i = new Intent(LoginActivity.this, Dashboard.class);
                     startActivity(i);
                 } else {
@@ -93,8 +92,10 @@ public class LoginActivity extends LoaderAsync {
             } else {
                 Toast.makeText(LoginActivity.this, "Invalid email/password!", Toast.LENGTH_LONG);
             }
-
         }
+
+
+
     }
 
 

@@ -10,16 +10,18 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="76dp" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/preq_dtl_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/preq_dtl_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="6pt"
+            android:visibility="gone" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -30,7 +32,10 @@
             android:id="@+id/preq_dtl_desc"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Description" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:hint="Description"
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -41,8 +46,11 @@
             android:id="@+id/preq_dtl_qty"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:hint="Quantity"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -52,7 +60,10 @@
             android:id="@+id/preq_dtl_unit"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Unit" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:hint="Unit"
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -63,7 +74,10 @@
             android:id="@+id/preq_dtl_job"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Job" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:hint="Job"
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -73,14 +87,27 @@
             android:id="@+id/preq_dtl_uni_price"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:hint="Unit Price"
-            android:inputType="numberDecimal" />
+            android:inputType="number"
+            android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/preq_dtl_line_tot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="301dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:textAlignment="viewEnd"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@android:color/black"
+        android:textSize="6pt" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"

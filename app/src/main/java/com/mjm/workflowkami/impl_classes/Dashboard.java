@@ -221,7 +221,7 @@ public class Dashboard extends AppCompatActivity
 //                startActivity(s);
 //                break;
             case R.id.nav_project:
-                loader.show();
+//                loader.show();
                 Intent p = new Intent(Dashboard.this, Projects.class);
                 startActivity(p);
                 break;
@@ -236,35 +236,35 @@ public class Dashboard extends AppCompatActivity
 //                startActivity(e);
 //                break;
             case R.id.nav_files:
-                loader.show();
+//                loader.show();
                 Intent fi = new Intent(Dashboard.this, Files.class);
                 startActivity(fi);
                 break;
             case R.id.nav_reports:
-                loader.show();
+//                loader.show();
                 Intent r = new Intent(Dashboard.this, Reports.class);
                 startActivity(r);
                 break;
             case R.id.nav_users:
-                loader.show();
+//                loader.show();
                 Intent u = new Intent(Dashboard.this, Users.class);
                 startActivity(u);
                 break;
 
             case R.id.nav_workers:
-                loader.show();
+//                loader.show();
                 Intent x = new Intent(Dashboard.this, Workers.class);
                 startActivity(x);
                 break;
 
             case R.id.nav_settings:
-                loader.show();
+//                loader.show();
                 Intent s = new Intent(Dashboard.this, Settings.class);
                 startActivity(s);
                 break;
 
             case R.id.nav_logout:
-                loader.show();
+//                loader.show();
                 Intent l = new Intent(Dashboard.this, LoginActivity.class);
                 startActivity(l);
                 break;

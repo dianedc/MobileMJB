@@ -40,8 +40,8 @@ public class ProjectTeamAdapter extends ArrayAdapter<ProjectTeamClass> {
 //        txtProjID.setText(projects.get(position).getProjectID().toString());
         TextView txtProjteamID = (TextView) view.findViewById(R.id.projTeam_id);
         txtProjteamID.setText(String.valueOf(pteams.get(position).getProjteamID()));
-        TextView txtProjUserRole = (TextView) view.findViewById(R.id.projuserrole);
-        txtProjUserRole.setText(pteams.get(position).getProjuserrole());
+//        TextView txtProjUserRole = (TextView) view.findViewById(R.id.projuserrole);
+//        txtProjUserRole.setText(pteams.get(position).getProjuserrole());
 
         Button btnEdit = (Button) view.findViewById(R.id.btnEditPteam);
         btnEdit.setOnClickListener(new View.OnClickListener() {

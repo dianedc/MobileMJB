@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mjm.workflowkami.add_classes.AddPRequest$PlaceholderFragment">
+    tools:context="com.mjm.workflowkami.add_classes.AddPRequestHdr">
 
     <!--<TextView-->
         <!--android:id="@+id/section_label"-->
@@ -61,6 +61,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp"
                 android:drawableLeft="@drawable/ic_menu_project"
+                android:drawablePadding="10dp"
                 android:hint="Project Name"
                 android:textSize="6pt" />
 
@@ -70,51 +71,28 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_weight="1"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="35dp" />
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="35dp">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+            <EditText
+                android:id="@+id/requestedby_preq"
+                android:layout_width="275dp"
+                android:layout_height="43dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp"
-                android:drawableLeft="@drawable/ic_menu_project"
+                android:drawableLeft="@drawable/ic_menu_user"
                 android:drawablePadding="10dp"
-                android:textColor="#000"
-                android:textSize="6pt"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/requestedby_preq"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:hint="Requested By"
+                android:textSize="6pt" />
 
-            <Spinner
-                android:id="@+id/requestedby_preq"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:drawSelectorOnTop="true"
-                android:drawablePadding="10dp"
-                android:entries="@array/requestedby"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-        </android.support.constraint.ConstraintLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
+        </android.support.design.widget.TextInputLayout>
 
         <!--<android.support.design.widget.TextInputLayout-->
         <!--android:layout_width="match_parent"-->
@@ -137,7 +115,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="20dp" />
 
         <EditText
             android:id="@+id/preq_daterequested"
@@ -187,6 +165,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp"
                 android:drawableLeft="@drawable/ic_menu_user"
+                android:drawablePadding="10dp"
                 android:hint="Project Manager"
                 android:textSize="6pt" />
         </android.support.design.widget.TextInputLayout>
@@ -232,6 +211,7 @@
             android:layout_height="20dp" />
 
         <RadioGroup
+            android:id="@+id/rdogrppm"
             android:layout_width="287dp"
             android:layout_height="34dp"
             android:layout_marginLeft="30dp"
@@ -239,14 +219,14 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton1"
+                android:id="@+id/isapprovedpmt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:text="Approved" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/isapprovedpmf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -269,6 +249,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp"
                 android:drawableLeft="@drawable/ic_menu_user"
+                android:drawablePadding="10dp"
                 android:hint="Office Engineer"
                 android:textSize="6pt" />
 
@@ -309,6 +290,7 @@
             android:layout_height="20dp" />
 
         <RadioGroup
+            android:id="@+id/rdogrpoe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
@@ -316,14 +298,14 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/isapprovedoet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:text="Approved" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/isapprovedoef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -346,6 +328,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp"
                 android:drawableLeft="@drawable/ic_menu_user"
+                android:drawablePadding="10dp"
                 android:hint="Purchasing Officer"
                 android:textSize="6pt" />
 
@@ -391,6 +374,7 @@
             android:layout_weight="0.17" />
 
         <RadioGroup
+            android:id="@+id/rdogrppo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
@@ -398,14 +382,14 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton5"
+                android:id="@+id/isapprovedpot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:text="Approved" />
 
             <RadioButton
-                android:id="@+id/radioButton6"
+                android:id="@+id/isapprovedpof"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

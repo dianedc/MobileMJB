@@ -1,5 +1,6 @@
 package com.mjm.workflowkami.impl_classes;
 
+import android.app.LoaderManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,7 +56,7 @@ public class Projects extends LoaderAsync
     private ListView listOfProjects;
     private SpotsDialog loader;
     private ProjectService projectService = API.getInstance().getProjectService();
-    List<ProjectClass> projectsList = new ArrayList<ProjectClass>();
+    List<ProjectClass> pl;
     private ServiceImpl serviceImpl = new ServiceImpl();
     private List<String> strings = new ArrayList<String>();
     private ProjectClassAdapter adapter;
@@ -66,27 +67,33 @@ public class Projects extends LoaderAsync
         @Override
         protected void onPreExecute() {
             showLoadingDialog();
-
         }
 
         @Override
         protected List<ProjectClass> doInBackground(String... strings) {
-            try {
+//            while (serviceImpl.projectsList != null) {
+//                serviceImpl.GetAllProjects();
+//                try  {
+//                    Thread.sleep(5000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            do {
                 serviceImpl.GetAllProjects();
-                return serviceImpl.projectsList;
-            } catch (Exception eo) {
-                String message = eo.getMessage();
-                return null;
-            }
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.projectsList == null);
+            return serviceImpl.projectsList;
         }
         @Override
         protected void onPostExecute(List<ProjectClass> projClassResponseEntity) {
             dismissProgressDialog();
-
-
-            adapter = new ProjectClassAdapter(Projects.this, projClassResponseEntity);
-            listOfProjects.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, projClassResponseEntity));
         }
     }
 
@@ -99,14 +106,11 @@ public class Projects extends LoaderAsync
         setSupportActionBar(toolbar);
 
         loader = new SpotsDialog(Projects.this);
-//        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshProject);
-
         listOfProjects = (ListView) findViewById(R.id.lstProjects);
-//        serviceImpl.GetAllProjects();
 
         final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/projects";
         new ProjectTask().execute(uri);
-//        listOfProjects.setAdapter(adapter);
+        pl = new ArrayList<ProjectClass>();
 //        Call<List<ProjectClass>> getProjects = projectService.getAllProjects();
 //
 //        getProjects.enqueue(new Callback<List<ProjectClass>>() {
@@ -114,12 +118,11 @@ public class Projects extends LoaderAsync
 //            public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
 //                if (response.isSuccessful()) {
 //                    List<ProjectClass> projectClassList = response.body();
+//                    Toast.makeText(Projects.this, response.toString(), Toast.LENGTH_LONG).show();
 //
-////                    Toast.makeText(Projects.this, response.body().toString(), Toast.LENGTH_LONG).show();
-////                    Log.d(TAG, response.toString());
 //                    try {
 //                        for (int i = 0; i < projectClassList.size(); i++) {
-//                            projectsList.add(new ProjectClass(projectClassList.get(i).getProjID(),
+//                            pl.add(new ProjectClass(projectClassList.get(i).getProjID(),
 //                                    projectClassList.get(i).getProjname(),
 //                                    projectClassList.get(i).getProjclient(),
 //                                    projectClassList.get(i).getProjdesc(),
@@ -133,28 +136,17 @@ public class Projects extends LoaderAsync
 //                                    projectClassList.get(i).getProjtargetbudget(),
 //                                    projectClassList.get(i).getProjprogress(),
 //                                    projectClassList.get(i).getProjduration()));
-////                            strings.add(projectClassList.get(i).getProjname());
-//
 //                        }
 //                    } catch (final Exception e) { e.printStackTrace(); }
 //                }
 //            }
 //            @Override
-//            public void onFailure(Call<List<ProjectClass>> call, Throwable t) {
-//                Toast.makeText(Projects.this, t.toString(), Toast.LENGTH_LONG).show();
-//            }
+//            public void onFailure(Call<List<ProjectClass>> call, Throwable t) { t.printStackTrace(); }
 //        });
-//        Toast.makeText(Projects.this, projectsList.toString(), Toast.LENGTH_LONG).show();
+
+//        serviceImpl.GetAllProjects();
 //        listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, serviceImpl.projectsList));
-//        loader.dismiss();
-
-//        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                fetchProjectAsync(0);
-//            }
-//        });
-
+//        Toast.makeText(Projects.this, serviceImpl.projectsList.toString(), Toast.LENGTH_LONG).show();
 
         layout = (PullRefreshLayout) findViewById(R.id.refreshProject);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
@@ -163,8 +155,8 @@ public class Projects extends LoaderAsync
                 layout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.clear();
-                        new ProjectTask().execute(uri);
+//                        adapter.cle   ar();
+//                        new ProjectTask().execute();
 //                        adapter.notifyDataSetChanged();
                         layout.setRefreshing(false);
                     }
@@ -276,7 +268,7 @@ public class Projects extends LoaderAsync
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -284,4 +276,6 @@ public class Projects extends LoaderAsync
     public void setSupportActionBar(Toolbar supportActionBar) {
         this.supportActionBar = supportActionBar;
     }
+
+
 }

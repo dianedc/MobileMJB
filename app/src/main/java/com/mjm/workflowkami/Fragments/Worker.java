@@ -1,6 +1,8 @@
 package com.mjm.workflowkami.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -38,11 +40,46 @@ public class Worker extends ListFragment {
     private WorkerClass work = new WorkerClass();
     List<WorkerClass> workerList = new ArrayList<WorkerClass>();
     private WorkerService workerService = API.getInstance().getWorkerService();
+    ProgressDialog progressDialog;
+
+
+    private class WorkerTask extends AsyncTask<String, Void, List<WorkerClass>> {
+
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Loading. Please wait... ");
+            progressDialog.show();
+        }
+
+        @Override
+        protected List<WorkerClass> doInBackground(String... strings) {
+            do {
+                serviceImpl.GetAllWorkers();
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.workerList == null);
+            return serviceImpl.workerList;
+        }
+        @Override
+        protected void onPostExecute(List<WorkerClass> workerClassResponseEntity) {
+            progressDialog.dismiss();
+            WorkerClassAdapter adapter = new WorkerClassAdapter(getActivity(), workerClassResponseEntity);
+            setListAdapter(adapter);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_worker, container, false);
+        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/worker/workers";
+        new WorkerTask().execute(uri);
 
 //        listofWorkers = (ListView) findViewById(R.id.lstWorkers);
 

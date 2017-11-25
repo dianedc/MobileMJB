@@ -132,11 +132,14 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
 
         Intent tIntent = getIntent();
         taskIntent = (TaskClass) tIntent.getSerializableExtra("tasks");
-//        Intent pIntent = getIntent();
-//        projIntent = (ProjectClass) pIntent.getSerializableExtra("projects");
+        Intent pIntent = getIntent();
+        projIntent = (ProjectClass) pIntent.getSerializableExtra("projects");
+
+//        Toast.makeText(AddTask.this, String.valueOf(taskIntent.getProjectID()), Toast.LENGTH_LONG).show();
 
 
         if (taskIntent != null) {
+
             taskID.setText(String.valueOf(taskIntent.getTaskID()));
             taskprojID.setText(String.valueOf(taskIntent.getProjectID()));
             taskName.setText(taskIntent.getTaskname());
@@ -163,8 +166,6 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
 //            viewManager.setText(taskIntent.getTaskmanager().getLastname());
 //            taskProgress.setText(String.valueOf(taskIntent.getTaskprogress()));
         }
-
-
 
 //        usersDialog1 = new SpinnerDialog(AddTask.this, serviceImpl.userIDList, "Select User");
 //        usersDialog1.bindOnSpinerListener(new OnSpinerItemClick() {
@@ -195,8 +196,10 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
 
                 if (!taskID.getText().toString().matches("")) {
                     //update
+                    Toast.makeText(AddTask.this, String.valueOf(taskIntent.getProjectID().getProjID()), Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddTask.this, taskID.getText().toString(), Toast.LENGTH_LONG).show();
                     task = new TaskClass(Integer.valueOf(taskID.getText().toString()),
-                            projIntent,
+                            taskIntent.getProjectID(),
                             taskName.getText().toString().trim(),
                             taskDescription.getText().toString().trim(),
                             taskPhase.getSelectedItem().toString().trim(),
@@ -206,10 +209,11 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                             dateComp.getText().toString().trim(),
                             taskStatus.getSelectedItem().toString().trim(),
                             taskDuration.getText().toString().trim());
-                    UpdateTask(Integer.valueOf(taskprojID.getText().toString()), Integer.valueOf(taskID.getText().toString()), task);
+                    UpdateTask(taskIntent.getProjectID().getProjID(), Integer.valueOf(taskID.getText().toString()), task);
                 } else {
                     //add
-                    task = new TaskClass(projIntent,
+                    Toast.makeText(AddTask.this, String.valueOf(projIntent.getProjID()), Toast.LENGTH_LONG).show();
+                    task = new TaskClass(taskIntent.getProjectID(),
                             taskName.getText().toString().trim(),
                             taskDescription.getText().toString().trim(),
                             taskPhase.getSelectedItem().toString().trim(),
@@ -219,7 +223,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                             dateComp.getText().toString().trim(),
                             taskStatus.getSelectedItem().toString().trim(),
                             taskDuration.getText().toString().trim());
-                    AddTask(Integer.valueOf(taskprojID.getText().toString()), task);
+                    SaveTask(taskIntent.getProjectID().getProjID(), task);
                 }
             }
         });
@@ -243,6 +247,9 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
 //            fromDate.requestFocus();
             toDate = (EditText) findViewById(R.id.task_end_date);
             toDate.setInputType(InputType.TYPE_NULL);
+
+            dateComp = (EditText) findViewById(R.id.task_date_completed);
+            dateComp.setInputType(InputType.TYPE_NULL);
 
             taskName = (EditText) findViewById(R.id.task_name);
             taskName.setInputType(InputType.TYPE_NULL);
@@ -279,7 +286,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                toDate.setText(dateFormatter.format(newDate.getTime()));
+                dateComp.setText(dateFormatter.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -378,13 +385,14 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
         startActivity(cancel);
     }
 
-    public void AddTask(int projID, TaskClass t) {
+    public void SaveTask(int projID, TaskClass t) {
 
         Call<TaskClass> addTask = taskService.addTask(projID, t);
 
         addTask.enqueue(new Callback<TaskClass>() {
             @Override
             public void onResponse(Call<TaskClass> call, Response<TaskClass> response) {
+                Toast.makeText(AddTask.this, response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
                     Toast.makeText(AddTask.this, "Task has been successfully added!", Toast.LENGTH_SHORT).show();
 
@@ -401,11 +409,12 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
 
 
     public void UpdateTask(int pid, int tid, TaskClass t) {
-        Call<TaskClass> addTask = taskService.editTask(pid, tid, t);
+        Call<Void> addTask = taskService.editTask(pid, tid, t);
 
-        addTask.enqueue(new Callback<TaskClass>() {
+        addTask.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<TaskClass> call, Response<TaskClass> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(AddTask.this, response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
                     Toast.makeText(AddTask.this, "Task has been successfully edited!", Toast.LENGTH_SHORT).show();
 
@@ -413,8 +422,10 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                     startActivity(u);
                 }
             }
+
             @Override
-            public void onFailure(Call<TaskClass> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
+
                 Toast.makeText(AddTask.this, "An error has been encountered while editing task", Toast.LENGTH_SHORT);
             }
         });

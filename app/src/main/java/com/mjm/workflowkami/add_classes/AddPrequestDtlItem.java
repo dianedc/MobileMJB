@@ -5,6 +5,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +34,7 @@ public class AddPrequestDtlItem extends AppCompatActivity {
     private TextView preq_dtl_line_tot;
     private Button btnCancel, btnSavePreqDtlItem;
 
-    private PurchaseRequestClass preq = new PurchaseRequestClass();
+//    private PurchaseRequestClass preq = new PurchaseRequestClass();
     private PurchaseRequestItemClass pi = new PurchaseRequestItemClass();
     private PurchaseRequestItemService pService = API.getInstance().getPurchaseRequestItemService();
 
@@ -67,29 +69,50 @@ public class AddPrequestDtlItem extends AppCompatActivity {
 //        Toast.makeText(AddPrequestDtlItem.this, preq.toString(), Toast.LENGTH_LONG).show();
         Toast.makeText(AddPrequestDtlItem.this, pi.toString(), Toast.LENGTH_LONG).show();
 
-        if (preq != null && pi != null) {
+        if (pi != null) {
             preq_dtl_id.setText(String.valueOf(pi.getPreqItemID()));
             preq_dtl_desc.setText(pi.getPreqdesc());
             preq_dtl_qty.setText(String.valueOf(pi.getPreqqty()));
             preq_dtl_unit.setText(pi.getPrequnit());
             preq_dtl_job.setText(pi.getPreqjob());
-        preq_dtl_uni_price.setText(pi.getPrequnitprice().toString());
-        preq_dtl_line_tot.setText(pi.getPreqlinetotal().toString());
+            preq_dtl_uni_price.setText(pi.getPrequnitprice().toString());
+            preq_dtl_line_tot.setText("Total: "+ pi.getPreqlinetotal().toString());
     }
+
+        preq_dtl_uni_price.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String input = preq_dtl_uni_price.getText().toString();
+                preq_dtl_line_tot.setText(input);
+
+            }
+        });
+
+
         btnSavePreqDtlItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!preq_dtl_id.getText().toString().matches("")) {
                     //update
                     pi = new PurchaseRequestItemClass(Integer.valueOf(preq_dtl_id.getText().toString()),
-                            Integer.valueOf(preq.getPreqID()),
+                            Integer.valueOf(pi.getPreqID()),
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),
                             Double.valueOf(preq_dtl_line_tot.getText().toString()));
-                    UpdateItem(preq.getPreqID(), Integer.valueOf(preq_dtl_id.getText().toString()), pi);
+                    UpdateItem(pi.getPreqID(), Integer.valueOf(preq_dtl_id.getText().toString()), pi);
                 } else {
                     //add
                     pi = new PurchaseRequestItemClass(Integer.valueOf(preq_dtl_id.getText().toString()),

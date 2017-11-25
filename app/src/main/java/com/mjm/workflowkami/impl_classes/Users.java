@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.impl_classes;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +10,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,10 +26,12 @@ import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.UserService;
 
 
+import java.util.List;
+
 import dmax.dialog.SpotsDialog;
 
 
-public class Users extends AppCompatActivity
+public class Users extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private String TAG = Users.class.getSimpleName();
@@ -41,6 +43,41 @@ public class Users extends AppCompatActivity
     private SpotsDialog loader;
     private TextView loggedInUser, loggedInEmail;
     private String email;
+//    private UserClassAdapter adapter = new UserClassAdapter();
+
+    private class UserTask extends AsyncTask<String, Void, List<UserClass>> {
+
+        List<UserClass> cached;
+        @Override
+        protected void onPreExecute() {
+            if (cached == null) {
+                showLoadingDialog();
+            } else {
+                super.onPostExecute(cached);
+            }
+        }
+
+        @Override
+        protected List<UserClass> doInBackground(String... strings) {
+
+            do {
+                serviceImpl.GetAllUsers();
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (serviceImpl.usersList ==null);
+
+            return serviceImpl.usersList;
+        }
+
+        @Override
+        protected void onPostExecute(List<UserClass> userClassResponseEntity) {
+            dismissProgressDialog();
+            listOfUsers.setAdapter(new UserClassAdapter(Users.this, userClassResponseEntity));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +91,14 @@ public class Users extends AppCompatActivity
         serviceImpl.GetAllUsers();
         listOfUsers.setAdapter(new UserClassAdapter(this, serviceImpl.usersList));
 
-        loader.dismiss();
+        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/user/users";
+        new Users.UserTask().execute(uri);
+//        loader.dismiss();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        getSupportLoaderManager().initLoader(R.id.object_loader_id, null, this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +159,7 @@ public class Users extends AppCompatActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_dashboard:
-                loader.show();
+//                loader.show();
                 Intent d = new Intent(Users.this, Dashboard.class);
                 startActivity(d);
                 break;
@@ -133,7 +174,7 @@ public class Users extends AppCompatActivity
 //                startActivity(s);
 //                break;
             case R.id.nav_project:
-                loader.show();
+//                loader.show();
                 Intent p = new Intent(Users.this, Projects.class);
                 startActivity(p);
                 break;
@@ -148,7 +189,7 @@ public class Users extends AppCompatActivity
 //                startActivity(e);
 //                break;
             case R.id.nav_files:
-                loader.show();
+//                loader.show();
                 Intent fi = new Intent(Users.this, Files.class);
                 startActivity(fi);
                 break;
@@ -163,19 +204,19 @@ public class Users extends AppCompatActivity
                 break;
 
             case R.id.nav_workers:
-                loader.show();
+//                loader.show();
                 Intent x = new Intent(Users.this, Workers.class);
                 startActivity(x);
                 break;
 
             case R.id.nav_settings:
-                loader.show();
+//                loader.show();
                 Intent s = new Intent(Users.this, Settings.class);
                 startActivity(s);
                 break;
 
             case R.id.nav_logout:
-                loader.show();
+//                loader.show();
                 Intent l = new Intent(Users.this, LoginActivity.class);
                 startActivity(l);
                 break;
@@ -186,4 +227,21 @@ public class Users extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+//    private LoaderManager.LoaderCallbacks<List<UserClass>> loaderCallbacks = new LoaderManager.LoaderCallbacks<List<UserClass>>() {
+//        @Override
+//        public Loader<List<UserClass>> onCreateLoader(int id, Bundle args) {
+//            return new ObjectLoader(getApplicationContext());
+//        }
+//
+//        @Override
+//        public void onLoadFinished(Loader<List<UserClass>> loader, List<UserClass> data) {
+//            listOfUsers.setAdapter(new UserClassAdapter(getApplicationContext(), data));
+//        }
+//
+//        @Override
+//        public void onLoaderReset(Loader<List<UserClass>> loader) {
+//            listOfUsers.setAdapter(new UserClassAdapter(getApplicationContext(), Collections.<UserClass>emptyList()));
+//        }
+//    };
 }

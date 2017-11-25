@@ -47,5 +47,5 @@ public interface TaskService {
 
     //EDIT TASKn
     @POST("{proj_id}/task/update/{task_id}")
-    Call<TaskClass> editTask(@Path("proj_id") int proj_id, @Path("task_id") int taskID, @Body TaskClass task);
+    Call<Void> editTask(@Path("proj_id") int proj_id, @Path("task_id") int taskID, @Body TaskClass task);
 }

@@ -8,11 +8,11 @@
     tools:context="com.mjm.workflowkami.impl_classes.ProjectTeam"
     tools:showIn="@layout/app_bar_project_team">
 
-    <ListView
-        android:id="@+id/lstTeams"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="10dp"/>
+    <!--<ListView-->
+        <!--android:id="@+id/lstTeams"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:paddingTop="10dp"/>-->
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"

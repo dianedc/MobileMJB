@@ -87,13 +87,13 @@ public class ProjectTeam extends AppCompatActivity
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loader = new SpotsDialog(ProjectTeam.this);
-        listofTeams = (ListView) findViewById(R.id.lstTeams);
-        serviceImpl.GetAllTeams();
-        listofTeams.setAdapter(new ProjectTeamAdapter(this, serviceImpl.pTeamList));
-
-        if (listofTeams != null) {
-            loader.dismiss();
-        }
+//        listofTeams = (ListView) findViewById(R.id.lstTeams);
+//        serviceImpl.GetAllTeams();
+//        listofTeams.setAdapter(new ProjectTeamAdapter(this, serviceImpl.pTeamList));
+//
+//        if (listofTeams != null) {
+//            loader.dismiss();
+//        }
 
 
 

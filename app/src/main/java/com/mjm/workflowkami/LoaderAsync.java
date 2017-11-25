@@ -2,12 +2,13 @@ package com.mjm.workflowkami;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by DC on 24/11/2017.
  */
 
-public class LoaderAsync extends Activity {
+public class LoaderAsync extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private boolean destroyed = false;

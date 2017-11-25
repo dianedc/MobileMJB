@@ -2,16 +2,9 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.mjm.workflowkami.add_classes.AddPRequest">
-
-    <!--<include-->
-        <!--layout="@layout/app_bar_add_preq"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
+    tools:context="com.mjm.workflowkami.add_classes.AddPrequestDtlItem">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -52,10 +45,6 @@
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <!--<include layout="@layout/content_add_preq_dtl_item" />-->
 
 </android.support.design.widget.CoordinatorLayout>

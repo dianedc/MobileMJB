@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.Fragments.Worker;
 import com.mjm.workflowkami.R;
+import com.mjm.workflowkami.impl_classes.Workers;
 import com.mjm.workflowkami.model_classes.WorkerClass;
 import com.mjm.workflowkami.service_classes.WorkerService;
 
@@ -91,7 +92,7 @@ public class AddWorker extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_back_worker:
-                startActivity(new Intent(this, Worker.class));
+                startActivity(new Intent(this, Workers.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
