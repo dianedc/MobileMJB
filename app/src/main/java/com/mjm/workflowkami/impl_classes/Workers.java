@@ -25,8 +25,6 @@ import com.mjm.workflowkami.Fragments.Attendance;
 import com.mjm.workflowkami.Fragments.Worker;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
-import com.mjm.workflowkami.add_classes.AddPRequestDtl;
-import com.mjm.workflowkami.add_classes.AddPRequestHdr;
 import com.mjm.workflowkami.model_classes.WorkerClass;
 import com.mjm.workflowkami.service_classes.WorkerService;
 

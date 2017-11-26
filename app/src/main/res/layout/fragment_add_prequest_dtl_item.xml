@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    tools:context="com.mjm.workflowkami.add_classes.AddPRequestItemDtl">
 
     <Space
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/preq_dtl_id"
+            android:id="@+id/preq_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="6pt"
@@ -96,7 +97,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:hint="Unit Price"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
@@ -159,4 +160,5 @@
 
 
     </RelativeLayout>
+
 </LinearLayout>

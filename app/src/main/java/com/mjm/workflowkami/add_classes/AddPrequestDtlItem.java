@@ -1,5 +1,6 @@
 package com.mjm.workflowkami.add_classes;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -18,7 +19,6 @@ import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
-import com.mjm.workflowkami.add_classes.AddPRequestDtl;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
@@ -79,14 +79,14 @@ public class AddPrequestDtlItem extends AppCompatActivity {
         }
 
         if (pi != null) {
-
+            Toast.makeText(AddPrequestDtlItem.this, String.valueOf(pi.getPrequestID().getPreqID()), Toast.LENGTH_LONG).show();
             preq_dtl_id.setText(String.valueOf(pi.getPreqItemID()));
             preq_dtl_desc.setText(pi.getPreqdesc());
             preq_dtl_qty.setText(String.valueOf(pi.getPreqqty()));
             preq_dtl_unit.setText(pi.getPrequnit());
             preq_dtl_job.setText(pi.getPreqjob());
             preq_dtl_uni_price.setText(pi.getPrequnitprice().toString());
-            preq_dtl_line_tot.setText("Total: "+ pi.getPreqlinetotal().toString());
+            preq_dtl_line_tot.setText(pi.getPreqlinetotal().toString());
     }
 
         preq_dtl_uni_price.addTextChangedListener(new TextWatcher() {
@@ -102,40 +102,48 @@ public class AddPrequestDtlItem extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String input = preq_dtl_uni_price.getText().toString();
-                preq_dtl_line_tot.setText(input);
+                int input = Integer.valueOf(preq_dtl_uni_price.getText().toString());
+                int input2 = Integer.valueOf(preq_dtl_qty.getText().toString());
+                int res = input * input2;
+                preq_dtl_line_tot.setText(String.valueOf(res));
 
             }
         });
 
 
+        final BigDecimal lineTot = new BigDecimal(preq_dtl_line_tot.getText().toString());
         btnSavePreqDtlItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!preq_dtl_id.getText().toString().matches("")) {
                     //update
-                    pi = new PurchaseRequestItemClass(Integer.valueOf(preq_dtl_id.getText().toString()),
-                            Integer.valueOf(pi.getPreqID()),
+                    pi = new PurchaseRequestItemClass(Integer.valueOf(pi.getPreqItemID()),
+                            pi.getPrequestID(),
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),
-                            Double.valueOf(preq_dtl_line_tot.getText().toString()));
-                    UpdateItem(pi.getPreqID(), Integer.valueOf(preq_dtl_id.getText().toString()), pi);
+                            lineTot);
+                    UpdateItem(pi.getPrequestID().getPreqID(), pi.getPreqItemID(), pi);
+                    Toast.makeText(AddPrequestDtlItem.this, "Purchase item has been successfully edited!", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     //add
-                    pi = new PurchaseRequestItemClass(Integer.valueOf(preq_id_dtl.getText().toString()),
+                    pi = new PurchaseRequestItemClass(pi.getPrequestID(),
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),
-                            Double.valueOf(preq_dtl_line_tot.getText().toString()));
-                    AddItem(pi.getPreqID(), pi);
+                            lineTot);
+                    AddItem(pi.getPrequestID().getPreqID(), pi);
+                    Toast.makeText(AddPrequestDtlItem.this, "Saved!", Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
         });
+
 
 
 
@@ -155,7 +163,7 @@ public class AddPrequestDtlItem extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_back_dtl_item:
-                startActivity(new Intent(AddPrequestDtlItem.this, AddPRequest.class));
+                finish();
                 return true;
 //            case R.id.action_settings:
 //                return true;
@@ -172,23 +180,17 @@ public class AddPrequestDtlItem extends AppCompatActivity {
             @Override
             public void onResponse(Call<PurchaseRequestItemClass> call, Response<PurchaseRequestItemClass> response) {
                 if(response.isSuccessful()) {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
-                    alertDialogBuilder.setMessage("Purchase item has been successfully added!");
-                    alertDialogBuilder.setCancelable(true);
-                    alertDialogBuilder.show();
-
-                    Intent u = new Intent(AddPrequestDtlItem.this, AddPRequestDtl.class);
-                    startActivity(u);
+                    Toast.makeText(AddPrequestDtlItem.this, "Saved!", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<PurchaseRequestItemClass> call, Throwable t) {
                 Toast.makeText(AddPrequestDtlItem.this, "An error has been encountered while adding purchase item", Toast.LENGTH_SHORT);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
-                alertDialogBuilder.setMessage(t.toString());
-                alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.show();
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
+//                alertDialogBuilder.setMessage(t.toString());
+//                alertDialogBuilder.setCancelable(true);
+//                alertDialogBuilder.show();
             }
         });
     }
@@ -200,24 +202,23 @@ public class AddPrequestDtlItem extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-//                    Toast.makeText(AddUserr.this, "User has been successfully edited!", Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
-                    alertDialogBuilder.setMessage("Purchase item has been successfully edited!");
-                    alertDialogBuilder.setCancelable(true);
-                    alertDialogBuilder.show();
+                    Toast.makeText(AddPrequestDtlItem.this, "Purchase item has been successfully edited!", Toast.LENGTH_SHORT).show();
+//                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
+//                    alertDialogBuilder.setMessage("Purchase item has been successfully edited!");
+//                    alertDialogBuilder.setCancelable(true);
+//                    alertDialogBuilder.show();
 
-                    Intent u = new Intent(AddPrequestDtlItem.this, AddPRequestDtl.class);
-                    startActivity(u);
+                    finish();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(AddPrequestDtlItem.this, "An error has been encountered while editing purchase item", Toast.LENGTH_SHORT);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
-                alertDialogBuilder.setMessage(t.toString());
-                alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.show();
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
+//                alertDialogBuilder.setMessage(t.toString());
+//                alertDialogBuilder.setCancelable(true);
+//                alertDialogBuilder.show();
             }
         });
     }

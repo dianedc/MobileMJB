@@ -229,8 +229,9 @@ public class ServiceImpl {
                     for (int i = 0; i < preq.size(); i++) {
                         prList.add(new PurchaseRequestClass(preq.get(i).getPreqID(),
                                 preq.get(i).getProjectID(),
-                                preq.get(i).getPreqdate(),
-                                preq.get(i).getPrequestedby(),
+                                preq.get(i).getPreqapproveddate(),
+                                preq.get(i).getPreqrequesteddate(),
+                                preq.get(i).getPreqrequestedby(),
                                 preq.get(i).getPreqstatus(),
                                 preq.get(i).getPreqprojman(),
                                 preq.get(i).getPreqpmdate(),
@@ -240,7 +241,10 @@ public class ServiceImpl {
                                 preq.get(i).getIsapprovedpo(),
                                 preq.get(i).getPreqofficeengr(),
                                 preq.get(i).getPreqoedate(),
-                                preq.get(i).getIsapprovedoe()));
+                                preq.get(i).getIsapprovedoe(),
+                                preq.get(i).getPreqsubtotal(),
+                                preq.get(i).getPreqsalestax(),
+                                preq.get(i).getPreqtotal()));
                     }
                 } catch (final Exception e) { e.printStackTrace(); }
             }
@@ -267,7 +271,7 @@ public class ServiceImpl {
                 try {
                     for (int i = 0; i < iList.size(); i++) {
                         pItemList.add(new PurchaseRequestItemClass(iList.get(i).getPreqItemID(),
-                                iList.get(i).getPreqID(),
+                                iList.get(i).getPrequestID(),
                                 iList.get(i).getPreqqty(),
                                 iList.get(i).getPrequnit(),
                                 iList.get(i).getPreqdesc(),

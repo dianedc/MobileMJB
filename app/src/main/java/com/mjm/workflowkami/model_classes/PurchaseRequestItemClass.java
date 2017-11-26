@@ -9,22 +9,22 @@ import java.math.BigDecimal;
 
 public class PurchaseRequestItemClass implements Serializable{
 
-    private int preqItemID;
-    private int preqID;
+    private int preqitemID;
+    private PurchaseRequestClass prequestID;
     private int preqqty;
     private String prequnit;
     private String preqdesc;
     private String preqjob;
     private Double prequnitprice;
-    private Double preqlinetotal;
+    private BigDecimal preqlinetotal;
 
     public PurchaseRequestItemClass() {
 
     }
 
-    public PurchaseRequestItemClass(int preqItemID, int preqID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, Double preqlinetotal) {
-        this.preqItemID = preqItemID;
-        this.preqID = preqID;
+    public PurchaseRequestItemClass(int preqitemID, PurchaseRequestClass prequestID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, BigDecimal preqlinetotal) {
+        this.preqitemID = preqitemID;
+        this.prequestID = prequestID;
         this.preqqty = preqqty;
         this.prequnit = prequnit;
         this.preqdesc = preqdesc;
@@ -32,8 +32,8 @@ public class PurchaseRequestItemClass implements Serializable{
         this.prequnitprice = prequnitprice;
         this.preqlinetotal = preqlinetotal;
     }
-    public PurchaseRequestItemClass(int preqID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, Double preqlinetotal) {
-        this.preqID = preqID;
+    public PurchaseRequestItemClass(PurchaseRequestClass prequestID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, BigDecimal preqlinetotal) {
+        this.prequestID = prequestID;
         this.preqqty = preqqty;
         this.prequnit = prequnit;
         this.preqdesc = preqdesc;
@@ -43,19 +43,19 @@ public class PurchaseRequestItemClass implements Serializable{
     }
 
     public int getPreqItemID() {
-        return preqItemID;
+        return preqitemID;
     }
 
     public void setPreqItemID(int preqItemID) {
-        this.preqItemID = preqItemID;
+        this.preqitemID = preqItemID;
     }
 
-    public int getPreqID() {
-        return preqID;
+    public PurchaseRequestClass getPrequestID() {
+        return prequestID;
     }
 
-    public void setPreqID(int preqID) {
-        this.preqID = preqID;
+    public void setPrequestID(PurchaseRequestClass prequestID) {
+        this.prequestID = prequestID;
     }
 
     public int getPreqqty() {
@@ -98,11 +98,11 @@ public class PurchaseRequestItemClass implements Serializable{
         this.prequnitprice = prequnitprice;
     }
 
-    public Double getPreqlinetotal() {
+    public BigDecimal getPreqlinetotal() {
         return preqlinetotal;
     }
 
-    public void setPreqlinetotal(Double preqlinetotal) {
+    public void setPreqlinetotal(BigDecimal preqlinetotal) {
         this.preqlinetotal = preqlinetotal;
     }
 }

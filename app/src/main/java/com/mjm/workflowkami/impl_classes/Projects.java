@@ -148,21 +148,21 @@ public class Projects extends LoaderAsync
 //        listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, serviceImpl.projectsList));
 //        Toast.makeText(Projects.this, serviceImpl.projectsList.toString(), Toast.LENGTH_LONG).show();
 
-        layout = (PullRefreshLayout) findViewById(R.id.refreshProject);
-        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                layout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-//                        adapter.cle   ar();
-//                        new ProjectTask().execute();
-//                        adapter.notifyDataSetChanged();
-                        layout.setRefreshing(false);
-                    }
-                }, 3000);
-            }
-        });
+//        layout = (PullRefreshLayout) findViewById(R.id.refreshProject);
+//        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                layout.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        adapter.cle   ar();
+////                        new ProjectTask().execute();
+////                        adapter.notifyDataSetChanged();
+//                        layout.setRefreshing(false);
+//                    }
+//                }, 3000);
+//            }
+//        });
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

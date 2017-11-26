@@ -1,12 +1,11 @@
 package com.mjm.workflowkami.add_classes;
 
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,21 +14,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.PurchaseRequestItemAdapter;
+import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
+import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
+import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,75 +43,24 @@ import retrofit2.Response;
  * Created by ddc on 11/14/17.
  */
 
-public class AddPRequestDtlItems extends ListFragment {
-
-    private PurchaseRequestClass preq = new PurchaseRequestClass();
-    private ServiceImpl serviceImpl = new ServiceImpl();
-    private PullRefreshLayout layout;
-    int preq_id;
-    private EditText preq_dtl_id, preq_dtl_desc, preq_dtl_qty, preq_dtl_unit, preq_dtl_job, preq_dtl_uni_price, preq_id_dtl;
+public class AddPRequestItemDtl extends Fragment {
+    private EditText preq_id, preq_dtl_desc, preq_dtl_qty, preq_dtl_unit, preq_dtl_job, preq_dtl_uni_price, preq_id_dtl;
     private TextView preq_dtl_line_tot;
     private Button btnCancel, btnSavePreqDtlItem;
+    private BigDecimal lineTot;
 
     private PurchaseRequestClass pr = new PurchaseRequestClass();
-    private PurchaseRequestItemClass pi = new PurchaseRequestItemClass();
+    private PurchaseRequestItemClass piIntent = new PurchaseRequestItemClass();
+    private PurchaseRequestItemClass pItem = new PurchaseRequestItemClass();
     private PurchaseRequestItemService pService = API.getInstance().getPurchaseRequestItemService();
 
-    private ProgressDialog progressDialog;
-
-    private class PRequestTask extends AsyncTask<String, Void, List<PurchaseRequestItemClass>> {
-
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Loading. Please wait... ");
-            progressDialog.show();
-        }
-
-        @Override
-        protected List<PurchaseRequestItemClass> doInBackground(String... strings) {
-            Intent intent = getActivity().getIntent();
-            preq = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
-            do {
-                if (preq != null) {
-                    serviceImpl.GetAllPReqItemList(preq.getPreqID());
-                }
-                try  {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            } while (serviceImpl.pItemList == null);
-            return serviceImpl.pItemList;
-        }
-        @Override
-        protected void onPostExecute(List<PurchaseRequestItemClass> pqClassResponseEntity) {
-            progressDialog.dismiss();
-            PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter(getActivity(), pqClassResponseEntity);
-            setListAdapter(adapter);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.content_add_preq_dtl_item, container, false);
-//        container = (ListView) rootView.findViewById(R.id.list_preq_items);
-
-//        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_add_preq_dtl_item);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent add = new Intent(getActivity(), AddPrequestDtlItem.class);
-//                startActivity(add);
-//            }
-//        });
-//        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
-
+        View rootView = inflater.inflate(R.layout.fragment_add_prequest_dtl_item, container, false);
+        preq_id = (EditText) rootView.findViewById(R.id.preq_id);
         preq_id_dtl = (EditText) rootView.findViewById(R.id.preq_id_dtl);
-        preq_dtl_id = (EditText) rootView.findViewById(R.id.preq_dtl_id);
         preq_dtl_desc = (EditText) rootView.findViewById(R.id.preq_dtl_desc);
         preq_dtl_qty = (EditText) rootView.findViewById(R.id.preq_dtl_qty);
         preq_dtl_unit = (EditText) rootView.findViewById(R.id.preq_dtl_unit);
@@ -123,27 +77,27 @@ public class AddPRequestDtlItems extends ListFragment {
             }
         });
 
-        Intent piIntent = getActivity().getIntent();
-        pi = (PurchaseRequestItemClass) piIntent.getSerializableExtra("item");
+        final Intent pIntent = getActivity().getIntent();
+        piIntent = (PurchaseRequestItemClass) pIntent.getSerializableExtra("item");
         Intent prIntent = getActivity().getIntent();
         pr = (PurchaseRequestClass) prIntent.getSerializableExtra("preqs");
 
 //        Toast.makeText(getActivity(), preq.toString(), Toast.LENGTH_LONG).show();
 //        Toast.makeText(getActivity(), pi.toString(), Toast.LENGTH_LONG).show();
         if(pr != null) {
-            Toast.makeText(getActivity(), pr.toString(), Toast.LENGTH_LONG).show();
-            preq_id_dtl.setText(String.valueOf(pr.getPreqID()));
+            Toast.makeText(getActivity(), String.valueOf(pr.getPreqID()), Toast.LENGTH_LONG).show();
+            preq_id.setText(String.valueOf(pr.getPreqID()));
         }
 
-        if (pi != null) {
-
-            preq_dtl_id.setText(String.valueOf(pi.getPreqItemID()));
-            preq_dtl_desc.setText(pi.getPreqdesc());
-            preq_dtl_qty.setText(String.valueOf(pi.getPreqqty()));
-            preq_dtl_unit.setText(pi.getPrequnit());
-            preq_dtl_job.setText(pi.getPreqjob());
-            preq_dtl_uni_price.setText(pi.getPrequnitprice().toString());
-            preq_dtl_line_tot.setText("Total: "+ pi.getPreqlinetotal().toString());
+        if (piIntent != null) {
+            Toast.makeText(getActivity(), String.valueOf(pr.getPreqID()), Toast.LENGTH_LONG).show();
+            preq_id_dtl.setText(String.valueOf(piIntent.getPreqItemID()));
+            preq_dtl_desc.setText(piIntent.getPreqdesc());
+            preq_dtl_qty.setText(String.valueOf(piIntent.getPreqqty()));
+            preq_dtl_unit.setText(piIntent.getPrequnit());
+            preq_dtl_job.setText(piIntent.getPreqjob());
+            preq_dtl_uni_price.setText(piIntent.getPrequnitprice().toString());
+            preq_dtl_line_tot.setText(piIntent.getPreqlinetotal().toString());
         }
 
         preq_dtl_uni_price.addTextChangedListener(new TextWatcher() {
@@ -160,10 +114,10 @@ public class AddPRequestDtlItems extends ListFragment {
             @Override
             public void afterTextChanged(Editable s) {
                 int input = Integer.valueOf(preq_dtl_uni_price.getText().toString());
-                int input1 = Integer.valueOf(preq_dtl_qty.getText().toString());
-                int result = input * input1;
-                preq_dtl_line_tot.setText(String.valueOf(result));
-
+                int input2 = Integer.valueOf(preq_dtl_qty.getText().toString());
+                int res = input * input2;
+                preq_dtl_line_tot.setText(String.valueOf(res));
+                lineTot = new BigDecimal(preq_dtl_line_tot.getText().toString());
             }
         });
 
@@ -171,48 +125,35 @@ public class AddPRequestDtlItems extends ListFragment {
         btnSavePreqDtlItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!preq_dtl_id.getText().toString().matches("")) {
+                if (!preq_id_dtl.getText().toString().matches("")) {
                     //update
-                    pi = new PurchaseRequestItemClass(Integer.valueOf(preq_dtl_id.getText().toString()),
-                            Integer.valueOf(preq_dtl_id.getText().toString()),
+                    pItem = new PurchaseRequestItemClass(Integer.valueOf(preq_id_dtl.getText().toString()),
+                            piIntent.getPrequestID(),
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),
-                            Double.valueOf(preq_dtl_line_tot.getText().toString()));
-                    UpdateItem(pi.getPreqID(), Integer.valueOf(preq_dtl_id.getText().toString()), pi);
+                            lineTot);
+                    UpdateItem(piIntent.getPrequestID().getPreqID(), Integer.valueOf(preq_id_dtl.getText().toString()), pItem);
                 } else {
                     //add
-                    pi = new PurchaseRequestItemClass(Integer.valueOf(preq_id_dtl.getText().toString()),
+                    pItem = new PurchaseRequestItemClass(pr,
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),
-                            Double.valueOf(preq_dtl_line_tot.getText().toString()));
-                    AddItem(pi.getPreqID(), pi);
+                            lineTot);
+                    AddItem(pr.getPreqID(), pItem);
+                    Toast.makeText(getActivity(), "Saved!", Toast.LENGTH_LONG).show();
+                    getActivity().finish();
                 }
             }
         });
+
+
         return rootView;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter(getActivity(), serviceImpl.pItemList);
-//        setListAdapter(adapter);
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        PurchaseRequestItemClass pItem = (PurchaseRequestItemClass) this.getListAdapter().getItem(position);
-        Intent i = new Intent(getContext(), AddPrequestDtlItem.class);
-
-        i.putExtra("item", pItem);
-        getContext().startActivity(i);
-        super.onListItemClick(l, v, position, id);
     }
 
     public void AddItem(int preqid, PurchaseRequestItemClass pi) {
@@ -271,4 +212,6 @@ public class AddPRequestDtlItems extends ListFragment {
             }
         });
     }
+
+
 }

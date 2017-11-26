@@ -52,7 +52,7 @@ public class AddPRequest extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsPreq);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -88,8 +88,8 @@ public class AddPRequest extends AppCompatActivity {
             finish();
             return true;
         } else if (id == R.id.action_back_pr_detail) {
-            Intent add = new Intent(getApplicationContext(), Forms.class);
-            startActivity(add);
+            finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -152,7 +152,8 @@ public class AddPRequest extends AppCompatActivity {
                     AddPRequestDtl preqDtl = new AddPRequestDtl();
                     return preqDtl;
                 case 2:
-                    AddPRequestDtlItems preqDtlItem = new AddPRequestDtlItems();
+                    AddPRequestItemDtl preqDtlItem = new AddPRequestItemDtl();
+                    return preqDtlItem;
                 default:
                     return null;
             }

@@ -4,463 +4,463 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:weightSum="1">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@android:color/white"-->
+        <!--android:orientation="vertical"-->
+        <!--android:weightSum="1">-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="65dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="65dp" />-->
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:text="Primary Information" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView3"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:text="Primary Information" />-->
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+        <!--<View-->
+            <!--android:id="@+id/view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@android:color/darker_gray" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="35dp">
-
-            <EditText
-                android:id="@+id/preqProjName"
-                android:layout_width="275dp"
-                android:layout_height="43dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_project"
-                android:hint="Project Name"
-                android:textSize="6pt" />
-
-        </android.support.design.widget.TextInputLayout>
-
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_weight="1"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="35dp" />
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp"
-                android:drawableLeft="@drawable/ic_menu_project"
-                android:drawablePadding="10dp"
-                android:textColor="#000"
-                android:textSize="6pt"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/requestedby_preq"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/requestedby_preq"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:drawSelectorOnTop="true"
-                android:drawablePadding="10dp"
-                android:entries="@array/requestedby"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-        </android.support.constraint.ConstraintLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
         <!--<android.support.design.widget.TextInputLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:layout_editor_absoluteX="8dp"-->
+            <!--tools:layout_editor_absoluteY="35dp">-->
 
-        <!--<EditText-->
-        <!--android:id="@+id/proj_name"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="20dp"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:ems="14"-->
-        <!--android:textSize="6pt"-->
-        <!--android:drawableLeft="@drawable/ic_menu_project"-->
-        <!--android:drawablePadding="10dp"-->
-        <!--android:hint="Project Name"-->
-        <!--android:singleLine="true"/>-->
+            <!--<EditText-->
+                <!--android:id="@+id/preqProjName"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_project"-->
+                <!--android:hint="Project Name"-->
+                <!--android:textSize="6pt" />-->
 
         <!--</android.support.design.widget.TextInputLayout>-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
 
-        <EditText
-            android:id="@+id/preq_daterequested"
-            android:layout_width="275dp"
-            android:layout_height="43dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawableLeft="@drawable/ic_date"
-            android:drawablePadding="10dp"
-            android:ems="14"
-            android:hint="Date Requested"
-            android:inputType="date"
-            android:textSize="6pt" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_weight="1"-->
+            <!--tools:layout_editor_absoluteX="8dp"-->
+            <!--tools:layout_editor_absoluteY="35dp" />-->
 
-        <Button
-            android:id="@+id/btnRedirect"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@android:color/background_light"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_48px"
-            android:text="Purchasing Items" />
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/textView2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_project"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:textColor="#000"-->
+                <!--android:textSize="6pt"-->
+                <!--android:textStyle="normal"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toLeftOf="@+id/requestedby_preq"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:text="Approval Information" />
+            <!--<Spinner-->
+                <!--android:id="@+id/requestedby_preq"-->
+                <!--android:layout_width="278dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:drawSelectorOnTop="true"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:entries="@array/requestedby"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintVertical_bias="0.0" />-->
+        <!--</android.support.constraint.ConstraintLayout>-->
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="5dp" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+        <!--&lt;!&ndash;<android.support.design.widget.TextInputLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/proj_name"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginStart="20dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:ems="14"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textSize="6pt"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:drawableLeft="@drawable/ic_menu_project"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:drawablePadding="10dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:hint="Project Name"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:singleLine="true"/>&ndash;&gt;-->
 
-            <EditText
-                android:id="@+id/preqProjMan"
-                android:layout_width="275dp"
-                android:layout_height="43dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:hint="Project Manager"
-                android:textSize="6pt" />
-        </android.support.design.widget.TextInputLayout>
+        <!--&lt;!&ndash;</android.support.design.widget.TextInputLayout>&ndash;&gt;-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="10dp" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/preq_daterequested"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="43dp"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawableLeft="@drawable/ic_date"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Date Requested"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btnRedirect"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:backgroundTint="@android:color/background_light"-->
+            <!--android:drawableRight="@drawable/ic_keyboard_arrow_right_black_48px"-->
+            <!--android:text="Purchasing Items" />-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:text="Approval Information" />-->
+
+        <!--<View-->
+            <!--android:id="@+id/view2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@android:color/darker_gray" />-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="10dp" />-->
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/preqProjMan"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_user"-->
+                <!--android:hint="Project Manager"-->
+                <!--android:textSize="6pt" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
 
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
-        <EditText
-            android:id="@+id/projman_dateapproved"
-            android:layout_width="275dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_weight="0.54"
-            android:drawableLeft="@drawable/ic_date"
-            android:drawablePadding="10dp"
-            android:ems="14"
-            android:hint="Date Approved"
-            android:inputType="date"
-            android:textSize="6pt" />
+        <!--<EditText-->
+            <!--android:id="@+id/projman_dateapproved"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:layout_weight="0.54"-->
+            <!--android:drawableLeft="@drawable/ic_date"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Date Approved"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="5dp" />-->
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawablePadding="10dp"
-            android:text="Approval Status"
-            android:textColor="#000"
-            android:textSize="6pt"
-            android:textStyle="normal" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView6"-->
+            <!--android:layout_width="278dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:text="Approval Status"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="6pt"-->
+            <!--android:textStyle="normal" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
-        <RadioGroup
-            android:layout_width="287dp"
-            android:layout_height="34dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:orientation="horizontal">
+        <!--<RadioGroup-->
+            <!--android:layout_width="287dp"-->
+            <!--android:layout_height="34dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:orientation="horizontal">-->
 
-            <RadioButton
-                android:id="@+id/radioButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.40"
-                android:text="Approved" />
+            <!--<RadioButton-->
+                <!--android:id="@+id/radioButton1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.40"-->
+                <!--android:text="Approved" />-->
 
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Declined" />
-        </RadioGroup>
+            <!--<RadioButton-->
+                <!--android:id="@+id/radioButton2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Declined" />-->
+        <!--</RadioGroup>-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-            <EditText
-                android:id="@+id/preqOfficeEng"
-                android:layout_width="275dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:hint="Office Engineer"
-                android:textSize="6pt" />
+            <!--<EditText-->
+                <!--android:id="@+id/preqOfficeEng"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_user"-->
+                <!--android:hint="Office Engineer"-->
+                <!--android:textSize="6pt" />-->
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_weight="1" />
-        </android.support.design.widget.TextInputLayout>
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_weight="1" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
 
-        <EditText
-            android:id="@+id/officeengineer_dateapproved"
-            android:layout_width="275dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawableLeft="@drawable/ic_date"
-            android:drawablePadding="10dp"
-            android:ems="14"
-            android:hint="Date Approved"
-            android:inputType="date"
-            android:textSize="6pt" />
+        <!--<EditText-->
+            <!--android:id="@+id/officeengineer_dateapproved"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawableLeft="@drawable/ic_date"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Date Approved"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawablePadding="10dp"
-            android:text="Approval Status"
-            android:textColor="#000"
-            android:textSize="6pt"
-            android:textStyle="normal" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:text="Approval Status"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="6pt"-->
+            <!--android:textStyle="normal" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:orientation="horizontal">
+        <!--<RadioGroup-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:orientation="horizontal">-->
 
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.40"
-                android:text="Approved" />
+            <!--<RadioButton-->
+                <!--android:id="@+id/radioButton3"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.40"-->
+                <!--android:text="Approved" />-->
 
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Declined" />
-        </RadioGroup>
+            <!--<RadioButton-->
+                <!--android:id="@+id/radioButton4"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Declined" />-->
+        <!--</RadioGroup>-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-            <EditText
-                android:id="@+id/preqPOfficer"
-                android:layout_width="275dp"
-                android:layout_height="43dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:hint="Purchasing Officer"
-                android:textSize="6pt" />
+            <!--<EditText-->
+                <!--android:id="@+id/preqPOfficer"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_user"-->
+                <!--android:hint="Purchasing Officer"-->
+                <!--android:textSize="6pt" />-->
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_weight="1" />
-        </android.support.design.widget.TextInputLayout>
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_weight="1" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
 
-        <EditText
-            android:id="@+id/dateauthorized_purchase"
-            android:layout_width="275dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawableLeft="@drawable/ic_date"
-            android:drawablePadding="10dp"
-            android:ems="14"
-            android:hint="Date Approved"
-            android:inputType="date"
-            android:textSize="6pt" />
+        <!--<EditText-->
+            <!--android:id="@+id/dateauthorized_purchase"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawableLeft="@drawable/ic_date"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Date Approved"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="5dp" />-->
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawablePadding="10dp"
-            android:text="Approval Status"
-            android:textColor="#000"
-            android:textSize="6pt"
-            android:textStyle="normal" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView12"-->
+            <!--android:layout_width="278dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:text="Approval Status"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="6pt"-->
+            <!--android:textStyle="normal" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_weight="0.17" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="10dp"-->
+            <!--android:layout_weight="0.17" />-->
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:orientation="horizontal">
+        <!--<RadioGroup-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:orientation="horizontal">-->
 
-            <RadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.40"
-                android:text="Approved" />
+            <!--<RadioButton-->
+                <!--android:id="@+id/radioButton5"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.40"-->
+                <!--android:text="Approved" />-->
 
-            <RadioButton
-                android:id="@+id/radioButton6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Declined" />
-        </RadioGroup>
+            <!--<RadioButton-->
+                <!--android:id="@+id/radioButton6"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Declined" />-->
+        <!--</RadioGroup>-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="34dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="34dp" />-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="horizontal">-->
 
-            <Button
-                android:id="@+id/btnSavePReq"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btnCancel"
-                android:layout_alignBottom="@+id/btnCancel"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="19dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/white"
-                android:fontFamily="sans-serif-medium"
-                android:onClick="onClickSavePrequest"
-                android:text="Save"
-                android:textColor="@android:color/black"
-                android:textStyle="normal|bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <!--<Button-->
+                <!--android:id="@+id/btnSavePReq"-->
+                <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBaseline="@+id/btnCancel"-->
+                <!--android:layout_alignBottom="@+id/btnCancel"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_marginEnd="19dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:backgroundTint="@android:color/white"-->
+                <!--android:fontFamily="sans-serif-medium"-->
+                <!--android:onClick="onClickSavePrequest"-->
+                <!--android:text="Save"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textStyle="normal|bold"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-            <Button
-                android:id="@+id/btnCancel"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/btnSavePReq"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/white"
-                android:fontFamily="sans-serif-medium"
-                android:onClick="onClickCancel"
-                android:text="Dismiss"
-                android:textColor="@android:color/black"
-                android:textStyle="normal|bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/btnSavePReq"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+            <!--<Button-->
+                <!--android:id="@+id/btnCancel"-->
+                <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_toStartOf="@+id/btnSavePReq"-->
+                <!--android:layout_weight="1"-->
+                <!--android:backgroundTint="@android:color/white"-->
+                <!--android:fontFamily="sans-serif-medium"-->
+                <!--android:onClick="onClickCancel"-->
+                <!--android:text="Dismiss"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textStyle="normal|bold"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintRight_toLeftOf="@+id/btnSavePReq"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintVertical_bias="0.0" />-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
-    </LinearLayout>
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp" />-->
+    <!--</LinearLayout>-->
 
 
 </ScrollView>

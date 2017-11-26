@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
@@ -39,10 +40,12 @@ import retrofit2.Response;
 
 public class AddPRequestHdr extends Fragment {
 
-    private EditText preqProjID, projname, preq_daterequested, preqProjMan, projman_dateapproved, preqOfficeEng, officeengineer_dateapproved, preqPOfficer,
+//    private EditText  preqID,  projectID,  preqapproveddate,  preqrequesteddate,  preqrequestedby,  preqstatus,  preqprojman,  preqpmdate,  isapprovedpm,  preqpurchofficer,  preqpodate, isapprovedpo, preqofficeengr,  preqoedate,  isapprovedoe, preqsubtotal, preqsalestax, preqtotal;
+    private EditText preqID, preqProjID, preq_daterequested, preq_dateapproved, preqProjMan, projman_dateapproved, preqOfficeEng, officeengineer_dateapproved, preqPOfficer,
             dateauthorized_purchase, requestedby_preq, preqStatus;
+    private TextView preq_sub_total, preq_sales_tax, preq_total;
     private RadioGroup rdogrppm, rdogrppo, rdogrpoe, rdogrpstat;
-    private RadioButton isapprovedpm, isapprovedpo, isapprovedoe, isapprovedpmt, isapprovedpot, isapprovedoet, statt, stat;
+    private RadioButton rdopm, rdostat, rdooe, rdopo;
     private Button btnSavePReq;
     private ServiceImpl serviceImpl = new ServiceImpl();
     private PurchaseRequestClass preqIntent = new PurchaseRequestClass();
@@ -53,33 +56,6 @@ public class AddPRequestHdr extends Fragment {
     private String selectedReqBy;
     private UserClass req, pm, po, oe;
 
-//    private class UserTask extends AsyncTask<String, Void, UserClass> {
-//
-//        List<UserClass> cached;
-//        @Override
-//        protected void onPreExecute() {
-//        }
-//
-//        @Override
-//        protected UserClass doInBackground(String... strings) {
-//
-//            do {
-//                serviceImpl.FetchUserById(Integer.valueOf(selectedReqBy));
-//                try  {
-//                    Thread.sleep(5000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            } while (serviceImpl.userClass ==null);
-//
-//            return serviceImpl.userClass;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(UserClass userClassResponseEntity) {
-//            req = userClassResponseEntity;
-//        }
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,41 +67,32 @@ public class AddPRequestHdr extends Fragment {
         pm = new UserClass();
         po = new UserClass();
         oe = new UserClass();
-//        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/user/users";
-//        new UserDialogTask().execute(uri);
-        rdogrpstat = (RadioGroup) rootView.findViewById(R.id.rdogrpstat);
+        rdogrpstat = (RadioGroup) rootView.findViewById(R.id.rdogrpstat);//
         int selected0 = rdogrpstat.getCheckedRadioButtonId();
-        statt = (RadioButton) rootView.findViewById(selected0);
-        stat = (RadioButton) rootView.findViewById(R.id.statt);
+        rdostat = (RadioButton) rootView.findViewById(selected0);
 //        isapprovedpmt = (RadioButton) rootView.findViewById(R.id.isapprovedpmt);
 
         rdogrppm = (RadioGroup) rootView.findViewById(R.id.rdogrppm);
         int selected1 = rdogrppm.getCheckedRadioButtonId();
-        isapprovedpm = (RadioButton) rootView.findViewById(selected1);
-        isapprovedpmt = (RadioButton) rootView.findViewById(R.id.isapprovedpmt);
+        rdopm = (RadioButton) rootView.findViewById(selected1);
 
         rdogrpoe = (RadioGroup)  rootView.findViewById(R.id.rdogrpoe);
         int selected2 = rdogrpoe.getCheckedRadioButtonId();
-        isapprovedoe = (RadioButton) rootView.findViewById(selected2);
-        isapprovedpot = (RadioButton) rootView.findViewById(R.id.isapprovedpot);
+        rdooe = (RadioButton) rootView.findViewById(selected2);
 
         rdogrppo = (RadioGroup)  rootView.findViewById(R.id.rdogrppo);
         int selected3 = rdogrppo.getCheckedRadioButtonId();
-        isapprovedpo = (RadioButton) rootView.findViewById(selected3);
-        isapprovedoet = (RadioButton) rootView.findViewById(R.id.isapprovedoet);
+        rdopo = (RadioButton) rootView.findViewById(selected3);
 
         //Spinner Dialog
-        requestedby_preq = (EditText) rootView.findViewById(R.id.requestedby_preq);
+        requestedby_preq = (EditText) rootView.findViewById(R.id.requestedby_preq);//
         requestedby_preq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reqDialog.showSpinerDialog();
             }
         });
-        preqProjID = (EditText) rootView.findViewById(R.id.preq_proj_id);
-        projname = (EditText) rootView.findViewById(R.id.preqProjName);
-        preq_daterequested = (EditText) rootView.findViewById(R.id.preq_daterequested);
-//        preqStatus = (EditText) rootView.findViewById(R.id.preq_status);
+
         preqProjMan = (EditText) rootView.findViewById(R.id.preqProjMan);
         preqProjMan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,97 +100,93 @@ public class AddPRequestHdr extends Fragment {
                 pmDialog.showSpinerDialog();
             }
         });
-        projman_dateapproved = (EditText) rootView.findViewById(R.id.projman_dateapproved);
+
         preqOfficeEng = (EditText) rootView.findViewById(R.id.preqOfficeEng);
-        preqOfficeEng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                poDialog.showSpinerDialog();
-            }
-        });
-        officeengineer_dateapproved = (EditText) rootView.findViewById(R.id.officeengineer_dateapproved);
-        preqPOfficer = (EditText) rootView.findViewById(R.id.preqPOfficer);
         preqOfficeEng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 oeDialog.showSpinerDialog();
             }
         });
+
+        preqPOfficer = (EditText) rootView.findViewById(R.id.preqPOfficer);
+        preqPOfficer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                poDialog.showSpinerDialog();
+            }
+        });
+
+        preqID = (EditText) rootView.findViewById(R.id.preq_id);
+        preqProjID = (EditText) rootView.findViewById(R.id.preq_proj_id);
+        preq_daterequested = (EditText) rootView.findViewById(R.id.preq_daterequested);
+        preq_dateapproved = (EditText) rootView.findViewById(R.id.preq_dateapproved);
+        projman_dateapproved = (EditText) rootView.findViewById(R.id.projman_dateapproved);
+        officeengineer_dateapproved = (EditText) rootView.findViewById(R.id.officeengineer_dateapproved);
         dateauthorized_purchase = (EditText) rootView.findViewById(R.id.dateauthorized_purchase);
         btnSavePReq = (Button) rootView.findViewById(R.id.btnSavePReq);
+        preq_sub_total = (TextView) rootView.findViewById(R.id.preq_sub_total);
+        preq_sales_tax = (TextView) rootView.findViewById(R.id.preq_sales_tax);
+        preq_total = (TextView) rootView.findViewById(R.id.preq_total);
 
 
         Intent intent = getActivity().getIntent();
         preqIntent = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
         projs = (ProjectClass) intent.getSerializableExtra("projs");
 
-
-//        Toast.makeText(getActivity(), preq.toString(), Toast.LENGTH_SHORT).show();
-//        Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
         try {
-            if (preqIntent != null) {
+            if (preqIntent != null ) {
+                if (projs != null) {
+                    Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
+                }
+
+                preqID.setText(String.valueOf(preqIntent.getPreqID()));
                 preqProjID.setText(String.valueOf(preqIntent.getProjectID().getProjID()));
-                projname.setText(projs.getProjname());
-                requestedby_preq.setText(preqIntent.getPreqdate());
-                if (preqIntent.getPreqstatus() == true) {
-                    int st = rdogrpstat.getCheckedRadioButtonId();
-                    statt.setChecked(true);
-                    stat = (RadioButton) rootView.findViewById(st);
-                }
-                if (preqIntent.getPreqprojman().getLastname() != null) {
-                    preqProjMan.setText(preqIntent.getPreqprojman().getLastname() + ", " + preqIntent.getPreqprojman().getFirstname());
-                }
-                if (preqIntent.getIsapprovedpm() == true) {
-                    int pm = rdogrppm.getCheckedRadioButtonId();
-                    isapprovedpmt.setChecked(true);
-                    isapprovedpm = (RadioButton) rootView.findViewById(pm);
-                }
+//                preqProjID.setText(String.valueOf(projs.getProjID()));
+                preq_dateapproved.setText(preqIntent.getPreqapproveddate());
+                requestedby_preq.setText(preqIntent.getPreqrequestedby().getLastname() + ", " + preqIntent.getPreqrequestedby().getFirstname());
+                preq_daterequested.setText(preqIntent.getPreqrequesteddate());
+                preqProjMan.setText(preqIntent.getPreqprojman().getLastname() +", "+ preqIntent.getPreqprojman().getFirstname());
                 projman_dateapproved.setText(preqIntent.getPreqpmdate());
-                if (preqIntent.getPreqofficeengr() != null) {
-                    preqOfficeEng.setText(preqIntent.getPreqofficeengr().getLastname() + ", " + preqIntent.getPreqofficeengr().getFirstname());
-                }
-                if (preqIntent.getIsapprovedoe() == true) {
-                    int oe = rdogrpoe.getCheckedRadioButtonId();
-                    isapprovedoet.setChecked(true);
-                    isapprovedoe = (RadioButton) rootView.findViewById(oe);
-                }
+                preqOfficeEng.setText(preqIntent.getPreqofficeengr().getLastname() + ", " + preqIntent.getPreqofficeengr().getFirstname());
+                dateauthorized_purchase.setText(preqIntent.getPreqpodate());
                 officeengineer_dateapproved.setText(preqIntent.getPreqoedate());
-                if (preqIntent.getPreqpurchofficer().getLastname() != null) {
-                    preqPOfficer.setText(preqIntent.getPreqpurchofficer().getLastname() + ", " + preqIntent.getPreqpurchofficer().getFirstname());
+                preqPOfficer.setText(preqIntent.getPreqpurchofficer().getLastname() + ", " + preqIntent.getPreqpurchofficer().getFirstname());
+
+                preq_sub_total.setText("Sub Total: " + String.valueOf(preqIntent.getPreqsubtotal()));
+                preq_sales_tax.setText("Sales Tax: "+ String.valueOf(preqIntent.getPreqsalestax()));
+                preq_total.setText("Total: "+ String.valueOf(preqIntent.getPreqtotal()));
+
+                if (preqIntent.getPreqstatus() == true) {
+                    rdogrpstat.check(R.id.statt);
                 }
                 if (preqIntent.getIsapprovedpo() == true) {
-                    int po = rdogrppo.getCheckedRadioButtonId();
-                    isapprovedpot.setChecked(true);
-                    isapprovedpo = (RadioButton) rootView.findViewById(po);
+                    rdogrppo.check(R.id.isapprovedpot);
                 }
-                dateauthorized_purchase.setText(preqIntent.getPreqpodate());
+                if (preqIntent.getIsapprovedoe() == true) {
+                    rdogrpoe.check(R.id.isapprovedoet);
+                }
+                if (preqIntent.getIsapprovedpm() == true) {
+                    rdogrppm.check(R.id.isapprovedpmt);
+                }
 
-
-//                if (preqIntent.getPreqstatus() == true) {
-//                    projname.setEnabled(false);
-//                    preq_daterequested.setEnabled(false);
-//                    preqProjMan.setEnabled(false);
-//                    projman_dateapproved.setEnabled(false);
-//                    preqOfficeEng.setEnabled(false);
-//                    officeengineer_dateapproved.setEnabled(false);
-//                    preqPOfficer.setEnabled(false);
-//                    dateauthorized_purchase.setEnabled(false);
-//                    for (int i = 0; i < rdogrppm.getChildCount(); i++) {
-//                        rdogrppm.getChildAt(i).setEnabled(false);
-//                    }
-//                    for (int i = 0; i < rdogrppo.getChildCount(); i++) {
-//                        rdogrppo.getChildAt(i).setEnabled(false);
-//                    }
-//                    for (int i = 0; i < rdogrpoe.getChildCount(); i++) {
-//                        rdogrpoe.getChildAt(i).setEnabled(false);
-//                    }
-//                }
+                requestedby_preq.setEnabled(false);
+                preq_daterequested.setEnabled(false);
+                preqProjMan.setEnabled(false);
+                preqPOfficer.setEnabled(false);
+                preqOfficeEng.setEnabled(false);
+                dateauthorized_purchase.setEnabled(false);
+                officeengineer_dateapproved.setEnabled(false);
+                projman_dateapproved.setEnabled(false);
             }
         } catch (Exception eo) {
-            Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), eo.toString(), Toast.LENGTH_LONG).show();
         }
 
 
+        //Dialog
         reqDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
         reqDialog.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
@@ -235,12 +198,6 @@ public class AddPRequestHdr extends Fragment {
 
             }
         });
-
-//        req = serviceImpl.FetchUserById(Integer.parseInt(selectedReqBy));
-//        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/user/"+Integer.valueOf(selectedReqBy)+"";
-//        new UserTask().execute(uri);
-
-//        Toast.makeText(getActivity(), selectedReqBy.toString(), Toast.LENGTH_LONG).show();
 
         pmDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
         pmDialog.bindOnSpinerListener(new OnSpinerItemClick() {
@@ -273,28 +230,28 @@ public class AddPRequestHdr extends Fragment {
             }
         });
 
-        btnSavePReq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addPreq = new PurchaseRequestClass(preqIntent.getProjectID(),
-                        preq_daterequested.getText().toString().trim(),
-                        req,
-                        stat.isChecked(),
-                        pm,
-                        projman_dateapproved.getText().toString().trim(),
-                        isapprovedpm.isChecked(),
-                        po,
-                        dateauthorized_purchase.getText().toString().trim(),
-                        isapprovedpo.isChecked(),
-                        oe,
-                        officeengineer_dateapproved.getText().toString().trim(),
-                        isapprovedoet.isChecked());
-
-//                Toast.makeText(getActivity(), addPreq.toString(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getActivity(), req.getLastname(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
+    //        btnSavePReq.setOnClickListener(new View.OnClickListener() {
+    //            @Override
+    //            public void onClick(View v) {
+    //                addPreq = new PurchaseRequestClass(preqIntent.getProjectID(),
+    //                        preq_daterequested.getText().toString().trim(),
+    //                        req,
+    //                        stat.isChecked(),
+    //                        pm,
+    //                        projman_dateapproved.getText().toString().trim(),
+    //                        isapprovedpm.isChecked(),
+    //                        po,
+    //                        dateauthorized_purchase.getText().toString().trim(),
+    //                        isapprovedpo.isChecked(),
+    //                        oe,
+    //                        officeengineer_dateapproved.getText().toString().trim(),
+    //                        isapprovedoet.isChecked());
+    //
+    ////                Toast.makeText(getActivity(), addPreq.toString(), Toast.LENGTH_LONG).show();
+    ////                Toast.makeText(getActivity(), req.getLastname(), Toast.LENGTH_SHORT).show();
+    //
+    //            }
+    //        });
 
 
         return rootView;
