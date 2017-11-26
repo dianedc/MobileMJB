@@ -14,11 +14,12 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.mjm.workflowkami.Fragments.Worker;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.R;
 
 import dmax.dialog.SpotsDialog;
 
-public class Dashboard extends AppCompatActivity
+public class Dashboard extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener{
 
 //    static final String EXTRA_MAP = "map";
@@ -30,15 +31,50 @@ public class Dashboard extends AppCompatActivity
 //    };
     private SpotsDialog loader;
 
+//    private class ProjectTask extends AsyncTask<String, Void, List<ProjectClass>> {
+//
+//        @Override
+//        protected void onPreExecute() {
+//            showLoadingDialog();
+//        }
+//
+//        @Override
+//        protected List<ProjectClass> doInBackground(String... strings) {
+////            while (serviceImpl.projectsList != null) {
+////                serviceImpl.GetAllProjects();
+////                try  {
+////                    Thread.sleep(5000);
+////                } catch (InterruptedException e) {
+////                    e.printStackTrace();
+////                }
+////            }
+//            do {
+//                serviceImpl.GetAllProjects();
+//                try  {
+//                    Thread.sleep(5000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            } while (serviceImpl.projectsList == null);
+//            return serviceImpl.projectsList;
+//        }
+//        @Override
+//        protected void onPostExecute(List<ProjectClass> projClassResponseEntity) {
+//            dismissProgressDialog();
+//            listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, projClassResponseEntity));
+//        }
+//    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        loader = new SpotsDialog(Dashboard.this);
+//        loader = new SpotsDialog(Dashboard.this);
         Button myButton = (Button) findViewById(R.id.btnProjects);
-        myButton.setText("19");
-        loader.dismiss();
+//        myButton.setText("19");
+//        loader.dismiss();
 
 
 //        GridView gridview = (GridView) findViewById(R.id.dashboard_grid);
@@ -225,16 +261,16 @@ public class Dashboard extends AppCompatActivity
                 Intent p = new Intent(Dashboard.this, Projects.class);
                 startActivity(p);
                 break;
-//            case R.id.nav_purchaseRequest:
+            case R.id.nav_purchaseRequest:
 //                loader.show();
-//                Intent f = new Intent(Dashboard.this, Forms.class);
-//                startActivity(f);
-//                break;
-//            case R.id.nav_purchaseOrder:
+                Intent f = new Intent(Dashboard.this, Forms.class);
+                startActivity(f);
+                break;
+            case R.id.nav_purchaseOrder:
 //                loader.show();
-//                Intent e = new Intent(Dashboard.this, PurchaseOrder.class);
-//                startActivity(e);
-//                break;
+                Intent e = new Intent(Dashboard.this, PurchaseOrder.class);
+                startActivity(e);
+                break;
             case R.id.nav_files:
 //                loader.show();
                 Intent fi = new Intent(Dashboard.this, Files.class);

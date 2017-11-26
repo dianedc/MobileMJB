@@ -21,14 +21,23 @@
         <!--android:title="Purchase Order" />-->
 
         <item
-            android:id="@+id/nav_files"
-            android:icon="@drawable/ic_menu_file"
-            android:title="Files" />
+            android:id="@+id/nav_purchaseRequest"
+            android:icon="@drawable/ic_menu_forms"
+            android:title="@string/title_pr" />
 
         <item
-            android:id="@+id/nav_reports"
-            android:icon="@drawable/ic_reports"
-            android:title="Reports" />
+            android:id="@+id/nav_purchaseOrder"
+            android:icon="@drawable/ic_nav_po"
+            android:title="@string/title_po" />
+        <!--<item-->
+            <!--android:id="@+id/nav_files"-->
+            <!--android:icon="@drawable/ic_menu_file"-->
+            <!--android:title="Files" />-->
+
+        <!--<item-->
+            <!--android:id="@+id/nav_reports"-->
+            <!--android:icon="@drawable/ic_reports"-->
+            <!--android:title="Reports" />-->
 
         <item
             android:id="@+id/nav_users"

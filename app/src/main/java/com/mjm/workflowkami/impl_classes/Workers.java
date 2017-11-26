@@ -131,7 +131,7 @@ public class Workers extends AppCompatActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_dashboard:
-                loader.show();
+//                loader.show();
                 Intent d = new Intent(Workers.this, Dashboard.class);
                 startActivity(d);
                 break;
@@ -146,7 +146,7 @@ public class Workers extends AppCompatActivity
 //                startActivity(s);
 //                break;
             case R.id.nav_project:
-                loader.show();
+//                loader.show();
                 Intent p = new Intent(Workers.this, Projects.class);
                 startActivity(p);
                 break;
@@ -161,35 +161,35 @@ public class Workers extends AppCompatActivity
 //                startActivity(e);
 //                break;
             case R.id.nav_files:
-                loader.show();
+//                loader.show();
                 Intent fi = new Intent(Workers.this, Files.class);
                 startActivity(fi);
                 break;
             case R.id.nav_reports:
-                loader.show();
+//                loader.show();
                 Intent r = new Intent(Workers.this, Reports.class);
                 startActivity(r);
                 break;
             case R.id.nav_users:
-                loader.show();
+//                loader.show();
                 Intent u = new Intent(Workers.this, Users.class);
                 startActivity(u);
                 break;
 
             case R.id.nav_workers:
-                loader.show();
+//                loader.show();
                 Intent x = new Intent(Workers.this, Workers.class);
                 startActivity(x);
                 break;
 
             case R.id.nav_settings:
-                loader.show();
+//                loader.show();
                 Intent s = new Intent(Workers.this, Settings.class);
                 startActivity(s);
                 break;
 
             case R.id.nav_logout:
-                loader.show();
+//                loader.show();
                 Intent l = new Intent(Workers.this, LoginActivity.class);
                 startActivity(l);
                 break;

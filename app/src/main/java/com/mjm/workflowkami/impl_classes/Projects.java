@@ -110,7 +110,7 @@ public class Projects extends LoaderAsync
 
         final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/projects";
         new ProjectTask().execute(uri);
-        pl = new ArrayList<ProjectClass>();
+//        pl = new ArrayList<ProjectClass>();
 //        Call<List<ProjectClass>> getProjects = projectService.getAllProjects();
 //
 //        getProjects.enqueue(new Callback<List<ProjectClass>>() {
@@ -231,6 +231,16 @@ public class Projects extends LoaderAsync
                 startActivity(d);
                 break;
             case R.id.nav_project:
+                break;
+            case R.id.nav_purchaseRequest:
+//                loader.show();
+                Intent f = new Intent(Projects.this, Forms.class);
+                startActivity(f);
+                break;
+            case R.id.nav_purchaseOrder:
+//                loader.show();
+                Intent e = new Intent(Projects.this, PurchaseOrder.class);
+                startActivity(e);
                 break;
             case R.id.nav_files:
 //                loader.show();

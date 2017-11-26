@@ -42,6 +42,15 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
+        <EditText
+            android:id="@+id/preq_proj_id"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:textSize="6pt"
+            android:visibility="gone"/>
 
         <Space
             android:layout_width="match_parent"
@@ -134,6 +143,47 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp" />
+
+        <RadioGroup
+            android:id="@+id/rdogrpstat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/statt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40"
+                android:text="Approved" />
+
+            <RadioButton
+                android:id="@+id/statf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Declined" />
+        </RadioGroup>
+
+        <!--<EditText-->
+            <!--android:id="@+id/preq_status"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="43dp"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawableLeft="@drawable/ic_check_circle_black_24dp"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Status"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
         <TextView
             android:id="@+id/textView4"

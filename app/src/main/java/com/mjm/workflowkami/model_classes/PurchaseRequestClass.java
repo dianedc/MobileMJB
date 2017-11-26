@@ -43,6 +43,22 @@ public class PurchaseRequestClass implements Serializable{
         this.isapprovedoe = isapprovedoe;
     }
 
+    public PurchaseRequestClass(ProjectClass projectID, String preqdate, UserClass prequestedby, Boolean preqstatus, UserClass preqprojman, String preqpmdate, Boolean isapprovedpm, UserClass preqpurchofficer, String preqpodate, Boolean isapprovedpo, UserClass preqofficeengr, String preqoedate, Boolean isapprovedoe) {
+        this.projectID = projectID;
+        this.preqdate = preqdate;
+        this.prequestedby = prequestedby;
+        this.preqstatus = preqstatus;
+        this.preqprojman = preqprojman;
+        this.preqpmdate = preqpmdate;
+        this.isapprovedpm = isapprovedpm;
+        this.preqpurchofficer = preqpurchofficer;
+        this.preqpodate = preqpodate;
+        this.isapprovedpo = isapprovedpo;
+        this.preqofficeengr = preqofficeengr;
+        this.preqoedate = preqoedate;
+        this.isapprovedoe = isapprovedoe;
+    }
+
     public int getPreqID() {
         return preqID;
     }

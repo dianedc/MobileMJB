@@ -151,6 +151,8 @@ public class AddPRequest extends AppCompatActivity {
                 case 1:
                     AddPRequestDtl preqDtl = new AddPRequestDtl();
                     return preqDtl;
+                case 2:
+                    AddPRequestDtlItems preqDtlItem = new AddPRequestDtlItems();
                 default:
                     return null;
             }
@@ -159,7 +161,7 @@ public class AddPRequest extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
 
         public CharSequence getPageTitle (int position){
@@ -167,8 +169,9 @@ public class AddPRequest extends AppCompatActivity {
                 case 0:
                     return "Approval";
                 case 1:
+                    return "Show Items";
+                case 2:
                     return "Add Item";
-
                 default:
                     return null;
             }

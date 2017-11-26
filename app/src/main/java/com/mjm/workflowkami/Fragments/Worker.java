@@ -109,7 +109,7 @@ public class Worker extends ListFragment {
 //            workersID = work.getWorkersID();
 //        }
 
-        serviceImpl.GetAllWorkers();
+//        serviceImpl.GetAllWorkers();
 //        serviceImpl.GetAllWorkers(workersID);
 
         return rootView;
@@ -117,8 +117,8 @@ public class Worker extends ListFragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        WorkerClassAdapter adapter = new WorkerClassAdapter(getActivity(), serviceImpl.workerList);
-        setListAdapter(adapter);
+//        WorkerClassAdapter adapter = new WorkerClassAdapter(getActivity(), serviceImpl.workerList);
+//        setListAdapter(adapter);
         super.onActivityCreated(savedInstanceState);
     }
 

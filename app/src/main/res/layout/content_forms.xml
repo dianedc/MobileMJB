@@ -9,24 +9,25 @@
         android:id="@+id/refreshpr"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ListView
             android:id="@+id/lstPreqs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </com.baoyz.widget.PullRefreshLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation_pr"
-        android:layout_gravity="start"
-        android:hapticFeedbackEnabled="true"
-        android:nestedScrollingEnabled="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorWhite"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/colorAccent"
-        app:menu="@menu/navigation">
-    </android.support.design.widget.BottomNavigationView>
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/bottom_navigation_pr"-->
+        <!--android:layout_gravity="start"-->
+        <!--android:hapticFeedbackEnabled="true"-->
+        <!--android:nestedScrollingEnabled="true"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--app:itemBackground="@color/colorWhite"-->
+        <!--app:itemIconTint="@color/colorPrimary"-->
+        <!--app:itemTextColor="@color/colorAccent"-->
+        <!--app:menu="@menu/navigation">-->
+    <!--</android.support.design.widget.BottomNavigationView>-->
 
 </RelativeLayout>

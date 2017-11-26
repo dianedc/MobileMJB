@@ -45,7 +45,7 @@ public class Users extends LoaderAsync
     private String email;
 //    private UserClassAdapter adapter = new UserClassAdapter();
 
-    private class UserTask extends AsyncTask<String, Void, List<UserClass>> {
+    public class UserTask extends AsyncTask<String, Void, List<UserClass>> {
 
         List<UserClass> cached;
         @Override
@@ -178,16 +178,16 @@ public class Users extends LoaderAsync
                 Intent p = new Intent(Users.this, Projects.class);
                 startActivity(p);
                 break;
-//            case R.id.nav_purchaseRequest:
-//                loader.show();
-//                Intent f = new Intent(Users.this, Forms.class);
-//                startActivity(f);
-//                break;
-//            case R.id.nav_purchaseOrder:
-//                loader.show();
-//                Intent e = new Intent(Users.this, PurchaseOrder.class);
-//                startActivity(e);
-//                break;
+            case R.id.nav_purchaseRequest:
+                loader.show();
+                Intent f = new Intent(Users.this, Forms.class);
+                startActivity(f);
+                break;
+            case R.id.nav_purchaseOrder:
+                loader.show();
+                Intent e = new Intent(Users.this, PurchaseOrder.class);
+                startActivity(e);
+                break;
             case R.id.nav_files:
 //                loader.show();
                 Intent fi = new Intent(Users.this, Files.class);

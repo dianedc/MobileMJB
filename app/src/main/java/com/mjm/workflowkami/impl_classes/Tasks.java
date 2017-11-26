@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.impl_classes;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.TaskClassAdapter;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
 
-public class Tasks extends AppCompatActivity
+public class Tasks extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
 //    private String TAG = Tasks.class.getSimpleName();
@@ -42,6 +44,45 @@ public class Tasks extends AppCompatActivity
 //    private TaskService taskService = API.getInstance().getTaskService();
     private SpotsDialog loader;
     private PullRefreshLayout layout;
+
+    private class ProjectTask extends AsyncTask<String, Void, List<TaskClass>> {
+
+        @Override
+        protected void onPreExecute() {
+            showLoadingDialog();
+        }
+
+        @Override
+        protected List<TaskClass> doInBackground(String... strings) {
+//            while (serviceImpl.projectsList != null) {
+//                serviceImpl.GetAllProjects();
+//                try  {
+//                    Thread.sleep(5000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            Intent intent = getIntent();
+            projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+            do {
+                if (projectIntent != null) {
+                    serviceImpl.GetTaskByProjId(projectIntent.getProjID());
+                }
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.tasksList == null);
+            return serviceImpl.tasksList;
+        }
+        @Override
+        protected void onPostExecute(List<TaskClass> taskClassResponseEntity) {
+            dismissProgressDialog();
+            listofTasks.setAdapter(new TaskClassAdapter(Tasks.this, taskClassResponseEntity));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +96,15 @@ public class Tasks extends AppCompatActivity
         projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
 
         listofTasks = (ListView) findViewById(R.id.lstTasks);
-        if (projectIntent != null) {
-            serviceImpl.GetTaskByProjId(projectIntent.getProjID());
-        }
-        listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
+//        if (projectIntent != null) {
+//            serviceImpl.GetTaskByProjId(projectIntent.getProjID());
+//        }
+//        listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
 
+        if (projectIntent != null) {
+            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/" + projectIntent.getProjID() + "/task";
+            new ProjectTask().execute(uri);
+        }
         layout = (PullRefreshLayout) findViewById(R.id.refreshTask);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
@@ -73,15 +118,15 @@ public class Tasks extends AppCompatActivity
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            Intent add = new Intent(Tasks.this, AddTask.class);
-            startActivity(add);
-
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            Intent add = new Intent(Tasks.this, AddTask.class);
+//            startActivity(add);
+//
+//            }
+//        });
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_tasks);

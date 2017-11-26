@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.impl_classes;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.PurchaseRequestAdapter;
@@ -30,7 +32,7 @@ import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 
-public class Forms extends AppCompatActivity
+public class Forms extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -42,6 +44,41 @@ public class Forms extends AppCompatActivity
     private SpotsDialog loader;
     private PullRefreshLayout layout;
 
+    private class ProjectTask extends AsyncTask<String, Void, List<PurchaseRequestClass>> {
+
+        @Override
+        protected void onPreExecute() {
+            showLoadingDialog();
+        }
+
+        @Override
+        protected List<PurchaseRequestClass> doInBackground(String... strings) {
+//            while (serviceImpl.projectsList != null) {
+//                serviceImpl.GetAllProjects();
+//                try  {
+//                    Thread.sleep(5000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            do {
+                serviceImpl.GetAllPurchaseRequests();
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.prList == null);
+            return serviceImpl.prList;
+        }
+        @Override
+        protected void onPostExecute(List<PurchaseRequestClass> preqClassResponseEntity) {
+            dismissProgressDialog();
+            listofPreq.setAdapter(new PurchaseRequestAdapter(Forms.this, preqClassResponseEntity));
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +87,12 @@ public class Forms extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         listofPreq = (ListView) findViewById(R.id.lstPreqs);
-        serviceImpl.GetAllPurchaseRequests();
+//        serviceImpl.GetAllPurchaseRequests();
 
-        listofPreq.setAdapter(new PurchaseRequestAdapter(Forms.this, serviceImpl.prList));
+//        listofPreq.setAdapter(new PurchaseRequestAdapter(Forms.this, serviceImpl.prList));
 
+        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/prequest/requests";
+        new ProjectTask().execute(uri);
         layout = (PullRefreshLayout) findViewById(R.id.refreshpr);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
@@ -66,40 +105,40 @@ public class Forms extends AppCompatActivity
                 }, 3000);
             }
         });
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_pr);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.navigation_task:
-                        Intent n = new Intent(Forms.this, Tasks.class);
-                        startActivity(n);
-                        break;
-
-                    case R.id.navigation_team:
-                        loader.show();
-                        Intent te = new Intent(Forms.this, ProjectTeam.class);
-                        startActivity(te);
-                        return true;
-
-                    case R.id.navigation_pr:
-                        Intent p = new Intent(Forms.this, Forms.class);
-                        startActivity(p);
-                        break;
-
-                    case R.id.navigation_po:
-                        Intent po =  new Intent(Forms.this, PurchaseOrder.class);
-                        startActivity(po);
-                        break;
-
-//                    case R.id.navigation_attendance:
-//                        Toast.makeText(Forms.this, "Going to Attendance", Toast.LENGTH_LONG).show();
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_pr);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId())
+//                {
+//                    case R.id.navigation_task:
+//                        Intent n = new Intent(Forms.this, Tasks.class);
+//                        startActivity(n);
 //                        break;
-                }
-                return true;
-            }
-        });
+//
+//                    case R.id.navigation_team:
+////                        loader.show();
+//                        Intent te = new Intent(Forms.this, ProjectTeam.class);
+//                        startActivity(te);
+//                        return true;
+//
+//                    case R.id.navigation_pr:
+//                        Intent p = new Intent(Forms.this, Forms.class);
+//                        startActivity(p);
+//                        break;
+//
+//                    case R.id.navigation_po:
+//                        Intent po =  new Intent(Forms.this, PurchaseOrder.class);
+//                        startActivity(po);
+//                        break;
+//
+////                    case R.id.navigation_attendance:
+////                        Toast.makeText(Forms.this, "Going to Attendance", Toast.LENGTH_LONG).show();
+////                        break;
+//                }
+//                return true;
+//            }
+//        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -197,19 +236,19 @@ public class Forms extends AppCompatActivity
                 break;
 
             case R.id.nav_workers:
-                loader.show();
+//                loader.show();
                 Intent x = new Intent(Forms.this, Workers.class);
                 startActivity(x);
                 break;
 
             case R.id.nav_settings:
-                loader.show();
+//                loader.show();
                 Intent s = new Intent(Forms.this, Settings.class);
                 startActivity(s);
                 break;
 
             case R.id.nav_logout:
-                loader.show();
+//                loader.show();
                 Intent l = new Intent(Forms.this, LoginActivity.class);
                 startActivity(l);
                 break;

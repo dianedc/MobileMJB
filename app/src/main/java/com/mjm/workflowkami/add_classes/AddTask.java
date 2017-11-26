@@ -68,20 +68,6 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
     private TaskClass task;
     private TaskService taskService = API.getInstance().getTaskService();
 
-//    private Button taskOwner;
-//    private Button taskManager;
-//    private EditText taskProgress;
-//    private SpinnerDialog usersDialog1;
-//    private SpinnerDialog usersDialog2;
-//    private Spinner spinnerTaskOwner;
-//    private TextView viewOwner, viewManager;
-//    private ProgressBar taskprogress;
-//    private UserClass userClass1, userClass2;
-//    private SpinnerAdapter adapter;
-//    private String selectedOwner, selectedManager;
-//    private UserClass userIDIntent = new UserClass();
-//    Toast t;
-//    Intent i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +93,10 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
         taskDuration = (EditText) findViewById(R.id.task_duration);
         saveTask = (Button) findViewById(R.id.btnSaveTask);
         dateFormatter = new SimpleDateFormat("yyyy-dd-MM", Locale.US);
+
+        taskDuration.setEnabled(false);
+        taskStatus.setEnabled(false);
+        dateComp.setEnabled(false);
 
 //        taskOwner = (Button) findViewById(R.id.task_owner);
 //        taskOwner.setOnClickListener(new OnClickListener() {

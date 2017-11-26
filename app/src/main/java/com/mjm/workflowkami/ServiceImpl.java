@@ -122,6 +122,9 @@ public class ServiceImpl {
                     try {
                         for (int i = 0; i < userClassList.size(); i++) {
                             userIDList.add(String.valueOf(userClassList.get(i).getUserID()));
+//                            +
+//                                    " " + userClassList.get(i).getLastname() +
+//                                    ", " + userClassList.get(i).getFirstname()
                         }
                     } catch (final Exception e) { e.printStackTrace(); }
                 }

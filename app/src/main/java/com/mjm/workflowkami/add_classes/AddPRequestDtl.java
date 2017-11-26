@@ -1,5 +1,6 @@
 package com.mjm.workflowkami.add_classes;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,36 +43,43 @@ public class AddPRequestDtl extends ListFragment {
     private PurchaseRequestClass preq = new PurchaseRequestClass();
     private ServiceImpl serviceImpl = new ServiceImpl();
     private PullRefreshLayout layout;
-    int preq_id = 0;
+    int preq_id;
+    private ProgressDialog progressDialog;
 
-//    private class AddPRequestDtlTask extends AsyncTask<String, Void, List<PurchaseRequestItemClass>> {
-//
-//        @Override
-//        protected void onPreExecute() {
-//            Intent intent = getActivity().getIntent();
-//            preq = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
-//
-//            if (preq != null) {
-//                preq_id = preq.getPreqID();
-//            }
-//        }
-//
-//        @Override
-//        protected List<PurchaseRequestItemClass> doInBackground(String... strings) {
-//            try {
-//                serviceImpl.GetAllPReqItemList(preq_id);
-//                return serviceImpl.pItemList;
-//            } catch (Exception eo) {
-//                String message = eo.getMessage();
-//                return null;
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(List<PurchaseRequestItemClass> purchaseRequestItemClasses) {
-//            super.onPostExecute(purchaseRequestItemClasses);
-//        }
-//    }
+    private class PRequestTask extends AsyncTask<String, Void, List<PurchaseRequestItemClass>> {
+
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Loading. Please wait... ");
+            progressDialog.show();
+        }
+
+        @Override
+        protected List<PurchaseRequestItemClass> doInBackground(String... strings) {
+            Intent intent = getActivity().getIntent();
+            preq = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
+            do {
+                if (preq != null) {
+                    serviceImpl.GetAllPReqItemList(preq.getPreqID());
+                }
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.pItemList == null);
+            return serviceImpl.pItemList;
+        }
+        @Override
+        protected void onPostExecute(List<PurchaseRequestItemClass> pqClassResponseEntity) {
+            progressDialog.dismiss();
+            PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter(getActivity(), pqClassResponseEntity);
+            setListAdapter(adapter);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,9 +101,12 @@ public class AddPRequestDtl extends ListFragment {
         preq = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
         int preq_id = 0;
         if (preq != null) {
-            preq_id = preq.getPreqID();
+//            preq_id = preq.getPreqID();
+            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/prequest/"+preq.getPreqID()+"/item";
+            new PRequestTask().execute(uri);
         }
-        serviceImpl.GetAllPReqItemList(preq_id);
+//        serviceImpl.GetAllPReqItemList(preq_id);
+
 
         layout = (PullRefreshLayout) rootView.findViewById(R.id.refreshprdtl);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
@@ -115,8 +126,8 @@ public class AddPRequestDtl extends ListFragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter(getActivity(), serviceImpl.pItemList);
-        setListAdapter(adapter);
+//        PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter(getActivity(), serviceImpl.pItemList);
+//        setListAdapter(adapter);
         super.onActivityCreated(savedInstanceState);
     }
 

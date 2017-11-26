@@ -175,8 +175,8 @@
     <string name="DialogAmount">Amount</string>
     <string name="title_activity_add_prequest">Purchase Request</string>
     <string name="tab_text_1">Approval</string>
-    <string name="tab_text_2">Add Item</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="tab_text_2">Show Item</string>
+    <string name="tab_text_3">Add Item</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
