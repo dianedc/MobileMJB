@@ -101,6 +101,12 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/requestedby_preq_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
         <!--<android.support.design.widget.TextInputLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content">-->
@@ -242,6 +248,12 @@
                 android:textSize="6pt" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/preqProjMan_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
 
         <Space
             android:layout_width="match_parent"
@@ -331,6 +343,12 @@
                 android:layout_weight="1" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/preqOfficeEng_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
         <EditText
             android:id="@+id/officeengineer_dateapproved"
             android:layout_width="275dp"
@@ -409,6 +427,12 @@
                 android:layout_height="20dp"
                 android:layout_weight="1" />
         </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/preqPOfficer_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
         <EditText
             android:id="@+id/dateauthorized_purchase"

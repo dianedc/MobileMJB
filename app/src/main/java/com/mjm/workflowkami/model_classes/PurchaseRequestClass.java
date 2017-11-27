@@ -48,9 +48,13 @@ public class PurchaseRequestClass implements Serializable{
         this.preqofficeengr = preqofficeengr;
         this.preqoedate = preqoedate;
         this.isapprovedoe = isapprovedoe;
-        this.preqsubtotal = preqsubtotal;
+        if(preqsubtotal!=null)
+        {this.preqsubtotal = preqsubtotal;}
+        else{ this.preqsubtotal = new BigDecimal("0.0");};
         this.preqsalestax = preqsalestax;
-        this.preqtotal = preqtotal;
+        if(preqtotal!=null)
+        {this.preqtotal = preqtotal;}
+        else{ this.preqtotal = new BigDecimal("0.0");};
     }
 
     public PurchaseRequestClass(ProjectClass projectID, String preqapproveddate, String preqrequesteddate, UserClass preqrequestedby, Boolean preqstatus, UserClass preqprojman, String preqpmdate, Boolean isapprovedpm, UserClass preqpurchofficer, String preqpodate, Boolean isapprovedpo, UserClass preqofficeengr, String preqoedate, Boolean isapprovedoe, BigDecimal preqsubtotal, double preqsalestax, BigDecimal preqtotal) {
@@ -68,9 +72,13 @@ public class PurchaseRequestClass implements Serializable{
         this.preqofficeengr = preqofficeengr;
         this.preqoedate = preqoedate;
         this.isapprovedoe = isapprovedoe;
-        this.preqsubtotal = preqsubtotal;
+        if(preqsubtotal!=null)
+        {this.preqsubtotal = preqsubtotal;}
+        else{ this.preqsubtotal = new BigDecimal("0.0");};
         this.preqsalestax = preqsalestax;
-        this.preqtotal = preqtotal;
+        if(preqtotal!=null)
+        {this.preqtotal = preqtotal;}
+        else{ this.preqtotal = new BigDecimal("0.0");};
     }
 
     public int getPreqID() {
@@ -216,4 +224,6 @@ public class PurchaseRequestClass implements Serializable{
     public void setPreqtotal(BigDecimal preqtotal) {
         this.preqtotal = preqtotal;
     }
+
+
 }

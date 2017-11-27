@@ -33,4 +33,7 @@ public interface PurchaseRequestService {
 
     @POST("prequest/add")
     Call<PurchaseRequestClass> addPreq(@Body PurchaseRequestClass project);
+
+    @POST("prequest/update/{preq_id}")
+    Call<Void> editPreq(@Path("preq_id") int preq_id, @Body PurchaseRequestClass project);
 }
