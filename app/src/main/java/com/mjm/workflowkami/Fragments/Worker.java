@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +14,11 @@ import android.widget.ListView;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
-import com.mjm.workflowkami.adapter_classes.PurchaseRequestItemAdapter;
 import com.mjm.workflowkami.adapter_classes.WorkerClassAdapter;
-import com.mjm.workflowkami.add_classes.AddPrequestDtlItem;
+import com.mjm.workflowkami.impl_classes.Projects;
 import com.mjm.workflowkami.impl_classes.Tasks;
-import com.mjm.workflowkami.impl_classes.Workers;
-import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
-import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
+import com.mjm.workflowkami.model_classes.ProjectClass;
+import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.model_classes.WorkerClass;
 import com.mjm.workflowkami.service_classes.WorkerService;
 
@@ -40,10 +37,10 @@ public class Worker extends ListFragment {
     private WorkerClass work = new WorkerClass();
     List<WorkerClass> workerList = new ArrayList<WorkerClass>();
     private WorkerService workerService = API.getInstance().getWorkerService();
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
+    private ProjectClass proj = new ProjectClass();
 
-
-    private class WorkerTask extends AsyncTask<String, Void, List<WorkerClass>> {
+    private class WorkerTask extends AsyncTask<String, Void, List<ProjectTeamClass>> {
 
 
         @Override
@@ -54,33 +51,35 @@ public class Worker extends ListFragment {
         }
 
         @Override
-        protected List<WorkerClass> doInBackground(String... strings) {
+        protected List<ProjectTeamClass> doInBackground(String... strings) {
             do {
-                serviceImpl.GetAllWorkers();
+                Intent pIntent = getActivity().getIntent();
+                proj = (ProjectClass) pIntent.getSerializableExtra("projects");
+                if (proj != null) {
+                    serviceImpl.GetTeamById(proj.getProjID());
+                }
                 try  {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-            } while (serviceImpl.workerList == null);
-            return serviceImpl.workerList;
+            } while (serviceImpl.pTeamList == null);
+            return serviceImpl.pTeamList;
         }
         @Override
-        protected void onPostExecute(List<WorkerClass> workerClassResponseEntity) {
+        protected void onPostExecute(List<ProjectTeamClass> workerClassResponseEntity) {
             progressDialog.dismiss();
             WorkerClassAdapter adapter = new WorkerClassAdapter(getActivity(), workerClassResponseEntity);
             setListAdapter(adapter);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_worker, container, false);
         final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/worker/workers";
         new WorkerTask().execute(uri);
-
 //        listofWorkers = (ListView) findViewById(R.id.lstWorkers);
 
 //        container = (ListView) rootView.findViewById(R.id.list_preq_items);
@@ -109,7 +108,7 @@ public class Worker extends ListFragment {
 //            workersID = work.getWorkersID();
 //        }
 
-//        serviceImpl.GetAllWorkers();
+        serviceImpl.GetAllWorkers();
 //        serviceImpl.GetAllWorkers(workersID);
 
         return rootView;
@@ -117,8 +116,8 @@ public class Worker extends ListFragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        WorkerClassAdapter adapter = new WorkerClassAdapter(getActivity(), serviceImpl.workerList);
-//        setListAdapter(adapter);
+        WorkerClassAdapter adapter = new WorkerClassAdapter(getActivity(), serviceImpl.pTeamList);
+        setListAdapter(adapter);
         super.onActivityCreated(savedInstanceState);
     }
 

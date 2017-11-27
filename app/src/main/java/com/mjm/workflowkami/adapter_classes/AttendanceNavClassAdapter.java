@@ -23,11 +23,11 @@ import java.util.List;
  * Created by Jasper on 4 Oct 2017.
  */
 
-public class ProjectClassAdapter extends ArrayAdapter<ProjectClass> {
+public class AttendanceNavClassAdapter extends ArrayAdapter<ProjectClass> {
     private Context context;
     private List<ProjectClass> projects;
 
-    public ProjectClassAdapter(Context context, List<ProjectClass> projects) {
+    public AttendanceNavClassAdapter(Context context, List<ProjectClass> projects) {
         super(context, R.layout.list_item_projects, projects);
         this.context = context;
         this.projects = projects;
@@ -60,7 +60,7 @@ public class ProjectClassAdapter extends ArrayAdapter<ProjectClass> {
             @Override
             public void onClick(View v) {
                 ProjectClass projectClass = projects.get(position);
-                Intent i = new Intent(context, Tasks.class);
+                Intent i = new Intent(context, Workers.class);
 
 //                i.setClassName(context, "com.mjm.workflowkami.add_classes.AddTask");
                 i.putExtra("projects", projectClass);

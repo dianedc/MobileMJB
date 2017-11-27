@@ -101,6 +101,10 @@
             android:name=".impl_classes.Workers"
             android:label="@string/title_activity_workers"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".impl_classes.AttendanceNav"
+            android:label="@string/title_activity_projects"
+            android:theme="@style/AppTheme" />
         <activity android:name=".add_classes.AddPrequestDtlItem" />
         <activity android:name=".add_classes.AddWorker"></activity>
     </application>

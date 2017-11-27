@@ -9,42 +9,34 @@ import java.io.Serializable;
 public class ProjectTeamClass implements Serializable {
 
     private Integer projteamID;
-    private ProjectClass projectID;
+    private ProjectClass projectsprojID;
     private UserClass userID;
-    private WorkerClass workersID;
-
-    public ProjectTeamClass(Integer projteamID, ProjectClass projectID, UserClass userID, WorkerClass workersID ) {
-        this.projteamID = projteamID;
-        this.projectID = projectID;
-        this.workersID = workersID;
-        this.userID = userID;
-
-    }
+    private WorkerClass workersworkersID;
 
     public ProjectTeamClass() {
-
     }
 
-//    public ProjectTeamClass(Integer projteamID, String s, String s1, String trim) {
-//    }
-//
-//    public ProjectTeamClass(String s, String s1, String s2, String trim) {
-//    }
+    public ProjectTeamClass(Integer projteamID, ProjectClass projectsprojID, UserClass userID, WorkerClass workersworkersID) {
+        this.projteamID = projteamID;
+        this.projectsprojID = projectsprojID;
+        this.userID = userID;
+        this.workersworkersID = workersworkersID;
+    }
 
     public Integer getProjteamID() {
-        return null;
+        return projteamID;
     }
 
-    public void setProjteamID(int projteamID) {
+    public void setProjteamID(Integer projteamID) {
         this.projteamID = projteamID;
     }
 
-    public ProjectClass getProjectID() {
-        return projectID;
+    public ProjectClass getProjectsprojID() {
+        return projectsprojID;
     }
 
-    public void setProjectID(ProjectClass projectID) {
-        this.projectID = projectID;
+    public void setProjectsprojID(ProjectClass projectsprojID) {
+        this.projectsprojID = projectsprojID;
     }
 
     public UserClass getUserID() {
@@ -55,20 +47,21 @@ public class ProjectTeamClass implements Serializable {
         this.userID = userID;
     }
 
-    public WorkerClass getWorkersID() { return workersID; }
+    public WorkerClass getWorkersworkersID() {
+        return workersworkersID;
+    }
 
-    public void setWorkersID(WorkerClass workersID) { this.workersID = workersID; }
-
-
+    public void setWorkersworkersID(WorkerClass workersworkersID) {
+        this.workersworkersID = workersworkersID;
+    }
 
     @Override
     public String toString() {
         return "ProjectTeamClass{" +
-                "projteamID='" + projteamID + '\'' +
-                ", projectID='" + projectID + '\'' +
-                ", userID='" + userID + '\'' +
-                ", workersID='" +  +
+                "projteamID=" + projteamID +
+                ", projectsprojID=" + projectsprojID +
+                ", userID=" + userID +
+                ", workersworkersID=" + workersworkersID +
                 '}';
     }
-
 }

@@ -180,10 +180,12 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="tab1">Engineers / Architects</string>
-    <string name="tab2">Workers</string>
-    <string name="tab3">Attendance</string>
-    <string name="workers">MJM Konstruct &amp; Management Inc.</string>
+    <string name="tab1">Project Team</string>
+    <string name="tab2">Time In</string>
+    <string name="tab3">Time Out</string>
+    <string name="team">Team</string>
+    <string name="workers">Attendannce</string>
+
 
     <string name="title_file_list">Files</string>
     <string name="title_file_detail">File Detail</string>

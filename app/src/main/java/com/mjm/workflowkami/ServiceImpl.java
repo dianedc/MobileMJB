@@ -351,4 +351,57 @@ public class ServiceImpl {
 
         return workerList;
     }
+
+    public List<ProjectTeamClass> GetProjTeamID(int projTeamID) {
+
+        Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.putTimeIn(projTeamID);
+
+        getProjTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
+            @Override
+            public void onResponse(Call<List<ProjectTeamClass>> call, Response<List<ProjectTeamClass>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectTeamClass> projectTeamClassList = response.body();
+                    Log.d(TAG, response.toString());
+
+//                    try {
+//                        for (int i = 0; i < projectTeamClassList.size(); i++) {
+//                            pTeamList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID()));
+//                        }
+//                    } catch (final Exception e) { e.printStackTrace(); }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) { t.printStackTrace(); }
+        });
+
+        return pTeamList;
+    }
+
+    public List<ProjectTeamClass> GetTeamById (int projID) {
+        pTeamList = new ArrayList<ProjectTeamClass>();
+        Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getTeamById(projID);
+
+        getProjTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
+            @Override
+            public void onResponse(Call<List<ProjectTeamClass>> call, Response<List<ProjectTeamClass>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectTeamClass> projectTeamClassList = response.body();
+                    Log.d(TAG, response.toString());
+
+                    try {
+                    for (int i = 0; i < projectTeamClassList.size(); i++) {
+                        pTeamList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
+                                projectTeamClassList.get(i).getProjectsprojID(),
+                                projectTeamClassList.get(i).getUserID(),
+                                projectTeamClassList.get(i).getWorkersworkersID()));
+                    }
+                } catch (final Exception e) { e.printStackTrace(); }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) { t.printStackTrace(); }
+        });
+
+        return pTeamList;
+    }
 }

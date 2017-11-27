@@ -104,40 +104,41 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
         btnCompleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertD = new AlertDialog.Builder(context);
-//                alert.setTitle("Complete Task?");
-                alertD.setMessage("Set the selected task to a completed state.").
-                        setCancelable(false).
-                        setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+                mBuilder.setTitle("Complete Task?");
+                mBuilder.setMessage("Set the selected task to a completed state.");
+                mBuilder.setCancelable(false);
+                mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
+                        Call<Void> compTask = taskService.completeTask(tasks.get(position).getProjectID().getProjID(),
+                                tasks.get(position).getTaskID());
+                        compTask.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.isSuccessful()){
+                                    btnCompleteTask.setVisibility(View.INVISIBLE);
+                                }
+                            }
 
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Call<Void> compTask = taskService.completeTask(tasks.get(position).getProjectID().getProjID(),
-                                        tasks.get(position).getTaskID());
-                                compTask.enqueue(new Callback<Void>() {
-                                    @Override
-                                    public void onResponse(Call<Void> call, Response<Void> response) {
-                                        if (response.isSuccessful()){
-                                            Toast.makeText(context, "Task has been completed", Toast.LENGTH_SHORT).show();
-                                            btnCompleteTask.setVisibility(View.INVISIBLE);
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<Void> call, Throwable t) {
-                                        t.printStackTrace();
-                                    }
-                                });
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
                             }
-                        }).
-                        setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                AlertDialog alert = alertD.create();
-                alert.setTitle("Complete Task?");
+                        });
+                    }
+                });
+                mBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+//                        Toast.makeText(context, "CANCEL", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alert = mBuilder.create();
+//                alert.setTitle("Complete Task?");
                 alert.show();
             }
         });

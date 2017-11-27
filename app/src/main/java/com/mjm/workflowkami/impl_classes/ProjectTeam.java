@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.Fragments.ProjTeam;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.ProjectTeamAdapter;
@@ -54,11 +55,11 @@ public class ProjectTeam extends AppCompatActivity
                     startActivity(n);
                     return true;
 
-                case R.id.navigation_team:
-                    loader.show();
-                    Intent t = new Intent(ProjectTeam.this, ProjectTeam.class);
-                    startActivity(t);
-                    return true;
+//                case R.id.navigation_team:
+//                    loader.show();
+//                    Intent t = new Intent(ProjectTeam.this, ProjTeam.class);
+//                    startActivity(t);
+//                    return true;
 
                 case R.id.navigation_pr:
                     loader.show();
@@ -198,11 +199,11 @@ public class ProjectTeam extends AppCompatActivity
                 startActivity(u);
                 break;
 
-            case R.id.nav_workers:
-                loader.show();
-                Intent x = new Intent(ProjectTeam.this, Workers.class);
-                startActivity(x);
-                break;
+//            case R.id.nav_workers:
+//                loader.show();
+//                Intent x = new Intent(ProjectTeam.this, Workers.class);
+//                startActivity(x);
+//                break;
 
             case R.id.nav_settings:
                 loader.show();

@@ -109,36 +109,36 @@ public class PurchaseOrder extends AppCompatActivity
         });
         fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
 
-//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_po);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId())
-//                {
-//                    case R.id.navigation_task:
-//                        Intent n = new Intent(PurchaseOrder.this, Tasks.class);
-//                        startActivity(n);
-//                        break;
-//
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_po);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.navigation_task:
+                        Intent n = new Intent(PurchaseOrder.this, Tasks.class);
+                        startActivity(n);
+                        break;
+
 //                    case R.id.navigation_team:
 //                        loader.show();
 //                        Intent t = new Intent(PurchaseOrder.this, ProjectTeam.class);
 //                        startActivity(t);
 //                        return true;
-//
-//                    case R.id.navigation_pr:
-//                        Intent p = new Intent(PurchaseOrder.this, Forms.class);
-//                        startActivity(p);
-//                        break;
-//
-//                    case R.id.navigation_po:
-//                        Intent po =  new Intent(PurchaseOrder.this, PurchaseOrder.class);
-//                        startActivity(po);
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
+
+                    case R.id.navigation_pr:
+                        Intent p = new Intent(PurchaseOrder.this, Forms.class);
+                        startActivity(p);
+                        break;
+
+                    case R.id.navigation_po:
+                        Intent po =  new Intent(PurchaseOrder.this, PurchaseOrder.class);
+                        startActivity(po);
+                        break;
+                }
+                return true;
+            }
+        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -203,6 +203,12 @@ public class PurchaseOrder extends AppCompatActivity
                 Intent p = new Intent(PurchaseOrder.this, Projects.class);
                 startActivity(p);
                 break;
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(PurchaseOrder.this, AttendanceNav.class);
+                startActivity(x);
+                break;
+
 //            case R.id.nav_purchaseRequest:
 //                Intent f = new Intent(PurchaseOrder.this, Forms.class);
 //                startActivity(f);
@@ -211,30 +217,30 @@ public class PurchaseOrder extends AppCompatActivity
 //                Intent e = new Intent(PurchaseOrder.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(PurchaseOrder.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(PurchaseOrder.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(PurchaseOrder.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                Intent r = new Intent(PurchaseOrder.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
                 Intent u = new Intent(PurchaseOrder.this, Users.class);
                 startActivity(u);
                 break;
 
-            case R.id.nav_workers:
-                loader.show();
-                Intent x = new Intent(PurchaseOrder.this, Workers.class);
-                startActivity(x);
-                break;
+//            case R.id.nav_workers:
+//                loader.show();
+//                Intent x = new Intent(PurchaseOrder.this, Workers.class);
+//                startActivity(x);
+//                break;
 
-            case R.id.nav_settings:
-                loader.show();
-                Intent s = new Intent(PurchaseOrder.this, Settings.class);
-                startActivity(s);
-                break;
+//            case R.id.nav_settings:
+//                loader.show();
+//                Intent s = new Intent(PurchaseOrder.this, Settings.class);
+//                startActivity(s);
+//                break;
 
             case R.id.nav_logout:
                 loader.show();

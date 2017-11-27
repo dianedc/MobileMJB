@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.Fragments.ProjTeam;
 import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
@@ -140,11 +141,11 @@ public class Tasks extends LoaderAsync
                         startActivity(n);
                         break;
 
-                    case R.id.navigation_team:
-                        loader.show();
-                        Intent te = new Intent(Tasks.this, ProjectTeam.class);
-                        startActivity(te);
-                        return true;
+//                    case R.id.navigation_team:
+////                        loader.show();
+//                        Intent te = new Intent(Tasks.this, Workers.class);
+//                        startActivity(te);
+//                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(Tasks.this, Forms.class);
@@ -226,6 +227,12 @@ public class Tasks extends LoaderAsync
                 Intent p = new Intent(Tasks.this, Projects.class);
                 startActivity(p);
                 break;
+
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Tasks.this, AttendanceNav.class);
+                startActivity(x);
+                break;
 //            case R.id.nav_purchaseRequest:
 //                loader.show();
 //                Intent f = new Intent(Tasks.this, Forms.class);
@@ -236,33 +243,33 @@ public class Tasks extends LoaderAsync
 //                Intent e = new Intent(Tasks.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                loader.show();
-                Intent fi = new Intent(Tasks.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                loader.show();
-                Intent r = new Intent(Tasks.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                loader.show();
+//                Intent fi = new Intent(Tasks.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                loader.show();
+//                Intent r = new Intent(Tasks.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
                 loader.show();
                 Intent u = new Intent(Tasks.this, Users.class);
                 startActivity(u);
                 break;
 
-            case R.id.nav_workers:
-                loader.show();
-                Intent x = new Intent(Tasks.this, Workers.class);
-                startActivity(x);
-                break;
+//            case R.id.nav_workers:
+//                loader.show();
+//                Intent x = new Intent(Tasks.this, Workers.class);
+//                startActivity(x);
+//                break;
 
-            case R.id.nav_settings:
-                loader.show();
-                Intent s = new Intent(Tasks.this, Settings.class);
-                startActivity(s);
-                break;
+//            case R.id.nav_settings:
+//                loader.show();
+//                Intent s = new Intent(Tasks.this, Settings.class);
+//                startActivity(s);
+//                break;
 
             case R.id.nav_logout:
                 loader.show();

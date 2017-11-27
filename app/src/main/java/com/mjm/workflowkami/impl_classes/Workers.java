@@ -2,6 +2,8 @@ package com.mjm.workflowkami.impl_classes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,18 +15,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.Fragments.Attendance;
+import com.mjm.workflowkami.Fragments.ProjTeam;
 import com.mjm.workflowkami.Fragments.Worker;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
+import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.WorkerClass;
 import com.mjm.workflowkami.service_classes.WorkerService;
 
@@ -45,13 +47,14 @@ public class Workers extends AppCompatActivity
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SpotsDialog loader;
     private ViewPager mViewPager;
+    private ProjectClass projectIntent = new ProjectClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workers);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportActionBar();
         loader = new SpotsDialog(Workers.this);
 
 //        listofWorkers = (ListView) findViewById(R.id.lstWorkers);
@@ -68,6 +71,12 @@ public class Workers extends AppCompatActivity
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        Intent intent = getIntent();
+        projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+        if (projectIntent !=null) {
+            Toast.makeText(Workers.this, String.valueOf(projectIntent.getProjID()), Toast.LENGTH_LONG).show();
+        }
+
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -77,6 +86,36 @@ public class Workers extends AppCompatActivity
 //            }
 //        });
 
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_worker);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId())
+//                {
+//                    case R.id.navigation_task:
+//                        Intent n = new Intent(Workers.this, Tasks.class);
+//                        startActivity(n);
+//                        break;
+//
+////                    case R.id.navigation_team:
+//////                        loader.show();
+////                        Intent te = new Intent(Workers.this, Workers.class);
+////                        startActivity(te);
+////                        return true;
+//
+//                    case R.id.navigation_pr:
+//                        Intent p = new Intent(Workers.this, Forms.class);
+//                        startActivity(p);
+//                        break;
+//
+//                    case R.id.navigation_po:
+//                        Intent po =  new Intent(Workers.this, PurchaseOrder.class);
+//                        startActivity(po);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -129,7 +168,7 @@ public class Workers extends AppCompatActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_dashboard:
-//                loader.show();
+                loader.show();
                 Intent d = new Intent(Workers.this, Dashboard.class);
                 startActivity(d);
                 break;
@@ -144,9 +183,14 @@ public class Workers extends AppCompatActivity
 //                startActivity(s);
 //                break;
             case R.id.nav_project:
-//                loader.show();
+                loader.show();
                 Intent p = new Intent(Workers.this, Projects.class);
                 startActivity(p);
+                break;
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Workers.this, AttendanceNav.class);
+                startActivity(x);
                 break;
 //            case R.id.nav_forms:
 //                loader.show();
@@ -158,36 +202,30 @@ public class Workers extends AppCompatActivity
 //                Intent e = new Intent(Users.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
+//            case R.id.nav_files:
 //                loader.show();
-                Intent fi = new Intent(Workers.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
+//                Intent fi = new Intent(Workers.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
 //                loader.show();
-                Intent r = new Intent(Workers.this, Reports.class);
-                startActivity(r);
-                break;
+//                Intent r = new Intent(Workers.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
-//                loader.show();
+                loader.show();
                 Intent u = new Intent(Workers.this, Users.class);
                 startActivity(u);
                 break;
 
-            case R.id.nav_workers:
+//            case R.id.nav_settings:
 //                loader.show();
-                Intent x = new Intent(Workers.this, Workers.class);
-                startActivity(x);
-                break;
-
-            case R.id.nav_settings:
-//                loader.show();
-                Intent s = new Intent(Workers.this, Settings.class);
-                startActivity(s);
-                break;
+//                Intent s = new Intent(Workers.this, Settings.class);
+//                startActivity(s);
+//                break;
 
             case R.id.nav_logout:
-//                loader.show();
+                loader.show();
                 Intent l = new Intent(Workers.this, LoginActivity.class);
                 startActivity(l);
                 break;
@@ -242,9 +280,12 @@ public class Workers extends AppCompatActivity
             switch(position) {
 
                 case 0:
+                    ProjTeam projTeam = new ProjTeam();
+                    return projTeam;
+                case 1:
                     Worker worker = new Worker();
                     return worker;
-                case 1:
+                case 2:
                     Attendance attendance = new Attendance();
                     return attendance;
                 default:
@@ -261,9 +302,11 @@ public class Workers extends AppCompatActivity
         public CharSequence getPageTitle (int position){
             switch (position){
                 case 0:
-                    return "Workers";
+                    return "Project Team";
                 case 1:
-                    return "Attendance";
+                    return "Time In";
+                case 2:
+                    return "Time Out";
 
                 default:
                     return null;

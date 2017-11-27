@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.Fragments.ProjTeam;
 import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
@@ -105,40 +106,40 @@ public class Forms extends LoaderAsync
                 }, 3000);
             }
         });
-//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_pr);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId())
-//                {
-//                    case R.id.navigation_task:
-//                        Intent n = new Intent(Forms.this, Tasks.class);
-//                        startActivity(n);
-//                        break;
-//
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_pr);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.navigation_task:
+                        Intent n = new Intent(Forms.this, Tasks.class);
+                        startActivity(n);
+                        break;
+
 //                    case R.id.navigation_team:
 ////                        loader.show();
-//                        Intent te = new Intent(Forms.this, ProjectTeam.class);
+//                        Intent te = new Intent(Forms.this, Workers.class);
 //                        startActivity(te);
 //                        return true;
-//
-//                    case R.id.navigation_pr:
-//                        Intent p = new Intent(Forms.this, Forms.class);
-//                        startActivity(p);
+
+                    case R.id.navigation_pr:
+                        Intent p = new Intent(Forms.this, Forms.class);
+                        startActivity(p);
+                        break;
+
+                    case R.id.navigation_po:
+                        Intent po =  new Intent(Forms.this, PurchaseOrder.class);
+                        startActivity(po);
+                        break;
+
+//                    case R.id.navigation_attendance:
+//                        Toast.makeText(Forms.this, "Going to Attendance", Toast.LENGTH_LONG).show();
 //                        break;
-//
-//                    case R.id.navigation_po:
-//                        Intent po =  new Intent(Forms.this, PurchaseOrder.class);
-//                        startActivity(po);
-//                        break;
-//
-////                    case R.id.navigation_attendance:
-////                        Toast.makeText(Forms.this, "Going to Attendance", Toast.LENGTH_LONG).show();
-////                        break;
-//                }
-//                return true;
-//            }
-//        });
+                }
+                return true;
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -214,6 +215,12 @@ public class Forms extends LoaderAsync
                 Intent p = new Intent(Forms.this, Projects.class);
                 startActivity(p);
                 break;
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Forms.this, AttendanceNav.class);
+                startActivity(x);
+                break;
+
 //            case R.id.nav_purchaseRequest:
 ////                Intent f = new Intent(Forms.this, Forms.class);
 ////                startActivity(f);
@@ -222,30 +229,30 @@ public class Forms extends LoaderAsync
 //                Intent e = new Intent(Forms.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(Forms.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(Forms.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(Forms.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                Intent r = new Intent(Forms.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
                 Intent u = new Intent(Forms.this, Users.class);
                 startActivity(u);
                 break;
 
-            case R.id.nav_workers:
-//                loader.show();
-                Intent x = new Intent(Forms.this, Workers.class);
-                startActivity(x);
-                break;
+//            case R.id.nav_workers:
+////                loader.show();
+//                Intent x = new Intent(Forms.this, Workers.class);
+//                startActivity(x);
+//                break;
 
-            case R.id.nav_settings:
-//                loader.show();
-                Intent s = new Intent(Forms.this, Settings.class);
-                startActivity(s);
-                break;
+//            case R.id.nav_settings:
+////                loader.show();
+//                Intent s = new Intent(Forms.this, Settings.class);
+//                startActivity(s);
+//                break;
 
             case R.id.nav_logout:
 //                loader.show();

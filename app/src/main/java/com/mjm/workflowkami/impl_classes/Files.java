@@ -125,11 +125,11 @@ public class Files extends AppCompatActivity
                 startActivity(u);
                 break;
 
-            case R.id.nav_workers:
-                loader.show();
-                Intent x = new Intent(Files.this, Workers.class);
-                startActivity(x);
-                break;
+//            case R.id.nav_workers:
+//                loader.show();
+//                Intent x = new Intent(Files.this, Workers.class);
+//                startActivity(x);
+//                break;
 
             case R.id.nav_settings:
                 loader.show();

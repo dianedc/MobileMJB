@@ -261,37 +261,38 @@ public class Dashboard extends LoaderAsync
                 Intent p = new Intent(Dashboard.this, Projects.class);
                 startActivity(p);
                 break;
-            case R.id.nav_purchaseRequest:
+            case R.id.nav_team:
 //                loader.show();
-                Intent f = new Intent(Dashboard.this, Forms.class);
-                startActivity(f);
+                Intent x = new Intent(Dashboard.this, AttendanceNav.class);
+                startActivity(x);
                 break;
-            case R.id.nav_purchaseOrder:
-//                loader.show();
-                Intent e = new Intent(Dashboard.this, PurchaseOrder.class);
-                startActivity(e);
-                break;
-            case R.id.nav_files:
-//                loader.show();
-                Intent fi = new Intent(Dashboard.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-//                loader.show();
-                Intent r = new Intent(Dashboard.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_purchaseRequest:
+////                loader.show();
+//                Intent f = new Intent(Dashboard.this, Forms.class);
+//                startActivity(f);
+//                break;
+//            case R.id.nav_purchaseOrder:
+////                loader.show();
+//                Intent e = new Intent(Dashboard.this, PurchaseOrder.class);
+//                startActivity(e);
+//                break;
+//            case R.id.nav_files:
+////                loader.show();
+//                Intent fi = new Intent(Dashboard.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+////                loader.show();
+//                Intent r = new Intent(Dashboard.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
 //                loader.show();
                 Intent u = new Intent(Dashboard.this, Users.class);
                 startActivity(u);
                 break;
 
-            case R.id.nav_workers:
-//                loader.show();
-                Intent x = new Intent(Dashboard.this, Workers.class);
-                startActivity(x);
-                break;
+
 
             case R.id.nav_settings:
 //                loader.show();

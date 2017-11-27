@@ -178,21 +178,27 @@ public class Users extends LoaderAsync
                 Intent p = new Intent(Users.this, Projects.class);
                 startActivity(p);
                 break;
-            case R.id.nav_purchaseRequest:
-                loader.show();
-                Intent f = new Intent(Users.this, Forms.class);
-                startActivity(f);
-                break;
-            case R.id.nav_purchaseOrder:
-                loader.show();
-                Intent e = new Intent(Users.this, PurchaseOrder.class);
-                startActivity(e);
-                break;
-            case R.id.nav_files:
+
+            case R.id.nav_team:
 //                loader.show();
-                Intent fi = new Intent(Users.this, Files.class);
-                startActivity(fi);
+                Intent x = new Intent(Users.this, AttendanceNav.class);
+                startActivity(x);
                 break;
+//            case R.id.nav_purchaseRequest:
+//                loader.show();
+//                Intent f = new Intent(Users.this, Forms.class);
+//                startActivity(f);
+//                break;
+//            case R.id.nav_purchaseOrder:
+//                loader.show();
+//                Intent e = new Intent(Users.this, PurchaseOrder.class);
+//                startActivity(e);
+//                break;
+//            case R.id.nav_files:
+////                loader.show();
+//                Intent fi = new Intent(Users.this, Files.class);
+//                startActivity(fi);
+//                break;
 //            case R.id.nav_reports:
 //                loader.show();
 //                Intent r = new Intent(Users.this, Reports.class);
@@ -203,17 +209,17 @@ public class Users extends LoaderAsync
 //                startActivity(u);
                 break;
 
-            case R.id.nav_workers:
-//                loader.show();
-                Intent x = new Intent(Users.this, Workers.class);
-                startActivity(x);
-                break;
+//            case R.id.nav_workers:
+////                loader.show();
+//                Intent x = new Intent(Users.this, Workers.class);
+//                startActivity(x);
+//                break;
 
-            case R.id.nav_settings:
-//                loader.show();
-                Intent s = new Intent(Users.this, Settings.class);
-                startActivity(s);
-                break;
+//            case R.id.nav_settings:
+////                loader.show();
+//                Intent s = new Intent(Users.this, Settings.class);
+//                startActivity(s);
+//                break;
 
             case R.id.nav_logout:
 //                loader.show();

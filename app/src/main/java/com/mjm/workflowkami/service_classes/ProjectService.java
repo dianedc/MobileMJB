@@ -30,4 +30,11 @@ public interface ProjectService {
 
     @POST("project/update/{proj_id}")
     Call<Void> editProject(@Path("proj_id") int proj_id, @Body ProjectClass proj);
+
+    @POST("project/{projID}/team/{projteamID}/attendance/timein")
+    Call<Void> workerTimeIn(@Path("projID") int proj_id, @Path("projteamID") int projteamID);
+
+    @POST("project/{projID}/team/{projteamID}/attendance/timeout")
+    Call<Void> workerTimeOut(@Path("projID") int proj_id, @Path("projteamID") int projteamID);
+
 }

@@ -3,6 +3,7 @@ package com.mjm.workflowkami;
  * Created by Jasper on 1 Sep 2017.
  */
 
+import com.mjm.workflowkami.service_classes.AttendanceService;
 import com.mjm.workflowkami.service_classes.ProjectService;
 import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.PurchaseOrderService;
@@ -20,8 +21,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class API {
 //    public final String BASE_URL = "http://192.168.2.108:8081/rest/";
-//    public final String BASE_URL = "http://192.168.2.123:8082/rest/";
-    public final String BASE_URL = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/";
+    public final String BASE_URL = "http://192.168.2.123:8083/rest/";
+//    public final String BASE_URL = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/";
 //    public final String BASE_URL = "http://192.168.2.144:8080/";
 //    public final String BASE_URL = "http://172.20.10.5:8081/rest/";
     //    public final String BASE_URL = "http://10.1.15.97:8081/rest/";
@@ -37,6 +38,7 @@ public class API {
     private PurchaseRequestService purchaseRequestService;
     private ProjectTeamService projectTeamService;
     private WorkerService workerService;
+    private AttendanceService attendanceService;
 
     public static API getInstance() {
         if (instance == null) {
@@ -61,6 +63,7 @@ public class API {
         this.purchaseRequestItemService = retrofit.create(PurchaseRequestItemService.class);
         this.projectTeamService = retrofit.create(ProjectTeamService.class);
         this.workerService = retrofit.create(WorkerService.class);
+        this.attendanceService = retrofit.create(AttendanceService.class);
 
     }
 
@@ -89,4 +92,6 @@ public class API {
     public ProjectTeamService getProjectTeamService () { return this.projectTeamService; }
 
     public WorkerService getWorkerService() { return this.workerService; }
+
+    public AttendanceService getAttendanceService() { return this.attendanceService; }
 }

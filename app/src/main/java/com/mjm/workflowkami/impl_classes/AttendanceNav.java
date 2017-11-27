@@ -1,58 +1,41 @@
 package com.mjm.workflowkami.impl_classes;
 
-import android.app.LoaderManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.LoaderAsync;
-import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
+import com.mjm.workflowkami.ServiceImpl;
+import com.mjm.workflowkami.adapter_classes.AttendanceNavClassAdapter;
 import com.mjm.workflowkami.adapter_classes.ProjectClassAdapter;
-import com.mjm.workflowkami.add_classes.AddProject;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.service_classes.ProjectService;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
-public class Projects extends LoaderAsync
+public class AttendanceNav extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private PullRefreshLayout layout;
     private SwipeRefreshLayout refreshLayout;
-    private String TAG = Projects.class.getSimpleName();
+    private String TAG = AttendanceNav.class.getSimpleName();
     private ListView listOfProjects;
     private SpotsDialog loader;
     private ProjectService projectService = API.getInstance().getProjectService();
@@ -93,20 +76,20 @@ public class Projects extends LoaderAsync
         @Override
         protected void onPostExecute(List<ProjectClass> projClassResponseEntity) {
             dismissProgressDialog();
-            listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, projClassResponseEntity));
+            listOfProjects.setAdapter(new AttendanceNavClassAdapter(AttendanceNav.this, projClassResponseEntity));
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_projects);
+        setContentView(R.layout.activity_attendance_nav);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarProj);
         setTitle("Projects");
         setSupportActionBar(toolbar);
 
-        loader = new SpotsDialog(Projects.this);
-        listOfProjects = (ListView) findViewById(R.id.lstProjects);
+        loader = new SpotsDialog(AttendanceNav.this);
+        listOfProjects = (ListView) findViewById(R.id.lstAttendanceNav);
 
         final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/projects";
         new ProjectTask().execute(uri);
@@ -227,7 +210,7 @@ public class Projects extends LoaderAsync
         switch (id){
             case R.id.nav_dashboard:
 //                loader.show();
-                Intent d = new Intent(Projects.this, Dashboard.class);
+                Intent d = new Intent(AttendanceNav.this, Dashboard.class);
                 startActivity(d);
                 break;
             case R.id.nav_project:
@@ -235,7 +218,7 @@ public class Projects extends LoaderAsync
 
             case R.id.nav_team:
 //                loader.show();
-                Intent x = new Intent(Projects.this, AttendanceNav.class);
+                Intent x = new Intent(AttendanceNav.this, AttendanceNav.class);
                 startActivity(x);
                 break;
 //            case R.id.nav_purchaseRequest:
@@ -260,7 +243,7 @@ public class Projects extends LoaderAsync
 //                break;
             case R.id.nav_users:
 //                loader.show();
-                Intent u = new Intent(Projects.this, Users.class);
+                Intent u = new Intent(AttendanceNav.this, Users.class);
                 startActivity(u);
                 break;
 
@@ -278,7 +261,7 @@ public class Projects extends LoaderAsync
 
             case R.id.nav_logout:
 //                loader.show();
-                Intent l = new Intent(Projects.this, LoginActivity.class);
+                Intent l = new Intent(AttendanceNav.this, LoginActivity.class);
                 startActivity(l);
                 break;
         }

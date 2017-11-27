@@ -94,7 +94,7 @@ public class AddProjectTeam extends AppCompatActivity {
 
         if (teamIntent != null) {
             projteamID.setText(String.valueOf(teamIntent.getProjteamID()));
-            projectID.setText(teamIntent.getProjectID().getProjID());
+            projectID.setText(teamIntent.getProjectsprojID().getProjID());
             userID.setText(teamIntent.getUserID().getUserID());
 //            workersID.setText(teamIntent.getWorkersID().getWorkersfirstname());
 

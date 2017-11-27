@@ -21,24 +21,25 @@
         <!--android:title="Purchase Order" />-->
 
         <item
-            android:id="@+id/nav_files"
-            android:icon="@drawable/ic_menu_file"
-            android:title="Files" />
+            android:id="@+id/nav_team"
+            android:icon="@drawable/ic_access_time_black_24dp"
+            android:title="@string/title_team" />
 
-        <item
-            android:id="@+id/nav_reports"
-            android:icon="@drawable/ic_reports"
-            android:title="Reports" />
+        <!--<item-->
+            <!--android:id="@+id/nav_files"-->
+            <!--android:icon="@drawable/ic_menu_file"-->
+            <!--android:title="Files" />-->
+
+        <!--<item-->
+            <!--android:id="@+id/nav_reports"-->
+            <!--android:icon="@drawable/ic_reports"-->
+            <!--android:title="Reports" />-->
 
         <item
             android:id="@+id/nav_users"
             android:icon="@drawable/ic_users"
             android:title="Users" />
 
-        <item
-            android:id="@+id/nav_workers"
-            android:icon="@drawable/ic_nav_workers"
-            android:title="Workers"/>
 
     </group>
 
