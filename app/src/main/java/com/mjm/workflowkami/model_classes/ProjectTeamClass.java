@@ -35,9 +35,7 @@ public class ProjectTeamClass implements Serializable {
         return projectsprojID;
     }
 
-    public void setProjectsprojID(ProjectClass projectsprojID) {
-        this.projectsprojID = projectsprojID;
-    }
+    public void setProjectsprojID(ProjectClass projectsprojID) { this.projectsprojID = projectsprojID; }
 
     public UserClass getUserID() {
         return userID;
@@ -51,9 +49,7 @@ public class ProjectTeamClass implements Serializable {
         return workersworkersID;
     }
 
-    public void setWorkersworkersID(WorkerClass workersworkersID) {
-        this.workersworkersID = workersworkersID;
-    }
+    public void setWorkersworkersID(WorkerClass workersworkersID) { this.workersworkersID = workersworkersID; }
 
     @Override
     public String toString() {

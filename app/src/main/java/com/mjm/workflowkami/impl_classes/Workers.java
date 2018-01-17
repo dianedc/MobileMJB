@@ -57,11 +57,6 @@ public class Workers extends AppCompatActivity
         getSupportActionBar();
         loader = new SpotsDialog(Workers.this);
 
-//        listofWorkers = (ListView) findViewById(R.id.lstWorkers);
-//        serviceImpl.GetAllWorkers();
-//        listofWorkers.setAdapter(new WorkerClassAdapter(this, serviceImpl.workerList));
-
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -73,49 +68,6 @@ public class Workers extends AppCompatActivity
 
         Intent intent = getIntent();
         projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
-        if (projectIntent !=null) {
-            Toast.makeText(Workers.this, String.valueOf(projectIntent.getProjID()), Toast.LENGTH_LONG).show();
-        }
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_worker);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId())
-//                {
-//                    case R.id.navigation_task:
-//                        Intent n = new Intent(Workers.this, Tasks.class);
-//                        startActivity(n);
-//                        break;
-//
-////                    case R.id.navigation_team:
-//////                        loader.show();
-////                        Intent te = new Intent(Workers.this, Workers.class);
-////                        startActivity(te);
-////                        return true;
-//
-//                    case R.id.navigation_pr:
-//                        Intent p = new Intent(Workers.this, Forms.class);
-//                        startActivity(p);
-//                        break;
-//
-//                    case R.id.navigation_po:
-//                        Intent po =  new Intent(Workers.this, PurchaseOrder.class);
-//                        startActivity(po);
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -140,26 +92,8 @@ public class Workers extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.workers, menu);
-//        getMenuInflater().inflate(R.menu.main,menu);
         return true;
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == android.R.id.home) {
-//            finish();
-//            return true;
-//        } else if (id == R.id.action_back_dtl_item) {
-//            Intent add = new Intent(getApplicationContext(), Dashboard.class);
-//            startActivity(add);
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -237,38 +171,6 @@ public class Workers extends AppCompatActivity
         return true;
     }
 
-//    public static class PlaceholderFragment extends Fragment {
-//        /**
-//         * The fragment argument representing the section number for this
-//         * fragment.
-//         */
-//        private static final String ARG_SECTION_NUMBER = "section_number";
-//
-//        public PlaceholderFragment() {
-//        }
-//
-//        /**
-//         * Returns a new instance of this fragment for the given section
-//         * number.
-//         */
-//        public static PlaceholderFragment newInstance(int sectionNumber) {
-//            PlaceholderFragment fragment = new PlaceholderFragment();
-//            Bundle args = new Bundle();
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//            fragment.setArguments(args);
-//            return fragment;
-//        }
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.fragment_tabbed, container, false);
-////            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-////            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-//            return rootView;
-//        }
-//    }
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -279,13 +181,13 @@ public class Workers extends AppCompatActivity
         public Fragment getItem(int position) {
             switch(position) {
 
+//                case 0:
+//                    ProjTeam projTeam = new ProjTeam();
+//                    return projTeam;
                 case 0:
-                    ProjTeam projTeam = new ProjTeam();
-                    return projTeam;
-                case 1:
                     Worker worker = new Worker();
                     return worker;
-                case 2:
+                case 1:
                     Attendance attendance = new Attendance();
                     return attendance;
                 default:
@@ -296,16 +198,16 @@ public class Workers extends AppCompatActivity
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         public CharSequence getPageTitle (int position){
             switch (position){
+//                case 0:
+//                    return "Project Team";
                 case 0:
-                    return "Project Team";
-                case 1:
                     return "Time In";
-                case 2:
+                case 1:
                     return "Time Out";
 
                 default:

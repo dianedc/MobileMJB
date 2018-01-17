@@ -43,18 +43,18 @@ public class ProjectTeamAdapter extends ArrayAdapter<ProjectTeamClass> {
         TextView txtProjUserRole = (TextView) view.findViewById(R.id.workersID);
         txtProjUserRole.setText(pteams.get(position).getWorkersworkersID().getWorkersfirstname());
 
-        Button btnEdit = (Button) view.findViewById(R.id.btnEditPteam);
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProjectTeamClass projectTeamClass = pteams.get(position);
-
-                Intent i = new Intent(context, AddProjectTeam.class);
-
-                i.putExtra("pteams", projectTeamClass);
-                context.startActivity(i);
-            }
-        });
+//        Button btnEdit = (Button) view.findViewById(R.id.btnEditPteam);
+//        btnEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ProjectTeamClass projectTeamClass = pteams.get(position);
+//
+//                Intent i = new Intent(context, AddProjectTeam.class);
+//
+//                i.putExtra("pteams", projectTeamClass);
+//                context.startActivity(i);
+//            }
+//        });
 
         return view;
 

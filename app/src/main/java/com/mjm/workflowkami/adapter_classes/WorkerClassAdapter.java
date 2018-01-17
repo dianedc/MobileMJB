@@ -59,10 +59,10 @@ public class WorkerClassAdapter extends ArrayAdapter<ProjectTeamClass>{
         TextView txtworkersfirstname = (TextView) view.findViewById(R.id.workerfirstnamew);
         txtworkersfirstname.setText(workers.get(position).getWorkersworkersID().getWorkersfirstname()
                 + " " + workers.get(position).getWorkersworkersID().getWorkerslastname());
-        txtworkersfirstname.setText(workers.get(position).getWorkersworkersID().getWorkersrole());
+//        txtworkersfirstname.setText(workers.get(position).getWorkersworkersID().getWorkersrole());
 
         TextView txtworkersrole = (TextView) view.findViewById(R.id.workersrolew);
-        txtworkersrole.setText(String.valueOf(workers.get(position).getWorkersworkersID().getWorkersID()));
+        txtworkersrole.setText(String.valueOf(workers.get(position).getWorkersworkersID().getWorkersrole()));
 
 
        Button btnTimeIn = (Button) view.findViewById(R.id.btnTimeIn);

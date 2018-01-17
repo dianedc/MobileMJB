@@ -20,7 +20,7 @@ import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.UserClassAdapter;
-import com.mjm.workflowkami.impl_classes.PurchaseRequest;
+//import com.mjm.workflowkami.impl_classes.PurchaseRequest;
 import com.mjm.workflowkami.impl_classes.Users;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
@@ -182,9 +182,9 @@ public class AddPRequestHdr extends Fragment {
         preqIntent = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
         Intent projsintent = getActivity().getIntent();
         projs = (ProjectClass) projsintent.getSerializableExtra("projects");
-        if (projs != null) {
-            Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
-        }
+//        if (projs != null) {
+//            Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
+//        }
         try {
             if (preqIntent != null ) {
 
@@ -340,20 +340,20 @@ public class AddPRequestHdr extends Fragment {
                         req = u;
                     }
                 }
-                Toast.makeText(getActivity(), req.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), req.toString(), Toast.LENGTH_LONG).show();
                 for (UserClass u : serviceImpl.usersList) {
                     if (u.getUserID().equals(Integer.valueOf(preqProjMan_id.getText().toString()))) {
                         pm = u;
                     }
                 }
 
-                Toast.makeText(getActivity(), pm.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), pm.toString(), Toast.LENGTH_LONG).show();
                 for (UserClass u : serviceImpl.usersList) {
                     if (u.getUserID().equals(Integer.valueOf(preqOfficeEng_id.getText().toString()))) {
                         oe = u;
                     }
                 }
-                Toast.makeText(getActivity(), oe.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), oe.toString(), Toast.LENGTH_LONG).show();
                 for (UserClass u : serviceImpl.usersList) {
                     if (u.getUserID().equals(Integer.valueOf(preqPOfficer_id.getText().toString()))) {
                         po = u;
@@ -384,7 +384,7 @@ public class AddPRequestHdr extends Fragment {
                     getActivity().finish();
                 } else {
 
-                    Toast.makeText(getActivity(), po.toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(), po.toString(), Toast.LENGTH_LONG).show();
 //                Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
                     addPreq = new PurchaseRequestClass(projs,
                             preq_dateapproved.getText().toString().trim(),
@@ -418,7 +418,7 @@ public class AddPRequestHdr extends Fragment {
         addPreq.enqueue(new Callback<PurchaseRequestClass>() {
             @Override
             public void onResponse(Call<PurchaseRequestClass> call, Response<PurchaseRequestClass> response) {
-                Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
                     Toast.makeText(getActivity(), "Request has been successfully added!", Toast.LENGTH_SHORT).show();
 
@@ -440,7 +440,7 @@ public class AddPRequestHdr extends Fragment {
         addPreq.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
                     Toast.makeText(getActivity(), "Request has been successfully edited!", Toast.LENGTH_SHORT).show();
 

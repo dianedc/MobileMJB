@@ -74,12 +74,12 @@ public class AddPrequestDtlItem extends AppCompatActivity {
 //        Toast.makeText(AddPrequestDtlItem.this, preq.toString(), Toast.LENGTH_LONG).show();
 //        Toast.makeText(AddPrequestDtlItem.this, pi.toString(), Toast.LENGTH_LONG).show();
         if(pr != null) {
-            Toast.makeText(AddPrequestDtlItem.this, pr.toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(AddPrequestDtlItem.this, pr.toString(), Toast.LENGTH_LONG).show();
             preq_id_dtl.setText(String.valueOf(pr.getPreqID()));
         }
 
         if (pi != null) {
-            Toast.makeText(AddPrequestDtlItem.this, String.valueOf(pi.getPrequestID().getPreqID()), Toast.LENGTH_LONG).show();
+//            Toast.makeText(AddPrequestDtlItem.this, String.valueOf(pi.getPrequestID().getPreqID()), Toast.LENGTH_LONG).show();
             preq_dtl_id.setText(String.valueOf(pi.getPreqItemID()));
             preq_dtl_desc.setText(pi.getPreqdesc());
             preq_dtl_qty.setText(String.valueOf(pi.getPreqqty()));

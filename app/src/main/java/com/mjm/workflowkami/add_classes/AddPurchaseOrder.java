@@ -7,11 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.mjm.workflowkami.impl_classes.PurchaseOrder;
 import com.mjm.workflowkami.R;
+import com.mjm.workflowkami.model_classes.PurchaseOrderClass;
 
 public class AddPurchaseOrder extends AppCompatActivity{
+
+    private EditText preq_pord_id, pord_id, pord_dateapproved, preqpm, preqoe, preqpo;
+    private TextView reqid, pmid, oeid, poid, subtotal, salestax, total;
+
+    private PurchaseOrderClass pordIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,34 +27,42 @@ public class AddPurchaseOrder extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        preqpm = (EditText) findViewById(R.id.preqProjMan);
+        preqoe = (EditText) findViewById(R.id.preqOfficeEng);
+        preqpo = (EditText) findViewById(R.id.preqPOfficer);
+        pord_id = (EditText) findViewById(R.id.pord_id);
+        preq_pord_id = (EditText) findViewById(R.id.preq_pord_id);
+        pord_dateapproved = (EditText) findViewById(R.id.pord_dateapproved);
+        subtotal = (TextView) findViewById(R.id.preq_sub_total);
+        salestax = (TextView) findViewById(R.id.preq_sales_tax);
+        total = (TextView) findViewById(R.id.preq_total);
 
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
+        reqid = (TextView) findViewById(R.id.requestedby_preq_id);
+        pmid = (TextView) findViewById(R.id.preqProjMan_id);
+        oeid = (TextView) findViewById(R.id.preqOfficeEng_id);
+        poid = (TextView) findViewById(R.id.preqPOfficer_id);
+
+        Intent intent = getIntent();
+        pordIntent = (PurchaseOrderClass) intent.getSerializableExtra("pords");
+
+        if (pordIntent != null) {
+            preq_pord_id.setText(String.valueOf(pordIntent.getPrequestID().getPreqID()));
+            pord_id.setText(String.valueOf(pordIntent.getPordID()));
+            pord_dateapproved.setText(pordIntent.getPordapproveddate());
+            preqpm.setText(pordIntent.getPordprojman().getFirstname() +" "+ pordIntent.getPordprojman().getLastname());
+            preqoe.setText(pordIntent.getPordofficeengr().getFirstname()+" "+pordIntent.getPordofficeengr().getLastname());
+            preqpo.setText(pordIntent.getPordpurchofficer().getFirstname()+" "+pordIntent.getPordpurchofficer().getLastname());
+
+            subtotal.setText(String.valueOf(pordIntent.getPordsubtotal()));
+            salestax.setText(String.valueOf(pordIntent.getPordsalestax()));
+            total.setText(String.valueOf(pordIntent.getPordtotal()));
+
+            pord_dateapproved.setEnabled(false);
+            preqpm.setEnabled(false);
+            preqoe.setEnabled(false);
+            preqpo.setEnabled(false);
+        }
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,81 +85,6 @@ public class AddPurchaseOrder extends AppCompatActivity{
 
         return super.onOptionsItemSelected(item);
     }
-
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//        switch (id){
-//            case R.id.nav_dashboard:
-//                loader.show();
-//                Intent d = new Intent(Tasks.this, Dashboard.class);
-//                startActivity(d);
-//                break;
-////            case R.id.nav_tasks:
-////                Intent t = new Intent(Tasks.this, Tasks.class );
-////                startActivity(t);
-////                break;
-////            case R.id.nav_schedule:
-////                loader.show();
-////                Intent s = new Intent(Tasks.this, Schedule.class);
-////                startActivity(s);
-////                break;
-//            case R.id.nav_project:
-//                loader.show();
-//                Intent p = new Intent(Tasks.this, Projects.class);
-//                startActivity(p);
-//                break;
-////            case R.id.nav_purchaseRequest:
-////                loader.show();
-////                Intent f = new Intent(Tasks.this, Forms.class);
-////                startActivity(f);
-////                break;
-////            case R.id.nav_purchaseOrder:
-////                loader.show();
-////                Intent e = new Intent(Tasks.this, PurchaseOrder.class);
-////                startActivity(e);
-////                break;
-//            case R.id.nav_files:
-//                loader.show();
-//                Intent fi = new Intent(Tasks.this, Files.class);
-//                startActivity(fi);
-//                break;
-//            case R.id.nav_reports:
-//                loader.show();
-//                Intent r = new Intent(Tasks.this, Reports.class);
-//                startActivity(r);
-//                break;
-//            case R.id.nav_users:
-//                loader.show();
-//                Intent u = new Intent(Tasks.this, Users.class);
-//                startActivity(u);
-//                break;
-//
-//            case R.id.nav_workers:
-//                loader.show();
-//                Intent x = new Intent(Tasks.this, Workers.class);
-//                startActivity(x);
-//                break;
-//
-//            case R.id.nav_settings:
-//                loader.show();
-//                Intent s = new Intent(Tasks.this, Settings.class);
-//                startActivity(s);
-//                break;
-//
-//            case R.id.nav_logout:
-//                loader.show();
-//                Intent l = new Intent(Tasks.this, LoginActivity.class);
-//                startActivity(l);
-//                break;
-//        }
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_tasks);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
 
     public void onClickCancel(View view) {
         Intent cancel = new Intent(AddPurchaseOrder.this, PurchaseOrder.class);

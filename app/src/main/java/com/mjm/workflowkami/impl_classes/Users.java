@@ -91,14 +91,10 @@ public class Users extends LoaderAsync
         serviceImpl.GetAllUsers();
         listOfUsers.setAdapter(new UserClassAdapter(this, serviceImpl.usersList));
 
-        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/user/users";
-        new Users.UserTask().execute(uri);
-//        loader.dismiss();
+        new Users.UserTask().execute();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        getSupportLoaderManager().initLoader(R.id.object_loader_id, null, this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -205,8 +201,8 @@ public class Users extends LoaderAsync
 //                startActivity(r);
 //                break;
             case R.id.nav_users:
-//                Intent u = new Intent(Users.this, Users.class);
-//                startActivity(u);
+                Intent u = new Intent(Users.this, Users.class);
+                startActivity(u);
                 break;
 
 //            case R.id.nav_workers:
@@ -233,21 +229,4 @@ public class Users extends LoaderAsync
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-//    private LoaderManager.LoaderCallbacks<List<UserClass>> loaderCallbacks = new LoaderManager.LoaderCallbacks<List<UserClass>>() {
-//        @Override
-//        public Loader<List<UserClass>> onCreateLoader(int id, Bundle args) {
-//            return new ObjectLoader(getApplicationContext());
-//        }
-//
-//        @Override
-//        public void onLoadFinished(Loader<List<UserClass>> loader, List<UserClass> data) {
-//            listOfUsers.setAdapter(new UserClassAdapter(getApplicationContext(), data));
-//        }
-//
-//        @Override
-//        public void onLoaderReset(Loader<List<UserClass>> loader) {
-//            listOfUsers.setAdapter(new UserClassAdapter(getApplicationContext(), Collections.<UserClass>emptyList()));
-//        }
-//    };
 }

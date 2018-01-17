@@ -13,36 +13,8 @@ public class WorkerClass implements Serializable{
     private String workerslastname;
     private String workersrole;
 
-    public Integer getWorkersID() {
-        return workersID;
-    }
+    public WorkerClass() {
 
-    public void setWorkersID(Integer workersID) {
-        this.workersID = workersID;
-    }
-
-    public String getWorkersfirstname() {
-        return workersfirstname;
-    }
-
-    public void setWorkersfirstname(String workersfirstname) {
-        this.workersfirstname = workersfirstname;
-    }
-
-    public String getWorkerslastname() {
-        return workerslastname;
-    }
-
-    public void setWorkerslastname(String workerslastname) {
-        this.workerslastname = workerslastname;
-    }
-
-    public String getWorkersrole() {
-        return workersrole;
-    }
-
-    public void setWorkersrole(String workersrole) {
-        this.workersrole = workersrole;
     }
 
     public WorkerClass(Integer workersID, String workersfirstname, String workerslastname, String workersrole) {
@@ -58,8 +30,32 @@ public class WorkerClass implements Serializable{
         this.workersrole = workersrole;
     }
 
-    public WorkerClass() {
+    public Integer getWorkersID() {
+        return workersID;
+    }
 
+    public void setWorkersID(Integer workersID) {
+        this.workersID = workersID;
+    }
+
+    public String getWorkersfirstname() {
+        return workersfirstname;
+    }
+
+    public void setWorkersfirstname(String workersfirstname) { this.workersfirstname = workersfirstname; }
+
+    public String getWorkerslastname() {
+        return workerslastname;
+    }
+
+    public void setWorkerslastname(String workerslastname) { this.workerslastname = workerslastname; }
+
+    public String getWorkersrole() {
+        return workersrole;
+    }
+
+    public void setWorkersrole(String workersrole) {
+        this.workersrole = workersrole;
     }
 
     @Override

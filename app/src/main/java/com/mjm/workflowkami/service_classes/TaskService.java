@@ -22,6 +22,16 @@ public interface TaskService {
     @GET("project/tasks")
     Call<List<TaskClass>> getAllTasks();
 
+    @Headers("Content-Type: application/json")
+    @GET("project/task/tasks/active")
+    Call<List<TaskClass>> getAllActive();
+
+    @GET("project/task/tasks/pending")
+    Call<List<TaskClass>> getAllPending();
+
+    @GET("project/task/tasks/completed")
+    Call<List<TaskClass>> getAllCompleted();
+
     @GET("project/task/{task_id}")
     Call<TaskClass> getTaskById(@Path("task_id") int task_id);
 

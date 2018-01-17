@@ -91,72 +91,8 @@ public class AttendanceNav extends LoaderAsync
         loader = new SpotsDialog(AttendanceNav.this);
         listOfProjects = (ListView) findViewById(R.id.lstAttendanceNav);
 
-        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/projects";
-        new ProjectTask().execute(uri);
-//        pl = new ArrayList<ProjectClass>();
-//        Call<List<ProjectClass>> getProjects = projectService.getAllProjects();
-//
-//        getProjects.enqueue(new Callback<List<ProjectClass>>() {
-//            @Override
-//            public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
-//                if (response.isSuccessful()) {
-//                    List<ProjectClass> projectClassList = response.body();
-//                    Toast.makeText(Projects.this, response.toString(), Toast.LENGTH_LONG).show();
-//
-//                    try {
-//                        for (int i = 0; i < projectClassList.size(); i++) {
-//                            pl.add(new ProjectClass(projectClassList.get(i).getProjID(),
-//                                    projectClassList.get(i).getProjname(),
-//                                    projectClassList.get(i).getProjclient(),
-//                                    projectClassList.get(i).getProjdesc(),
-//                                    projectClassList.get(i).getProjtype(),
-//                                    projectClassList.get(i).getProjstartdate(),
-//                                    projectClassList.get(i).getProjenddate(),
-//                                    projectClassList.get(i).getProjdatecompleted(),
-//                                    projectClassList.get(i).getProjstatus(),
-//                                    projectClassList.get(i).getProjmanager(),
-//                                    projectClassList.get(i).getProjcontractbudget(),
-//                                    projectClassList.get(i).getProjtargetbudget(),
-//                                    projectClassList.get(i).getProjprogress(),
-//                                    projectClassList.get(i).getProjduration()));
-//                        }
-//                    } catch (final Exception e) { e.printStackTrace(); }
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<List<ProjectClass>> call, Throwable t) { t.printStackTrace(); }
-//        });
-
-//        serviceImpl.GetAllProjects();
-//        listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, serviceImpl.projectsList));
-//        Toast.makeText(Projects.this, serviceImpl.projectsList.toString(), Toast.LENGTH_LONG).show();
-
-//        layout = (PullRefreshLayout) findViewById(R.id.refreshProject);
-//        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                layout.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-////                        adapter.cle   ar();
-////                        new ProjectTask().execute();
-////                        adapter.notifyDataSetChanged();
-//                        layout.setRefreshing(false);
-//                    }
-//                }, 3000);
-//            }
-//        });
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                    Intent add = new Intent(Projects.this, AddProject.class);
-//                    startActivity(add);
-//            }
-//        });
-//        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
+        //final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/projects";
+        new ProjectTask().execute();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_projects);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -209,15 +145,15 @@ public class AttendanceNav extends LoaderAsync
         int id = item.getItemId();
         switch (id){
             case R.id.nav_dashboard:
-//                loader.show();
                 Intent d = new Intent(AttendanceNav.this, Dashboard.class);
                 startActivity(d);
                 break;
             case R.id.nav_project:
+                Intent xp = new Intent(AttendanceNav.this, Projects.class);
+                startActivity(xp);
                 break;
 
             case R.id.nav_team:
-//                loader.show();
                 Intent x = new Intent(AttendanceNav.this, AttendanceNav.class);
                 startActivity(x);
                 break;
@@ -242,7 +178,6 @@ public class AttendanceNav extends LoaderAsync
 //                startActivity(r);
 //                break;
             case R.id.nav_users:
-//                loader.show();
                 Intent u = new Intent(AttendanceNav.this, Users.class);
                 startActivity(u);
                 break;
@@ -260,7 +195,6 @@ public class AttendanceNav extends LoaderAsync
 //                break;
 
             case R.id.nav_logout:
-//                loader.show();
                 Intent l = new Intent(AttendanceNav.this, LoginActivity.class);
                 startActivity(l);
                 break;
@@ -275,6 +209,5 @@ public class AttendanceNav extends LoaderAsync
     public void setSupportActionBar(Toolbar supportActionBar) {
         this.supportActionBar = supportActionBar;
     }
-
 
 }

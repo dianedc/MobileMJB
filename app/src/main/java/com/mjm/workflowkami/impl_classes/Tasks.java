@@ -37,12 +37,9 @@ import dmax.dialog.SpotsDialog;
 public class Tasks extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
-//    private String TAG = Tasks.class.getSimpleName();
     private ListView listofTasks;
     private ServiceImpl serviceImpl = new ServiceImpl();
     private ProjectClass projectIntent = new ProjectClass();
-//    List<TaskClass> tasksList = new ArrayList<TaskClass>();
-//    private TaskService taskService = API.getInstance().getTaskService();
     private SpotsDialog loader;
     private PullRefreshLayout layout;
 
@@ -97,11 +94,6 @@ public class Tasks extends LoaderAsync
         projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
 
         listofTasks = (ListView) findViewById(R.id.lstTasks);
-//        if (projectIntent != null) {
-//            serviceImpl.GetTaskByProjId(projectIntent.getProjID());
-//        }
-//        listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
-
         if (projectIntent != null) {
             final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/" + projectIntent.getProjID() + "/task";
             new ProjectTask().execute(uri);
@@ -118,17 +110,6 @@ public class Tasks extends LoaderAsync
                 }, 3000);
             }
         });
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            Intent add = new Intent(Tasks.this, AddTask.class);
-//            startActivity(add);
-//
-//            }
-//        });
-
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_tasks);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -209,7 +190,7 @@ public class Tasks extends LoaderAsync
         int id = item.getItemId();
         switch (id){
             case R.id.nav_dashboard:
-                loader.show();
+//                loader.show();
                 Intent d = new Intent(Tasks.this, Dashboard.class);
                 startActivity(d);
                 break;
@@ -223,7 +204,7 @@ public class Tasks extends LoaderAsync
 //                startActivity(s);
 //                break;
             case R.id.nav_project:
-                loader.show();
+//                loader.show();
                 Intent p = new Intent(Tasks.this, Projects.class);
                 startActivity(p);
                 break;
@@ -254,7 +235,7 @@ public class Tasks extends LoaderAsync
 //                startActivity(r);
 //                break;
             case R.id.nav_users:
-                loader.show();
+//                loader.show();
                 Intent u = new Intent(Tasks.this, Users.class);
                 startActivity(u);
                 break;
@@ -272,7 +253,7 @@ public class Tasks extends LoaderAsync
 //                break;
 
             case R.id.nav_logout:
-                loader.show();
+//                loader.show();
                 Intent l = new Intent(Tasks.this, LoginActivity.class);
                 startActivity(l);
                 break;
@@ -282,23 +263,4 @@ public class Tasks extends LoaderAsync
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-//    public void ListViewImpl() {
-
-//        listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
-//        listofTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                TaskClass taskClass = (TaskClass) serviceImpl.tasksList.get(position);
-//
-//                Intent i = new Intent(getApplicationContext(), AddTask.class);
-//                i.putExtra("tasks", taskClass);
-////                Toast.makeText(getApplicationContext(), taskClass.getTaskname(), Toast.LENGTH_LONG).show();
-//                startActivity(i);
-//
-//            }
-//        });
-//    }
-
 }

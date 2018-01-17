@@ -101,25 +101,19 @@ public class PurchaseRequestClass implements Serializable{
         return preqapproveddate;
     }
 
-    public void setPreqapproveddate(String preqapproveddate) {
-        this.preqapproveddate = preqapproveddate;
-    }
+    public void setPreqapproveddate(String preqapproveddate) { this.preqapproveddate = preqapproveddate; }
 
     public String getPreqrequesteddate() {
         return preqrequesteddate;
     }
 
-    public void setPreqrequesteddate(String preqrequesteddate) {
-        this.preqrequesteddate = preqrequesteddate;
-    }
+    public void setPreqrequesteddate(String preqrequesteddate) { this.preqrequesteddate = preqrequesteddate; }
 
     public UserClass getPreqrequestedby() {
         return preqrequestedby;
     }
 
-    public void setPreqrequestedby(UserClass preqrequestedby) {
-        this.preqrequestedby = preqrequestedby;
-    }
+    public void setPreqrequestedby(UserClass preqrequestedby) { this.preqrequestedby = preqrequestedby; }
 
     public Boolean getPreqstatus() {
         return preqstatus;
@@ -157,9 +151,7 @@ public class PurchaseRequestClass implements Serializable{
         return preqpurchofficer;
     }
 
-    public void setPreqpurchofficer(UserClass preqpurchofficer) {
-        this.preqpurchofficer = preqpurchofficer;
-    }
+    public void setPreqpurchofficer(UserClass preqpurchofficer) { this.preqpurchofficer = preqpurchofficer; }
 
     public String getPreqpodate() {
         return preqpodate;
@@ -181,9 +173,7 @@ public class PurchaseRequestClass implements Serializable{
         return preqofficeengr;
     }
 
-    public void setPreqofficeengr(UserClass preqofficeengr) {
-        this.preqofficeengr = preqofficeengr;
-    }
+    public void setPreqofficeengr(UserClass preqofficeengr) { this.preqofficeengr = preqofficeengr; }
 
     public String getPreqoedate() {
         return preqoedate;

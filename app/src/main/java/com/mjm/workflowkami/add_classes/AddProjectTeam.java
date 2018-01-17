@@ -64,7 +64,6 @@ public class AddProjectTeam extends AppCompatActivity {
         projteamID = (EditText) findViewById(R.id.projTeam_id);
         projectID = (EditText) findViewById(R.id.project_id);
         userID = (EditText) findViewById(R.id.user_id);
-//        workersID = (EditText) findViewById(R.id.workersID);
 
         saveTeam = (Button) findViewById(R.id.btnSaveProjectTeam);
 
@@ -74,29 +73,10 @@ public class AddProjectTeam extends AppCompatActivity {
         Intent intent = getIntent();
         teamIntent = (ProjectTeamClass) intent.getSerializableExtra("teams");
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
-
         if (teamIntent != null) {
             projteamID.setText(String.valueOf(teamIntent.getProjteamID()));
             projectID.setText(teamIntent.getProjectsprojID().getProjID());
             userID.setText(teamIntent.getUserID().getUserID());
-//            workersID.setText(teamIntent.getWorkersID().getWorkersfirstname());
 
         }
 
@@ -122,29 +102,6 @@ public class AddProjectTeam extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
-
-//        saveTeam.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (!projteamID.getText().toString().matches("")) {
-//                    //update
-//                    team = new ProjectTeamClass(Integer.valueOf(projteamID.getText().toString()),
-//                            projectID.getText().toString(),
-//                            userID.getText().toString(),
-//                            projuserrole.getText().toString().trim());
-//                    Toast.makeText(AddProjectTeam.this, team.toString(), Toast.LENGTH_SHORT).show();
-//                    UpdateTeam(teamIntent.getProjteamID(), team);
-//                } else {
-//                    //add
-//                    team = new ProjectTeamClass(projteamID.getText().toString(),
-//                            projectID.getText().toString(),
-//                            userID.getText().toString(),
-//                            projuserrole.getText().toString().trim());
-//                    AddTeam(team);
-//                }
-//            }
-//        });
     }
 
     @Override

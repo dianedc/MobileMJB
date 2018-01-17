@@ -3,6 +3,7 @@ package com.mjm.workflowkami.add_classes;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,7 +58,7 @@ import retrofit2.Response;
 
 public class AddTask extends AppCompatActivity implements OnClickListener {
 
-    private EditText taskID, taskprojID, taskName, taskDescription, fromDate, toDate, taskHeader, dateComp, taskDuration;
+    private EditText taskID, taskprojID, taskName, taskDescription, fromDate, toDate, taskHeader, dateComp, taskDuration, taskBudget;
     private Spinner taskStatus, taskPhase;
     private Button saveTask;
     private DatePickerDialog fromDatePickerDialog, toDatePickerDialog, compDatePickerDialog;
@@ -93,40 +94,16 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
         taskDuration = (EditText) findViewById(R.id.task_duration);
         saveTask = (Button) findViewById(R.id.btnSaveTask);
         dateFormatter = new SimpleDateFormat("yyyy-dd-MM", Locale.US);
+        taskBudget = (EditText) findViewById(R.id.task_budget);
 
         taskDuration.setEnabled(false);
         taskStatus.setEnabled(false);
         dateComp.setEnabled(false);
 
-//        taskOwner = (Button) findViewById(R.id.task_owner);
-//        taskOwner.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                usersDialog1.showSpinerDialog();
-//            }
-//        });
-//        taskManager = (Button) findViewById(R.id.task_manager);
-//        taskManager.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                usersDialog2.showSpinerDialog();
-//            }
-//        });
-//        viewOwner = (TextView) findViewById(R.id.viewOwner);
-//        viewManager = (TextView) findViewById(R.id.viewManager);
-//        taskProgress = (EditText) findViewById(R.id.task_duration);
-
-//        userClass1 = new UserClass();
-//        userClass2 = new UserClass();
-
-
         Intent tIntent = getIntent();
         taskIntent = (TaskClass) tIntent.getSerializableExtra("tasks");
         Intent pIntent = getIntent();
         projIntent = (ProjectClass) pIntent.getSerializableExtra("projects");
-
-//        Toast.makeText(AddTask.this, String.valueOf(taskIntent.getProjectID()), Toast.LENGTH_LONG).show();
-
 
         if (taskIntent != null) {
 
@@ -141,6 +118,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                     break;
                 }
             }
+            taskBudget.setText(String.valueOf(taskIntent.getTaskbudget()));
             taskHeader.setText(taskIntent.getTaskheader());
             fromDate.setText(taskIntent.getTaskstartdate());
             toDate.setText(taskIntent.getTaskenddate());
@@ -152,33 +130,8 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                 }
             }
             taskDuration.setText(taskIntent.getTaskduration());
-//            viewOwner.setText(taskIntent.getTaskowner().getLastname());
-//            viewManager.setText(taskIntent.getTaskmanager().getLastname());
-//            taskProgress.setText(String.valueOf(taskIntent.getTaskprogress()));
         }
-
-//        usersDialog1 = new SpinnerDialog(AddTask.this, serviceImpl.userIDList, "Select User");
-//        usersDialog1.bindOnSpinerListener(new OnSpinerItemClick() {
-//            @Override
-//            public void onClick(String s, int i) {
-//                selectedOwner = s;
-//                viewOwner.setText(selectedOwner +" "+
-//                        serviceImpl.usersList.get(i).getLastname() + ", " +
-//                        serviceImpl.usersList.get(i).getFirstname());
-//            }
-//        });
-//        usersDialog2 = new SpinnerDialog(AddTask.this, serviceImpl.userIDList, "Select User");
-//        usersDialog2.bindOnSpinerListener(new OnSpinerItemClick() {
-//            @Override
-//            public void onClick(String s, int i) {
-//                selectedManager = s;
-//                viewManager.setText(selectedManager +" "+
-//                        serviceImpl.usersList.get(i).getLastname() + ", " +
-//                        serviceImpl.usersList.get(i).getFirstname());
-//            }
-//        });
-
-//        userClass1 = serviceImpl.FetchUserById(Integer.valueOf(selectedOwner));
+        final BigDecimal budget = new BigDecimal(taskBudget.getText().toString());
 
         saveTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,6 +147,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                             taskDescription.getText().toString().trim(),
                             taskPhase.getSelectedItem().toString().trim(),
                             taskHeader.getText().toString().trim(),
+                            budget,
                             fromDate.getText().toString().trim(),
                             toDate.getText().toString().trim(),
                             dateComp.getText().toString().trim(),
@@ -208,6 +162,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                             taskDescription.getText().toString().trim(),
                             taskPhase.getSelectedItem().toString().trim(),
                             taskHeader.getText().toString().trim(),
+                            budget,
                             fromDate.getText().toString().trim(),
                             toDate.getText().toString().trim(),
                             dateComp.getText().toString().trim(),
@@ -217,16 +172,6 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                 }
             }
         });
-
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -292,16 +237,6 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_task, menu);
@@ -320,55 +255,6 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
 
         return super.onOptionsItemSelected(item);
     }
-
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//        switch (id){
-//            case R.id.nav_dashboard:
-//                Intent d = new Intent(AddTask.this, Dashboard.class);
-//                startActivity(d);
-//                break;
-////            case R.id.nav_tasks:
-////                Intent t = new Intent(AddTask.this, Tasks.class );
-////                startActivity(t);
-////                break;
-////            case R.id.nav_schedule:
-////                Intent s = new Intent(AddTask.this, Schedule.class);
-////                startActivity(s);
-////                break;
-//            case R.id.nav_project:
-//                Intent p = new Intent(AddTask.this, Projects.class);
-//                startActivity(p);
-//                break;
-//            case R.id.nav_purchaseRequest:
-//                Intent f = new Intent(AddTask.this, Forms.class);
-//                startActivity(f);
-//                break;
-//            case R.id.nav_purchaseOrder:
-//                Intent e = new Intent(AddTask.this, PurchaseOrder.class);
-//                startActivity(e);
-//                break;
-//            case R.id.nav_files:
-//                Intent fi = new Intent(AddTask.this, Files.class);
-//                startActivity(fi);
-//                break;
-//            case R.id.nav_reports:
-//                Intent r = new Intent(AddTask.this, Reports.class);
-//                startActivity(r);
-//                break;
-//            case R.id.nav_users:
-//                Intent u = new Intent(AddTask.this, Users.class);
-//                startActivity(u);
-//                break;
-//        }
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
 
     public void onClickCancel(View v) {
         Intent cancel = new Intent(AddTask.this, Tasks.class);

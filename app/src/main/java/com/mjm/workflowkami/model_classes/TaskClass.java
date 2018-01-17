@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.model_classes;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by Jasper on 13 Sep 2017.
@@ -14,24 +15,48 @@ public class TaskClass implements Serializable {
     private String taskdesc;
     private String taskphase;
     private String taskheader;
+    private BigDecimal taskbudget;
+
+    public BigDecimal getTaskbudget() {
+        return taskbudget;
+    }
+
+    public void setTaskbudget(BigDecimal taskbudget) {
+        this.taskbudget = taskbudget;
+    }
+
     private String taskstartdate;
     private String taskenddate;
     private String taskdatecompleted;
     private String taskstatus;
     private String taskduration;
 
+    private String Count;
+
     public TaskClass() {
 
     }
 
+    public TaskClass(String Count) {
+        this.Count = Count;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskClass{" +
+                "Count='" + Count +
+                '}';
+    }
+
     //Edit
-    public TaskClass(Integer taskID, ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
+    public TaskClass(Integer taskID, ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, BigDecimal taskbudget, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
         this.taskID = taskID;
         this.projectID = projectID;
         this.taskname = taskname;
         this.taskdesc = taskdesc;
         this.taskphase = taskphase;
         this.taskheader = taskheader;
+        this.taskbudget = taskbudget;
         this.taskstartdate = taskstartdate;
         this.taskenddate = taskenddate;
         this.taskdatecompleted = taskdatecompleted;
@@ -40,13 +65,14 @@ public class TaskClass implements Serializable {
     }
 
     //Add
-    public TaskClass(ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
+    public TaskClass(ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, BigDecimal taskbudget, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
         this.taskID = taskID;
         this.projectID = projectID;
         this.taskname = taskname;
         this.taskdesc = taskdesc;
         this.taskphase = taskphase;
         this.taskheader = taskheader;
+        this.taskbudget = taskbudget;
         this.taskstartdate = taskstartdate;
         this.taskenddate = taskenddate;
         this.taskdatecompleted = taskdatecompleted;
@@ -122,9 +148,7 @@ public class TaskClass implements Serializable {
         return taskdatecompleted;
     }
 
-    public void setTaskdatecompleted(String taskdatecompleted) {
-        this.taskdatecompleted = taskdatecompleted;
-    }
+    public void setTaskdatecompleted(String taskdatecompleted) { this.taskdatecompleted = taskdatecompleted; }
 
     public String getTaskstatus() {
         return taskstatus;
@@ -140,5 +164,13 @@ public class TaskClass implements Serializable {
 
     public void setTaskduration(String taskduration) {
         this.taskduration = taskduration;
+    }
+
+    public String getCount() {
+        return Count;
+    }
+
+    public void setCount(String count) {
+        Count = count;
     }
 }

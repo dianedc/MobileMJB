@@ -87,8 +87,8 @@ public class Attendance extends ListFragment {
         proj = (ProjectClass) pIntent.getSerializableExtra("projects");
         Intent intent = getActivity().getIntent();
         work = (WorkerClass) intent.getSerializableExtra("workers");
-        final String uri = "http://192.168.2.123:8083/rest/project/"+proj.getProjID()+"/team";
-        new WorkerTask().execute(uri);
+//        final String uri = "http://192.168.2.123:8083/rest/project/"+proj.getProjID()+"/team";
+        new WorkerTask().execute();
 //        Toast.makeText(getActivity(), proj.toString(), Toast.LENGTH_LONG).show();
 //        serviceImpl.GetAllWorkers();
 

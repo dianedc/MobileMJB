@@ -1,11 +1,15 @@
 package com.mjm.workflowkami;
 
 
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.mjm.workflowkami.impl_classes.PurchaseOrder;
 import com.mjm.workflowkami.impl_classes.Workers;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
+import com.mjm.workflowkami.model_classes.PurchaseOrderClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
@@ -13,6 +17,7 @@ import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.model_classes.WorkerClass;
 import com.mjm.workflowkami.service_classes.ProjectService;
 import com.mjm.workflowkami.service_classes.ProjectTeamService;
+import com.mjm.workflowkami.service_classes.PurchaseOrderService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import com.mjm.workflowkami.service_classes.TaskService;
@@ -43,11 +48,15 @@ public class ServiceImpl {
     private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
     private WorkerService workerService = API.getInstance().getWorkerService();
 
+    private List<PurchaseOrderClass> pordList = new ArrayList<PurchaseOrderClass>();
+    private PurchaseOrderService purchaseOrderService = API.getInstance().getPurchaseOrderService();
+
     public List<UserClass> usersList;
     public ArrayList<String> userIDList = new ArrayList<String>();
     public List<TaskClass> tasksList = new ArrayList<TaskClass>();
     public List<ProjectClass> projectsList = new ArrayList<ProjectClass>();
-    public UserClass userClass = new UserClass();;
+    public UserClass userClass = new UserClass();
+    ;
     public List<PurchaseRequestClass> prList = new ArrayList<PurchaseRequestClass>();
     public List<PurchaseRequestItemClass> pItemList = new ArrayList<PurchaseRequestItemClass>();
     public List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
@@ -73,9 +82,12 @@ public class ServiceImpl {
                                     userClassList.get(i).getPassword(),
                                     userClassList.get(i).getUserstatus()));
                         }
-                    } catch (final Exception e) { e.printStackTrace(); }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
             @Override
             public void onFailure(Call<List<UserClass>> call, Throwable t) {
                 t.printStackTrace();
@@ -91,7 +103,7 @@ public class ServiceImpl {
         getUserID.enqueue(new Callback<UserClass>() {
             @Override
             public void onResponse(Call<UserClass> call, Response<UserClass> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     UserClass uc = response.body();
                     userClass = new UserClass(uc.getUserID(),
                             uc.getFirstname(),
@@ -102,8 +114,11 @@ public class ServiceImpl {
                             uc.getUserstatus());
                 }
             }
+
             @Override
-            public void onFailure(Call<UserClass> call, Throwable t) { t.printStackTrace(); }
+            public void onFailure(Call<UserClass> call, Throwable t) {
+                t.printStackTrace();
+            }
         });
         return userClass;
     }
@@ -126,9 +141,12 @@ public class ServiceImpl {
 //                                    " " + userClassList.get(i).getLastname() +
 //                                    ", " + userClassList.get(i).getFirstname()
                         }
-                    } catch (final Exception e) { e.printStackTrace(); }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
             @Override
             public void onFailure(Call<List<UserClass>> call, Throwable t) {
                 t.printStackTrace();
@@ -160,17 +178,23 @@ public class ServiceImpl {
                                     taskClassList.get(i).getTaskdesc(),
                                     taskClassList.get(i).getTaskphase(),
                                     taskClassList.get(i).getTaskheader(),
+                                    taskClassList.get(i).getTaskbudget(),
                                     taskClassList.get(i).getTaskstartdate(),
                                     taskClassList.get(i).getTaskenddate(),
                                     taskClassList.get(i).getTaskdatecompleted(),
                                     taskClassList.get(i).getTaskstatus(),
                                     taskClassList.get(i).getTaskduration()));
                         }
-                    } catch (final Exception e) { e.printStackTrace(); }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
             @Override
-            public void onFailure(Call<List<TaskClass>> call, Throwable t) { t.printStackTrace(); }
+            public void onFailure(Call<List<TaskClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
         });
 
         return tasksList;
@@ -204,11 +228,16 @@ public class ServiceImpl {
                                     projectClassList.get(i).getProjprogress(),
                                     projectClassList.get(i).getProjduration()));
                         }
-                    } catch (final Exception e) { e.printStackTrace(); }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
             @Override
-            public void onFailure(Call<List<ProjectClass>> call, Throwable t) { t.printStackTrace(); }
+            public void onFailure(Call<List<ProjectClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
         });
 
         return projectsList;
@@ -246,7 +275,9 @@ public class ServiceImpl {
                                 preq.get(i).getPreqsalestax(),
                                 preq.get(i).getPreqtotal()));
                     }
-                } catch (final Exception e) { e.printStackTrace(); }
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -279,7 +310,9 @@ public class ServiceImpl {
                                 iList.get(i).getPrequnitprice(),
                                 iList.get(i).getPreqlinetotal()));
                     }
-                } catch (final Exception e) { e.printStackTrace(); }
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -315,8 +348,11 @@ public class ServiceImpl {
 //                    } catch (final Exception e) { e.printStackTrace(); }
                 }
             }
+
             @Override
-            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) { t.printStackTrace(); }
+            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
         });
 
         return pTeamList;
@@ -342,11 +378,16 @@ public class ServiceImpl {
                                     workerClassList.get(i).getWorkerslastname(),
                                     workerClassList.get(i).getWorkersrole()));
                         }
-                    } catch (final Exception e) { e.printStackTrace(); }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
             @Override
-            public void onFailure(Call<List<WorkerClass>> call, Throwable t) { t.printStackTrace(); }
+            public void onFailure(Call<List<WorkerClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
         });
 
         return workerList;
@@ -370,14 +411,17 @@ public class ServiceImpl {
 //                    } catch (final Exception e) { e.printStackTrace(); }
                 }
             }
+
             @Override
-            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) { t.printStackTrace(); }
+            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
         });
 
         return pTeamList;
     }
 
-    public List<ProjectTeamClass> GetTeamById (int projID) {
+    public List<ProjectTeamClass> GetTeamById(int projID) {
         pTeamList = new ArrayList<ProjectTeamClass>();
         Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getTeamById(projID);
 
@@ -389,17 +433,55 @@ public class ServiceImpl {
                     Log.d(TAG, response.toString());
 
                     try {
-                    for (int i = 0; i < projectTeamClassList.size(); i++) {
-                        pTeamList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
-                                projectTeamClassList.get(i).getProjectsprojID(),
-                                projectTeamClassList.get(i).getUserID(),
-                                projectTeamClassList.get(i).getWorkersworkersID()));
+                        for (int i = 0; i < projectTeamClassList.size(); i++) {
+                            pTeamList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
+                                    projectTeamClassList.get(i).getProjectsprojID(),
+                                    projectTeamClassList.get(i).getUserID(),
+                                    projectTeamClassList.get(i).getWorkersworkersID()));
+                        }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (final Exception e) { e.printStackTrace(); }
                 }
             }
+
             @Override
-            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) { t.printStackTrace(); }
+            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        return pTeamList;
+    }
+
+    public List<ProjectTeamClass> GetAllProjTeams() {
+        pTeamList = new ArrayList<ProjectTeamClass>();
+        Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getAllProjTeams();
+
+        getProjTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
+            @Override
+            public void onResponse(Call<List<ProjectTeamClass>> call, Response<List<ProjectTeamClass>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectTeamClass> projectTeamClassList = response.body();
+                    Log.d(TAG, response.toString());
+
+                    try {
+                        for (int i = 0; i < projectTeamClassList.size(); i++) {
+                            pTeamList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
+                                    projectTeamClassList.get(i).getProjectsprojID(),
+                                    projectTeamClassList.get(i).getUserID(),
+                                    projectTeamClassList.get(i).getWorkersworkersID()));
+                        }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
         });
 
         return pTeamList;

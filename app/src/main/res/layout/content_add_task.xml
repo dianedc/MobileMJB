@@ -176,6 +176,29 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/task_budget"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+                android:drawablePadding="10dp"
+                android:ems="14"
+                android:hint="Budget"
+                android:singleLine="true"
+                android:textSize="6pt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

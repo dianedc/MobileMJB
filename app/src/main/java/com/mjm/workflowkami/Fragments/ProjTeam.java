@@ -1,6 +1,8 @@
 package com.mjm.workflowkami.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -12,8 +14,10 @@ import android.widget.ListView;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
+import com.mjm.workflowkami.adapter_classes.ProjTeamClassAdapter;
 import com.mjm.workflowkami.adapter_classes.ProjectTeamAdapter;
 import com.mjm.workflowkami.impl_classes.Tasks;
+import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.service_classes.ProjectTeamService;
 
@@ -30,33 +34,54 @@ public class ProjTeam extends ListFragment {
     private ListView listofPteams;
     private ServiceImpl serviceImpl = new ServiceImpl();
     private ProjectTeamClass prjteam = new ProjectTeamClass();
-    List<ProjectTeamClass> projList = new ArrayList<ProjectTeamClass>();
+    private List<ProjectTeamClass> projList = new ArrayList<ProjectTeamClass>();
     private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
+    private ProgressDialog progressDialog;
+    private ProjectClass proj = new ProjectClass();
+
+    private class ProjTeamTask extends AsyncTask<String, Void, List<ProjectTeamClass>> {
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Loading. Please wait... ");
+            progressDialog.show();
+        }
+
+        @Override
+        protected List<ProjectTeamClass> doInBackground(String... strings) {
+            do {
+                serviceImpl.GetAllProjTeams();
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.pTeamList == null);
+            return serviceImpl.pTeamList;
+        }
+        @Override
+        protected void onPostExecute(List<ProjectTeamClass> workerClassResponseEntity) {
+            progressDialog.dismiss();
+            ProjTeamClassAdapter adapter = new ProjTeamClassAdapter(getActivity(), workerClassResponseEntity);
+            setListAdapter(adapter);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_projteam, container, false);
 
-
-
-        Intent intent = getActivity().getIntent();
-        prjteam = (ProjectTeamClass) intent.getSerializableExtra("projTeam");
-//        int workersID = 0;
-//        if (work != null) {
-//            workersID = work.getWorkersID();
-//        }
-
-        serviceImpl.GetAllTeams();
-//        serviceImpl.GetAllWorkers(workersID);
-
+        new ProjTeamTask().execute();
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ProjectTeamAdapter adapter = new ProjectTeamAdapter(getActivity(), serviceImpl.pTeamList);
-        setListAdapter(adapter);
+//        ProjectTeamAdapter adapter = new ProjectTeamAdapter(getActivity(), serviceImpl.pTeamList);
+//        setListAdapter(adapter);
         super.onActivityCreated(savedInstanceState);
     }
 

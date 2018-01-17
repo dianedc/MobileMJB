@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.impl_classes;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,10 +19,13 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.PurchaseOrderAdapter;
 import com.mjm.workflowkami.R;
+import com.mjm.workflowkami.adapter_classes.PurchaseRequestAdapter;
 import com.mjm.workflowkami.add_classes.AddPurchaseOrder;
+import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.PurchaseOrderClass;
 import com.mjm.workflowkami.service_classes.PurchaseOrderService;
 
@@ -33,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PurchaseOrder extends AppCompatActivity
+public class PurchaseOrder extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private String TAG = Tasks.class.getSimpleName();
@@ -42,6 +46,78 @@ public class PurchaseOrder extends AppCompatActivity
     List<PurchaseOrderClass> pordList = new ArrayList<PurchaseOrderClass>();
     private PurchaseOrderService purchaseOrderService = API.getInstance().getPurchaseOrderService();
     private SpotsDialog loader;
+    private ProjectClass projectIntent = new ProjectClass();
+
+    private class ProjectTask extends AsyncTask<String, Void, List<PurchaseOrderClass>> {
+
+        @Override
+        protected void onPreExecute() {
+            showLoadingDialog();
+        }
+
+        @Override
+        protected List<PurchaseOrderClass> doInBackground(String... strings) {
+//            Intent intent = getIntent();
+//            projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+            do {
+//                if (projectIntent != null) {
+                Call<List<PurchaseOrderClass>> getPords = purchaseOrderService.getAllPord();
+
+                getPords.enqueue(new Callback<List<PurchaseOrderClass>>() {
+                    @Override
+                    public void onResponse(Call<List<PurchaseOrderClass>> call, Response<List<PurchaseOrderClass>> response) {
+                        if (response.isSuccessful( )) {
+                            List<PurchaseOrderClass> po = response.body();
+//                        preqList = response.body();
+                            for (int i = 0; i < po.size(); i++) {
+                                //  preqList.add(PurchaseRequestClass.get(i).getPreqID()));
+                                pordList.add(new PurchaseOrderClass(po.get(i).getPordID(),
+                                        po.get(i).getPrequestID(),
+                                        po.get(i).getPordapproveddate(),
+                                        po.get(i).getPordrequesteddate(),
+                                        po.get(i).getPordrequestedby(),
+                                        po.get(i).getPordprojman(),
+                                        po.get(i).getPordpmdate(),
+                                        po.get(i).getPordpurchofficer(),
+                                        po.get(i).getPordpodate(),
+                                        po.get(i).getPordofficeengr(),
+                                        po.get(i).getPordoedate(),
+                                        po.get(i).getPordsubtotal(),
+                                        po.get(i).getPordsalestax(),
+                                        po.get(i).getPordtotal()));
+                            }
+                        }
+//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PurchaseOrder.this);
+//                        alertDialogBuilder.setMessage(pordList.toString());
+//                        alertDialogBuilder.setCancelable(true);
+//                        alertDialogBuilder.show();
+//                Toast.makeText(PurchaseOrder.this, response.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onFailure(Call<List<PurchaseOrderClass>> call, Throwable t) {
+//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PurchaseOrder.this);
+//                        alertDialogBuilder.setMessage(t.toString());
+//                        alertDialogBuilder.setCancelable(true);
+//                        alertDialogBuilder.show(); }
+                        t.printStackTrace();
+                    }
+                });
+//                }
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (pordList == null);
+            return pordList;
+        }
+        @Override
+        protected void onPostExecute(List<PurchaseOrderClass> taskClassResponseEntity) {
+            dismissProgressDialog();
+            listsofPord.setAdapter(new PurchaseOrderAdapter(PurchaseOrder.this, taskClassResponseEntity));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,63 +127,8 @@ public class PurchaseOrder extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         listsofPord = (ListView) findViewById(R.id.lstPords);
-//        serviceImpl.GetAllPreq();
         loader = new SpotsDialog(PurchaseOrder.this);
-
-        Call<List<PurchaseOrderClass>> getPords = purchaseOrderService.getAllPord();
-
-        getPords.enqueue(new Callback<List<PurchaseOrderClass>>() {
-            @Override
-            public void onResponse(Call<List<PurchaseOrderClass>> call, Response<List<PurchaseOrderClass>> response) {
-                if (response.isSuccessful( )) {
-                    List<PurchaseOrderClass> po = response.body();
-//                        preqList = response.body();
-                    for (int i = 0; i < po.size(); i++) {
-                        //  preqList.add(PurchaseRequestClass.get(i).getPreqID()));
-                        pordList.add(new PurchaseOrderClass(po.get(i).getPordID(),
-                                po.get(i).getPrequestID(),
-                                po.get(i).getPorddate(),
-                                po.get(i).getPordsubtotal(),
-                                po.get(i).getPordsalestax(),
-                                po.get(i).getPordtotal(),
-                                po.get(i).getPordcreatedby(),
-                                po.get(i).getPordstatus(),
-                                po.get(i).getPordprojman(),
-                                po.get(i).getPordpmdate(),
-                                po.get(i).getIsapprovedpm(),
-                                po.get(i).getPordpurchofficer(),
-                                po.get(i).getPordpodate(),
-                                po.get(i).getIsapprovedpo(),
-                                po.get(i).getPordshipping(),
-                                po.get(i).getPordshippingterms(),
-                                po.get(i).getPordshipdeldate()));
-                    }
-                }
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PurchaseOrder.this);
-                alertDialogBuilder.setMessage(pordList.toString());
-                alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.show();
-//                Toast.makeText(PurchaseOrder.this, response.toString(), Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFailure(Call<List<PurchaseOrderClass>> call, Throwable t) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PurchaseOrder.this);
-                alertDialogBuilder.setMessage(t.toString());
-                alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.show(); }
-        });
-
-        listsofPord.setAdapter(new PurchaseOrderAdapter(PurchaseOrder.this, pordList));
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent add = new Intent(PurchaseOrder.this, AddPurchaseOrder.class);
-                startActivity(add);
-            }
-        });
-        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
+        new ProjectTask().execute();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_po);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -243,7 +264,7 @@ public class PurchaseOrder extends AppCompatActivity
 //                break;
 
             case R.id.nav_logout:
-                loader.show();
+//                loader.show();
                 Intent l = new Intent(PurchaseOrder.this, LoginActivity.class);
                 startActivity(l);
                 break;

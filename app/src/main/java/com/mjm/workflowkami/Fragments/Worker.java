@@ -31,12 +31,8 @@ import java.util.List;
 
 public class Worker extends ListFragment {
 
-    private String TAG = Tasks.class.getSimpleName();
-    private ListView listofWorkers;
     private ServiceImpl serviceImpl = new ServiceImpl();
     private WorkerClass work = new WorkerClass();
-    List<WorkerClass> workerList = new ArrayList<WorkerClass>();
-    private WorkerService workerService = API.getInstance().getWorkerService();
     private ProgressDialog progressDialog;
     private ProjectClass proj = new ProjectClass();
 
@@ -78,38 +74,11 @@ public class Worker extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_worker, container, false);
-        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/worker/workers";
-        new WorkerTask().execute(uri);
-//        listofWorkers = (ListView) findViewById(R.id.lstWorkers);
-
-//        container = (ListView) rootView.findViewById(R.id.list_preq_items);
-
-//        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_add_preq_dtl_item);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent add = new Intent(getActivity(), AddPrequestDtlItem.class);
-//                startActivity(add);
-//            }
-//        });
-//        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
-
-//        Intent intent = getActivity().getIntent();
-//        work = (Workers) intent.getSerializableExtra("workers");
-//        int workersID = 0;
-//        if (work != null) {
-//            workersID = work.getWorkersID();
-//        }
-
+        new WorkerTask().execute();
         Intent intent = getActivity().getIntent();
         work = (WorkerClass) intent.getSerializableExtra("workers");
-//        int workersID = 0;
-//        if (work != null) {
-//            workersID = work.getWorkersID();
-//        }
 
         serviceImpl.GetAllWorkers();
-//        serviceImpl.GetAllWorkers(workersID);
 
         return rootView;
     }

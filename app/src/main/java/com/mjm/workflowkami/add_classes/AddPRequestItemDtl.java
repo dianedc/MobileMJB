@@ -85,12 +85,12 @@ public class AddPRequestItemDtl extends Fragment {
 //        Toast.makeText(getActivity(), preq.toString(), Toast.LENGTH_LONG).show();
 //        Toast.makeText(getActivity(), pi.toString(), Toast.LENGTH_LONG).show();
         if(pr != null) {
-            Toast.makeText(getActivity(), String.valueOf(pr.getPreqID()), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), String.valueOf(pr.getPreqID()), Toast.LENGTH_LONG).show();
             preq_id.setText(String.valueOf(pr.getPreqID()));
         }
 
         if (piIntent != null) {
-            Toast.makeText(getActivity(), String.valueOf(pr.getPreqID()), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), String.valueOf(pr.getPreqID()), Toast.LENGTH_LONG).show();
             preq_id_dtl.setText(String.valueOf(piIntent.getPreqItemID()));
             preq_dtl_desc.setText(piIntent.getPreqdesc());
             preq_dtl_qty.setText(String.valueOf(piIntent.getPreqqty()));
@@ -146,7 +146,7 @@ public class AddPRequestItemDtl extends Fragment {
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),
                             lineTot);
                     AddItem(pr.getPreqID(), pItem);
-                    Toast.makeText(getActivity(), "Saved!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Saved!", Toast.LENGTH_LONG).show();
                     getActivity().finish();
                 }
             }

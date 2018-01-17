@@ -18,9 +18,7 @@ public class PurchaseRequestItemClass implements Serializable{
     private Double prequnitprice;
     private BigDecimal preqlinetotal;
 
-    public PurchaseRequestItemClass() {
-
-    }
+    public PurchaseRequestItemClass() {   }
 
     public PurchaseRequestItemClass(int preqitemID, PurchaseRequestClass prequestID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, BigDecimal preqlinetotal) {
         this.preqitemID = preqitemID;

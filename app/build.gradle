@@ -45,9 +45,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    // VectorDrawableCompat
-    // AnimatedVectorDrawableCompat
 
+    //UI design
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:design:25.4.0'
     compile 'com.android.support:transition:25.4.0'
@@ -56,10 +55,14 @@ dependencies {
     compile 'com.android.support:support-annotations:25.4.0'
     compile 'com.android.support:support-vector-drawable:25.4.0'
     compile 'com.android.support:animated-vector-drawable:25.4.0'
+
+    //Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-moshi:2.3.0'
     compile 'com.google.code.gson:gson:2.6.1'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    //
     compile 'com.steelkiwi:dots-loader-view:1.0.0'
     compile 'com.github.MdFarhanRaja:SearchableSpinner:1.2'
     compile 'com.github.d-max:spots-dialog:0.7@aar'
@@ -68,8 +71,11 @@ dependencies {
     compile 'com.thoughtbot:expandablecheckrecyclerview:1.4'
     compile 'ivb.com.materialstepper:material-stepper:0.0.2'
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
+
+    //Spring REST
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.11'
     testCompile 'junit:junit:4.12'
 }

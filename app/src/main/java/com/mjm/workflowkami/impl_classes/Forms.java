@@ -54,14 +54,6 @@ public class Forms extends LoaderAsync
 
         @Override
         protected List<PurchaseRequestClass> doInBackground(String... strings) {
-//            while (serviceImpl.projectsList != null) {
-//                serviceImpl.GetAllProjects();
-//                try  {
-//                    Thread.sleep(5000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
             do {
                 serviceImpl.GetAllPurchaseRequests();
                 try  {
@@ -88,10 +80,6 @@ public class Forms extends LoaderAsync
         setSupportActionBar(toolbar);
 
         listofPreq = (ListView) findViewById(R.id.lstPreqs);
-//        serviceImpl.GetAllPurchaseRequests();
-
-//        listofPreq.setAdapter(new PurchaseRequestAdapter(Forms.this, serviceImpl.prList));
-
         final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/prequest/requests";
         new ProjectTask().execute(uri);
         layout = (PullRefreshLayout) findViewById(R.id.refreshpr);
@@ -140,16 +128,6 @@ public class Forms extends LoaderAsync
                 return true;
             }
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent add = new Intent(Forms.this, AddPRequest.class);
-                startActivity(add);
-            }
-        });
-        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -264,22 +242,5 @@ public class Forms extends LoaderAsync
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-    public void ListViewImpl() {
-
-//        listofPreq.setAdapter(new PurchaseRequestAdapter(this, serviceImpl.purchaseRequestList));
-//        listofPreq.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                PurchaseRequestClass purchaseRequestClass = (PurchaseRequestClass) serviceImpl.purchaseRequestList.get(position);
-//
-////                Toast.makeText(Forms.this,purchaseRequestClass.getProjectID().getProjectID(), Toast.LENGTH_SHORT).show();
-////                Intent i = new Intent(getApplicationContext(), AddPurchaseRequest.class);
-////                i.putExtra("preqs", purchaseRequestClass);
-////                startActivity(i);
-//
-//            }
-//        });
     }
 }

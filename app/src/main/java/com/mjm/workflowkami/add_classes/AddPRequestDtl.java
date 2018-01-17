@@ -24,8 +24,6 @@ import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.PurchaseRequestItemAdapter;
-import com.mjm.workflowkami.impl_classes.PurchaseRequest;
-import com.mjm.workflowkami.impl_classes.Users;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
@@ -79,7 +77,7 @@ public class AddPRequestDtl extends ListFragment {
                     serviceImpl.GetAllPReqItemList(preqIntent.getPreqID());
                 }
                 try  {
-                    Thread.sleep(5000);
+                    Thread.sleep(15000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -110,26 +108,27 @@ public class AddPRequestDtl extends ListFragment {
         Intent intent = getActivity().getIntent();
         preq = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
 
-        if (preq != null) {
-            int intid = 0;
-            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/prequest/"+preq.getPreqID()+"/item";
-            new PRequestTask().execute(uri);
-        }
+//        if (preq != null) {
+//            int intid = 0;
+//            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/prequest/"+preq.getPreqID()+"/item";
+            new PRequestTask().execute();
+//        }
 
 
-//        layout = (PullRefreshLayout) rootView.findViewById(R.id.refreshprdtl);
-//        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                layout.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        layout.setRefreshing(false);
-//
-//                    }
-//                }, 3000);
-//            }
-//        });
+        layout = (PullRefreshLayout) rootView.findViewById(R.id.refreshprdtl);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        new PRequestTask().execute();
+                        layout.setRefreshing(false);
+
+                    }
+                }, 3000);
+            }
+        });
         return rootView;
     }
 
@@ -148,71 +147,6 @@ public class AddPRequestDtl extends ListFragment {
         Intent i = new Intent(getActivity(), AddPrequestDtlItem.class);
         i.putExtra("item", pItem);
         getActivity().startActivity(i);
-//        Intent intent = getActivity().getIntent();
-//        preqIntent = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
-//
-//        Toast.makeText(getActivity(), "PITEM: "+ String.valueOf(pItem.getPreqqty()), Toast.LENGTH_LONG).show();
-//        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-//        View rootView = getLayoutInflater().inflate(R.layout.dialog_preq_add, null);
-//
-//        preq_id_dtl = (EditText) rootView.findViewById(R.id.dialog_preq_id_dtl);
-//        preq_dtl_desc = (EditText) rootView.findViewById(R.id.dialog_preq_dtl_desc);
-//        preq_dtl_qty = (EditText) rootView.findViewById(R.id.dialog_preq_dtl_qty);
-//        preq_dtl_unit = (EditText) rootView.findViewById(R.id.dialog_preq_dtl_unit);
-//        preq_dtl_job = (EditText) rootView.findViewById(R.id.dialog_preq_dtl_job);
-//        preq_dtl_uni_price = (EditText) rootView.findViewById(R.id.dialog_preq_dtl_uni_price);
-//        preq_dtl_line_tot = (TextView) rootView.findViewById(R.id.dialog_preq_dtl_line_tot);
-//        btnCancel = (Button) rootView.findViewById(R.id.btnCancel);
-//        btnSavePreqDtlItem = (Button) rootView.findViewById(R.id.dialog_btnSavePreqDtlItem);
-//        btnCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent cancel = new Intent(getActivity(), AddPRequest.class);
-//                startActivity(cancel);
-//            }
-//        });
-//
-//        preq_id_dtl.setText(String.valueOf(pItem.getPreqID()));
-//        preq_dtl_desc.setText(pItem.getPreqdesc());
-//        preq_dtl_qty.setText(String.valueOf(pItem.getPreqqty()));
-//        preq_dtl_unit.setText(pItem.getPrequnit());
-//        preq_dtl_job.setText(pItem.getPreqjob());
-//        preq_dtl_uni_price.setText(pItem.getPrequnitprice().toString());
-//        preq_dtl_line_tot.setText(pItem.getPreqlinetotal().toString());
-//
-//        lineTot = new BigDecimal(preq_dtl_line_tot.getText().toString());
-//        btnSavePreqDtlItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!preq_id_dtl.getText().toString().matches("")) {
-//                    //update
-//                    pItemDtl = new PurchaseRequestItemClass(Integer.valueOf(pItem.getPreqID()),
-//                            preqIntent.getPreqID(),
-//                            Integer.valueOf(preq_dtl_qty.getText().toString()),
-//                            preq_dtl_unit.getText().toString().trim(),
-//                            preq_dtl_desc.getText().toString().trim(),
-//                            preq_dtl_job.getText().toString().trim(),
-//                            Double.valueOf(preq_dtl_uni_price.getText().toString()),
-//                            lineTot);
-//                    UpdateItem(pItem.getPreqID(), pItem.getPreqItemID(), pItemDtl);
-//                }
-////                else {
-////                    //add
-////                    pItemDtl = new PurchaseRequestItemClass(Integer.valueOf(preq_id_dtl.getText().toString()),
-////                            Integer.valueOf(preq_dtl_qty.getText().toString()),
-////                            preq_dtl_unit.getText().toString().trim(),
-////                            preq_dtl_desc.getText().toString().trim(),
-////                            preq_dtl_job.getText().toString().trim(),
-////                            Double.valueOf(preq_dtl_uni_price.getText().toString()),
-////                            Double.valueOf(preq_dtl_line_tot.getText().toString()));
-////                    AddItem(pItem.getPreqID(), pItem);
-////                }
-//            }
-//        });
-//
-//        mBuilder.setView(rootView);
-//        AlertDialog dialog = mBuilder.create();
-//        dialog.show();
 
         super.onListItemClick(l, v, position, id);
     }

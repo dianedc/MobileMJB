@@ -30,16 +30,6 @@ public class Files extends AppCompatActivity
 
         loader.dismiss();
 
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -104,6 +94,12 @@ public class Files extends AppCompatActivity
                 Intent p = new Intent(Files.this, Projects.class);
                 startActivity(p);
                 break;
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Files.this, AttendanceNav.class);
+                startActivity(x);
+                break;
+
 //            case R.id.nav_purchaseRequest:
 //                Intent f = new Intent(Files.this, Forms.class);
 //                startActivity(f);
@@ -112,14 +108,14 @@ public class Files extends AppCompatActivity
 //                Intent e = new Intent(Files.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(Files.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(Files.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(Files.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                Intent r = new Intent(Files.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
                 Intent u = new Intent(Files.this, Users.class);
                 startActivity(u);
@@ -131,11 +127,11 @@ public class Files extends AppCompatActivity
 //                startActivity(x);
 //                break;
 
-            case R.id.nav_settings:
-                loader.show();
-                Intent s = new Intent(Files.this, Settings.class);
-                startActivity(s);
-                break;
+//            case R.id.nav_settings:
+//                loader.show();
+//                Intent s = new Intent(Files.this, Settings.class);
+//                startActivity(s);
+//                break;
 
             case R.id.nav_logout:
                 loader.show();

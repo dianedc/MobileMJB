@@ -39,10 +39,10 @@ public class PurchaseOrderAdapter extends ArrayAdapter<PurchaseOrderClass> {
 //        TextView txtProjID = (TextView) view.findViewById(R.id.userID);
 //        txtProjID.setText(projects.get(position).getProjectID().toString());
         TextView txtPordid = (TextView) view.findViewById(R.id.pord_id);
-        txtPordid.setText(String.valueOf(pords.get(position).getPordID()));
+        txtPordid.setText(pords.get(position).getPrequestID().getProjectID().getProjname());
         TextView txtpord_projnman = (TextView) view.findViewById(R.id.pord_projman);
-//        txtpord_projnman.setText(pords.get(position).getPordprojman().getLastname() +
-//        ", " + pords.get(position).getPordprojman().getFirstname());
+        txtpord_projnman.setText(pords.get(position).getPordprojman().getFirstname() +
+        " " + pords.get(position).getPordprojman().getLastname());
 
         Button btnEdit = (Button) view.findViewById(R.id.btnEditPord);
         btnEdit.setOnClickListener(new View.OnClickListener() {

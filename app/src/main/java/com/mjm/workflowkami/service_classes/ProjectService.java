@@ -37,4 +37,6 @@ public interface ProjectService {
     @POST("project/{projID}/team/{projteamID}/attendance/timeout")
     Call<Void> workerTimeOut(@Path("projID") int proj_id, @Path("projteamID") int projteamID);
 
+    @GET("project/projects/active")
+    Call<List<ProjectClass>> getAllActiveProjects();
 }

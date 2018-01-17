@@ -23,8 +23,20 @@ public class ProjectClass implements Serializable {
     private double projtargetbudget;
     private BigDecimal projprogress;
     private String projduration;
+    private String Count;
 
     public ProjectClass() {}
+
+    public ProjectClass(String Count) {
+        this.Count = Count;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskClass{" +
+                "Count='" + Count +
+                '}';
+    }
 
     public ProjectClass(int projID, String projname, String projclient, String projdesc, String projtype, String projstartdate, String projenddate, String projdatecompleted, String projstatus, UserClass projmanager, double projcontractbudget, double projtargetbudget, BigDecimal projprogress, String projduration) {
         this.projID = projID;
@@ -119,9 +131,7 @@ public class ProjectClass implements Serializable {
         return projdatecompleted;
     }
 
-    public void setProjdatecompleted(String projdatecompleted) {
-        this.projdatecompleted = projdatecompleted;
-    }
+    public void setProjdatecompleted(String projdatecompleted) { this.projdatecompleted = projdatecompleted; }
 
     public String getProjstatus() {
         return projstatus;
@@ -143,17 +153,13 @@ public class ProjectClass implements Serializable {
         return projcontractbudget;
     }
 
-    public void setProjcontractbudget(double projcontractbudget) {
-        this.projcontractbudget = projcontractbudget;
-    }
+    public void setProjcontractbudget(double projcontractbudget) { this.projcontractbudget = projcontractbudget;  }
 
     public double getProjtargetbudget() {
         return projtargetbudget;
     }
 
-    public void setProjtargetbudget(double projtargetbudget) {
-        this.projtargetbudget = projtargetbudget;
-    }
+    public void setProjtargetbudget(double projtargetbudget) { this.projtargetbudget = projtargetbudget;  }
 
     public BigDecimal getProjprogress() {
         return projprogress;
@@ -169,5 +175,13 @@ public class ProjectClass implements Serializable {
 
     public void setProjduration(String projduration) {
         this.projduration = projduration;
+    }
+
+    public String getCount() {
+        return Count;
+    }
+
+    public void setCount(String count) {
+        Count = count;
     }
 }
