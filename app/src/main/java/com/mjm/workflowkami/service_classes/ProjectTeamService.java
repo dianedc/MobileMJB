@@ -31,8 +31,11 @@ public interface ProjectTeamService {
     Call<ProjectTeamClass> editTeam(@Path("projteamID") int projteamID, @Body ProjectTeamClass team);
 
 //    http://192.168.2.123:8083/rest/project/12/team
-    @GET("project/{projID}/team")
-    Call<List<ProjectTeamClass>> getTeamById(@Path("projID") int projID);
+    @GET("project/{projID}/team/users")
+    Call<List<ProjectTeamClass>> getUsersTeamById(@Path("projID") int projID);
+
+    @GET("project/{projID}/team/workers")
+    Call<List<ProjectTeamClass>> getWorkerTeamById(@Path("projID") int projID);
 
 
 }

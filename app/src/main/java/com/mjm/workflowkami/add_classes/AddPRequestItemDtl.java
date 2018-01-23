@@ -97,7 +97,7 @@ public class AddPRequestItemDtl extends Fragment {
             preq_dtl_unit.setText(piIntent.getPrequnit());
             preq_dtl_job.setText(piIntent.getPreqjob());
             preq_dtl_uni_price.setText(piIntent.getPrequnitprice().toString());
-            preq_dtl_line_tot.setText(piIntent.getPreqlinetotal().toString());
+            preq_dtl_line_tot.setText("Total: " + piIntent.getPreqlinetotal().toString());
         }
 
         preq_dtl_uni_price.addTextChangedListener(new TextWatcher() {

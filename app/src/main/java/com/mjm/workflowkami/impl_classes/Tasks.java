@@ -33,6 +33,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Tasks extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +45,7 @@ public class Tasks extends LoaderAsync
     private ProjectClass projectIntent = new ProjectClass();
     private SpotsDialog loader;
     private PullRefreshLayout layout;
+    private TaskService taskService = API.getInstance().getTaskService();
 
     private class ProjectTask extends AsyncTask<String, Void, List<TaskClass>> {
 
@@ -64,6 +68,7 @@ public class Tasks extends LoaderAsync
             projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
             do {
                 if (projectIntent != null) {
+
                     serviceImpl.GetTaskByProjId(projectIntent.getProjID());
                 }
                 try  {

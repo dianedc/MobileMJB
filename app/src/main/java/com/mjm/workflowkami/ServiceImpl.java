@@ -54,6 +54,7 @@ public class ServiceImpl {
     public List<UserClass> usersList;
     public ArrayList<String> userIDList = new ArrayList<String>();
     public List<TaskClass> tasksList = new ArrayList<TaskClass>();
+    public List<TaskClass> completedTasks = new ArrayList<TaskClass>();
     public List<ProjectClass> projectsList = new ArrayList<ProjectClass>();
     public UserClass userClass = new UserClass();
     ;
@@ -198,6 +199,32 @@ public class ServiceImpl {
         });
 
         return tasksList;
+    }
+
+    public List<TaskClass> GetCompletedTasks() {
+        completedTasks = new ArrayList<TaskClass>();
+
+        Call<List<TaskClass>> completed = taskService.getAllCompleted();
+        completed.enqueue(new Callback<List<TaskClass>>() {
+            @Override
+            public void onResponse(Call<List<TaskClass>> call, Response<List<TaskClass>> response) {
+                List<TaskClass> listComp = response.body();
+
+                try {
+                    for (int i = 0; i < listComp.size(); i++) {
+                        completedTasks.add(new TaskClass(String.valueOf(listComp.get(i).getTaskID())));
+                    }
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TaskClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return completedTasks;
     }
 
     public List<ProjectClass> GetAllProjects() {
@@ -421,9 +448,42 @@ public class ServiceImpl {
         return pTeamList;
     }
 
-    public List<ProjectTeamClass> GetTeamById(int projID) {
+    public List<ProjectTeamClass> GetUsersTeamById(int projID) {
         pTeamList = new ArrayList<ProjectTeamClass>();
-        Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getTeamById(projID);
+        Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getUsersTeamById(projID);
+
+        getProjTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
+            @Override
+            public void onResponse(Call<List<ProjectTeamClass>> call, Response<List<ProjectTeamClass>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectTeamClass> projectTeamClassList = response.body();
+                    Log.d(TAG, response.toString());
+
+                    try {
+                        for (int i = 0; i < projectTeamClassList.size(); i++) {
+                            pTeamList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
+                                    projectTeamClassList.get(i).getProjectsprojID(),
+                                    projectTeamClassList.get(i).getUserID(),
+                                    projectTeamClassList.get(i).getWorkersworkersID()));
+                        }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        return pTeamList;
+    }
+
+    public List<ProjectTeamClass> GetWorkersTeamById(int projID) {
+        pTeamList = new ArrayList<ProjectTeamClass>();
+        Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getWorkerTeamById(projID);
 
         getProjTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
             @Override

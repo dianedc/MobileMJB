@@ -60,7 +60,7 @@ public class Attendance extends ListFragment {
                 Intent pIntent = getActivity().getIntent();
                 proj = (ProjectClass) pIntent.getSerializableExtra("projects");
                 if (proj != null) {
-                    serviceImpl.GetTeamById(proj.getProjID());
+                    serviceImpl.GetWorkersTeamById(proj.getProjID());
                 }
 
                 try  {

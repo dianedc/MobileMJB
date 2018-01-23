@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -61,7 +60,7 @@ public class AddProjectTeam extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        projteamID = (EditText) findViewById(R.id.projTeam_id);
+        projteamID = (EditText) findViewById(R.id.projectTeam_id);
         projectID = (EditText) findViewById(R.id.project_id);
         userID = (EditText) findViewById(R.id.user_id);
 

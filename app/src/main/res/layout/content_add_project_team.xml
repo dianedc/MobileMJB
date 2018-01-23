@@ -33,7 +33,7 @@
 
 
             <EditText
-                android:id="@+id/projTeam_id"
+                android:id="@+id/projectTeam_id"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="20dp"
-                android:layout_toEndOf="@+id/projTeam_id"
+                android:layout_toEndOf="@+id/projectTeam_id"
                 android:drawableLeft="@drawable/ic_menu_project"
                 android:drawablePadding="10dp"
                 android:ems="9"

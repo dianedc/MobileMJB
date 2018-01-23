@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/projTeam_id"
+        android:id="@+id/projectTeam_id"
         android:layout_width="288dp"
         android:layout_height="40dp"
         android:layout_marginLeft="4dp"
@@ -31,7 +31,7 @@
         android:text="TextView"
         android:textSize="6pt"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/projTeam_id" />
+        app:layout_constraintTop_toBottomOf="@+id/projectTeam_id" />
 
 
 </android.support.constraint.ConstraintLayout>

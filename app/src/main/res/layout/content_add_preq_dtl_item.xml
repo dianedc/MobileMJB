@@ -30,6 +30,14 @@
             android:visibility="gone" />
     </android.support.design.widget.TextInputLayout>
 
+    <Spinner
+        android:id="@+id/preq_dtl_gendesc"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:entries="@array/generalDescription" />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -40,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:hint="Description"
+            android:hint="Specific Description"
             android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
 
@@ -82,12 +90,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:hint="Job"
+            android:hint="Floor"
             android:textSize="6pt" />
     </android.support.design.widget.TextInputLayout>
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/preq_dtl_uni_price"
@@ -97,7 +107,8 @@
             android:layout_marginStart="20dp"
             android:hint="Unit Price"
             android:inputType="number"
-            android:textSize="6pt" />
+            android:textSize="6pt"
+            android:visibility="gone" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -109,11 +120,13 @@
         android:textAlignment="viewEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@android:color/black"
-        android:textSize="6pt" />
+        android:textSize="6pt"
+        android:visibility="gone" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:layout_width="match_parent"

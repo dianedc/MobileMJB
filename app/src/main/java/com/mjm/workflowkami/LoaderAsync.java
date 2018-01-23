@@ -28,6 +28,7 @@ public class LoaderAsync extends AppCompatActivity {
     public void showProgressDialog(CharSequence message) {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
+            progressDialog.setCancelable(false);
             progressDialog.setIndeterminate(true);
         }
 

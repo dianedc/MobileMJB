@@ -147,7 +147,7 @@ public class Workers extends AppCompatActivity
 //                startActivity(r);
 //                break;
             case R.id.nav_users:
-                loader.show();
+//                loader.show();
                 Intent u = new Intent(Workers.this, Users.class);
                 startActivity(u);
                 break;
@@ -181,13 +181,13 @@ public class Workers extends AppCompatActivity
         public Fragment getItem(int position) {
             switch(position) {
 
-//                case 0:
-//                    ProjTeam projTeam = new ProjTeam();
-//                    return projTeam;
                 case 0:
+                    ProjTeam projTeam = new ProjTeam();
+                    return projTeam;
+                case 1:
                     Worker worker = new Worker();
                     return worker;
-                case 1:
+                case 2:
                     Attendance attendance = new Attendance();
                     return attendance;
                 default:
@@ -198,16 +198,16 @@ public class Workers extends AppCompatActivity
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
 
         public CharSequence getPageTitle (int position){
             switch (position){
-//                case 0:
-//                    return "Project Team";
                 case 0:
-                    return "Time In";
+                    return "Project Team";
                 case 1:
+                    return "Time In";
+                case 2:
                     return "Time Out";
 
                 default:

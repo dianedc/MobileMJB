@@ -23,6 +23,7 @@ import com.mjm.workflowkami.add_classes.AddTask;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.service_classes.TaskService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -100,6 +101,7 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
             }
         });
 //        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/{proj_id}/task/complete/{task_id}";
+
         final Button btnCompleteTask = (Button) view.findViewById(R.id.btnCompleteTask);
         btnCompleteTask.setOnClickListener(new View.OnClickListener() {
             @Override

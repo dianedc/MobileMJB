@@ -56,6 +56,18 @@
         <item>Denied</item>
     </string-array>
 
+    <string-array name="generalDescription">
+        <item>Select Description</item>
+        <item>Nails</item>
+        <item>Cement</item>
+        <item>Sand</item>
+        <item>Gravel</item>
+        <item>Steelbars</item>
+        <item>Lumber</item>
+        <item>Plywood</item>
+        <item>Others</item>
+    </string-array>
+
     <!-- END PURCHASE REQUEST -->
 
     <!-- WORKER -->

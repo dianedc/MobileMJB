@@ -24,6 +24,8 @@ import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Intent.getIntent;
+
 /**
  * Created by admin on 26 Nov 2017.
  */
@@ -37,7 +39,7 @@ public class ProjTeam extends ListFragment {
     private List<ProjectTeamClass> projList = new ArrayList<ProjectTeamClass>();
     private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
     private ProgressDialog progressDialog;
-    private ProjectClass proj = new ProjectClass();
+    private ProjectClass projectIntent = new ProjectClass();
 
     private class ProjTeamTask extends AsyncTask<String, Void, List<ProjectTeamClass>> {
 
@@ -50,8 +52,15 @@ public class ProjTeam extends ListFragment {
 
         @Override
         protected List<ProjectTeamClass> doInBackground(String... strings) {
+            Intent intent = getActivity().getIntent();
+            projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+
             do {
-                serviceImpl.GetAllProjTeams();
+
+//                serviceImpl.GetAllProjTeams();
+                if (projectIntent != null) {
+                    serviceImpl.GetUsersTeamById(projectIntent.getProjID());
+                }
                 try  {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
@@ -80,8 +89,8 @@ public class ProjTeam extends ListFragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        ProjectTeamAdapter adapter = new ProjectTeamAdapter(getActivity(), serviceImpl.pTeamList);
-//        setListAdapter(adapter);
+        ProjTeamClassAdapter adapter = new ProjTeamClassAdapter(getActivity(), serviceImpl.pTeamList);
+        setListAdapter(adapter);
         super.onActivityCreated(savedInstanceState);
     }
 
