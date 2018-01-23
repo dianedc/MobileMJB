@@ -1,18 +1,15 @@
 package com.mjm.workflowkami.adapter_classes;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.mjm.workflowkami.R;
-import com.mjm.workflowkami.add_classes.AddProjectTeam;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 
 import java.util.List;
@@ -38,23 +35,23 @@ public class ProjectTeamAdapter extends ArrayAdapter<ProjectTeamClass> {
         View view = layoutInflater.inflate(R.layout.list_item_pteams, parent, false);
 //        TextView txtProjID = (TextView) view.findViewById(R.id.userID);
 //        txtProjID.setText(projects.get(position).getProjectID().toString());
-        TextView txtProjteamID = (TextView) view.findViewById(R.id.projTeam_id);
+        TextView txtProjteamID = (TextView) view.findViewById(R.id.projectTeam_id);
         txtProjteamID.setText(String.valueOf(pteams.get(position).getProjteamID()));
-        TextView txtProjUserRole = (TextView) view.findViewById(R.id.projuserrole);
-        txtProjUserRole.setText(pteams.get(position).getProjuserrole());
+        TextView txtProjUserRole = (TextView) view.findViewById(R.id.workersID);
+        txtProjUserRole.setText(pteams.get(position).getWorkersworkersID().getWorkersfirstname());
 
-        Button btnEdit = (Button) view.findViewById(R.id.btnEditPteam);
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProjectTeamClass projectTeamClass = pteams.get(position);
-
-                Intent i = new Intent(context, AddProjectTeam.class);
-
-                i.putExtra("pteams", projectTeamClass);
-                context.startActivity(i);
-            }
-        });
+//        Button btnEdit = (Button) view.findViewById(R.id.btnEditPteam);
+//        btnEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ProjectTeamClass projectTeamClass = pteams.get(position);
+//
+//                Intent i = new Intent(context, AddProjectTeam.class);
+//
+//                i.putExtra("pteams", projectTeamClass);
+//                context.startActivity(i);
+//            }
+//        });
 
         return view;
 

@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:background="@color/colorPrimary">
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +39,8 @@
             android:textColor="@android:color/black"
             android:textSize="6pt"
             android:hint="Project ID"
-            android:drawableLeft="@drawable/ic_menu_project" />
+            android:drawableLeft="@drawable/ic_menu_project"
+            android:visibility="gone"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -64,6 +64,7 @@
                 android:drawablePadding="10dp"
                 android:ems="14"
                 android:hint="Project Name"
+                android:textColorHint="@color/colorLightBlue"
                 android:singleLine="true"
                 android:textSize="6pt" />
 
@@ -71,28 +72,25 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            />
+            android:layout_height="20dp" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1">
+            android:layout_height="wrap_content">
 
 
-            <Spinner
-                android:id="@+id/projecttype"
+            <EditText
+                android:id="@+id/proj_client"
                 android:layout_width="278dp"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_weight="0.73"
                 android:drawableLeft="@drawable/ic_menu_project"
                 android:drawablePadding="10dp"
-                android:ems="9"
-                android:focusable="false"
-                android:entries="@array/projType"
-                android:hint="Type of Project"
+                android:ems="14"
+                android:hint="Client Name"
+                android:textColorHint="@color/colorLightBlue"
+                android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="6pt" />
 
@@ -108,16 +106,17 @@
 
 
             <EditText
-                android:id="@+id/projectdesc"
+                android:id="@+id/proj_desc"
                 android:layout_width="278dp"
-                android:layout_height="144dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_menu_project"
                 android:drawablePadding="10dp"
                 android:ems="14"
-                android:textSize="6pt"
-                android:drawableLeft="@drawable/ic_menu_project"
-                android:hint="Description" />
+                android:hint="Description"
+                android:textColorHint="@color/colorLightBlue"
+                android:textSize="6pt" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -127,19 +126,23 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="0.73">
 
 
             <EditText
-                android:id="@+id/projectclient"
+                android:id="@+id/proj_type"
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
                 android:drawableLeft="@drawable/ic_menu_project"
                 android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="Client Name"
+                android:ems="9"
+                android:enabled="false"
+                android:focusable="false"
+                android:hint="Project Type"
+                android:textColorHint="@color/colorLightBlue"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="6pt" />
@@ -154,47 +157,66 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/project_start_date"
-                android:layout_width="161dp"
-                android:layout_height="47dp"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="175dp"
+                android:layout_height="71dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginStart="20dp"
-                android:layout_weight="0.44"
-                android:drawableLeft="@drawable/ic_date"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="Start Date"
-                android:inputType="date"
-                android:textSize="6pt"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/project_end_date"
-                android:layout_width="161dp"
-                android:layout_height="47dp"
+                <EditText
+                    android:id="@+id/project_start_date"
+                    android:layout_width="161dp"
+                    android:layout_height="47dp"
+                    android:layout_weight="0.44"
+                    android:drawableLeft="@drawable/ic_date"
+                    android:drawablePadding="10dp"
+                    android:ems="14"
+                    android:hint="Start Date"
+                    android:textColorHint="@color/colorLightBlue"
+                    android:inputType="date"
+                    android:textSize="6pt" />
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintVertical_bias="0.0" />-->
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="174dp"
+                android:layout_height="71dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:drawableLeft="@drawable/ic_date"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="End Date"
-                android:inputType="date"
-                android:textSize="6pt"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/project_start_date"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <!--tools:layout_editor_absoluteX="154dp"-->
+                <!--tools:layout_editor_absoluteY="0dp">-->
+
+                <EditText
+                    android:id="@+id/project_end_date"
+                    android:layout_width="161dp"
+                    android:layout_height="47dp"
+                    android:layout_weight="0.44"
+                    android:drawableLeft="@drawable/ic_date"
+                    android:drawablePadding="10dp"
+                    android:ems="14"
+                    android:hint="End Date"
+                    android:textColorHint="@color/colorLightBlue"
+                    android:inputType="date"
+                    android:textSize="6pt" />
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintLeft_toRightOf="@+id/project_start_date"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintVertical_bias="0.0" />-->
+            </android.support.design.widget.TextInputLayout>
         </android.support.constraint.ConstraintLayout>
 
 
@@ -202,6 +224,56 @@
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp">
+
+            <EditText
+                android:id="@+id/proj_date_comp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:drawableLeft="@drawable/ic_date"
+                android:drawablePadding="10dp"
+                android:hint="Date Completed"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/colorLightBlue"
+                android:textSize="6pt" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <EditText
+                android:id="@+id/project_status"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_menu_project"
+                android:drawablePadding="10dp"
+                android:ems="9"
+                android:enabled="false"
+                android:focusable="false"
+                android:hint="Project Status"
+                android:textColorHint="@color/colorLightBlue"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="6pt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -216,6 +288,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:text="Project Manager"
+                android:textColorHint="@color/colorLightBlue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -243,39 +316,72 @@
                 tools:layout_editor_absoluteY="-35dp" />
         </android.support.constraint.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-            <Button
-                android:id="@+id/proj_manager"
-                android:layout_width="278dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Select Project Manager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.222"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-        </android.support.constraint.ConstraintLayout>
+            <!--<Button-->
+                <!--android:id="@+id/proj_manager"-->
+                <!--android:layout_width="278dp"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:text="Select Project Manager"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintHorizontal_bias="0.222"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintVertical_bias="0.0" />-->
+        <!--</android.support.constraint.ConstraintLayout>-->
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
-        <Spinner
-            android:id="@+id/project_status"
-            android:layout_width="278dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:drawSelectorOnTop="true"
-            android:entries="@array/projectStatus" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/proj_c_budget"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Contract Budget"
+                android:textColorHint="@color/colorLightBlue"
+                android:inputType="numberDecimal"
+                android:textSize="6pt" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/proj_t_budget"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Target Budget"
+                android:textColorHint="@color/colorLightBlue"
+                android:inputType="numberDecimal"
+                android:textSize="6pt" />
+        </android.support.design.widget.TextInputLayout>
 
         <Space
             android:layout_width="match_parent"
@@ -295,6 +401,7 @@
                 android:drawablePadding="10dp"
                 android:ems="14"
                 android:hint="Progress"
+                android:textColorHint="@color/colorLightBlue"
                 android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textSize="6pt" />
@@ -304,10 +411,28 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            />
+            android:layout_height="25dp" />
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/proj_duration"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_access_time_black_24dp"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Total Duration"
+                android:textColorHint="@color/colorLightBlue"
+                android:inputType="number"
+                android:textSize="6pt" />
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -317,9 +442,9 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="13dp"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/white"
                 android:fontFamily="sans-serif-medium"
@@ -328,28 +453,27 @@
                 android:textColor="@android:color/black"
                 android:textStyle="normal|bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/btnSaveProject"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnSaveProject"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/white"
-                android:fontFamily="sans-serif-medium"
-                android:text="Done"
-                android:textColor="@android:color/black"
-                android:textStyle="normal|bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <!--<Button-->
+                <!--android:id="@+id/btnSaveProject"-->
+                <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:backgroundTint="@android:color/white"-->
+                <!--android:fontFamily="sans-serif-medium"-->
+                <!--android:text="Done"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textStyle="normal|bold"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-        </android.support.constraint.ConstraintLayout>
+        </RelativeLayout>
 
     </LinearLayout>
     <!--</android.support.constraint.ConstraintLayout>-->

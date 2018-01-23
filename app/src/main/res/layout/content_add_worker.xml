@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/workerID" />
+
+    <EditText
+        android:id="@+id/workerID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="37dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="gone" />
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/textInputLayout">-->
+
+    <EditText
+        android:id="@+id/workerfname"
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/space4"
+        android:layout_alignStart="@+id/workerlname"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/ic_person"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/first_name"
+        android:inputType="textPersonName"
+        android:textSize="6pt" />
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <Space
+        android:id="@+id/space4"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_above="@+id/space3"
+        android:layout_marginBottom="63dp"
+        android:layout_toEndOf="@+id/workerID" />
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true">-->
+
+    <EditText
+        android:id="@+id/workerlname"
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/space3"
+        android:layout_alignStart="@+id/workerrole"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/ic_person"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/last_name"
+        android:inputType="textPersonName"
+        android:textSize="6pt" />
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <Space
+        android:id="@+id/space3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_above="@+id/workerrole"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="1" />
+
+    <Spinner
+        android:id="@+id/workerrole"
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/space2"
+        android:layout_marginStart="21dp"
+        android:layout_toEndOf="@+id/workerID"
+        android:layout_weight="1"
+        android:entries="@array/workerRole"
+        android:spinnerMode="dialog" />
+
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/workerID" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/space2"
+        android:layout_marginTop="76dp"
+        android:layout_toEndOf="@+id/workerID">
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="15dp"
+            android:layout_toStartOf="@+id/btnSaveWorker"
+            android:backgroundTint="@android:color/white"
+            android:fontFamily="sans-serif-medium"
+            android:onClick="onClickCancel"
+            android:text="Dismiss"
+            android:textColor="@android:color/black"
+            android:textStyle="normal|bold" />
+
+        <Button
+            android:id="@+id/btnSaveWorker"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="17dp"
+            android:backgroundTint="@android:color/white"
+            android:fontFamily="sans-serif-medium"
+            android:onClick="onClickCancel"
+            android:text="Save"
+            android:textColor="@android:color/black"
+            android:textStyle="normal|bold" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

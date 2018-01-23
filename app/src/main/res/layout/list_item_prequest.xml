@@ -9,19 +9,19 @@
         android:id="@+id/preqID"
         android:layout_width="107dp"
         android:layout_height="40dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
         android:paddingLeft="13dp"
         android:paddingTop="16dp"
         android:text="tesxt"
         android:textColor="#000000"
         android:textSize="9pt"
-        android:textStyle="bold"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
+        android:textStyle="bold|italic"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintRight_toLeftOf="@+id/btnEditPord" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnEditPord"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/proj_name"

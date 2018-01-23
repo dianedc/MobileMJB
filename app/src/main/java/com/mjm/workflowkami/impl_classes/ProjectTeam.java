@@ -17,9 +17,9 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.Fragments.ProjTeam;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
-import com.mjm.workflowkami.Settings;
 import com.mjm.workflowkami.adapter_classes.ProjectTeamAdapter;
 import com.mjm.workflowkami.add_classes.AddProjectTeam;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
@@ -55,11 +55,11 @@ public class ProjectTeam extends AppCompatActivity
                     startActivity(n);
                     return true;
 
-                case R.id.navigation_team:
-                    loader.show();
-                    Intent t = new Intent(ProjectTeam.this, ProjectTeam.class);
-                    startActivity(t);
-                    return true;
+//                case R.id.navigation_team:
+//                    loader.show();
+//                    Intent t = new Intent(ProjectTeam.this, ProjTeam.class);
+//                    startActivity(t);
+//                    return true;
 
                 case R.id.navigation_pr:
                     loader.show();
@@ -88,15 +88,6 @@ public class ProjectTeam extends AppCompatActivity
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loader = new SpotsDialog(ProjectTeam.this);
-        listofTeams = (ListView) findViewById(R.id.lstTeams);
-        serviceImpl.GetAllTeams();
-        listofTeams.setAdapter(new ProjectTeamAdapter(this, serviceImpl.pTeamList));
-
-        if (listofTeams != null) {
-            loader.dismiss();
-        }
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -174,6 +165,11 @@ public class ProjectTeam extends AppCompatActivity
                 Intent p = new Intent(ProjectTeam.this, Projects.class);
                 startActivity(p);
                 break;
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(ProjectTeam.this, AttendanceNav.class);
+                startActivity(x);
+                break;
 //            case R.id.nav:
 //                loader.show();
 ////                Intent f = new Intent(Forms.this, Forms.class);
@@ -183,33 +179,33 @@ public class ProjectTeam extends AppCompatActivity
 ////                Intent e = new Intent(Forms.this, PurchaseOrder.class);
 ////                startActivity(e);
 ////                break;
-            case R.id.nav_files:
-                loader.show();
-                Intent fi = new Intent(ProjectTeam.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                loader.show();
-                Intent r = new Intent(ProjectTeam.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                loader.show();
+//                Intent fi = new Intent(ProjectTeam.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                loader.show();
+//                Intent r = new Intent(ProjectTeam.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
                 loader.show();
                 Intent u = new Intent(ProjectTeam.this, Users.class);
                 startActivity(u);
                 break;
 
-            case R.id.nav_workers:
-                loader.show();
-                Intent x = new Intent(ProjectTeam.this, Workers.class);
-                startActivity(x);
-                break;
+//            case R.id.nav_workers:
+//                loader.show();
+//                Intent x = new Intent(ProjectTeam.this, Workers.class);
+//                startActivity(x);
+//                break;
 
-            case R.id.nav_settings:
-                loader.show();
-                Intent s = new Intent(ProjectTeam.this, Settings.class);
-                startActivity(s);
-                break;
+//            case R.id.nav_settings:
+//                loader.show();
+//                Intent s = new Intent(ProjectTeam.this, Settings.class);
+//                startActivity(s);
+//                break;
 
             case R.id.nav_logout:
                 loader.show();

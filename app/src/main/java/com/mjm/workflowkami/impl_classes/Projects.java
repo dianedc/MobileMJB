@@ -1,9 +1,12 @@
 package com.mjm.workflowkami.impl_classes;
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,8 +17,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.ProjectClassAdapter;
@@ -23,77 +29,86 @@ import com.mjm.workflowkami.add_classes.AddProject;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.service_classes.ProjectService;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-public class Projects extends AppCompatActivity
+public class Projects extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private PullRefreshLayout layout;
+    private SwipeRefreshLayout refreshLayout;
     private String TAG = Projects.class.getSimpleName();
     private ListView listOfProjects;
     private SpotsDialog loader;
-    //private ArrayAdapter<String> adapter;
     private ProjectService projectService = API.getInstance().getProjectService();
-    private ProjectClass project;
-    //private Object[] projectClassList;
-    List<ProjectClass> projectsList = new ArrayList<ProjectClass>();
+    List<ProjectClass> pl;
     private ServiceImpl serviceImpl = new ServiceImpl();
+    private List<String> strings = new ArrayList<String>();
+    private ProjectClassAdapter adapter;
+    private Toolbar supportActionBar;
+
+    private class ProjectTask extends AsyncTask<String, Void, List<ProjectClass>> {
+
+        @Override
+        protected void onPreExecute() {
+            showLoadingDialog();
+        }
+
+        @Override
+        protected List<ProjectClass> doInBackground(String... strings) {
+//            while (serviceImpl.projectsList != null) {
+//                serviceImpl.GetAllProjects();
+//                try  {
+//                    Thread.sleep(5000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            do {
+                serviceImpl.GetAllProjects();
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.projectsList == null);
+            return serviceImpl.projectsList;
+        }
+        @Override
+        protected void onPostExecute(List<ProjectClass> projClassResponseEntity) {
+            dismissProgressDialog();
+            listOfProjects.setAdapter(new ProjectClassAdapter(Projects.this, projClassResponseEntity));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projects);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarProj);
+        setTitle("Projects");
         setSupportActionBar(toolbar);
 
         loader = new SpotsDialog(Projects.this);
-
         listOfProjects = (ListView) findViewById(R.id.lstProjects);
-        serviceImpl.GetAllProjects();
-        listOfProjects.setAdapter(new ProjectClassAdapter(this, serviceImpl.projectsList));
-        loader.dismiss();
 
-//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId())
-//                {
-//                    case R.id.navigation_task:
-//                        Intent n = new Intent(Projects.this, Tasks.class);
-//                        startActivity(n);
-//                        break;
-//
-//                    case R.id.navigation_team:
-//                        Toast.makeText(Projects.this, "Going to teams", Toast.LENGTH_LONG).show();
-//                        break;
-//
-//                    case R.id.navigation_pr:
-//                        Intent p = new Intent(Projects.this, Forms.class);
-//                        startActivity(p);
-//                        break;
-//
-//                    case R.id.navigation_po:
-//                        Intent po =  new Intent(Projects.this, PurchaseOrder.class);
-//                        startActivity(po);
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                    Intent add = new Intent(Projects.this, AddProject.class);
-                    startActivity(add);
-            }
-        });
-        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
-
+        new ProjectTask().execute();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_projects);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -103,6 +118,7 @@ public class Projects extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -127,9 +143,10 @@ public class Projects extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 //        int id = item.getItemId();
-//
+
 //        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
+//        if (id == R.id.action_back_proj) {
+//            startActivity(new Intent(this, Users.class));
 //            return true;
 //        }
 
@@ -143,49 +160,72 @@ public class Projects extends AppCompatActivity
         int id = item.getItemId();
         switch (id){
             case R.id.nav_dashboard:
-                loader.show();
+//                loader.show();
                 Intent d = new Intent(Projects.this, Dashboard.class);
                 startActivity(d);
                 break;
-//            case R.id.nav_tasks:
-//                Intent t = new Intent(Projects.this, Tasks.class );
-//                startActivity(t);
-//                break;
-//            case R.id.nav_schedule:
-//                Intent s = new Intent(Projects.this, Schedule.class);
-//                startActivity(s);
-//                break;
             case R.id.nav_project:
-//                Intent p = new Intent(Projects.this, Projects.class);
-//                startActivity(p);
-//                getAllProjects();
-//                adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, projectClassList);
-//                listOfProjects.setAdapter(adapter);
+                break;
+
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Projects.this, AttendanceNav.class);
+                startActivity(x);
                 break;
 //            case R.id.nav_purchaseRequest:
+////                loader.show();
 //                Intent f = new Intent(Projects.this, Forms.class);
 //                startActivity(f);
 //                break;
 //            case R.id.nav_purchaseOrder:
+////                loader.show();
 //                Intent e = new Intent(Projects.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(Projects.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(Projects.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+////                loader.show();
+//                Intent fi = new Intent(Projects.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+////                loader.show();
+//                Intent r = new Intent(Projects.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
+//                loader.show();
                 Intent u = new Intent(Projects.this, Users.class);
                 startActivity(u);
+                break;
+
+//            case R.id.nav_workers:
+////                loader.show();
+//                Intent x = new Intent(Projects.this, Workers.class);
+//                startActivity(x);
+//                break;
+
+//            case R.id.nav_settings:
+////                loader.show();
+//                Intent s = new Intent(Projects.this, Settings.class);
+//                startActivity(s);
+//                break;
+
+            case R.id.nav_logout:
+//                loader.show();
+                Intent l = new Intent(Projects.this, LoginActivity.class);
+                startActivity(l);
                 break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    public void setSupportActionBar(Toolbar supportActionBar) {
+        this.supportActionBar = supportActionBar;
+    }
+
+
 }

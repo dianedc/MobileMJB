@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.model_classes;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by DC on 01/11/2017.
@@ -10,44 +11,37 @@ public class PurchaseOrderClass implements Serializable {
 
     private int pordID;
     private PurchaseRequestClass prequestID;
-    private String porddate;
-    private double pordsubtotal;
-    private double pordsalestax;
-    private double pordtotal;
-    private UserClass pordcreatedby;
-    private String pordstatus;
+    private String pordapproveddate;
+    private String pordrequesteddate;
+    private UserClass pordrequestedby;
     private UserClass pordprojman;
     private String pordpmdate;
-    private Boolean isapprovedpm;
     private UserClass pordpurchofficer;
     private String pordpodate;
-    private Boolean isapprovedpo;
-    private String pordshipping;
-    private String pordshippingterms;
-    private String pordshipdeldate;
+    private UserClass pordofficeengr;
+    private String pordoedate;
+    private BigDecimal pordsubtotal;
+    private double pordsalestax;
+    private BigDecimal pordtotal;
 
-    public PurchaseOrderClass(){
-
+    public PurchaseOrderClass() {
     }
 
-    public PurchaseOrderClass(int pordID, PurchaseRequestClass prequestID, String porddate, double pordsubtotal, double pordsalestax, double pordtotal, UserClass pordcreatedby, String pordstatus, UserClass pordprojman, String pordpmdate, Boolean isapprovedpm, UserClass pordpurchofficer, String pordpodate, Boolean isapprovedpo, String pordshipping, String pordshippingterms, String pordshipdeldate) {
+    public PurchaseOrderClass(int pordID, PurchaseRequestClass prequestID, String pordapproveddate, String pordrequesteddate, UserClass pordrequestedby, UserClass pordprojman, String pordpmdate, UserClass pordpurchofficer, String pordpodate, UserClass pordofficeengr, String pordoedate, BigDecimal pordsubtotal, double pordsalestax, BigDecimal pordtotal) {
         this.pordID = pordID;
         this.prequestID = prequestID;
-        this.porddate = porddate;
+        this.pordapproveddate = pordapproveddate;
+        this.pordrequesteddate = pordrequesteddate;
+        this.pordrequestedby = pordrequestedby;
+        this.pordprojman = pordprojman;
+        this.pordpmdate = pordpmdate;
+        this.pordpurchofficer = pordpurchofficer;
+        this.pordpodate = pordpodate;
+        this.pordofficeengr = pordofficeengr;
+        this.pordoedate = pordoedate;
         this.pordsubtotal = pordsubtotal;
         this.pordsalestax = pordsalestax;
         this.pordtotal = pordtotal;
-        this.pordcreatedby = pordcreatedby;
-        this.pordstatus = pordstatus;
-        this.pordprojman = pordprojman;
-        this.pordpmdate = pordpmdate;
-        this.isapprovedpm = isapprovedpm;
-        this.pordpurchofficer = pordpurchofficer;
-        this.pordpodate = pordpodate;
-        this.isapprovedpo = isapprovedpo;
-        this.pordshipping = pordshipping;
-        this.pordshippingterms = pordshippingterms;
-        this.pordshipdeldate = pordshipdeldate;
     }
 
     public int getPordID() {
@@ -66,53 +60,23 @@ public class PurchaseOrderClass implements Serializable {
         this.prequestID = prequestID;
     }
 
-    public String getPorddate() {
-        return porddate;
+    public String getPordapproveddate() {
+        return pordapproveddate;
     }
 
-    public void setPorddate(String porddate) {
-        this.porddate = porddate;
+    public void setPordapproveddate(String pordapproveddate) { this.pordapproveddate = pordapproveddate;  }
+
+    public String getPordrequesteddate() {
+        return pordrequesteddate;
     }
 
-    public double getPordsubtotal() {
-        return pordsubtotal;
+    public void setPordrequesteddate(String pordrequesteddate) { this.pordrequesteddate = pordrequesteddate;  }
+
+    public UserClass getPordrequestedby() {
+        return pordrequestedby;
     }
 
-    public void setPordsubtotal(double pordsubtotal) {
-        this.pordsubtotal = pordsubtotal;
-    }
-
-    public double getPordsalestax() {
-        return pordsalestax;
-    }
-
-    public void setPordsalestax(double pordsalestax) {
-        this.pordsalestax = pordsalestax;
-    }
-
-    public double getPordtotal() {
-        return pordtotal;
-    }
-
-    public void setPordtotal(double pordtotal) {
-        this.pordtotal = pordtotal;
-    }
-
-    public UserClass getPordcreatedby() {
-        return pordcreatedby;
-    }
-
-    public void setPordcreatedby(UserClass pordcreatedby) {
-        this.pordcreatedby = pordcreatedby;
-    }
-
-    public String getPordstatus() {
-        return pordstatus;
-    }
-
-    public void setPordstatus(String pordstatus) {
-        this.pordstatus = pordstatus;
-    }
+    public void setPordrequestedby(UserClass pordrequestedby) { this.pordrequestedby = pordrequestedby; }
 
     public UserClass getPordprojman() {
         return pordprojman;
@@ -130,21 +94,11 @@ public class PurchaseOrderClass implements Serializable {
         this.pordpmdate = pordpmdate;
     }
 
-    public Boolean getIsapprovedpm() {
-        return isapprovedpm;
-    }
-
-    public void setIsapprovedpm(Boolean isapprovedpm) {
-        this.isapprovedpm = isapprovedpm;
-    }
-
     public UserClass getPordpurchofficer() {
         return pordpurchofficer;
     }
 
-    public void setPordpurchofficer(UserClass pordpurchofficer) {
-        this.pordpurchofficer = pordpurchofficer;
-    }
+    public void setPordpurchofficer(UserClass pordpurchofficer) { this.pordpurchofficer = pordpurchofficer; }
 
     public String getPordpodate() {
         return pordpodate;
@@ -154,35 +108,61 @@ public class PurchaseOrderClass implements Serializable {
         this.pordpodate = pordpodate;
     }
 
-    public Boolean getIsapprovedpo() {
-        return isapprovedpo;
+    public UserClass getPordofficeengr() {
+        return pordofficeengr;
     }
 
-    public void setIsapprovedpo(Boolean isapprovedpo) {
-        this.isapprovedpo = isapprovedpo;
+    public void setPordofficeengr(UserClass pordofficeengr) { this.pordofficeengr = pordofficeengr; }
+
+    public String getPordoedate() {
+        return pordoedate;
     }
 
-    public String getPordshipping() {
-        return pordshipping;
+    public void setPordoedate(String pordoedate) {
+        this.pordoedate = pordoedate;
     }
 
-    public void setPordshipping(String pordshipping) {
-        this.pordshipping = pordshipping;
+    public BigDecimal getPordsubtotal() {
+        return pordsubtotal;
     }
 
-    public String getPordshippingterms() {
-        return pordshippingterms;
+    public void setPordsubtotal(BigDecimal pordsubtotal) {
+        this.pordsubtotal = pordsubtotal;
     }
 
-    public void setPordshippingterms(String pordshippingterms) {
-        this.pordshippingterms = pordshippingterms;
+    public double getPordsalestax() {
+        return pordsalestax;
     }
 
-    public String getPordshipdeldate() {
-        return pordshipdeldate;
+    public void setPordsalestax(double pordsalestax) {
+        this.pordsalestax = pordsalestax;
     }
 
-    public void setPordshipdeldate(String pordshipdeldate) {
-        this.pordshipdeldate = pordshipdeldate;
+    public BigDecimal getPordtotal() {
+        return pordtotal;
+    }
+
+    public void setPordtotal(BigDecimal pordtotal) {
+        this.pordtotal = pordtotal;
+    }
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderClass{" +
+                "pordID=" + pordID +
+                ", prequestID=" + prequestID +
+                ", pordapproveddate='" + pordapproveddate + '\'' +
+                ", pordrequesteddate='" + pordrequesteddate + '\'' +
+                ", pordrequestedby=" + pordrequestedby +
+                ", pordprojman=" + pordprojman +
+                ", pordpmdate='" + pordpmdate + '\'' +
+                ", pordpurchofficer=" + pordpurchofficer +
+                ", pordpodate='" + pordpodate + '\'' +
+                ", pordofficeengr=" + pordofficeengr +
+                ", pordoedate='" + pordoedate + '\'' +
+                ", pordsubtotal=" + pordsubtotal +
+                ", pordsalestax=" + pordsalestax +
+                ", pordtotal=" + pordtotal +
+                '}';
     }
 }

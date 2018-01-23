@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.model_classes;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by Jasper on 15 Sep 2017.
@@ -10,8 +11,9 @@ public class PurchaseRequestClass implements Serializable{
 
     private int preqID;
     private ProjectClass projectID;
-    private String preqdate;
-    private UserClass prequestedby;
+    private String preqapproveddate;
+    private String preqrequesteddate;
+    private UserClass preqrequestedby;
     private Boolean preqstatus;
     private UserClass preqprojman;
     private String preqpmdate;
@@ -22,15 +24,20 @@ public class PurchaseRequestClass implements Serializable{
     private UserClass preqofficeengr;
     private String preqoedate;
     private Boolean isapprovedoe;
+    private BigDecimal preqsubtotal;
+    private double preqsalestax;
+    private BigDecimal preqtotal;
 
     public PurchaseRequestClass() {
 
     }
-    public PurchaseRequestClass(int preqID, ProjectClass projectID, String preqdate, UserClass prequestedby, Boolean preqstatus, UserClass preqprojman, String preqpmdate, Boolean isapprovedpm, UserClass preqpurchofficer, String preqpodate, Boolean isapprovedpo, UserClass preqofficeengr, String preqoedate, Boolean isapprovedoe) {
+
+    public PurchaseRequestClass(int preqID, ProjectClass projectID, String preqapproveddate, String preqrequesteddate, UserClass preqrequestedby, Boolean preqstatus, UserClass preqprojman, String preqpmdate, Boolean isapprovedpm, UserClass preqpurchofficer, String preqpodate, Boolean isapprovedpo, UserClass preqofficeengr, String preqoedate, Boolean isapprovedoe, BigDecimal preqsubtotal, double preqsalestax, BigDecimal preqtotal) {
         this.preqID = preqID;
         this.projectID = projectID;
-        this.preqdate = preqdate;
-        this.prequestedby = prequestedby;
+        this.preqapproveddate = preqapproveddate;
+        this.preqrequesteddate = preqrequesteddate;
+        this.preqrequestedby = preqrequestedby;
         this.preqstatus = preqstatus;
         this.preqprojman = preqprojman;
         this.preqpmdate = preqpmdate;
@@ -41,6 +48,37 @@ public class PurchaseRequestClass implements Serializable{
         this.preqofficeengr = preqofficeengr;
         this.preqoedate = preqoedate;
         this.isapprovedoe = isapprovedoe;
+        if(preqsubtotal!=null)
+        {this.preqsubtotal = preqsubtotal;}
+        else{ this.preqsubtotal = new BigDecimal("0.0");};
+        this.preqsalestax = preqsalestax;
+        if(preqtotal!=null)
+        {this.preqtotal = preqtotal;}
+        else{ this.preqtotal = new BigDecimal("0.0");};
+    }
+
+    public PurchaseRequestClass(ProjectClass projectID, String preqapproveddate, String preqrequesteddate, UserClass preqrequestedby, Boolean preqstatus, UserClass preqprojman, String preqpmdate, Boolean isapprovedpm, UserClass preqpurchofficer, String preqpodate, Boolean isapprovedpo, UserClass preqofficeengr, String preqoedate, Boolean isapprovedoe, BigDecimal preqsubtotal, double preqsalestax, BigDecimal preqtotal) {
+        this.projectID = projectID;
+        this.preqapproveddate = preqapproveddate;
+        this.preqrequesteddate = preqrequesteddate;
+        this.preqrequestedby = preqrequestedby;
+        this.preqstatus = preqstatus;
+        this.preqprojman = preqprojman;
+        this.preqpmdate = preqpmdate;
+        this.isapprovedpm = isapprovedpm;
+        this.preqpurchofficer = preqpurchofficer;
+        this.preqpodate = preqpodate;
+        this.isapprovedpo = isapprovedpo;
+        this.preqofficeengr = preqofficeengr;
+        this.preqoedate = preqoedate;
+        this.isapprovedoe = isapprovedoe;
+        if(preqsubtotal!=null)
+        {this.preqsubtotal = preqsubtotal;}
+        else{ this.preqsubtotal = new BigDecimal("0.0");};
+        this.preqsalestax = preqsalestax;
+        if(preqtotal!=null)
+        {this.preqtotal = preqtotal;}
+        else{ this.preqtotal = new BigDecimal("0.0");};
     }
 
     public int getPreqID() {
@@ -59,21 +97,23 @@ public class PurchaseRequestClass implements Serializable{
         this.projectID = projectID;
     }
 
-    public String getPreqdate() {
-        return preqdate;
+    public String getPreqapproveddate() {
+        return preqapproveddate;
     }
 
-    public void setPreqdate(String preqdate) {
-        this.preqdate = preqdate;
+    public void setPreqapproveddate(String preqapproveddate) { this.preqapproveddate = preqapproveddate; }
+
+    public String getPreqrequesteddate() {
+        return preqrequesteddate;
     }
 
-    public UserClass getPrequestedby() {
-        return prequestedby;
+    public void setPreqrequesteddate(String preqrequesteddate) { this.preqrequesteddate = preqrequesteddate; }
+
+    public UserClass getPreqrequestedby() {
+        return preqrequestedby;
     }
 
-    public void setPrequestedby(UserClass prequestedby) {
-        this.prequestedby = prequestedby;
-    }
+    public void setPreqrequestedby(UserClass preqrequestedby) { this.preqrequestedby = preqrequestedby; }
 
     public Boolean getPreqstatus() {
         return preqstatus;
@@ -111,9 +151,7 @@ public class PurchaseRequestClass implements Serializable{
         return preqpurchofficer;
     }
 
-    public void setPreqpurchofficer(UserClass preqpurchofficer) {
-        this.preqpurchofficer = preqpurchofficer;
-    }
+    public void setPreqpurchofficer(UserClass preqpurchofficer) { this.preqpurchofficer = preqpurchofficer; }
 
     public String getPreqpodate() {
         return preqpodate;
@@ -135,9 +173,7 @@ public class PurchaseRequestClass implements Serializable{
         return preqofficeengr;
     }
 
-    public void setPreqofficeengr(UserClass preqofficeengr) {
-        this.preqofficeengr = preqofficeengr;
-    }
+    public void setPreqofficeengr(UserClass preqofficeengr) { this.preqofficeengr = preqofficeengr; }
 
     public String getPreqoedate() {
         return preqoedate;
@@ -155,23 +191,29 @@ public class PurchaseRequestClass implements Serializable{
         this.isapprovedoe = isapprovedoe;
     }
 
-    @Override
-    public String toString() {
-        return "PurchaseRequestClass{" +
-                "preqID=" + preqID +
-                ", projectID=" + projectID +
-                ", preqdate='" + preqdate + '\'' +
-                ", prequestedby=" + prequestedby +
-                ", preqstatus=" + preqstatus +
-                ", preqprojman=" + preqprojman +
-                ", preqpmdate='" + preqpmdate + '\'' +
-                ", isapprovedpm=" + isapprovedpm +
-                ", preqpurchofficer=" + preqpurchofficer +
-                ", preqpodate='" + preqpodate + '\'' +
-                ", isapprovedpo=" + isapprovedpo +
-                ", preqofficeengr=" + preqofficeengr +
-                ", preqoedate='" + preqoedate + '\'' +
-                ", isapprovedoe=" + isapprovedoe +
-                '}';
+    public BigDecimal getPreqsubtotal() {
+        return preqsubtotal;
     }
+
+    public void setPreqsubtotal(BigDecimal preqsubtotal) {
+        this.preqsubtotal = preqsubtotal;
+    }
+
+    public double getPreqsalestax() {
+        return preqsalestax;
+    }
+
+    public void setPreqsalestax(double preqsalestax) {
+        this.preqsalestax = preqsalestax;
+    }
+
+    public BigDecimal getPreqtotal() {
+        return preqtotal;
+    }
+
+    public void setPreqtotal(BigDecimal preqtotal) {
+        this.preqtotal = preqtotal;
+    }
+
+
 }

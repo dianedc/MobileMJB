@@ -16,19 +16,7 @@ import com.mjm.workflowkami.R;
 
 public class AddPRequest extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
 
     @Override
@@ -36,12 +24,10 @@ public class AddPRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prequest);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_add_preq);
         toolbar.setTitle("Purchase Request");
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24px);
-//        toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Light);
-//        toolbar.set(R.style.ThemeOverlay_AppCompat_Light);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -50,20 +36,10 @@ public class AddPRequest extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsPreq);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(AddPRequest.this, Add)
-//
-//            }
-//        });
 
     }
 
@@ -79,11 +55,13 @@ public class AddPRequest extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
+        // as you specify a parent activity in AndroidManifest.xml.z
         //noinspection SimplifiableIfStatement
+        int id = item.getItemId();
         if (id == android.R.id.home) {
+            finish();
+            return true;
+        } else if (id == R.id.action_back_pr_detail) {
             finish();
             return true;
         }
@@ -91,45 +69,6 @@ public class AddPRequest extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-//    public static class PlaceholderFragment extends Fragment {
-//        /**
-//         * The fragment argument representing the section number for this
-//         * fragment.
-//         */
-//        private static final String ARG_SECTION_NUMBER = "section_number";
-//
-//        public PlaceholderFragment() {
-//        }
-//
-//        /**
-//         * Returns a new instance of this fragment for the given section
-//         * number.
-//         */
-//        public static PlaceholderFragment newInstance(int sectionNumber) {
-//            PlaceholderFragment fragment = new PlaceholderFragment();
-//            Bundle args = new Bundle();
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//            fragment.setArguments(args);
-//            return fragment;
-//        }
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.fragment_add_prequest, container, false);
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-//            return rootView;
-//        }
-//    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -147,6 +86,9 @@ public class AddPRequest extends AppCompatActivity {
                 case 1:
                     AddPRequestDtl preqDtl = new AddPRequestDtl();
                     return preqDtl;
+                case 2:
+                    AddPRequestItemDtl preqDtlItem = new AddPRequestItemDtl();
+                    return preqDtlItem;
                 default:
                     return null;
             }
@@ -155,7 +97,7 @@ public class AddPRequest extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
 
         public CharSequence getPageTitle (int position){
@@ -163,8 +105,9 @@ public class AddPRequest extends AppCompatActivity {
                 case 0:
                     return "Approval";
                 case 1:
+                    return "Show Items";
+                case 2:
                     return "Add Item";
-
                 default:
                     return null;
             }

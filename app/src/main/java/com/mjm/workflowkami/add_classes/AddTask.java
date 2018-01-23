@@ -3,6 +3,7 @@ package com.mjm.workflowkami.add_classes;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,6 +44,7 @@ import com.mjm.workflowkami.impl_classes.PurchaseOrder;
 import com.mjm.workflowkami.impl_classes.Reports;
 import com.mjm.workflowkami.impl_classes.Tasks;
 import com.mjm.workflowkami.impl_classes.Users;
+import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.TaskService;
@@ -54,42 +56,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddTask extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnClickListener {
+public class AddTask extends AppCompatActivity implements OnClickListener {
 
-    private EditText taskID;
-    private EditText taskName;
-    private EditText taskDescription;
-    private EditText fromDate;
-    private EditText toDate;
-    private Spinner taskStatus;
-    private Button taskOwner;
-    private Button taskManager;
-    private EditText taskProgress;
+    private EditText taskID, taskprojID, taskName, taskDescription, fromDate, toDate, taskHeader, dateComp, taskDuration, taskBudget;
+    private Spinner taskStatus, taskPhase;
     private Button saveTask;
-    private SpinnerDialog usersDialog1;
-    private SpinnerDialog usersDialog2;
-    private Spinner spinnerTaskOwner;
-    private TextView viewOwner, viewManager;
-    private ProgressBar taskprogress;
-    private DatePickerDialog fromDatePickerDialog;
-    private DatePickerDialog toDatePickerDialog;
+    private DatePickerDialog fromDatePickerDialog, toDatePickerDialog, compDatePickerDialog;
     private SimpleDateFormat dateFormatter;
-    private UserClass userClass1, userClass2;
     private ServiceImpl serviceImpl = new ServiceImpl();
-    private SpinnerAdapter adapter;
-    private ArrayList<String> uc;
-    private ArrayList<UserClass> uccc = new ArrayList<UserClass>();
-    private List<String> array;
-    private String selectedOwner, selectedManager;
     private TaskClass taskIntent = new TaskClass();
-    private UserClass userIDIntent = new UserClass();
-
-    Toast t;
-    Intent i;
-
+    private ProjectClass projIntent = new ProjectClass();
     private TaskClass task;
     private TaskService taskService = API.getInstance().getTaskService();
-    private UserService userService = API.getInstance().getUserService();
 
 
     @Override
@@ -98,127 +76,102 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_add_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        findViewsById();
+        setDateTimeField();
         serviceImpl.GetAllUserId();
         serviceImpl.GetAllUsers();
 
         taskID = (EditText) findViewById(R.id.task_id);
+        taskprojID = (EditText) findViewById(R.id.task_projID);
         taskName = (EditText) findViewById(R.id.task_name);
         taskDescription = (EditText) findViewById(R.id.task_desc);
+        taskPhase = (Spinner) findViewById(R.id.task_phase);
+        taskHeader = (EditText) findViewById(R.id.task_header) ;
         fromDate = (EditText) findViewById(R.id.task_start_date);
         toDate = (EditText) findViewById(R.id.task_end_date);
+        dateComp = (EditText) findViewById(R.id.task_date_completed);
         taskStatus = (Spinner) findViewById(R.id.task_status);
-
-        taskOwner = (Button) findViewById(R.id.task_owner);
-
-        taskOwner.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                usersDialog1.showSpinerDialog();
-            }
-        });
-        taskManager = (Button) findViewById(R.id.task_manager);
-        taskManager.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                usersDialog2.showSpinerDialog();
-            }
-        });
-        viewOwner = (TextView) findViewById(R.id.viewOwner);
-        viewManager = (TextView) findViewById(R.id.viewManager);
-        taskProgress = (EditText) findViewById(R.id.task_progress);
+        taskDuration = (EditText) findViewById(R.id.task_duration);
         saveTask = (Button) findViewById(R.id.btnSaveTask);
-//        taskprogress = (ProgressBar) findViewsById(R.id.taskProgress);
         dateFormatter = new SimpleDateFormat("yyyy-dd-MM", Locale.US);
-        userClass1 = new UserClass();
-        userClass2 = new UserClass();
+        taskBudget = (EditText) findViewById(R.id.task_budget);
 
+        taskDuration.setEnabled(false);
+        taskStatus.setEnabled(false);
+        dateComp.setEnabled(false);
 
-        Intent intent = getIntent();
-        taskIntent = (TaskClass) intent.getSerializableExtra("tasks");
+        Intent tIntent = getIntent();
+        taskIntent = (TaskClass) tIntent.getSerializableExtra("tasks");
+        Intent pIntent = getIntent();
+        projIntent = (ProjectClass) pIntent.getSerializableExtra("projects");
 
         if (taskIntent != null) {
+
             taskID.setText(String.valueOf(taskIntent.getTaskID()));
+            taskprojID.setText(String.valueOf(taskIntent.getProjectID()));
             taskName.setText(taskIntent.getTaskname());
             taskDescription.setText(taskIntent.getTaskdesc());
+
+            for (int i = 0; i < taskPhase.getCount(); i++) {
+                if (taskPhase.getItemAtPosition(i).toString().equals(taskIntent.getTaskphase())) {
+                    taskPhase.setSelection(i);
+                    break;
+                }
+            }
+            taskBudget.setText(String.valueOf(taskIntent.getTaskbudget()));
+            taskHeader.setText(taskIntent.getTaskheader());
             fromDate.setText(taskIntent.getTaskstartdate());
             toDate.setText(taskIntent.getTaskenddate());
+            dateComp.setText(taskIntent.getTaskdatecompleted());
             for (int i = 0; i < taskStatus.getCount(); i++) {
                 if (taskStatus.getItemAtPosition(i).toString().equals(taskIntent.getTaskstatus())) {
                     taskStatus.setSelection(i);
                     break;
                 }
             }
-
-//            viewOwner.setText(taskIntent.getTaskowner().getLastname());
-//            viewManager.setText(taskIntent.getTaskmanager().getLastname());
-//            taskProgress.setText(String.valueOf(taskIntent.getTaskprogress()));
+            taskDuration.setText(taskIntent.getTaskduration());
         }
+        final BigDecimal budget = new BigDecimal(taskBudget.getText().toString());
 
-        findViewsById();
-
-        usersDialog1 = new SpinnerDialog(AddTask.this, serviceImpl.userIDList, "Select User");
-        usersDialog1.bindOnSpinerListener(new OnSpinerItemClick() {
+        saveTask.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(String s, int i) {
-                selectedOwner = s;
-                viewOwner.setText(selectedOwner +" "+
-                        serviceImpl.usersList.get(i).getLastname() + ", " +
-                        serviceImpl.usersList.get(i).getFirstname());
+            public void onClick(View v) {
+
+                if (!taskID.getText().toString().matches("")) {
+                    //update
+                    Toast.makeText(AddTask.this, String.valueOf(taskIntent.getProjectID().getProjID()), Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddTask.this, taskID.getText().toString(), Toast.LENGTH_LONG).show();
+                    task = new TaskClass(Integer.valueOf(taskID.getText().toString()),
+                            taskIntent.getProjectID(),
+                            taskName.getText().toString().trim(),
+                            taskDescription.getText().toString().trim(),
+                            taskPhase.getSelectedItem().toString().trim(),
+                            taskHeader.getText().toString().trim(),
+                            budget,
+                            fromDate.getText().toString().trim(),
+                            toDate.getText().toString().trim(),
+                            dateComp.getText().toString().trim(),
+                            taskStatus.getSelectedItem().toString().trim(),
+                            taskDuration.getText().toString().trim());
+                    UpdateTask(taskIntent.getProjectID().getProjID(), Integer.valueOf(taskID.getText().toString()), task);
+                } else {
+                    //add
+                    Toast.makeText(AddTask.this, String.valueOf(projIntent.getProjID()), Toast.LENGTH_LONG).show();
+                    task = new TaskClass(taskIntent.getProjectID(),
+                            taskName.getText().toString().trim(),
+                            taskDescription.getText().toString().trim(),
+                            taskPhase.getSelectedItem().toString().trim(),
+                            taskHeader.getText().toString().trim(),
+                            budget,
+                            fromDate.getText().toString().trim(),
+                            toDate.getText().toString().trim(),
+                            dateComp.getText().toString().trim(),
+                            taskStatus.getSelectedItem().toString().trim(),
+                            taskDuration.getText().toString().trim());
+                    SaveTask(taskIntent.getProjectID().getProjID(), task);
+                }
             }
         });
-        usersDialog2 = new SpinnerDialog(AddTask.this, serviceImpl.userIDList, "Select User");
-        usersDialog2.bindOnSpinerListener(new OnSpinerItemClick() {
-            @Override
-            public void onClick(String s, int i) {
-                selectedManager = s;
-                viewManager.setText(selectedManager +" "+
-                        serviceImpl.usersList.get(i).getLastname() + ", " +
-                        serviceImpl.usersList.get(i).getFirstname());
-            }
-        });
-
-//        userClass1 = serviceImpl.FetchUserById(Integer.valueOf(selectedOwner));
-
-//        saveTask.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (!taskID.getText().toString().matches("")) {
-//                    //update
-//                    task = new TaskClass(taskName.getText().toString().trim(),
-//                            taskDescription.getText().toString().trim(),
-//                            fromDate.getText().toString().trim(),
-//                            toDate.getText().toString().trim(),
-//                            taskStatus.getSelectedItem().toString().trim(),
-//                            userClass1,
-//                            userClass2,
-//                            Double.parseDouble(taskProgress.getText().toString()),
-//                            Integer.parseInt(taskID.getText().toString()));
-//                    UpdateTask(taskIntent.getTaskID(), task);
-//                } else {
-//                    //add
-//                    task = new TaskClass(taskName.getText().toString().trim(),
-//                            taskDescription.getText().toString().trim(),
-//                            fromDate.getText().toString().trim(),
-//                            toDate.getText().toString().trim(),
-//                            taskStatus.getSelectedItem().toString().trim(),
-//                            userClass1,
-//                            userClass2,
-//                            Double.parseDouble(taskProgress.getText().toString()));
-//                    AddTask(task);
-//                }
-//            }
-//        });
-        setDateTimeField();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -229,6 +182,9 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
 //            fromDate.requestFocus();
             toDate = (EditText) findViewById(R.id.task_end_date);
             toDate.setInputType(InputType.TYPE_NULL);
+
+            dateComp = (EditText) findViewById(R.id.task_date_completed);
+            dateComp.setInputType(InputType.TYPE_NULL);
 
             taskName = (EditText) findViewById(R.id.task_name);
             taskName.setInputType(InputType.TYPE_NULL);
@@ -259,6 +215,16 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        compDatePickerDialog = new DatePickerDialog(this, new OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                dateComp.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
     @Override
     public void onClick(View view) {
@@ -266,96 +232,43 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
             fromDatePickerDialog.show();
         } else if(view == toDate) {
             toDatePickerDialog.show();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        } else if (view == dateComp) {
+            compDatePickerDialog.show();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_task, menu);
-        getMenuInflater().inflate(R.menu.main, menu);
+//        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-        switch (id){
-            case R.id.nav_dashboard:
-                Intent d = new Intent(AddTask.this, Dashboard.class);
-                startActivity(d);
-                break;
-//            case R.id.nav_tasks:
-//                Intent t = new Intent(AddTask.this, Tasks.class );
-//                startActivity(t);
-//                break;
-//            case R.id.nav_schedule:
-//                Intent s = new Intent(AddTask.this, Schedule.class);
-//                startActivity(s);
-//                break;
-            case R.id.nav_project:
-                Intent p = new Intent(AddTask.this, Projects.class);
-                startActivity(p);
-                break;
-            case R.id.nav_purchaseRequest:
-                Intent f = new Intent(AddTask.this, Forms.class);
-                startActivity(f);
-                break;
-            case R.id.nav_purchaseOrder:
-                Intent e = new Intent(AddTask.this, PurchaseOrder.class);
-                startActivity(e);
-                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(AddTask.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(AddTask.this, Reports.class);
-                startActivity(r);
-                break;
-            case R.id.nav_users:
-                Intent u = new Intent(AddTask.this, Users.class);
-                startActivity(u);
-                break;
+
+        if (id == R.id.action_back_task) {
+            startActivity(new Intent(this, Tasks.class));
+            return true;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     public void onClickCancel(View v) {
         Intent cancel = new Intent(AddTask.this, Tasks.class);
         startActivity(cancel);
     }
-    public void AddTask(TaskClass t) {
-        Call<TaskClass> addTask = taskService.addTask(t);
+
+    public void SaveTask(int projID, TaskClass t) {
+
+        Call<TaskClass> addTask = taskService.addTask(projID, t);
 
         addTask.enqueue(new Callback<TaskClass>() {
             @Override
             public void onResponse(Call<TaskClass> call, Response<TaskClass> response) {
+                Toast.makeText(AddTask.this, response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
                     Toast.makeText(AddTask.this, "Task has been successfully added!", Toast.LENGTH_SHORT).show();
 
@@ -371,12 +284,13 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
     }
 
 
-    public void UpdateTask(int id, TaskClass t) {
-        Call<TaskClass> addTask = taskService.editTask(id, t);
+    public void UpdateTask(int pid, int tid, TaskClass t) {
+        Call<Void> addTask = taskService.editTask(pid, tid, t);
 
-        addTask.enqueue(new Callback<TaskClass>() {
+        addTask.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<TaskClass> call, Response<TaskClass> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(AddTask.this, response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
                     Toast.makeText(AddTask.this, "Task has been successfully edited!", Toast.LENGTH_SHORT).show();
 
@@ -384,8 +298,10 @@ public class AddTask extends AppCompatActivity implements NavigationView.OnNavig
                     startActivity(u);
                 }
             }
+
             @Override
-            public void onFailure(Call<TaskClass> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
+
                 Toast.makeText(AddTask.this, "An error has been encountered while editing task", Toast.LENGTH_SHORT);
             }
         });

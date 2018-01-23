@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.impl_classes;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,9 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.Fragments.ProjTeam;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.PurchaseRequestAdapter;
@@ -28,7 +31,9 @@ import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Forms extends AppCompatActivity
+import dmax.dialog.SpotsDialog;
+
+public class Forms extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -37,6 +42,35 @@ public class Forms extends AppCompatActivity
     private ServiceImpl serviceImpl = new ServiceImpl();
     private List<PurchaseRequestClass> preqList = new ArrayList<PurchaseRequestClass>();
     private PurchaseRequestService purchaseRequestService = API.getInstance().getPurchaseRequestService();
+    private SpotsDialog loader;
+    private PullRefreshLayout layout;
+
+    private class ProjectTask extends AsyncTask<String, Void, List<PurchaseRequestClass>> {
+
+        @Override
+        protected void onPreExecute() {
+            showLoadingDialog();
+        }
+
+        @Override
+        protected List<PurchaseRequestClass> doInBackground(String... strings) {
+            do {
+                serviceImpl.GetAllPurchaseRequests();
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.prList == null);
+            return serviceImpl.prList;
+        }
+        @Override
+        protected void onPostExecute(List<PurchaseRequestClass> preqClassResponseEntity) {
+            dismissProgressDialog();
+            listofPreq.setAdapter(new PurchaseRequestAdapter(Forms.this, preqClassResponseEntity));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +80,20 @@ public class Forms extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         listofPreq = (ListView) findViewById(R.id.lstPreqs);
-        serviceImpl.GetAllPurchaseRequests();
-
-        listofPreq.setAdapter(new PurchaseRequestAdapter(Forms.this, serviceImpl.prList));
-
+        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/prequest/requests";
+        new ProjectTask().execute(uri);
+        layout = (PullRefreshLayout) findViewById(R.id.refreshpr);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_pr);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -61,9 +105,11 @@ public class Forms extends AppCompatActivity
                         startActivity(n);
                         break;
 
-                    case R.id.navigation_team:
-                        Toast.makeText(Forms.this, "Going to teams", Toast.LENGTH_LONG).show();
-                        break;
+//                    case R.id.navigation_team:
+////                        loader.show();
+//                        Intent te = new Intent(Forms.this, Workers.class);
+//                        startActivity(te);
+//                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(Forms.this, Forms.class);
@@ -82,16 +128,6 @@ public class Forms extends AppCompatActivity
                 return true;
             }
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent add = new Intent(Forms.this, AddPRequest.class);
-                startActivity(add);
-            }
-        });
-        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -157,47 +193,54 @@ public class Forms extends AppCompatActivity
                 Intent p = new Intent(Forms.this, Projects.class);
                 startActivity(p);
                 break;
-            case R.id.nav_purchaseRequest:
-//                Intent f = new Intent(Forms.this, Forms.class);
-//                startActivity(f);
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Forms.this, AttendanceNav.class);
+                startActivity(x);
                 break;
+
+//            case R.id.nav_purchaseRequest:
+////                Intent f = new Intent(Forms.this, Forms.class);
+////                startActivity(f);
+//                break;
 //            case R.id.nav_purchaseOrder:
 //                Intent e = new Intent(Forms.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(Forms.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(Forms.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(Forms.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                Intent r = new Intent(Forms.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
                 Intent u = new Intent(Forms.this, Users.class);
                 startActivity(u);
+                break;
+
+//            case R.id.nav_workers:
+////                loader.show();
+//                Intent x = new Intent(Forms.this, Workers.class);
+//                startActivity(x);
+//                break;
+
+//            case R.id.nav_settings:
+////                loader.show();
+//                Intent s = new Intent(Forms.this, Settings.class);
+//                startActivity(s);
+//                break;
+
+            case R.id.nav_logout:
+//                loader.show();
+                Intent l = new Intent(Forms.this, LoginActivity.class);
+                startActivity(l);
                 break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-    public void ListViewImpl() {
-
-//        listofPreq.setAdapter(new PurchaseRequestAdapter(this, serviceImpl.purchaseRequestList));
-//        listofPreq.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                PurchaseRequestClass purchaseRequestClass = (PurchaseRequestClass) serviceImpl.purchaseRequestList.get(position);
-//
-////                Toast.makeText(Forms.this,purchaseRequestClass.getProjectID().getProjectID(), Toast.LENGTH_SHORT).show();
-////                Intent i = new Intent(getApplicationContext(), AddPurchaseRequest.class);
-////                i.putExtra("preqs", purchaseRequestClass);
-////                startActivity(i);
-//
-//            }
-//        });
     }
 }

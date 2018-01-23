@@ -3,6 +3,7 @@ package com.mjm.workflowkami;
  * Created by Jasper on 1 Sep 2017.
  */
 
+import com.mjm.workflowkami.service_classes.AttendanceService;
 import com.mjm.workflowkami.service_classes.ProjectService;
 import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.PurchaseOrderService;
@@ -10,16 +11,25 @@ import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 import com.mjm.workflowkami.service_classes.TaskService;
 import com.mjm.workflowkami.service_classes.UserService;
+import com.mjm.workflowkami.service_classes.WorkerService;
+
+import java.net.URLEncoder;
 
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class API {
-    public final String BASE_URL = "http://192.168.2.108:8081/rest/";
-//    public final String BASE_URL = "http://192.168.2.144:8081/rest/";
+//    public final String BASE_URL = "http://192.168.2.108:8081/rest/";
+//    public final String BASE_URL = "http://192.168.2.123:8083/rest/";
+//    public final String BASE_URL = "http://10.1.11.159:8083/rest/";
+//    public final String BASE_URL = "http://192.168.0.22:8083/rest/";
+    public final String BASE_URL = "http://192.168.2.107:8083/rest/";
+//    public final String BASE_URL = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/";
 //    public final String BASE_URL = "http://192.168.2.144:8080/";
 //    public final String BASE_URL = "http://172.20.10.5:8081/rest/";
     //    public final String BASE_URL = "http://10.1.15.97:8081/rest/";
+//    public final String BASE_URL = "http://192.168.2.144:8083/";
     private static API instance = null;
 
     private UserService userService;
@@ -29,6 +39,8 @@ public class API {
     private PurchaseOrderService purchaseOrderService;
     private PurchaseRequestService purchaseRequestService;
     private ProjectTeamService projectTeamService;
+    private WorkerService workerService;
+    private AttendanceService attendanceService;
 
     public static API getInstance() {
         if (instance == null) {
@@ -43,7 +55,7 @@ public class API {
 
     private void buildRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL).build();
         this.userService = retrofit.create(UserService.class);
         this.taskService = retrofit.create(TaskService.class);
@@ -52,6 +64,8 @@ public class API {
         this.purchaseOrderService = retrofit.create(PurchaseOrderService.class);
         this.purchaseRequestItemService = retrofit.create(PurchaseRequestItemService.class);
         this.projectTeamService = retrofit.create(ProjectTeamService.class);
+        this.workerService = retrofit.create(WorkerService.class);
+        this.attendanceService = retrofit.create(AttendanceService.class);
 
     }
 
@@ -78,4 +92,8 @@ public class API {
     public PurchaseRequestItemService getPurchaseRequestItemService() {return this.purchaseRequestItemService; }
 
     public ProjectTeamService getProjectTeamService () { return this.projectTeamService; }
+
+    public WorkerService getWorkerService() { return this.workerService; }
+
+    public AttendanceService getAttendanceService() { return this.attendanceService; }
 }

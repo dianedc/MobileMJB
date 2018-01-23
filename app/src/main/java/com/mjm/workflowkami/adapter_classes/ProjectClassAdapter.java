@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.add_classes.AddProject;
 import com.mjm.workflowkami.impl_classes.Tasks;
+import com.mjm.workflowkami.impl_classes.Workers;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 
 import java.util.List;
@@ -34,13 +35,13 @@ public class ProjectClassAdapter extends ArrayAdapter<ProjectClass> {
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.list_item_projects, parent, false);
         TextView txtProjname = (TextView) view.findViewById(R.id.projname);
-        txtProjname.setText(projects.get(position).getProjectname());
+        txtProjname.setText(projects.get(position).getProjname());
         TextView txtProjectManager = (TextView) view.findViewById(R.id.projmanager);
-        txtProjectManager.setText(projects.get(position).getProjectmanager().getLastname());
+        txtProjectManager.setText(projects.get(position).getProjmanager().getLastname());
 
         Button btnEdit = (Button) view.findViewById(R.id.btnEditProj);
         btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +62,7 @@ public class ProjectClassAdapter extends ArrayAdapter<ProjectClass> {
                 ProjectClass projectClass = projects.get(position);
                 Intent i = new Intent(context, Tasks.class);
 
+//                i.setClassName(context, "com.mjm.workflowkami.add_classes.AddTask");
                 i.putExtra("projects", projectClass);
                 context.startActivity(i);
             }

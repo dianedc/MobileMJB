@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- TASK -->
     <string-array name="taskStatus">
-        <item>Select Task Status</item>
+        <item>Select Status</item>
         <item>Waiting</item>
         <item>Active</item>
         <item>Completed</item>
         <item>Late</item>
     </string-array>
+
+    <string-array name="taskOwner">
+        <item>Select Task Owner</item>
+    </string-array>
+
+    <string-array name="taskManager">
+        <item>Select Task Manager</item>
+    </string-array>
+
+    <string-array name="taskPhase">
+        <item>Select Phase</item>
+        <item>Pre-Construction</item>
+        <item>Construction</item>
+        <item>Post-Construction</item>
+    </string-array>
+    <!-- END TASK -->
+
+    <!-- PROJECT -->
     <string-array name="projectStatus">
         <item>Select Project Status</item>
         <item>Active</item>
         <item>Inactive</item>
     </string-array>
+
     <string-array name="projectname">
         <item>Select Project Name</item>
-    </string-array>
-    <string-array name="taskOwner">
-        <item>Select Task Owner</item>
-    </string-array>
-    <string-array name="taskManager">
-        <item>Select Task Manager</item>
-    </string-array>
-    <string-array name="requestedby">
-        <item>Requested By</item>
-    </string-array>
-    <string-array name="approvalStatus">
-        <item>Select Approval Status</item>
-        <item>Approved</item>
-        <item>Denied</item>
     </string-array>
 
     <string-array name="projType">
@@ -37,4 +43,46 @@
         <item>Demolition Only</item>
         <item>Demolition w/ Construction</item>
     </string-array>
+
+    <!-- END PROJECT -->
+
+    <!-- PURCHASE REQUEST -->
+    <string-array name="requestedby">
+        <item>Requested By</item>
+    </string-array>
+    <string-array name="approvalStatus">
+        <item>Select Approval Status</item>
+        <item>Approved</item>
+        <item>Denied</item>
+    </string-array>
+
+    <string-array name="generalDescription">
+        <item>Select Description</item>
+        <item>Nails</item>
+        <item>Cement</item>
+        <item>Sand</item>
+        <item>Gravel</item>
+        <item>Steelbars</item>
+        <item>Lumber</item>
+        <item>Plywood</item>
+        <item>Others</item>
+    </string-array>
+
+    <!-- END PURCHASE REQUEST -->
+
+    <!-- WORKER -->
+
+    <string-array name="workerRole">
+        <item>Select Role</item>
+        <item>Carpenter</item>
+        <item>Driver</item>
+        <item>Foreman</item>
+        <item>Laborer</item>
+        <item>Mason</item>
+        <item>Painter</item>
+        <item>Steelman</item>
+        <item>Timekeeper</item>
+    </string-array>
+
+    <!-- END WORKER -->
 </resources>

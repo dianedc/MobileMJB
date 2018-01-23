@@ -96,6 +96,12 @@ public class Reports extends AppCompatActivity
                 Intent p = new Intent(Reports.this, Projects.class);
                 startActivity(p);
                 break;
+
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Reports.this, AttendanceNav.class);
+                startActivity(x);
+                break;
 //            case R.id.nav_purchaseRequest:
 //                Intent f = new Intent(Reports.this, Forms.class);
 //                startActivity(f);
@@ -104,14 +110,14 @@ public class Reports extends AppCompatActivity
 //                Intent e = new Intent(Reports.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(Reports.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-//                Intent r = new Intent(Reports.this, Reports.class);
-//                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(Reports.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+////                Intent r = new Intent(Reports.this, Reports.class);
+////                startActivity(r);
+//                break;
             case R.id.nav_users:
                 Intent u = new Intent(Reports.this, Users.class);
                 startActivity(u);

@@ -13,8 +13,12 @@ import android.view.MenuItem;
 
 import com.mjm.workflowkami.R;
 
+import dmax.dialog.SpotsDialog;
+
 public class Files extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private SpotsDialog loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +26,9 @@ public class Files extends AppCompatActivity
         setContentView(R.layout.activity_files);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        loader = new SpotsDialog(Files.this);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        loader.dismiss();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -96,6 +94,12 @@ public class Files extends AppCompatActivity
                 Intent p = new Intent(Files.this, Projects.class);
                 startActivity(p);
                 break;
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Files.this, AttendanceNav.class);
+                startActivity(x);
+                break;
+
 //            case R.id.nav_purchaseRequest:
 //                Intent f = new Intent(Files.this, Forms.class);
 //                startActivity(f);
@@ -104,18 +108,38 @@ public class Files extends AppCompatActivity
 //                Intent e = new Intent(Files.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                Intent fi = new Intent(Files.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                Intent r = new Intent(Files.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                Intent fi = new Intent(Files.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                Intent r = new Intent(Files.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
                 Intent u = new Intent(Files.this, Users.class);
                 startActivity(u);
                 break;
+
+//            case R.id.nav_workers:
+//                loader.show();
+//                Intent x = new Intent(Files.this, Workers.class);
+//                startActivity(x);
+//                break;
+
+//            case R.id.nav_settings:
+//                loader.show();
+//                Intent s = new Intent(Files.this, Settings.class);
+//                startActivity(s);
+//                break;
+
+            case R.id.nav_logout:
+                loader.show();
+                Intent l = new Intent(Files.this, LoginActivity.class);
+                startActivity(l);
+                break;
+
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

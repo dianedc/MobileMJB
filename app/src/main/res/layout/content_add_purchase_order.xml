@@ -1,378 +1,617 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:background="@color/colorPrimary">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mjm.workflowkami.add_classes.AddPRequestHdr">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:background="@android:color/white"
+        android:orientation="vertical"
         android:weightSum="1">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="65dp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Primary Information"
+            android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"/>
+            android:text="Primary Information" />
 
-        <Space
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/pord_id"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_assign"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="Purchase Order ID"
-                android:singleLine="true"
-                android:textSize="6pt" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/preq_id"
-                    android:layout_width="278dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"
-                    android:drawableLeft="@drawable/ic_assign"
-                    android:drawablePadding="10dp"
-                    android:ems="14"
-                    android:hint="Purchase Request ID"
-                    android:singleLine="true"
-                    android:textSize="6pt" />
-
-            </android.support.design.widget.TextInputLayout>
-        </android.support.design.widget.TextInputLayout>
-
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <EditText
+            android:id="@+id/preq_pord_id"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:textSize="6pt"
+            android:visibility="gone"/>
 
         <EditText
-                android:id="@+id/pord_date"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:drawableLeft="@drawable/ic_date"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:textSize="6pt"
-                android:inputType="date"
-                android:hint="Date"/>
+            android:id="@+id/pord_id"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:textSize="6pt"
+            android:visibility="gone"/>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<Space-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="20dp" />-->
 
-            <EditText
-                android:id="@+id/pord_vendor"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="Vendor"
-                android:singleLine="true"
-                android:textSize="6pt" />
+        <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout_editor_absoluteX="8dp"-->
+        <!--tools:layout_editor_absoluteY="35dp">-->
 
-        </android.support.design.widget.TextInputLayout>
+        <!--<EditText-->
+        <!--android:id="@+id/preqProjName"-->
+        <!--android:layout_width="275dp"-->
+        <!--android:layout_height="43dp"-->
+        <!--android:layout_marginEnd="30dp"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:layout_marginStart="30dp"-->
+        <!--android:drawableLeft="@drawable/ic_menu_project"-->
+        <!--android:drawablePadding="10dp"-->
+        <!--android:hint="Project Name"-->
+        <!--android:textSize="6pt" />-->
+
+        <!--</android.support.design.widget.TextInputLayout>-->
+
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_weight="1" />
+            android:layout_height="20dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="35dp" />
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:layout_editor_absoluteX="8dp"-->
+            <!--tools:layout_editor_absoluteY="35dp">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/requestedby_preq"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_user"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:hint="Requested By"-->
+                <!--android:textSize="6pt" />-->
+
+        <!--</android.support.design.widget.TextInputLayout>-->
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/requestedby_preq_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Shipping Information"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"/>
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+        <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<EditText-->
+        <!--android:id="@+id/proj_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:ems="14"-->
+        <!--android:textSize="6pt"-->
+        <!--android:drawableLeft="@drawable/ic_menu_project"-->
+        <!--android:drawablePadding="10dp"-->
+        <!--android:hint="Project Name"-->
+        <!--android:singleLine="true"/>-->
 
-            <EditText
-                android:id="@+id/shippingmethod"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="Shipping Method"
-                android:singleLine="true"
-                android:textSize="6pt" />
+        <!--</android.support.design.widget.TextInputLayout>-->
 
-        </android.support.design.widget.TextInputLayout>
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<EditText-->
+            <!--android:id="@+id/preq_daterequested"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="43dp"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawableLeft="@drawable/ic_date"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Date Requested"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
 
-            <EditText
-                android:id="@+id/shippingterms"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_project"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="Shipping Terms"
-                android:singleLine="true"
-                android:textSize="6pt" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
         <EditText
-            android:id="@+id/deliv_date"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:id="@+id/pord_dateapproved"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:drawableLeft="@drawable/ic_date"
             android:drawablePadding="10dp"
             android:ems="14"
-            android:textSize="6pt"
+            android:hint="Date Approved"
             android:inputType="date"
-            android:hint="Delivery Date"/>
+            android:textSize="6pt" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Authorization Information"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:text="Project Manager"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:drawablePadding="10dp"
-            android:textStyle="normal"
-            android:textSize="6pt"
-            android:textColor="#000"
-            android:drawableLeft="@drawable/ic_menu_user"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <Spinner
-            android:id="@+id/proj_manager"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawSelectorOnTop="true"
-            android:drawablePadding="10dp"
-            />
-        <!--android:entries="@array/projectManager"-->
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <EditText
-            android:id="@+id/dateauthorized_proj"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:drawableLeft="@drawable/ic_date"
-            android:drawablePadding="10dp"
-            android:ems="14"
-            android:textSize="6pt"
-            android:inputType="date"
-            android:hint="Date Authorized"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:text="Authorization Status"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:drawablePadding="10dp"
-            android:textStyle="normal"
-            android:textSize="6pt"
-            android:textColor="#000"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <Spinner
-            android:id="@+id/authorization_status"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawSelectorOnTop="true"
-             />
-        <!--android:entries="@array/authorizationStatus"-->
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:text="Purchasing Officer"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:drawablePadding="10dp"
-            android:textStyle="normal"
-            android:textSize="6pt"
-            android:textColor="#000"
-            android:drawableLeft="@drawable/ic_menu_user"/>
+        <!--<RadioGroup-->
+            <!--android:id="@+id/rdogrpstat"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/statt"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.40"-->
+                <!--android:text="Approved" />-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/statf"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Declined" />-->
+        <!--</RadioGroup>-->
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="5dp" />
+            android:layout_height="20dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="35dp" />
 
-        <Spinner
-            android:id="@+id/purchasingOfficer"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawSelectorOnTop="true"
-            />
+        <!--<EditText-->
+        <!--android:id="@+id/preq_status"-->
+        <!--android:layout_width="275dp"-->
+        <!--android:layout_height="43dp"-->
+        <!--android:layout_marginEnd="30dp"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:layout_marginStart="30dp"-->
+        <!--android:drawableLeft="@drawable/ic_check_circle_black_24dp"-->
+        <!--android:drawablePadding="10dp"-->
+        <!--android:ems="14"-->
+        <!--android:hint="Status"-->
+        <!--android:inputType="date"-->
+        <!--android:textSize="6pt" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
+        <!--<Space-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="20dp" />-->
 
-        <EditText
-            android:id="@+id/dateauthorized_purchase"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:drawableLeft="@drawable/ic_date"
-            android:drawablePadding="10dp"
-            android:ems="14"
-            android:textSize="6pt"
-            android:inputType="date"
-            android:hint="Date Authorized"/>
+        <!--<TextView-->
+            <!--android:id="@+id/textView4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:text="Approval Information" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:text="Authorization Status"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:drawablePadding="10dp"
-            android:textStyle="normal"
-            android:textSize="6pt"
-            android:textColor="#000"/>
+        <!--<View-->
+            <!--android:id="@+id/view2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@android:color/darker_gray" />-->
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <Spinner
-            android:id="@+id/authorization_stat"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:drawSelectorOnTop="true"
-            />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/preqProjMan"
+                android:layout_width="275dp"
+                android:layout_height="43dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:drawableLeft="@drawable/ic_menu_user"
+                android:drawablePadding="10dp"
+                android:hint="Project Manager"
+                android:textSize="6pt" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/preqProjMan_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="20dp" />
 
-        <LinearLayout
+        <!--<EditText-->
+            <!--android:id="@+id/projman_dateapproved"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:layout_weight="0.54"-->
+            <!--android:drawableLeft="@drawable/ic_date"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Date Approved"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="5dp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView6"-->
+            <!--android:layout_width="278dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:text="Approval Status"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="6pt"-->
+            <!--android:textStyle="normal" />-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
+
+        <!--<RadioGroup-->
+            <!--android:id="@+id/rdogrppm"-->
+            <!--android:layout_width="287dp"-->
+            <!--android:layout_height="34dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/isapprovedpmt"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.40"-->
+                <!--android:text="Approved" />-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/isapprovedpmf"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Declined" />-->
+        <!--</RadioGroup>-->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/preqOfficeEng"
+                android:layout_width="275dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:drawableLeft="@drawable/ic_menu_user"
+                android:drawablePadding="10dp"
+                android:hint="Office Engineer"
+                android:textSize="6pt" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_weight="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/preqOfficeEng_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:visibility="gone"/>
 
-            <Button
-                android:id="@+id/btnCancel"
-                style="@style/Widget.AppCompat.Button.Borderless"
+        <!--<EditText-->
+            <!--android:id="@+id/officeengineer_dateapproved"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawableLeft="@drawable/ic_date"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Date Approved"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:text="Approval Status"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="6pt"-->
+            <!--android:textStyle="normal" />-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
+
+        <!--<RadioGroup-->
+            <!--android:id="@+id/rdogrpoe"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/isapprovedoet"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.40"-->
+                <!--android:text="Approved" />-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/isapprovedoef"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Declined" />-->
+        <!--</RadioGroup>-->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/preqPOfficer"
+                android:layout_width="275dp"
+                android:layout_height="43dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:drawableLeft="@drawable/ic_menu_user"
+                android:drawablePadding="10dp"
+                android:hint="Purchasing Officer"
+                android:textSize="6pt" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_weight="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/preqPOfficer_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+        <!--<EditText-->
+            <!--android:id="@+id/dateauthorized_purchase"-->
+            <!--android:layout_width="275dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawableLeft="@drawable/ic_date"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:ems="14"-->
+            <!--android:hint="Date Approved"-->
+            <!--android:inputType="date"-->
+            <!--android:textSize="6pt" />-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="5dp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView12"-->
+            <!--android:layout_width="278dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:text="Approval Status"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="6pt"-->
+            <!--android:textStyle="normal" />-->
+
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="10dp"-->
+            <!--android:layout_weight="0.17" />-->
+
+        <!--<RadioGroup-->
+            <!--android:id="@+id/rdogrppo"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/isapprovedpot"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.40"-->
+                <!--android:text="Approved" />-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/isapprovedpof"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Declined" />-->
+        <!--</RadioGroup>-->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="34dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/white"
-                android:fontFamily="sans-serif-medium"
-                android:text="Done"
-                android:textColor="@android:color/black"
-                android:textStyle="normal|bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/preq_sub_total"
+                android:text="Sub Total: "
+                android:textSize="10pt" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/preq_sub_total"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="59dp"
+                android:textSize="10pt" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="60dp"
+                android:text="Sales Tax: "
+                android:textSize="10pt" />
+
+            <TextView
+                android:id="@+id/preq_sales_tax"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/textView5"
+                android:textSize="10pt" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="117dp"
+                android:text="Total: "
+                android:textSize="10pt" />
+
+            <TextView
+                android:id="@+id/preq_total"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/textView7"
+                android:textSize="10pt" />
+        </RelativeLayout>
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btnSavePReq"-->
+                <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBaseline="@+id/btnCancel"-->
+                <!--android:layout_alignBottom="@+id/btnCancel"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_marginEnd="19dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:backgroundTint="@android:color/white"-->
+                <!--android:fontFamily="sans-serif-medium"-->
+                <!--android:text="SAVE"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textStyle="normal|bold"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btnCancel"-->
+                <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_toStartOf="@+id/btnSavePReq"-->
+                <!--android:layout_weight="1"-->
+                <!--android:backgroundTint="@android:color/white"-->
+                <!--android:fontFamily="sans-serif-medium"-->
+                <!--android:onClick="onClickCancel"-->
+                <!--android:text="Dismiss"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textStyle="normal|bold"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintRight_toLeftOf="@+id/btnSavePReq"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintVertical_bias="0.0" />-->
+
+        <!--</RelativeLayout>-->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
     </LinearLayout>
+
 </ScrollView>

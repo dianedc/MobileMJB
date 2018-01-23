@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:background="@color/colorPrimary">
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="348dp"
@@ -39,32 +38,39 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
-        <Space
+        <EditText
+            android:id="@+id/task_projID"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:drawableLeft="@drawable/ic_assign"
+            android:drawablePadding="10dp"
+            android:ems="9"
+            android:enabled="false"
+            android:focusable="false"
+            android:hint="Task ID"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="6pt"
+            android:visibility="gone" />
 
-        <android.support.design.widget.TextInputLayout
+        <EditText
+            android:id="@+id/task_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/task_id"
-                android:layout_width="112dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:drawableLeft="@drawable/ic_assign"
-                android:drawablePadding="10dp"
-                android:ems="9"
-                android:enabled="false"
-                android:focusable="false"
-                android:hint="Task ID"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textSize="6pt" />
-
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:drawableLeft="@drawable/ic_assign"
+            android:drawablePadding="10dp"
+            android:ems="9"
+            android:enabled="false"
+            android:focusable="false"
+            android:hint="Task ID"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="6pt"
+            android:visibility="gone" />
 
         <Space
             android:layout_width="match_parent"
@@ -104,18 +110,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/task_desc"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:ems="14"
-            android:textSize="6pt"
-            android:hint="Task Description"
-            android:drawableLeft="@drawable/ic_desc"
-            android:drawablePadding="10dp"
-            android:singleLine="true"/>
+            <EditText
+                android:id="@+id/task_desc"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_desc"
+                android:drawablePadding="10dp"
+                android:ems="14"
+                android:hint="Description"
+                android:singleLine="true"
+                android:textSize="6pt" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -135,30 +141,121 @@
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content">-->
 
-        <EditText
-            android:id="@+id/task_start_date"
+        <Spinner
+            android:id="@+id/task_phase"
             android:layout_width="278dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_weight="0.24"
-            android:drawableLeft="@drawable/ic_date"
-            android:drawablePadding="10dp"
-            android:ems="14"
-            android:hint="Start Date"
-            android:inputType="date"
-            android:onClick="datePicker"
-            android:singleLine="true"
-            android:textSize="6pt" />
+            android:entries="@array/taskPhase" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/task_header"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_desc"
+                android:drawablePadding="10dp"
+                android:ems="14"
+                android:hint="Header"
+                android:singleLine="true"
+                android:textSize="6pt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/task_budget"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+                android:drawablePadding="10dp"
+                android:ems="14"
+                android:hint="Budget"
+                android:singleLine="true"
+                android:textSize="6pt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/task_start_date"
+                    android:layout_width="161dp"
+                    android:layout_height="47dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="0.24"
+                    android:drawableLeft="@drawable/ic_date"
+                    android:drawablePadding="10dp"
+                    android:ems="14"
+                    android:hint="Start Date"
+                    android:inputType="date"
+                    android:onClick="datePicker"
+                    android:singleLine="true"
+                    android:textSize="6pt" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
+                <EditText
+                    android:id="@+id/task_end_date"
+                    android:layout_width="161dp"
+                    android:layout_height="47dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="0.24"
+                    android:drawableLeft="@drawable/ic_date"
+                    android:drawablePadding="10dp"
+                    android:ems="14"
+                    android:hint="Target End Date"
+                    android:inputType="date"
+                    android:singleLine="true"
+                    android:textSize="6pt" />
+
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
 
         <!--</android.support.design.widget.TextInputLayout>-->
 
         <!--android:layout_gravity="center"-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            />
         <!--<TextView-->
         <!--android:id="@+id/textView23"-->
         <!--android:layout_width="wrap_content"-->
@@ -167,31 +264,9 @@
         <!--tools:layout_editor_absoluteX="16dp"-->
         <!--tools:layout_editor_absoluteY="189dp" />-->
 
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-        <EditText
-            android:id="@+id/task_end_date"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="0.24"
-            android:drawableLeft="@drawable/ic_date"
-            android:drawablePadding="10dp"
-            android:ems="14"
-            android:hint="End Date"
-            android:inputType="date"
-            android:singleLine="true"
-            android:textSize="6pt" />
-
-        <!--</android.support.design.widget.TextInputLayout>-->
-
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            />
+            android:layout_height="20dp" />
         <!--<TextView-->
         <!--android:id="@+id/textView24"-->
         <!--android:layout_width="wrap_content"-->
@@ -213,6 +288,29 @@
             <!--android:hint="Confirm Email Address"-->
             <!--android:inputType="textEmailAddress" />-->
 
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/task_date_completed"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_weight="0.24"
+                android:drawableLeft="@drawable/ic_date"
+                android:drawablePadding="10dp"
+                android:ems="14"
+                android:inputType="date"
+                android:hint="Date Completed"
+                android:textSize="6pt" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
         <Spinner
             android:id="@+id/task_status"
             android:layout_width="278dp"
@@ -223,10 +321,9 @@
             android:drawSelectorOnTop="true"
             android:entries="@array/taskStatus" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="25dp" />-->
         <!--<TextView-->
         <!--android:id="@+id/textView25"-->
         <!--android:layout_width="wrap_content"-->
@@ -235,81 +332,42 @@
         <!--tools:layout_editor_absoluteX="16dp"-->
         <!--tools:layout_editor_absoluteY="263dp" />-->
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="35dp">
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:layout_editor_absoluteX="8dp"-->
+            <!--tools:layout_editor_absoluteY="35dp">-->
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Task Owner"
-                android:layout_marginLeft="24dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="24dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/textView13"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Task Owner"-->
+                <!--android:layout_marginLeft="24dp"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginStart="24dp" />-->
 
-            <TextView
-                android:id="@+id/viewOwner"
-                android:layout_width="180dp"
-                android:layout_height="21dp"
-                android:layout_marginBottom="9dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:text="TextView"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.193"
-                app:layout_constraintLeft_toRightOf="@+id/textView13"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp" />
-
-            <!--<EditText-->
-            <!--android:id="@+id/task_owner"-->
-            <!--android:layout_width="229dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginStart="20dp"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:ems="14"-->
-            <!--android:textSize="6pt"-->
-            <!--android:hint="Owner"-->
-            <!--android:drawableLeft="@drawable/ic_person"-->
-            <!--android:drawablePadding="10dp"-->
-            <!--android:singleLine="true"/>-->
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/task_owner"
-                android:layout_width="278dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:drawSelectorOnTop="true"
-                android:text="Select Task Owner"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.323"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:layout_editor_absoluteX="24dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/viewOwner"-->
+                <!--android:layout_width="180dp"-->
+                <!--android:layout_height="21dp"-->
+                <!--android:layout_marginBottom="9dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="TextView"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="14sp"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintHorizontal_bias="0.193"-->
+                <!--app:layout_constraintLeft_toRightOf="@+id/textView13"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--android:layout_marginTop="8dp" />-->
 
             <!--<EditText-->
             <!--android:id="@+id/task_owner"-->
@@ -324,7 +382,46 @@
             <!--android:drawablePadding="10dp"-->
             <!--android:singleLine="true"/>-->
 
-        </android.support.constraint.ConstraintLayout>
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<Button-->
+                <!--android:id="@+id/task_owner"-->
+                <!--android:layout_width="278dp"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:drawSelectorOnTop="true"-->
+                <!--android:text="Select Task Owner"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintHorizontal_bias="0.323"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintVertical_bias="0.0"-->
+                <!--tools:layout_editor_absoluteX="24dp" />-->
+
+            <!--<EditText-->
+            <!--android:id="@+id/task_owner"-->
+            <!--android:layout_width="229dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:ems="14"-->
+            <!--android:textSize="6pt"-->
+            <!--android:hint="Owner"-->
+            <!--android:drawableLeft="@drawable/ic_person"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:singleLine="true"/>-->
+
+        <!--</android.support.constraint.ConstraintLayout>-->
 
         <!--<TextView-->
         <!--android:id="@+id/textView26"-->
@@ -334,80 +431,44 @@
         <!--tools:layout_editor_absoluteX="16dp"-->
         <!--tools:layout_editor_absoluteY="300dp" />-->
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="35dp">
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:layout_editor_absoluteX="8dp"-->
+            <!--tools:layout_editor_absoluteY="35dp">-->
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Task Manager"
-                android:layout_marginLeft="24dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/textView14"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Task Manager"-->
+                <!--android:layout_marginLeft="24dp"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--android:layout_marginBottom="8dp" />-->
 
-            <TextView
-                android:id="@+id/viewManager"
-                android:layout_width="178dp"
-                android:layout_height="21dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:text="TextView"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.089"
-                app:layout_constraintLeft_toRightOf="@+id/textView14"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:layout_editor_absoluteY="8dp" />
-
-            <!--<EditText-->
-            <!--android:id="@+id/task_manager"-->
-            <!--android:layout_width="229dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:ems="14"-->
-            <!--android:layout_marginStart="20dp"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:textSize="6pt"-->
-            <!--android:hint="Task Manager"-->
-            <!--android:drawableLeft="@drawable/ic_name"-->
-            <!--android:drawablePadding="10dp"-->
-            <!--android:singleLine="true"/>-->
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/task_manager"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:drawSelectorOnTop="true"
-                android:text="Select Task Manager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <!--<TextView-->
+                <!--android:id="@+id/viewManager"-->
+                <!--android:layout_width="178dp"-->
+                <!--android:layout_height="21dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="0dp"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="TextView"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="14sp"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintHorizontal_bias="0.089"-->
+                <!--app:layout_constraintLeft_toRightOf="@+id/textView14"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintVertical_bias="0.0"-->
+                <!--tools:layout_editor_absoluteY="8dp" />-->
 
             <!--<EditText-->
             <!--android:id="@+id/task_manager"-->
@@ -422,7 +483,43 @@
             <!--android:drawablePadding="10dp"-->
             <!--android:singleLine="true"/>-->
 
-        </android.support.constraint.ConstraintLayout>
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<Button-->
+                <!--android:id="@+id/task_manager"-->
+                <!--android:layout_width="278dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:drawSelectorOnTop="true"-->
+                <!--android:text="Select Task Manager"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<EditText-->
+            <!--android:id="@+id/task_manager"-->
+            <!--android:layout_width="229dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:ems="14"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:textSize="6pt"-->
+            <!--android:hint="Task Manager"-->
+            <!--android:drawableLeft="@drawable/ic_name"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:singleLine="true"/>-->
+
+        <!--</android.support.constraint.ConstraintLayout>-->
 
         <Space
             android:layout_width="match_parent"
@@ -447,7 +544,7 @@
             <!--android:singleLine="true"/>-->
 
             <EditText
-                android:id="@+id/task_progress"
+                android:id="@+id/task_duration"
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -455,7 +552,7 @@
                 android:drawableLeft="@drawable/ic_taskprog"
                 android:drawablePadding="10dp"
                 android:ems="14"
-                android:hint="Task Progress"
+                android:hint="Task Duration"
                 android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textSize="6pt" />
@@ -468,22 +565,27 @@
             android:layout_height="55dp"
             />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnCancel"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
                 android:layout_weight="1"
-                android:text="Cancel"
-                android:backgroundTint="@android:color/holo_red_light"
-                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/white"
                 android:fontFamily="sans-serif-medium"
+                android:onClick="onClickCancel"
+                android:text="Dismiss"
+                android:textColor="@android:color/black"
                 android:textStyle="normal|bold"
-                android:onClick="onClickCancel"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!--<Button-->
                 <!--android:id="@+id/btnReset"-->
@@ -498,17 +600,22 @@
 
             <Button
                 android:id="@+id/btnSaveTask"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="17dp"
+                android:layout_toStartOf="@+id/btnCancel"
                 android:layout_weight="1"
-                android:text="Submit"
-                android:backgroundTint="@color/colorGreen"
-                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/white"
                 android:fontFamily="sans-serif-medium"
+                android:text="Save"
+                android:textColor="@android:color/black"
                 android:textStyle="normal|bold"
-                />
-            <!--android:onClick="onClickAddTask"-->
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -11,17 +11,17 @@
             <!--android:id="@+id/menu_logout"-->
             <!--android:title="Logout" />-->
     <!--</menu>-->
-    <item
-        android:id="@+id/action_notif"
-        android:icon="@mipmap/ic_launcher"
-        android:title="Notification"
-        app:showAsAction="always"/>
+    <!--<item-->
+        <!--android:id="@+id/action_notif"-->
+        <!--android:icon="@mipmap/ic_launcher"-->
+        <!--android:title="Notification"-->
+        <!--app:showAsAction="always"/>-->
 
-    <item
-        android:id="@+id/action_user"
-        android:icon="@mipmap/ic_user"
-        android:title="User"
-        app:showAsAction="ifRoom"></item>
+    <!--<item-->
+        <!--android:id="@+id/action_user"-->
+        <!--android:icon="@mipmap/ic_user"-->
+        <!--android:title="User"-->
+        <!--app:showAsAction="ifRoom"></item>-->
 
 
 </menu>

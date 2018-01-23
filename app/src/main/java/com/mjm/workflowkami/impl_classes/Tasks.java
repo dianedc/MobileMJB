@@ -1,9 +1,11 @@
 package com.mjm.workflowkami.impl_classes;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,13 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
+import com.mjm.workflowkami.Fragments.ProjTeam;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.TaskClassAdapter;
+import com.mjm.workflowkami.add_classes.AddTask;
+import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.service_classes.TaskService;
 
@@ -26,16 +33,59 @@ import java.util.List;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class Tasks extends AppCompatActivity
+public class Tasks extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String TAG = Tasks.class.getSimpleName();
     private ListView listofTasks;
     private ServiceImpl serviceImpl = new ServiceImpl();
-    List<TaskClass> tasksList = new ArrayList<TaskClass>();
-    private TaskService taskService = API.getInstance().getTaskService();
+    private ProjectClass projectIntent = new ProjectClass();
     private SpotsDialog loader;
+    private PullRefreshLayout layout;
+    private TaskService taskService = API.getInstance().getTaskService();
+
+    private class ProjectTask extends AsyncTask<String, Void, List<TaskClass>> {
+
+        @Override
+        protected void onPreExecute() {
+            showLoadingDialog();
+        }
+
+        @Override
+        protected List<TaskClass> doInBackground(String... strings) {
+//            while (serviceImpl.projectsList != null) {
+//                serviceImpl.GetAllProjects();
+//                try  {
+//                    Thread.sleep(5000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            Intent intent = getIntent();
+            projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+            do {
+                if (projectIntent != null) {
+
+                    serviceImpl.GetTaskByProjId(projectIntent.getProjID());
+                }
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.tasksList == null);
+            return serviceImpl.tasksList;
+        }
+        @Override
+        protected void onPostExecute(List<TaskClass> taskClassResponseEntity) {
+            dismissProgressDialog();
+            listofTasks.setAdapter(new TaskClassAdapter(Tasks.this, taskClassResponseEntity));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,24 +95,26 @@ public class Tasks extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Intent intent = getIntent();
+        projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+
         listofTasks = (ListView) findViewById(R.id.lstTasks);
-        serviceImpl.GetAllTasks();
-        listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
-
-        if (listofTasks != null) {
-            loader.dismiss();
+        if (projectIntent != null) {
+            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/" + projectIntent.getProjID() + "/task";
+            new ProjectTask().execute(uri);
         }
-//        ListViewImpl();
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            Intent add = new Intent(Tasks.this, AddTask.class);
-//            startActivity(add);
-//
-//            }
-//        });
+        layout = (PullRefreshLayout) findViewById(R.id.refreshTask);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_tasks);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -75,9 +127,11 @@ public class Tasks extends AppCompatActivity
                         startActivity(n);
                         break;
 
-                    case R.id.navigation_team:
-                        Toast.makeText(Tasks.this, "Going to teams", Toast.LENGTH_LONG).show();
-                        break;
+//                    case R.id.navigation_team:
+////                        loader.show();
+//                        Intent te = new Intent(Tasks.this, Workers.class);
+//                        startActivity(te);
+//                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(Tasks.this, Forms.class);
@@ -141,23 +195,29 @@ public class Tasks extends AppCompatActivity
         int id = item.getItemId();
         switch (id){
             case R.id.nav_dashboard:
-                loader.show();
+//                loader.show();
                 Intent d = new Intent(Tasks.this, Dashboard.class);
                 startActivity(d);
                 break;
-            case R.id.nav_tasks:
+//            case R.id.nav_tasks:
 //                Intent t = new Intent(Tasks.this, Tasks.class );
 //                startActivity(t);
-                break;
+//                break;
 //            case R.id.nav_schedule:
 //                loader.show();
 //                Intent s = new Intent(Tasks.this, Schedule.class);
 //                startActivity(s);
 //                break;
             case R.id.nav_project:
-                loader.show();
+//                loader.show();
                 Intent p = new Intent(Tasks.this, Projects.class);
                 startActivity(p);
+                break;
+
+            case R.id.nav_team:
+//                loader.show();
+                Intent x = new Intent(Tasks.this, AttendanceNav.class);
+                startActivity(x);
                 break;
 //            case R.id.nav_purchaseRequest:
 //                loader.show();
@@ -169,20 +229,38 @@ public class Tasks extends AppCompatActivity
 //                Intent e = new Intent(Tasks.this, PurchaseOrder.class);
 //                startActivity(e);
 //                break;
-            case R.id.nav_files:
-                loader.show();
-                Intent fi = new Intent(Tasks.this, Files.class);
-                startActivity(fi);
-                break;
-            case R.id.nav_reports:
-                loader.show();
-                Intent r = new Intent(Tasks.this, Reports.class);
-                startActivity(r);
-                break;
+//            case R.id.nav_files:
+//                loader.show();
+//                Intent fi = new Intent(Tasks.this, Files.class);
+//                startActivity(fi);
+//                break;
+//            case R.id.nav_reports:
+//                loader.show();
+//                Intent r = new Intent(Tasks.this, Reports.class);
+//                startActivity(r);
+//                break;
             case R.id.nav_users:
-                loader.show();
+//                loader.show();
                 Intent u = new Intent(Tasks.this, Users.class);
                 startActivity(u);
+                break;
+
+//            case R.id.nav_workers:
+//                loader.show();
+//                Intent x = new Intent(Tasks.this, Workers.class);
+//                startActivity(x);
+//                break;
+
+//            case R.id.nav_settings:
+//                loader.show();
+//                Intent s = new Intent(Tasks.this, Settings.class);
+//                startActivity(s);
+//                break;
+
+            case R.id.nav_logout:
+//                loader.show();
+                Intent l = new Intent(Tasks.this, LoginActivity.class);
+                startActivity(l);
                 break;
         }
 
@@ -190,23 +268,4 @@ public class Tasks extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    public void ListViewImpl() {
-
-        listofTasks.setAdapter(new TaskClassAdapter(this, serviceImpl.tasksList));
-//        listofTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                TaskClass taskClass = (TaskClass) serviceImpl.tasksList.get(position);
-//
-//                Intent i = new Intent(getApplicationContext(), AddTask.class);
-//                i.putExtra("tasks", taskClass);
-////                Toast.makeText(getApplicationContext(), taskClass.getTaskname(), Toast.LENGTH_LONG).show();
-//                startActivity(i);
-//
-//            }
-//        });
-    }
-
 }

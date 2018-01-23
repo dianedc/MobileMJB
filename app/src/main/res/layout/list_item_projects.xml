@@ -61,12 +61,12 @@
 
     <Button
         android:id="@+id/btnEditProj"
-        android:layout_width="32dp"
+        android:layout_width="100dp"
         android:layout_height="32dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="27dp"
         android:background="@drawable/rounded_button"
-        android:drawableLeft="@drawable/ic_mode_edit_4px"
+        android:text="View Details"
         android:textAlignment="center"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

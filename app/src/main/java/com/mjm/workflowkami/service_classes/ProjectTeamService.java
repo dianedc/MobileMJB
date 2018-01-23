@@ -21,12 +21,21 @@ public interface ProjectTeamService {
     @GET("project/teams")
     Call<List<ProjectTeamClass>> getAllProjTeams();
 
-    @GET("project/{projteamID}")
-    Call<ProjectTeamClass> getProjectTeamById(@Path("projteamID") int projteamID);
+    @POST("project/{projteamID}/attendance")
+    Call<List<ProjectTeamClass>> putTimeIn(@Path("projteamID") int projteamID);
 
     @POST("project/add")
     Call<ProjectTeamClass> addProjectTeam(@Body ProjectTeamClass projectTeam);
 
     @POST("project/update/{projteamID}")
     Call<ProjectTeamClass> editTeam(@Path("projteamID") int projteamID, @Body ProjectTeamClass team);
+
+//    http://192.168.2.123:8083/rest/project/12/team
+    @GET("project/{projID}/team/users")
+    Call<List<ProjectTeamClass>> getUsersTeamById(@Path("projID") int projID);
+
+    @GET("project/{projID}/team/workers")
+    Call<List<ProjectTeamClass>> getWorkerTeamById(@Path("projID") int projID);
+
+
 }

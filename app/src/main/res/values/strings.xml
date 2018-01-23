@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">MJM Konstruct &amp; Management Inc.</string>
+    <string name="base_url">"http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/"</string>
 
     <!-- Strings related to login -->
     <!--<string name="app_name">Sign In&amp;Up</string>-->
@@ -175,17 +176,26 @@
     <string name="DialogAmount">Amount</string>
     <string name="title_activity_add_prequest">Purchase Request</string>
     <string name="tab_text_1">Approval</string>
-    <string name="tab_text_2">Add Item</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="tab_text_2">Show Item</string>
+    <string name="tab_text_3">Add Item</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="tab1">Engineers / Architects</string>
-    <string name="tab2">Workers</string>
-    <string name="tab3">Attendance</string>
-    <string name="workers">MJM Konstruct &amp; Management Inc.</string>
+    <string name="tab1">Project Team</string>
+    <string name="tab2">Time In</string>
+    <string name="tab3">Time Out</string>
+    <string name="team">Team</string>
+    <string name="workers">Attendannce</string>
+
 
     <string name="title_file_list">Files</string>
     <string name="title_file_detail">File Detail</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="save">Save</string>
 
 </resources>
