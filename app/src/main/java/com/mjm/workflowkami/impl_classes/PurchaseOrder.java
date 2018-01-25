@@ -141,11 +141,11 @@ public class PurchaseOrder extends LoaderAsync
                         startActivity(n);
                         break;
 
-//                    case R.id.navigation_team:
-//                        loader.show();
-//                        Intent t = new Intent(PurchaseOrder.this, ProjectTeam.class);
-//                        startActivity(t);
-//                        return true;
+                    case R.id.navigation_team:
+                        loader.show();
+                        Intent t = new Intent(PurchaseOrder.this, ProjectTeam.class);
+                        startActivity(t);
+                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(PurchaseOrder.this, Forms.class);

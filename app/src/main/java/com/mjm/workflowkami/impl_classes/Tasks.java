@@ -43,6 +43,7 @@ public class Tasks extends LoaderAsync
     private ListView listofTasks;
     private ServiceImpl serviceImpl = new ServiceImpl();
     private ProjectClass projectIntent = new ProjectClass();
+    private int projID = 0;
     private SpotsDialog loader;
     private PullRefreshLayout layout;
     private TaskService taskService = API.getInstance().getTaskService();
@@ -66,10 +67,11 @@ public class Tasks extends LoaderAsync
 //            }
             Intent intent = getIntent();
             projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+            projID = projectIntent.getProjID();
             do {
-                if (projectIntent != null) {
+                if (projID != 0) {
 
-                    serviceImpl.GetTaskByProjId(projectIntent.getProjID());
+                    serviceImpl.GetTaskByProjId(projID);
                 }
                 try  {
                     Thread.sleep(5000);
@@ -97,10 +99,11 @@ public class Tasks extends LoaderAsync
 
         Intent intent = getIntent();
         projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+        projID = projectIntent.getProjID();
 
         listofTasks = (ListView) findViewById(R.id.lstTasks);
-        if (projectIntent != null) {
-            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/" + projectIntent.getProjID() + "/task";
+        if (projID != 0) {
+            final String uri = "http://192.168.2.107:8083/rest/project/" + projID + "/task";
             new ProjectTask().execute(uri);
         }
         layout = (PullRefreshLayout) findViewById(R.id.refreshTask);
@@ -127,11 +130,11 @@ public class Tasks extends LoaderAsync
                         startActivity(n);
                         break;
 
-//                    case R.id.navigation_team:
-////                        loader.show();
-//                        Intent te = new Intent(Tasks.this, Workers.class);
-//                        startActivity(te);
-//                        return true;
+                    case R.id.navigation_team:
+//                        loader.show();
+                        Intent te = new Intent(Tasks.this, ProjectTeam.class);
+                        startActivity(te);
+                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(Tasks.this, Forms.class);

@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.add_classes.AddProject;
-import com.mjm.workflowkami.impl_classes.Tasks;
-import com.mjm.workflowkami.impl_classes.Workers;
+import com.mjm.workflowkami.impl_classes.Workflow;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 
 import java.util.List;
@@ -60,7 +59,7 @@ public class ProjectClassAdapter extends ArrayAdapter<ProjectClass> {
             @Override
             public void onClick(View v) {
                 ProjectClass projectClass = projects.get(position);
-                Intent i = new Intent(context, Tasks.class);
+                Intent i = new Intent(context, Workflow.class);
 
 //                i.setClassName(context, "com.mjm.workflowkami.add_classes.AddTask");
                 i.putExtra("projects", projectClass);

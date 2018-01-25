@@ -82,15 +82,11 @@ public class AddPRequestItemDtl extends Fragment {
         Intent prIntent = getActivity().getIntent();
         pr = (PurchaseRequestClass) prIntent.getSerializableExtra("preqs");
 
-//        Toast.makeText(getActivity(), preq.toString(), Toast.LENGTH_LONG).show();
-//        Toast.makeText(getActivity(), pi.toString(), Toast.LENGTH_LONG).show();
         if(pr != null) {
-//            Toast.makeText(getActivity(), String.valueOf(pr.getPreqID()), Toast.LENGTH_LONG).show();
             preq_id.setText(String.valueOf(pr.getPreqID()));
         }
 
         if (piIntent != null) {
-//            Toast.makeText(getActivity(), String.valueOf(pr.getPreqID()), Toast.LENGTH_LONG).show();
             preq_id_dtl.setText(String.valueOf(piIntent.getPreqItemID()));
             preq_dtl_desc.setText(piIntent.getPreqdesc());
             preq_dtl_qty.setText(String.valueOf(piIntent.getPreqqty()));
@@ -168,6 +164,7 @@ public class AddPRequestItemDtl extends Fragment {
                     alertDialogBuilder.setCancelable(true);
                     alertDialogBuilder.show();
 
+//                    AsyncTask<String, Void, List<PurchaseRequestItemClass>> execute = new AddPRequestDtl.PRequestTask().execute();
                     Intent u = new Intent(getActivity(), AddPRequestDtl.class);
                     startActivity(u);
                 }
@@ -185,7 +182,7 @@ public class AddPRequestItemDtl extends Fragment {
     }
 
     public void UpdateItem(int preqid, int item, PurchaseRequestItemClass pi) {
-        Call<Void> edtItem = pService.editPReqItem(preqid, item, pi);
+        Call<Void> edtItem = pService.editPReqItem(item, pi);
 
         edtItem.enqueue(new Callback<Void>() {
             @Override

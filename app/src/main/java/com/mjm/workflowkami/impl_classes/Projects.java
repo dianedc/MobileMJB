@@ -217,7 +217,7 @@ public class Projects extends LoaderAsync
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_projects);
 //        drawer.closeDrawer(GravityCompat.START);
         return true;
     }

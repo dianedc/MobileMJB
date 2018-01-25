@@ -14,23 +14,23 @@ import android.widget.ListView;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
-import com.mjm.workflowkami.adapter_classes.ProjTeamClassAdapter;
-import com.mjm.workflowkami.adapter_classes.ProjectTeamAdapter;
+import com.mjm.workflowkami.adapter_classes.PurchaseRequestAdapter;
+import com.mjm.workflowkami.adapter_classes.TaskClassAdapter;
 import com.mjm.workflowkami.impl_classes.Tasks;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
+import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
+import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.service_classes.ProjectTeamService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.Intent.getIntent;
-
 /**
  * Created by admin on 26 Nov 2017.
  */
 
-public class ProjTeam extends ListFragment {
+public class PRequestFragment extends ListFragment {
 
     private String TAG = Tasks.class.getSimpleName();
     private ListView listofPteams;
@@ -41,7 +41,7 @@ public class ProjTeam extends ListFragment {
     private ProgressDialog progressDialog;
     private ProjectClass projectIntent = new ProjectClass();
 
-    private class ProjTeamTask extends AsyncTask<String, Void, List<ProjectTeamClass>> {
+    private class ProjPReq extends AsyncTask<String, Void, List<PurchaseRequestClass>> {
 
         @Override
         protected void onPreExecute() {
@@ -52,29 +52,30 @@ public class ProjTeam extends ListFragment {
         }
 
         @Override
-        protected List<ProjectTeamClass> doInBackground(String... strings) {
+        protected List<PurchaseRequestClass> doInBackground(String... strings) {
             Intent intent = getActivity().getIntent();
             projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
 
             do {
 
+                serviceImpl.GetAllPurchaseRequests();
 //                serviceImpl.GetAllProjTeams();
-                if (projectIntent != null) {
-                    serviceImpl.GetUsersTeamById(projectIntent.getProjID());
-                }
+//                if (projectIntent != null) {
+//                    serviceImpl.GetTaskByProjId(projectIntent.getProjID());
+//                }
                 try  {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-            } while (serviceImpl.pTeamList == null);
-            return serviceImpl.pTeamList;
+            } while (serviceImpl.prList == null);
+            return serviceImpl.prList;
         }
         @Override
-        protected void onPostExecute(List<ProjectTeamClass> workerClassResponseEntity) {
+        protected void onPostExecute(List<PurchaseRequestClass> workerClassResponseEntity) {
             progressDialog.dismiss();
-            ProjTeamClassAdapter adapter = new ProjTeamClassAdapter(getActivity(), workerClassResponseEntity);
+            PurchaseRequestAdapter adapter = new PurchaseRequestAdapter(getActivity(), workerClassResponseEntity);
             setListAdapter(adapter);
         }
     }
@@ -82,15 +83,15 @@ public class ProjTeam extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_projteam, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_preq, container, false);
 
-        new ProjTeamTask().execute();
+        new ProjPReq().execute();
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ProjTeamClassAdapter adapter = new ProjTeamClassAdapter(getActivity(), serviceImpl.pTeamList);
+        PurchaseRequestAdapter adapter = new PurchaseRequestAdapter(getActivity(), serviceImpl.prList);
         setListAdapter(adapter);
         super.onActivityCreated(savedInstanceState);
     }

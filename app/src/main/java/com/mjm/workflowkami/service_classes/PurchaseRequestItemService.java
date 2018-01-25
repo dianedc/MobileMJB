@@ -33,6 +33,6 @@ public interface PurchaseRequestItemService {
     @POST("prequest/{prequestID}/item/add")
     Call<PurchaseRequestItemClass> addPReqItem(@Path("prequestID") int preqID, @Body PurchaseRequestItemClass preqItem);
 
-    @POST("prequest/{prequestID}/item/update/{preqitemID}")
-    Call<Void> editPReqItem(@Path("prequestID") int preqID, @Path("preqitemID") int preqitemID, @Body PurchaseRequestItemClass preqitem);
+    @POST("prequest/item/update/{preqitemID}")
+    Call<Void> editPReqItem(@Path("preqitemID") int preqitemID, @Body PurchaseRequestItemClass preqitem);
 }

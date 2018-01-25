@@ -504,8 +504,9 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/preq_sub_total"
+                android:layout_marginStart="29dp"
                 android:text="Sub Total: "
                 android:textSize="10pt" />
 
@@ -513,9 +514,8 @@
                 android:id="@+id/preq_sub_total"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="59dp"
+                android:layout_toEndOf="@+id/textView2"
                 android:textSize="10pt" />
         </RelativeLayout>
 
@@ -529,7 +529,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="29dp"
                 android:text="Sales Tax: "
                 android:textSize="10pt" />
 
@@ -552,7 +552,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="117dp"
+                android:layout_marginStart="30dp"
                 android:text="Total: "
                 android:textSize="10pt" />
 
@@ -561,6 +561,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:layout_marginStart="42dp"
                 android:layout_toEndOf="@+id/textView7"
                 android:textSize="10pt" />
         </RelativeLayout>

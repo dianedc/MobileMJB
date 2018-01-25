@@ -37,6 +37,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taskName" />
 
+    <TextView
+        android:id="@+id/taskPhase"
+        android:layout_width="230dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="36dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="13dp"
+        android:paddingTop="12dp"
+        android:text="TextView"
+        android:textSize="6pt"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/btnCompleteTask"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskName" />
+
     <Button
         android:id="@+id/btnEditTask"
         android:layout_width="27dp"
@@ -52,7 +68,7 @@
         android:id="@+id/btnCompleteTask"
         android:layout_width="92dp"
         android:layout_height="47dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/rounded_button"
         android:drawableTop="@drawable/ic_check_circle_black_24dp"
         android:text="Complete"

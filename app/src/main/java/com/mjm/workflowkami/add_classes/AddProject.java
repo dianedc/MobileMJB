@@ -60,6 +60,9 @@ public class AddProject extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         projID = (EditText) findViewById(R.id.project_id);
         projName = (EditText) findViewById(R.id.project_name);
         projStatus = (EditText) findViewById(R.id.project_status);
@@ -175,14 +178,10 @@ public class AddProject extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_back_proj) {
-            startActivity(new Intent(this, Projects.class));
-            return true;
+        if (id == android.R.id.home) {
+            this.finish();
         }
 
         return super.onOptionsItemSelected(item);

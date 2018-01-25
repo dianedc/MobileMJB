@@ -166,10 +166,12 @@
     <string name="splashtext">MJM Konstruct &amp; Management Inc.</string>
     <string name="title_task">Task</string>
     <string name="title_team">Team</string>
+    <string name="title_workflow">Workflow</string>
     <string name="title_pr">Purchase Request</string>
     <string name="title_po">Purchase Order</string>
     <string name="title_attendance">Attendance</string>
     <string name="title_activity_workers">Workers</string>
+    <string name="title_activity_workflow">Workflow</string>
 
     <string name="DialogItem">Item</string>
     <string name="DialogQuantity">Qty</string>
@@ -186,6 +188,12 @@
     <string name="tab3">Time Out</string>
     <string name="team">Team</string>
     <string name="workers">Attendannce</string>
+
+    <string name="tab11">Tasks</string>
+    <string name="tab12">Project Team</string>
+    <string name="tab13">Purchase Request</string>
+    <string name="tab14">Purchase Order</string>
+    <string name="workflow">Workflow</string>
 
 
     <string name="title_file_list">Files</string>

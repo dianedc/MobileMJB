@@ -8,11 +8,11 @@
     <!--android:title="@string/action_settings"-->
     <!--app:showAsAction="never" />-->
 
-    <item
-        android:id="@+id/action_back_pr_detail"
-        android:icon="@drawable/ic_close_white_24px"
-        android:title="Back"
-        android:visible="true"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/action_back_pr_detail"-->
+        <!--android:icon="@drawable/ic_close_white_24px"-->
+        <!--android:title="Back"-->
+        <!--android:visible="true"-->
+        <!--app:showAsAction="always" />-->
 
 </menu>
