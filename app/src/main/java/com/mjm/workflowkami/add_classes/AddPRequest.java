@@ -28,6 +28,9 @@ public class AddPRequest extends AppCompatActivity {
         toolbar.setTitle("Purchase Request");
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -53,17 +56,10 @@ public class AddPRequest extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.z
-        //noinspection SimplifiableIfStatement
         int id = item.getItemId();
+
         if (id == android.R.id.home) {
-            finish();
-            return true;
-        } else if (id == R.id.action_back_pr_detail) {
-            finish();
-            return true;
+            this.finish();
         }
 
         return super.onOptionsItemSelected(item);

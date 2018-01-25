@@ -81,6 +81,9 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
         serviceImpl.GetAllUserId();
         serviceImpl.GetAllUsers();
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         taskID = (EditText) findViewById(R.id.task_id);
         taskprojID = (EditText) findViewById(R.id.task_projID);
         taskName = (EditText) findViewById(R.id.task_name);
@@ -248,18 +251,17 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_back_task) {
-            startActivity(new Intent(this, Tasks.class));
-            return true;
+        if (id == android.R.id.home) {
+            this.finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickCancel(View v) {
-        Intent cancel = new Intent(AddTask.this, Tasks.class);
-        startActivity(cancel);
-    }
+//    public void onClickCancel(View v) {
+//        Intent cancel = new Intent(AddTask.this, Tasks.class);
+//        startActivity(cancel);
+//    }
 
     public void SaveTask(int projID, TaskClass t) {
 

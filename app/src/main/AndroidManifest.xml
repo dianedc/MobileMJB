@@ -106,7 +106,11 @@
             android:label="@string/title_activity_projects"
             android:theme="@style/AppTheme" />
         <activity android:name=".add_classes.AddPrequestDtlItem" />
-        <activity android:name=".add_classes.AddWorker"></activity>
+        <activity android:name=".add_classes.AddWorker" />
+        <activity
+            android:name=".impl_classes.Workflow"
+            android:label="@string/title_activity_workflow"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

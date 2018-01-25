@@ -60,6 +60,6 @@ public interface TaskService {
     Call<Void> editTask(@Path("proj_id") int proj_id, @Path("task_id") int taskID, @Body TaskClass task);
 
     //SET TASK TO COMPLETE
-    @POST("project/{proj_id}/task/complete/{task_id}")
-    Call<Void> completeTask(@Path("proj_id") int proj_id, @Path("task_id") int task_id);
+    @POST("project/task/complete/{task_id}")
+    Call<Void> completeTask(@Path("task_id") int task_id);
 }

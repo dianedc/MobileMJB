@@ -80,7 +80,7 @@ public class Forms extends LoaderAsync
         setSupportActionBar(toolbar);
 
         listofPreq = (ListView) findViewById(R.id.lstPreqs);
-        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/prequest/requests";
+        final String uri = "http://192.168.2.107:8083/rest/prequest/requests";
         new ProjectTask().execute(uri);
         layout = (PullRefreshLayout) findViewById(R.id.refreshpr);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
@@ -105,11 +105,11 @@ public class Forms extends LoaderAsync
                         startActivity(n);
                         break;
 
-//                    case R.id.navigation_team:
-////                        loader.show();
-//                        Intent te = new Intent(Forms.this, Workers.class);
-//                        startActivity(te);
-//                        return true;
+                    case R.id.navigation_team:
+//                        loader.show();
+                        Intent te = new Intent(Forms.this, ProjectTeam.class);
+                        startActivity(te);
+                        return true;
 
                     case R.id.navigation_pr:
                         Intent p = new Intent(Forms.this, Forms.class);

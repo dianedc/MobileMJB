@@ -116,23 +116,26 @@
     <!--</RelativeLayout>-->
 
 
-<com.baoyz.widget.PullRefreshLayout
-    android:id="@+id/refreshprdtl"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/refreshprdtl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-</com.baoyz.widget.PullRefreshLayout>
-
+    </com.baoyz.widget.PullRefreshLayout>
 
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/fab_add_preq_dtl_item"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="@dimen/fab_margin"-->
         <!--android:layout_gravity="bottom|right"-->
-        <!--android:src="@drawable/ic_add"/>-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:src="@drawable/ic_add"-->
+        <!--android:visibility="visible" />-->
+
+
 </RelativeLayout>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.mjm.workflowkami.impl_classes.Workers">
+    tools:context="com.mjm.workflowkami.impl_classes.Workflow">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -16,50 +16,56 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_workflow"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/team">
+            app:title="@string/workflow">
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs_workers"
+            android:id="@+id/tabs_workflow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--<android.support.design.widget.TabItem-->
-                <!--android:id="@+id/tabItem1"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@string/tab1" />-->
-
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
+                android:id="@+id/tabItem11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab2" />
+                android:text="@string/Tasks" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem3"
+                android:id="@+id/tabItem12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab3" />
+                android:text="@string/team" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab13" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab14" />
 
         </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/container_workers"
+        android:id="@+id/container_workflow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </android.support.v4.view.ViewPager>
 
-    <include layout="@layout/content_workers" />
+    <include layout="@layout/content_workflow" />
 
 </android.support.design.widget.CoordinatorLayout>

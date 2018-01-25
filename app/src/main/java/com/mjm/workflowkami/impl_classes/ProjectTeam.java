@@ -1,6 +1,8 @@
 package com.mjm.workflowkami.impl_classes;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,10 +20,13 @@ import android.widget.ListView;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.Fragments.ProjTeam;
+import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
+import com.mjm.workflowkami.adapter_classes.ProjTeamClassAdapter;
 import com.mjm.workflowkami.adapter_classes.ProjectTeamAdapter;
 import com.mjm.workflowkami.add_classes.AddProjectTeam;
+import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.service_classes.ProjectTeamService;
 
@@ -30,52 +35,49 @@ import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 
-public class ProjectTeam extends AppCompatActivity
+public class ProjectTeam extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private SpotsDialog loader;
-
-    private String TAG = ProjectTeam.class.getSimpleName();
-    private ListView listofTeams;
+    private ListView listofTeam;
     private ServiceImpl serviceImpl = new ServiceImpl();
-    List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
-    private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
+    private ProjectClass projectIntent = new ProjectClass();
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        //    BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private class ProjTeamTask extends AsyncTask<String, Void, List<ProjectTeamClass>> {
+
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId())
-            {
-                case R.id.navigation_task:
-                    loader.show();
-                    Intent n = new Intent(ProjectTeam.this, Tasks.class);
-                    startActivity(n);
-                    return true;
-
-//                case R.id.navigation_team:
-//                    loader.show();
-//                    Intent t = new Intent(ProjectTeam.this, ProjTeam.class);
-//                    startActivity(t);
-//                    return true;
-
-                case R.id.navigation_pr:
-                    loader.show();
-                    Intent p = new Intent(ProjectTeam.this, Forms.class);
-                    startActivity(p);
-                    return true;
-
-                case R.id.navigation_po:
-                    loader.show();
-                    Intent po =  new Intent(ProjectTeam.this, PurchaseOrder.class);
-                    startActivity(po);
-                    return true;
-            }
-            return false;
+        protected void onPreExecute() {
+            showLoadingDialog();
         }
-    };
+
+        @Override
+        protected List<ProjectTeamClass> doInBackground(String... strings) {
+            Intent intent = getIntent();
+            projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
+
+            do {
+
+//                serviceImpl.GetAllProjTeams();
+                if (projectIntent != null) {
+                    serviceImpl.GetUsersTeamById(projectIntent.getProjID());
+                }
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.pTeamList == null);
+            return serviceImpl.pTeamList;
+        }
+        @Override
+        protected void onPostExecute(List<ProjectTeamClass> workerClassResponseEntity) {
+            dismissProgressDialog();
+            ProjTeamClassAdapter adapter = new ProjTeamClassAdapter(ProjectTeam.this, workerClassResponseEntity);
+//            setListAdapter(adapter);
+            listofTeam.setAdapter(adapter);
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,15 +86,51 @@ public class ProjectTeam extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        Intent intent = getIntent();
+        projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
 
-        loader = new SpotsDialog(ProjectTeam.this);
+        listofTeam = (ListView) findViewById(R.id.lstTeams);
+        if (projectIntent != null) {
+//            final String uri = "http://192.168.2.107:8083/rest/project/" + projectIntent.getProjID() + "/task";
+            new ProjTeamTask().execute();
+        }
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_team);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.navigation_task:
+                        Intent n = new Intent(ProjectTeam.this, Tasks.class);
+                        startActivity(n);
+                        break;
+
+                    case R.id.navigation_team:
+//                        loader.show();
+                        Intent te = new Intent(ProjectTeam.this, ProjectTeam.class);
+                        startActivity(te);
+                        return true;
+
+                    case R.id.navigation_pr:
+                        Intent p = new Intent(ProjectTeam.this, Forms.class);
+                        startActivity(p);
+                        break;
+
+                    case R.id.navigation_po:
+                        Intent po =  new Intent(ProjectTeam.this, PurchaseOrder.class);
+                        startActivity(po);
+                        break;
+                }
+                return true;
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent add = new Intent(ProjectTeam.this, AddProjectTeam.class);
                 startActivity(add);
             }
@@ -131,7 +169,7 @@ public class ProjectTeam extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
@@ -148,7 +186,6 @@ public class ProjectTeam extends AppCompatActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_dashboard:
-                loader.show();
                 Intent d = new Intent(ProjectTeam.this, Dashboard.class);
                 startActivity(d);
                 break;
@@ -161,7 +198,6 @@ public class ProjectTeam extends AppCompatActivity
 //                startActivity(s);
 //                break;
             case R.id.nav_project:
-                loader.show();
                 Intent p = new Intent(ProjectTeam.this, Projects.class);
                 startActivity(p);
                 break;
@@ -190,7 +226,6 @@ public class ProjectTeam extends AppCompatActivity
 //                startActivity(r);
 //                break;
             case R.id.nav_users:
-                loader.show();
                 Intent u = new Intent(ProjectTeam.this, Users.class);
                 startActivity(u);
                 break;
@@ -208,7 +243,6 @@ public class ProjectTeam extends AppCompatActivity
 //                break;
 
             case R.id.nav_logout:
-                loader.show();
                 Intent l = new Intent(ProjectTeam.this, LoginActivity.class);
                 startActivity(l);
                 break;

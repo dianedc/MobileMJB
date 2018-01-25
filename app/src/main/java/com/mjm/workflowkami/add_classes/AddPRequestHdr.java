@@ -62,6 +62,7 @@ public class AddPRequestHdr extends Fragment {
     private String selectedReqBy, selectedpm, selectedoe, selectedpo;
     private UserClass req, pm, po, oe;
     private Boolean isstat, ispm, ispo, isoe;
+    private Boolean checked;
 //    private BigDecimal subTotal, total;
     private DateFormat dateFormat;
 
@@ -210,16 +211,24 @@ public class AddPRequestHdr extends Fragment {
                 preq_sales_tax.setText(String.valueOf(preqIntent.getPreqsalestax()));
                 preq_total.setText(String.valueOf(preqIntent.getPreqtotal()));
 
-                if (preqIntent.getPreqstatus() == true) {
+                if (preqIntent.getPreqstatus() == null) {
+
+                } else if (preqIntent.getPreqstatus() == true) {
                     rdogrpstat.check(R.id.statt);
                 }
-                if (preqIntent.getIsapprovedpo() == true) {
+                if (preqIntent.getIsapprovedpo() == null) {
+
+                } else if (preqIntent.getIsapprovedpo() == true) {
                     rdogrppo.check(R.id.isapprovedpot);
                 }
-                if (preqIntent.getIsapprovedoe() == true) {
+                if (preqIntent.getIsapprovedoe() == null) {
+
+                } else if (preqIntent.getIsapprovedoe() == true) {
                     rdogrpoe.check(R.id.isapprovedoet);
                 }
-                if (preqIntent.getIsapprovedpm() == true) {
+                if (preqIntent.getIsapprovedpm() == null) {
+
+                } else if (preqIntent.getIsapprovedpm() == true) {
                     rdogrppm.check(R.id.isapprovedpmt);
                 }
 
@@ -233,7 +242,8 @@ public class AddPRequestHdr extends Fragment {
                 projman_dateapproved.setEnabled(false);
             }
         } catch (Exception eo) {
-            Toast.makeText(getActivity(), eo.toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), eo.toString(), Toast.LENGTH_LONG).show();
+            eo.printStackTrace();
         }
 
         //Dialog
@@ -410,6 +420,69 @@ public class AddPRequestHdr extends Fragment {
         });
         return rootView;
     }
+
+//    public void onRadioButtonPO(View view) {
+//        checked = ((RadioButton) view).isChecked();
+//
+//        switch(view.getId()) {
+//            case R.id.isapprovedpot:
+//                if (checked)
+//                    ispo = true;
+//                break;
+//            case R.id.isapprovedpof:
+//                if (checked)
+//                    ispo = false;
+//                break;
+//        }
+//    }
+//
+//    public void onRadioButtonET(View view) {
+//        checked = ((RadioButton) view).isChecked();
+//
+//        switch(view.getId()) {
+//            case R.id.isapprovedoet:
+//                if (checked)
+//                    isoe = true;
+//                break;
+//            case R.id.isapprovedoef:
+//                if (checked)
+//                    isoe = false;
+//                break;
+//        }
+//
+//    }
+//
+//    public void onRadioButtonPM(View view) {
+//
+//        checked = ((RadioButton) view).isChecked();
+//
+//        switch(view.getId()) {
+//            case R.id.isapprovedpmt:
+//                if (checked)
+//                    ispm = true;
+//                break;
+//            case R.id.isapprovedpmf:
+//                if (checked)
+//                    ispm = false;
+//                break;
+//        }
+//    }
+//
+//    public void onRadioButtonStat(View view) {
+//        checked = ((RadioButton) view).isChecked();
+//
+//        switch(view.getId()) {
+//            case R.id.statt:
+//                if (checked)
+//                    isstat = true;
+//                break;
+//            case R.id.statf:
+//                if (checked)
+//                    isstat = false;
+//                break;
+//        }
+//
+//    }
 
     public void SavePReq(PurchaseRequestClass pr) {
 

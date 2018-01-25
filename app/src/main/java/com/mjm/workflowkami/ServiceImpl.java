@@ -48,7 +48,6 @@ public class ServiceImpl {
     private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
     private WorkerService workerService = API.getInstance().getWorkerService();
 
-    private List<PurchaseOrderClass> pordList = new ArrayList<PurchaseOrderClass>();
     private PurchaseOrderService purchaseOrderService = API.getInstance().getPurchaseOrderService();
 
     public List<UserClass> usersList;
@@ -58,6 +57,7 @@ public class ServiceImpl {
     public List<ProjectClass> projectsList = new ArrayList<ProjectClass>();
     public UserClass userClass = new UserClass();
     ;
+    public List<PurchaseOrderClass> pordList = new ArrayList<PurchaseOrderClass>();
     public List<PurchaseRequestClass> prList = new ArrayList<PurchaseRequestClass>();
     public List<PurchaseRequestItemClass> pItemList = new ArrayList<PurchaseRequestItemClass>();
     public List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
@@ -314,6 +314,42 @@ public class ServiceImpl {
         });
 
         return prList;
+    }
+
+    public List<PurchaseOrderClass> GetAllPurchaseOrder() {
+        Call<List<PurchaseOrderClass>> getPords = purchaseOrderService.getAllPord();
+
+        getPords.enqueue(new Callback<List<PurchaseOrderClass>>() {
+            @Override
+            public void onResponse(Call<List<PurchaseOrderClass>> call, Response<List<PurchaseOrderClass>> response) {
+                if (response.isSuccessful( )) {
+                    List<PurchaseOrderClass> po = response.body();
+//                        preqList = response.body();
+                    for (int i = 0; i < po.size(); i++) {
+                        //  preqList.add(PurchaseRequestClass.get(i).getPreqID()));
+                        pordList.add(new PurchaseOrderClass(po.get(i).getPordID(),
+                                po.get(i).getPrequestID(),
+                                po.get(i).getPordapproveddate(),
+                                po.get(i).getPordrequesteddate(),
+                                po.get(i).getPordrequestedby(),
+                                po.get(i).getPordprojman(),
+                                po.get(i).getPordpmdate(),
+                                po.get(i).getPordpurchofficer(),
+                                po.get(i).getPordpodate(),
+                                po.get(i).getPordofficeengr(),
+                                po.get(i).getPordoedate(),
+                                po.get(i).getPordsubtotal(),
+                                po.get(i).getPordsalestax(),
+                                po.get(i).getPordtotal()));
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<PurchaseOrderClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return pordList;
     }
 
     public List<PurchaseRequestItemClass> GetAllPReqItemList(int i) {

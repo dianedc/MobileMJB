@@ -94,7 +94,7 @@ public class AttendanceNav extends LoaderAsync
         //final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/project/projects";
         new ProjectTask().execute();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_projects);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_attendance_nav);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -107,7 +107,7 @@ public class AttendanceNav extends LoaderAsync
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_projects);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_attendance_nav);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -200,7 +200,7 @@ public class AttendanceNav extends LoaderAsync
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_attendance_nav);
 //        drawer.closeDrawer(GravityCompat.START);
         return true;
     }

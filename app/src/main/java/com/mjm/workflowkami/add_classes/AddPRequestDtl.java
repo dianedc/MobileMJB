@@ -24,6 +24,7 @@ import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.PurchaseRequestItemAdapter;
+import com.mjm.workflowkami.impl_classes.Users;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
@@ -58,7 +59,7 @@ public class AddPRequestDtl extends ListFragment {
     private PurchaseRequestItemService pItemService = API.getInstance().getPurchaseRequestItemService();
     private ProgressDialog progressDialog;
 
-    private class PRequestTask extends AsyncTask<String, Void, List<PurchaseRequestItemClass>> {
+    public class PRequestTask extends AsyncTask<String, Void, List<PurchaseRequestItemClass>> {
 
 
         @Override
@@ -90,13 +91,6 @@ public class AddPRequestDtl extends ListFragment {
             progressDialog.dismiss();
             PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter(getActivity(), pqClassResponseEntity);
             setListAdapter(adapter);
-//            getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    pItem = (PurchaseRequestItemClass) parent.getItemAtPosition(position);
-//                    Toast.makeText(getActivity(), String.valueOf(pItem.getPrequestID()), Toast.LENGTH_LONG).show();
-//                }
-//            });
         }
 
     }
@@ -129,13 +123,15 @@ public class AddPRequestDtl extends ListFragment {
                 }, 3000);
             }
         });
+
+
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter(getActivity(), serviceImpl.pItemList);
-//        setListAdapter(adapter);
+        PurchaseRequestItemAdapter adapter = new PurchaseRequestItemAdapter(getActivity(), serviceImpl.pItemList);
+        setListAdapter(adapter);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -152,7 +148,7 @@ public class AddPRequestDtl extends ListFragment {
     }
 
     public void UpdateItem(int preqid, int item, PurchaseRequestItemClass pi) {
-        Call<Void> edtItem = pItemService.editPReqItem(preqid, item, pi);
+        Call<Void> edtItem = pItemService.editPReqItem(item, pi);
 
         edtItem.enqueue(new Callback<Void>() {
             @Override

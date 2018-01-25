@@ -34,7 +34,6 @@ import dmax.dialog.SpotsDialog;
 public class Users extends LoaderAsync
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String TAG = Users.class.getSimpleName();
     private ListView listOfUsers;
     private UserClass user;
     private ServiceImpl serviceImpl = new ServiceImpl();

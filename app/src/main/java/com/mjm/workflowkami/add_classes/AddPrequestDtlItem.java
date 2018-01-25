@@ -47,6 +47,8 @@ public class AddPrequestDtlItem extends AppCompatActivity {
         toolbar.setTitle("Purchase Request Details");
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         preq_id_dtl = (EditText) findViewById(R.id.preq_id_dtl);
         preq_dtl_id = (EditText) findViewById(R.id.preq_dtl_id);
@@ -71,15 +73,11 @@ public class AddPrequestDtlItem extends AppCompatActivity {
         Intent prIntent = getIntent();
         pr = (PurchaseRequestClass) prIntent.getSerializableExtra("preqs");
 
-//        Toast.makeText(AddPrequestDtlItem.this, preq.toString(), Toast.LENGTH_LONG).show();
-//        Toast.makeText(AddPrequestDtlItem.this, pi.toString(), Toast.LENGTH_LONG).show();
         if(pr != null) {
-//            Toast.makeText(AddPrequestDtlItem.this, pr.toString(), Toast.LENGTH_LONG).show();
             preq_id_dtl.setText(String.valueOf(pr.getPreqID()));
         }
 
         if (pi != null) {
-//            Toast.makeText(AddPrequestDtlItem.this, String.valueOf(pi.getPrequestID().getPreqID()), Toast.LENGTH_LONG).show();
             preq_dtl_id.setText(String.valueOf(pi.getPreqItemID()));
             preq_dtl_desc.setText(pi.getPreqdesc());
             preq_dtl_qty.setText(String.valueOf(pi.getPreqqty()));
@@ -158,19 +156,13 @@ public class AddPrequestDtlItem extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.action_back_dtl_item:
-                finish();
-                return true;
-//            case R.id.action_settings:
-//                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
 
+        if (id == android.R.id.home) {
+            this.finish();
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void AddItem(int preqid, PurchaseRequestItemClass pi) {
@@ -187,26 +179,19 @@ public class AddPrequestDtlItem extends AppCompatActivity {
             @Override
             public void onFailure(Call<PurchaseRequestItemClass> call, Throwable t) {
                 Toast.makeText(AddPrequestDtlItem.this, "An error has been encountered while adding purchase item", Toast.LENGTH_SHORT);
-//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
-//                alertDialogBuilder.setMessage(t.toString());
-//                alertDialogBuilder.setCancelable(true);
-//                alertDialogBuilder.show();
+
             }
         });
     }
 
     public void UpdateItem(int preqid, int item, PurchaseRequestItemClass pi) {
-        Call<Void> edtItem = pService.editPReqItem(preqid, item, pi);
+        Call<Void> edtItem = pService.editPReqItem(item, pi);
 
         edtItem.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(AddPrequestDtlItem.this, "Purchase item has been successfully edited!", Toast.LENGTH_SHORT).show();
-//                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
-//                    alertDialogBuilder.setMessage("Purchase item has been successfully edited!");
-//                    alertDialogBuilder.setCancelable(true);
-//                    alertDialogBuilder.show();
 
                     finish();
                 }
@@ -215,10 +200,6 @@ public class AddPrequestDtlItem extends AppCompatActivity {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(AddPrequestDtlItem.this, "An error has been encountered while editing purchase item", Toast.LENGTH_SHORT);
-//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddPrequestDtlItem.this);
-//                alertDialogBuilder.setMessage(t.toString());
-//                alertDialogBuilder.setCancelable(true);
-//                alertDialogBuilder.show();
             }
         });
     }

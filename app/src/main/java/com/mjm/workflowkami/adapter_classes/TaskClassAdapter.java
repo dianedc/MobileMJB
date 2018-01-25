@@ -40,25 +40,6 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
     private ProgressDialog progressDialog;
     private TaskService taskService = API.getInstance().getTaskService();
 
-//    private class CompleteTask extends AsyncTask<String, String, String> {
-//
-//        @Override
-//        protected void onPreExecute() {
-//            progressDialog = new ProgressDialog(context);
-//            progressDialog.setMessage("Loading. Please wait... ");
-//            progressDialog.show();
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... strings) {
-//            Call<Void> compTask = taskService.completeTask())
-//            return "Updated";
-//        }
-//        @Override
-//        protected void onPostExecute(String workerClassResponseEntity) {
-//            progressDialog.dismiss();
-//        }
-//    }
     public TaskClassAdapter(Context context, List<TaskClass> tasks) {
         super(context, R.layout.list_item_tasks, tasks);
         this.context = context;
@@ -73,6 +54,7 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
         View view = layoutInflater.inflate(R.layout.list_item_tasks, parent, false);
 //        TextView txtID = (TextView) view.findViewById(R.id.userID);
 //        txtID.setText(tasks.get(position).getTaskID().toString());
+        final Button btnCompleteTask = (Button) view.findViewById(R.id.btnCompleteTask);
         try {
             if (tasks != null) {
                 TextView txtTaskname = (TextView) view.findViewById(R.id.taskName);
@@ -80,11 +62,16 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
 
                 TextView txtTaskDescription = (TextView) view.findViewById(R.id.taskStatus);
                 txtTaskDescription.setText(tasks.get(position).getTaskstatus());
+
+                TextView txtTaskPhase = (TextView) view.findViewById(R.id.taskPhase);
+                txtTaskPhase.setText(tasks.get(position).getTaskphase());
+
+                if (tasks.get(position).getTaskstatus().trim() == "Active") {
+                    btnCompleteTask.setVisibility(View.VISIBLE);
+//                    Toast.makeText(context, "Task has been successfully completed!", Toast.LENGTH_LONG).show();
+                }
             }
-            if (tasks.get(position).getTaskstatus() == "Completed") {
-                Button btnCompleteTask = (Button) view.findViewById(R.id.btnCompleteTask);
-                btnCompleteTask.setVisibility(View.INVISIBLE);
-            }
+
         } catch (Exception eo) {
             eo.printStackTrace();
         }
@@ -102,7 +89,7 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
         });
 //        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/{proj_id}/task/complete/{task_id}";
 
-        final Button btnCompleteTask = (Button) view.findViewById(R.id.btnCompleteTask);
+
         btnCompleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,12 +102,12 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 //                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
-                        Call<Void> compTask = taskService.completeTask(tasks.get(position).getProjectID().getProjID(),
-                                tasks.get(position).getTaskID());
+                        Call<Void> compTask = taskService.completeTask(tasks.get(position).getTaskID());
                         compTask.enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 if (response.isSuccessful()){
+                                    Toast.makeText(context, "Task has been successfully completed!", Toast.LENGTH_LONG).show();
                                     btnCompleteTask.setVisibility(View.INVISIBLE);
                                 }
                             }
