@@ -110,6 +110,10 @@
         <activity
             android:name=".impl_classes.Workflow"
             android:label="@string/title_activity_workflow"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".impl_classes.Form"
+            android:label="@string/title_activity_form"
             android:theme="@style/AppTheme"></activity>
     </application>
 

@@ -25,6 +25,7 @@ import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.adapter_classes.PurchaseRequestAdapter;
 import com.mjm.workflowkami.add_classes.AddPRequest;
+import com.mjm.workflowkami.add_classes.AddPrequestDtlItem;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 
@@ -94,42 +95,44 @@ public class Forms extends LoaderAsync
                 }, 3000);
             }
         });
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_pr);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.navigation_task:
-                        Intent n = new Intent(Forms.this, Tasks.class);
-                        startActivity(n);
-                        break;
 
-                    case R.id.navigation_team:
-//                        loader.show();
-                        Intent te = new Intent(Forms.this, ProjectTeam.class);
-                        startActivity(te);
-                        return true;
 
-                    case R.id.navigation_pr:
-                        Intent p = new Intent(Forms.this, Forms.class);
-                        startActivity(p);
-                        break;
-
-                    case R.id.navigation_po:
-                        Intent po =  new Intent(Forms.this, PurchaseOrder.class);
-                        startActivity(po);
-                        break;
-
-//                    case R.id.navigation_attendance:
-//                        Toast.makeText(Forms.this, "Going to Attendance", Toast.LENGTH_LONG).show();
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_pr);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId())
+//                {
+//                    case R.id.navigation_task:
+//                        Intent n = new Intent(Forms.this, Tasks.class);
+//                        startActivity(n);
 //                        break;
-                }
-                return true;
-            }
-        });
+//
+//                    case R.id.navigation_team:
+////                        loader.show();
+//                        Intent te = new Intent(Forms.this, ProjectTeam.class);
+//                        startActivity(te);
+//                        return true;
+//
+//                    case R.id.navigation_pr:
+//                        Intent p = new Intent(Forms.this, Forms.class);
+//                        startActivity(p);
+//                        break;
+//
+//                    case R.id.navigation_po:
+//                        Intent po =  new Intent(Forms.this, PurchaseOrder.class);
+//                        startActivity(po);
+//                        break;
+//
+////                    case R.id.navigation_attendance:
+////                        Toast.makeText(Forms.this, "Going to Attendance", Toast.LENGTH_LONG).show();
+////                        break;
+//                }
+//                return true;
+//            }
+//        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_forms);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -141,7 +144,7 @@ public class Forms extends LoaderAsync
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_forms);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -239,7 +242,7 @@ public class Forms extends LoaderAsync
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_forms);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

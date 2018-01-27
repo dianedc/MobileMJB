@@ -316,6 +316,52 @@ public class ServiceImpl {
         return prList;
     }
 
+    public List<PurchaseRequestClass> GetAllPreqByProj(int projID) {
+
+        Call<List<PurchaseRequestClass>> getPurchaseRequests = purchaseRequestService.getAllPreqByProj(projID);
+
+        getPurchaseRequests.enqueue(new Callback<List<PurchaseRequestClass>>() {
+            @Override
+            public void onResponse(Call<List<PurchaseRequestClass>> call, Response<List<PurchaseRequestClass>> response) {
+                List<PurchaseRequestClass> preq = response.body();
+
+                Log.d(TAG, response.toString());
+
+                try {
+                    for (int i = 0; i < preq.size(); i++) {
+                        prList.add(new PurchaseRequestClass(preq.get(i).getPreqID(),
+                                preq.get(i).getProjectID(),
+                                preq.get(i).getPreqapproveddate(),
+                                preq.get(i).getPreqrequesteddate(),
+                                preq.get(i).getPreqrequestedby(),
+                                preq.get(i).getPreqstatus(),
+                                preq.get(i).getPreqprojman(),
+                                preq.get(i).getPreqpmdate(),
+                                preq.get(i).getIsapprovedpm(),
+                                preq.get(i).getPreqpurchofficer(),
+                                preq.get(i).getPreqpodate(),
+                                preq.get(i).getIsapprovedpo(),
+                                preq.get(i).getPreqofficeengr(),
+                                preq.get(i).getPreqoedate(),
+                                preq.get(i).getIsapprovedoe(),
+                                preq.get(i).getPreqsubtotal(),
+                                preq.get(i).getPreqsalestax(),
+                                preq.get(i).getPreqtotal()));
+                    }
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PurchaseRequestClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        return prList;
+    }
+
     public List<PurchaseOrderClass> GetAllPurchaseOrder() {
         Call<List<PurchaseOrderClass>> getPords = purchaseOrderService.getAllPord();
 

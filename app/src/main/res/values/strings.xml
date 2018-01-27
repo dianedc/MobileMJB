@@ -177,8 +177,8 @@
     <string name="DialogQuantity">Qty</string>
     <string name="DialogAmount">Amount</string>
     <string name="title_activity_add_prequest">Purchase Request</string>
-    <string name="tab_text_1">Approval</string>
-    <string name="tab_text_2">Show Item</string>
+    <string name="tab_text_1">Purchase Request</string>
+    <string name="tab_text_2">Purchase Order</string>
     <string name="tab_text_3">Add Item</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
@@ -205,5 +205,6 @@
     <string name="last_name">Last Name</string>
     <string name="dismiss">Dismiss</string>
     <string name="save">Save</string>
+    <string name="title_activity_form">Form</string>
 
 </resources>
