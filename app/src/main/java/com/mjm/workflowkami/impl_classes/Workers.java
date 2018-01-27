@@ -207,7 +207,7 @@ public class Workers extends AppCompatActivity
 //                    return "Project Team";
                 case 0:
                     return "Time In";
-                case 2:
+                case 1:
                     return "Time Out";
 
                 default:

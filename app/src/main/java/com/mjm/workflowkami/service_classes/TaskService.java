@@ -62,4 +62,8 @@ public interface TaskService {
     //SET TASK TO COMPLETE
     @POST("project/task/complete/{task_id}")
     Call<Void> completeTask(@Path("task_id") int task_id);
+
+    //SET TASK TO START
+    @POST("project/task/start/{task_id}")
+    Call<Void> startTask(@Path("task_id") int task_id);
 }

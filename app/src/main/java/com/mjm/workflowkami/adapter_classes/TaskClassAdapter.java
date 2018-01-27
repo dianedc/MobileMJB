@@ -39,6 +39,7 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
     private List<TaskClass> tasks;
     private ProgressDialog progressDialog;
     private TaskService taskService = API.getInstance().getTaskService();
+    private Button btnCompleteTask, btnStartTask, btnEditTask;
 
     public TaskClassAdapter(Context context, List<TaskClass> tasks) {
         super(context, R.layout.list_item_tasks, tasks);
@@ -52,9 +53,9 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.list_item_tasks, parent, false);
-//        TextView txtID = (TextView) view.findViewById(R.id.userID);
-//        txtID.setText(tasks.get(position).getTaskID().toString());
-        final Button btnCompleteTask = (Button) view.findViewById(R.id.btnCompleteTask);
+        btnCompleteTask = (Button) view.findViewById(R.id.btnCompleteTask);
+        btnStartTask = (Button) view.findViewById(R.id.btnStartTask);
+//        initialState();
         try {
             if (tasks != null) {
                 TextView txtTaskname = (TextView) view.findViewById(R.id.taskName);
@@ -66,16 +67,56 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                 TextView txtTaskPhase = (TextView) view.findViewById(R.id.taskPhase);
                 txtTaskPhase.setText(tasks.get(position).getTaskphase());
 
-                if (tasks.get(position).getTaskstatus().trim() == "Active") {
-                    btnCompleteTask.setVisibility(View.VISIBLE);
-//                    Toast.makeText(context, "Task has been successfully completed!", Toast.LENGTH_LONG).show();
+                if (tasks.get(position).getTaskstatus().equals("Completed")) {
+                    btnCompleteTask.setVisibility(View.INVISIBLE);
+                    btnStartTask.setVisibility(View.INVISIBLE);
+
+//                    btnCompleteTask.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Toast.makeText(context, "Task has been completed", Toast.LENGTH_LONG).show();
+//                        }
+//                    });
+//                    btnStartTask.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Toast.makeText(context, "Task has been completed", Toast.LENGTH_LONG).show();
+//                        }
+//                    });
+
+                }
+
+                if (tasks.get(position).getTaskstatus().equals("Active")) {
+                    btnStartTask.setVisibility(View.INVISIBLE);
+//                    btnCompleteTask.setEnabled(true);
+
+//                    btnStartTask.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Toast.makeText(context, "Task is already active", Toast.LENGTH_LONG).show();
+//                        }
+//                    });
+
+                }
+
+                if (tasks.get(position).getTaskstatus().equals("Waiting")) {
+//                    btnStartTask.setEnabled(true);
+                    btnCompleteTask.setVisibility(View.INVISIBLE);
+
+//                    btnCompleteTask.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Toast.makeText(context, "Task should be started", Toast.LENGTH_LONG).show();
+//                        }
+//                    });
+
                 }
             }
 
         } catch (Exception eo) {
             eo.printStackTrace();
         }
-        Button btnEditTask = (Button) view.findViewById(R.id.btnEditTask);
+        btnEditTask = (Button) view.findViewById(R.id.btnEditTask);
         btnEditTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,8 +128,6 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                 context.startActivity(i);
             }
         });
-//        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/{proj_id}/task/complete/{task_id}";
-
 
         btnCompleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +140,6 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
                         Call<Void> compTask = taskService.completeTask(tasks.get(position).getTaskID());
                         compTask.enqueue(new Callback<Void>() {
                             @Override
@@ -123,16 +161,61 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-//                        Toast.makeText(context, "CANCEL", Toast.LENGTH_SHORT).show();
                     }
                 });
                 AlertDialog alert = mBuilder.create();
-//                alert.setTitle("Complete Task?");
+                alert.show();
+            }
+        });
+
+        btnStartTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+                mBuilder.setTitle("Start Task?");
+                mBuilder.setMessage("Set the selected task to an active state.");
+                mBuilder.setCancelable(false);
+                mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Call<Void> compTask = taskService.startTask(tasks.get(position).getTaskID());
+                        compTask.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.isSuccessful()){
+                                    Toast.makeText(context, "Task has been successfully started!", Toast.LENGTH_LONG).show();
+                                    btnStartTask.setVisibility(View.INVISIBLE);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+                mBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alert = mBuilder.create();
                 alert.show();
             }
         });
 
         return view;
+
+    }
+
+    private void initialState() {
+
+        btnCompleteTask.setEnabled(true);
+        btnStartTask.setEnabled(true);
+        btnEditTask.setEnabled(true);
 
     }
 }
