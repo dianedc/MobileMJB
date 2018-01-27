@@ -39,7 +39,7 @@ public class PurchaseOrderAdapter extends ArrayAdapter<PurchaseOrderClass> {
 //        TextView txtProjID = (TextView) view.findViewById(R.id.userID);
 //        txtProjID.setText(projects.get(position).getProjectID().toString());
         TextView txtPordid = (TextView) view.findViewById(R.id.pord_id);
-        txtPordid.setText("PR #00000" + String.valueOf(pords.get(position).getPrequestID().getPreqID()));
+        txtPordid.setText("PR " + String.valueOf(pords.get(position).getPrequestID().getPreqID()));
         TextView txtpord_projnman = (TextView) view.findViewById(R.id.pord_projman);
         txtpord_projnman.setText(pords.get(position).getPordprojman().getFirstname() +
         " " + pords.get(position).getPordprojman().getLastname());

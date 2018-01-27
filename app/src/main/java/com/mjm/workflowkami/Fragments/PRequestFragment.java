@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.PurchaseRequestAdapter;
 import com.mjm.workflowkami.adapter_classes.TaskClassAdapter;
+import com.mjm.workflowkami.add_classes.AddPRequest;
+import com.mjm.workflowkami.impl_classes.Forms;
 import com.mjm.workflowkami.impl_classes.Tasks;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
@@ -58,13 +61,13 @@ public class PRequestFragment extends ListFragment {
 
             do {
 
-                serviceImpl.GetAllPurchaseRequests();
-//                serviceImpl.GetAllProjTeams();
-//                if (projectIntent != null) {
-//                    serviceImpl.GetTaskByProjId(projectIntent.getProjID());
-//                }
+//                serviceImpl.GetAllPurchaseRequests();
+                serviceImpl.GetAllProjTeams();
+                if (projectIntent != null) {
+                    serviceImpl.GetAllPreqByProj(projectIntent.getProjID());
+                }
                 try  {
-                    Thread.sleep(5000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -84,6 +87,16 @@ public class PRequestFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_preq, container, false);
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_preq);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent add = new Intent(getActivity(), AddPRequest.class);
+                startActivity(add);
+            }
+        });
+        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
 
         new ProjPReq().execute();
         return rootView;

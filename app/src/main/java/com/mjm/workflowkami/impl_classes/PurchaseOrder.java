@@ -57,52 +57,8 @@ public class PurchaseOrder extends LoaderAsync
 
         @Override
         protected List<PurchaseOrderClass> doInBackground(String... strings) {
-//            Intent intent = getIntent();
-//            projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
             do {
-//                if (projectIntent != null) {
-                Call<List<PurchaseOrderClass>> getPords = purchaseOrderService.getAllPord();
-
-                getPords.enqueue(new Callback<List<PurchaseOrderClass>>() {
-                    @Override
-                    public void onResponse(Call<List<PurchaseOrderClass>> call, Response<List<PurchaseOrderClass>> response) {
-                        if (response.isSuccessful( )) {
-                            List<PurchaseOrderClass> po = response.body();
-//                        preqList = response.body();
-                            for (int i = 0; i < po.size(); i++) {
-                                //  preqList.add(PurchaseRequestClass.get(i).getPreqID()));
-                                pordList.add(new PurchaseOrderClass(po.get(i).getPordID(),
-                                        po.get(i).getPrequestID(),
-                                        po.get(i).getPordapproveddate(),
-                                        po.get(i).getPordrequesteddate(),
-                                        po.get(i).getPordrequestedby(),
-                                        po.get(i).getPordprojman(),
-                                        po.get(i).getPordpmdate(),
-                                        po.get(i).getPordpurchofficer(),
-                                        po.get(i).getPordpodate(),
-                                        po.get(i).getPordofficeengr(),
-                                        po.get(i).getPordoedate(),
-                                        po.get(i).getPordsubtotal(),
-                                        po.get(i).getPordsalestax(),
-                                        po.get(i).getPordtotal()));
-                            }
-                        }
-//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PurchaseOrder.this);
-//                        alertDialogBuilder.setMessage(pordList.toString());
-//                        alertDialogBuilder.setCancelable(true);
-//                        alertDialogBuilder.show();
-//                Toast.makeText(PurchaseOrder.this, response.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onFailure(Call<List<PurchaseOrderClass>> call, Throwable t) {
-//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PurchaseOrder.this);
-//                        alertDialogBuilder.setMessage(t.toString());
-//                        alertDialogBuilder.setCancelable(true);
-//                        alertDialogBuilder.show(); }
-                        t.printStackTrace();
-                    }
-                });
-//                }
+                serviceImpl.GetAllPurchaseOrder();
                 try  {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
