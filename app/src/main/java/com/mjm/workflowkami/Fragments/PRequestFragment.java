@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
@@ -62,15 +63,18 @@ public class PRequestFragment extends ListFragment {
             do {
 
 //                serviceImpl.GetAllPurchaseRequests();
-                serviceImpl.GetAllProjTeams();
+//                serviceImpl.GetAllProjTeams();
                 if (projectIntent != null) {
+                    try  {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     serviceImpl.GetAllPreqByProj(projectIntent.getProjID());
+                } else {
+                    Toast.makeText(getActivity(), "No Content", Toast.LENGTH_SHORT).show();
                 }
-                try  {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
 
             } while (serviceImpl.prList == null);
             return serviceImpl.prList;

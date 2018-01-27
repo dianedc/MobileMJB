@@ -46,21 +46,7 @@ import retrofit2.Response;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
-//    private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-//    private static final String[] DUMMY_CREDENTIALS = new String[]{
-//            "foo@example.com:hello", "bar@example.com:world"
-//    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
 
     // UI references.
     private EditText mPasswordView, mEmailView;
@@ -68,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtPassword;
     private View mProgressView;
     private View mLoginFormView;
-    private SpotsDialog loader;
+//    private SpotsDialog loader;
     Toast t;
     Intent i;
     private UserClass user;
@@ -82,12 +68,12 @@ public class LoginActivity extends AppCompatActivity {
 
         txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
-        loader = new SpotsDialog(LoginActivity.this);
+//        loader = new SpotsDialog(LoginActivity.this);
         // Set up the login form.
     }
 
     public void singInButtonOnClick (View v) {
-        loader.show();
+//        loader.show();
         if (!"".equals(txtPassword.getText().toString()) && !"".equals(txtEmail.getText().toString())) {
             user = new UserClass();
             user.setEmail(txtEmail.getText().toString().trim());
@@ -99,16 +85,17 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<UserClass> call, Response<UserClass> response) {
 
                     if (response.isSuccessful()) {
-                        loader.dismiss();
+//                        loader.dismiss();
+                        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
                         i = new Intent(LoginActivity.this, Dashboard.class);
                         startActivity(i);
                     } else {
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-                        alertDialogBuilder.setMessage("Invalid Username/Password!");
-                        alertDialogBuilder.setCancelable(true);
-                        alertDialogBuilder.show();
-                        loader.dismiss();
-//                        Toast.makeText(LoginActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+//                        alertDialogBuilder.setMessage("");
+//                        alertDialogBuilder.setCancelable(true);
+//                        alertDialogBuilder.show();
+//                        loader.dismiss();
+                        Toast.makeText(LoginActivity.this, "Invalid Username/Password!", Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -116,23 +103,23 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<UserClass> call, Throwable t) {
 
-//                    Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_LONG).show();
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-                    alertDialogBuilder.setMessage(t.toString());
-                    alertDialogBuilder.setCancelable(true);
-                    alertDialogBuilder.show();
-                    loader.dismiss();
+                    Toast.makeText(LoginActivity.this, "Error!", Toast.LENGTH_LONG).show();
+//                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+//                    alertDialogBuilder.setMessage(t.toString());
+//                    alertDialogBuilder.setCancelable(true);
+//                    alertDialogBuilder.show();
+//                    loader.dismiss();
                 }
 
             });
         } else {
 
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-            alertDialogBuilder.setMessage("Invalid Email/Password! Please try again.");
-            alertDialogBuilder.setCancelable(true);
-            alertDialogBuilder.show();
-            loader.dismiss();
-//            Toast.makeText(LoginActivity.this, "Invalid Email/Password! Please try again.", Toast.LENGTH_LONG).show();
+//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+//            alertDialogBuilder.setMessage("Invalid Email/Password! Please try again.");
+//            alertDialogBuilder.setCancelable(true);
+//            alertDialogBuilder.show();
+//            loader.dismiss();
+            Toast.makeText(LoginActivity.this, "Invalid Email/Password! Please try again.", Toast.LENGTH_LONG).show();
         }
 //        alertDialog.dismiss();
     }

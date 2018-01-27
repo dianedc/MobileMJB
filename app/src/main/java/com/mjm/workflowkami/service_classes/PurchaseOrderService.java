@@ -22,7 +22,7 @@ public interface PurchaseOrderService {
     Call<List<PurchaseOrderClass>> getAllPord();
 
     @GET("porder/{preqID}/orders")
-    Call<List<PurchaseOrderClass>> getAllPord(@Path("preqID") int preqID);
+    Call<List<PurchaseOrderClass>> getAllPordByPreqID(@Path("preqID") int preqID);
 
     @GET("pord/{pord_id}")
     Call<PurchaseOrderClass> getTaskById(@Path("pord_id") int task_id);
