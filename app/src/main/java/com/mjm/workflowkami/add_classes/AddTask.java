@@ -58,7 +58,7 @@ import retrofit2.Response;
 
 public class AddTask extends AppCompatActivity implements OnClickListener {
 
-    private EditText taskID, taskprojID, taskName, taskDescription, fromDate, toDate, taskHeader, dateComp, taskDuration, taskBudget;
+    private EditText taskID, taskprojID, taskName, taskDescription, fromDate, toDate, dateStarted, totalAmountSpent, taskHeader, dateComp, taskDuration, taskBudget;
     private Spinner taskStatus, taskPhase;
     private Button saveTask;
     private DatePickerDialog fromDatePickerDialog, toDatePickerDialog, compDatePickerDialog;
@@ -93,11 +93,13 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
         fromDate = (EditText) findViewById(R.id.task_start_date);
         toDate = (EditText) findViewById(R.id.task_end_date);
         dateComp = (EditText) findViewById(R.id.task_date_completed);
+        dateStarted = (EditText) findViewById(R.id.task_date_started);
         taskStatus = (Spinner) findViewById(R.id.task_status);
         taskDuration = (EditText) findViewById(R.id.task_duration);
         saveTask = (Button) findViewById(R.id.btnSaveTask);
         dateFormatter = new SimpleDateFormat("yyyy-dd-MM", Locale.US);
         taskBudget = (EditText) findViewById(R.id.task_budget);
+        totalAmountSpent = (EditText) findViewById(R.id.task_total_spent);
 
         taskDuration.setEnabled(false);
         taskStatus.setEnabled(false);
@@ -125,6 +127,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
             taskHeader.setText(taskIntent.getTaskheader());
             fromDate.setText(taskIntent.getTaskstartdate());
             toDate.setText(taskIntent.getTaskenddate());
+
             dateComp.setText(taskIntent.getTaskdatecompleted());
             for (int i = 0; i < taskStatus.getCount(); i++) {
                 if (taskStatus.getItemAtPosition(i).toString().equals(taskIntent.getTaskstatus())) {
@@ -135,6 +138,8 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
             taskDuration.setText(taskIntent.getTaskduration());
         }
         final BigDecimal budget = new BigDecimal(taskBudget.getText().toString());
+
+        final BigDecimal spent = new BigDecimal(totalAmountSpent.getText().toString());
 
         saveTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +158,8 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                             budget,
                             fromDate.getText().toString().trim(),
                             toDate.getText().toString().trim(),
+                            dateStarted.getText().toString().trim(),
+                            spent,
                             dateComp.getText().toString().trim(),
                             taskStatus.getSelectedItem().toString().trim(),
                             taskDuration.getText().toString().trim());
@@ -280,7 +287,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
             }
             @Override
             public void onFailure(Call<TaskClass> call, Throwable t) {
-                Toast.makeText(AddTask.this, "An error has been encountered while adding task", Toast.LENGTH_SHORT);
+                Toast.makeText(AddTask.this, "An error has been encountered while adding task", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -304,7 +311,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
 
-                Toast.makeText(AddTask.this, "An error has been encountered while editing task", Toast.LENGTH_SHORT);
+                Toast.makeText(AddTask.this, "An error has been encountered while editing task", Toast.LENGTH_SHORT).show();
             }
         });
     }

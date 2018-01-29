@@ -39,7 +39,7 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
     private List<TaskClass> tasks;
     private ProgressDialog progressDialog;
     private TaskService taskService = API.getInstance().getTaskService();
-    private Button btnCompleteTask, btnStartTask, btnEditTask;
+    private Button btnCompleteTask, btnCompleteTaskDone, btnStartTask, btnStartTaskDone, btnEditTask;
 
     public TaskClassAdapter(Context context, List<TaskClass> tasks) {
         super(context, R.layout.list_item_tasks, tasks);
@@ -54,7 +54,9 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.list_item_tasks, parent, false);
         btnCompleteTask = (Button) view.findViewById(R.id.btnCompleteTask);
+        btnCompleteTaskDone = (Button) view.findViewById(R.id.btnCompleteTaskDone);
         btnStartTask = (Button) view.findViewById(R.id.btnStartTask);
+        btnStartTaskDone = (Button) view.findViewById(R.id.btnStartTaskDone);
 //        initialState();
         try {
             if (tasks != null) {
@@ -69,7 +71,10 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
 
                 if (tasks.get(position).getTaskstatus().equals("Completed")) {
                     btnCompleteTask.setVisibility(View.INVISIBLE);
+                    btnCompleteTaskDone.setVisibility(View.VISIBLE);
+
                     btnStartTask.setVisibility(View.INVISIBLE);
+                    btnStartTaskDone.setVisibility(View.VISIBLE);
 
 //                    btnCompleteTask.setOnClickListener(new View.OnClickListener() {
 //                        @Override
@@ -88,6 +93,8 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
 
                 if (tasks.get(position).getTaskstatus().equals("Active")) {
                     btnStartTask.setVisibility(View.INVISIBLE);
+                    btnStartTaskDone.setVisibility(View.VISIBLE);
+
 //                    btnCompleteTask.setEnabled(true);
 
 //                    btnStartTask.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +109,9 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                 if (tasks.get(position).getTaskstatus().equals("Waiting")) {
 //                    btnStartTask.setEnabled(true);
                     btnCompleteTask.setVisibility(View.INVISIBLE);
+                    btnStartTask.setVisibility(View.VISIBLE);
+
+
 
 //                    btnCompleteTask.setOnClickListener(new View.OnClickListener() {
 //                        @Override

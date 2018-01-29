@@ -80,12 +80,25 @@
             android:textSize="5pt" />
 
         <Button
+            android:id="@+id/btnStartTaskDone"
+            android:layout_width="85dp"
+            android:layout_height="47dp"
+            android:layout_alignBaseline="@+id/btnCompleteTask"
+            android:layout_alignBottom="@+id/btnCompleteTask"
+            android:layout_alignStart="@+id/btnStartTask"
+            android:background="@drawable/rounded_button"
+            android:drawableTop="@drawable/ic_assignment_returned_done_24px"
+            android:text="Start"
+            android:textSize="5pt"
+            android:visibility="invisible"
+            android:enabled="false"/>
+
+        <Button
             android:id="@+id/btnCompleteTask"
             android:layout_width="85dp"
             android:layout_height="47dp"
-            android:layout_alignBaseline="@+id/btnStartTask"
-            android:layout_alignBottom="@+id/btnStartTask"
-            android:layout_marginEnd="23dp"
+            android:layout_alignBaseline="@+id/btnCompleteTaskDone"
+            android:layout_alignBottom="@+id/btnCompleteTaskDone"
             android:layout_toStartOf="@+id/btnEditTask"
             android:background="@drawable/rounded_button"
             android:drawableTop="@drawable/ic_check_circle_black_24dp"
@@ -93,12 +106,31 @@
             android:textSize="5pt" />
 
         <Button
-            android:id="@+id/btnEditTask"
-            android:layout_width="45dp"
+            android:id="@+id/btnCompleteTaskDone"
+            android:layout_width="85dp"
             android:layout_height="47dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/btnCompleteTask"
+            android:layout_alignBaseline="@+id/btnStartTask"
+            android:layout_alignBottom="@+id/btnStartTask"
+            android:layout_toEndOf="@+id/btnStartTask"
             android:background="@drawable/rounded_button"
-            android:drawableLeft="@drawable/ic_remove_red_eye_18px" />
+            android:drawableTop="@drawable/ic_check_circle_done_24dp"
+            android:text="Complete"
+            android:textSize="5pt"
+            android:visibility="invisible"
+            android:enabled="false"/>
+
+
+        <Button
+            android:id="@+id/btnEditTask"
+            android:layout_width="85dp"
+            android:layout_height="47dp"
+            android:layout_alignBaseline="@+id/btnCompleteTaskDone"
+            android:layout_alignBottom="@+id/btnCompleteTaskDone"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/rounded_button"
+            android:drawableTop="@drawable/ic_remove_red_eye_18px"
+            android:text="View"
+            android:textSize="5pt" />
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>

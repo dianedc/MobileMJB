@@ -221,7 +221,7 @@
                     android:drawableLeft="@drawable/ic_date"
                     android:drawablePadding="10dp"
                     android:ems="14"
-                    android:hint="Start Date"
+                    android:hint="Target Start Date"
                     android:inputType="date"
                     android:onClick="datePicker"
                     android:singleLine="true"
@@ -252,6 +252,63 @@
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/task_date_started"
+                    android:layout_width="161dp"
+                    android:layout_height="47dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="0.24"
+                    android:drawableLeft="@drawable/ic_date"
+                    android:drawablePadding="10dp"
+                    android:ems="14"
+                    android:hint="Actual Start Date"
+                    android:inputType="date"
+                    android:onClick="datePicker"
+                    android:singleLine="true"
+                    android:textSize="6pt" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
+                <EditText
+                    android:id="@+id/task_date_completed"
+                    android:layout_width="161dp"
+                    android:layout_height="47dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="0.24"
+                    android:drawableLeft="@drawable/ic_date"
+                    android:drawablePadding="10dp"
+                    android:ems="14"
+                    android:hint="Actual End Date"
+                    android:inputType="date"
+                    android:singleLine="true"
+                    android:textSize="6pt" />
+
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
         <!--</android.support.design.widget.TextInputLayout>-->
 
         <!--android:layout_gravity="center"-->
@@ -264,9 +321,9 @@
         <!--tools:layout_editor_absoluteX="16dp"-->
         <!--tools:layout_editor_absoluteY="189dp" />-->
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+        <!--<Space-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
         <!--<TextView-->
         <!--android:id="@+id/textView24"-->
         <!--android:layout_width="wrap_content"-->
@@ -289,23 +346,23 @@
             <!--android:inputType="textEmailAddress" />-->
 
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/task_date_completed"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_weight="0.24"
-                android:drawableLeft="@drawable/ic_date"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:inputType="date"
-                android:hint="Date Completed"
-                android:textSize="6pt" />
-        </android.support.design.widget.TextInputLayout>
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<EditText-->
+                <!--android:id="@+id/task_date_completed"-->
+                <!--android:layout_width="278dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_marginStart="20dp"-->
+                <!--android:layout_weight="0.24"-->
+                <!--android:drawableLeft="@drawable/ic_date"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:ems="14"-->
+                <!--android:inputType="date"-->
+                <!--android:hint="Date Completed"-->
+                <!--android:textSize="6pt" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
 
         <Space
             android:layout_width="match_parent"
@@ -553,6 +610,44 @@
                 android:drawablePadding="10dp"
                 android:ems="14"
                 android:hint="Task Duration"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textSize="6pt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--<EditText-->
+            <!--android:id="@+id/task_progress"-->
+            <!--android:layout_width="229dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:ems="14"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:textSize="6pt"-->
+            <!--android:hint="Task Progress"-->
+            <!--android:drawableLeft="@drawable/ic_taskprog"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:singleLine="true"/>-->
+
+            <EditText
+                android:id="@+id/task_total_spent"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_access_time_black_24dp"
+                android:drawablePadding="10dp"
+                android:ems="14"
+                android:hint="Total Amount Spent"
                 android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textSize="6pt" />
