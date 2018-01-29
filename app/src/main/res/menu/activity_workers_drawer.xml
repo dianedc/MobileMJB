@@ -14,7 +14,7 @@
         <item
             android:id="@+id/nav_team"
             android:icon="@drawable/ic_access_time_black_24dp"
-            android:title="@string/title_team" />
+            android:title="@string/title_attendance" />
 
         <!--<item-->
         <!--android:id="@+id/nav_purchaseRequest"-->

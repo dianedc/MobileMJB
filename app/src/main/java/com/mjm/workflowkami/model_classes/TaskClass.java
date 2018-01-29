@@ -16,17 +16,10 @@ public class TaskClass implements Serializable {
     private String taskphase;
     private String taskheader;
     private BigDecimal taskbudget;
-
-    public BigDecimal getTaskbudget() {
-        return taskbudget;
-    }
-
-    public void setTaskbudget(BigDecimal taskbudget) {
-        this.taskbudget = taskbudget;
-    }
-
     private String taskstartdate;
     private String taskenddate;
+    private String taskdatestarted;
+    private BigDecimal tasktotalspent;
     private String taskdatecompleted;
     private String taskstatus;
     private String taskduration;
@@ -49,7 +42,7 @@ public class TaskClass implements Serializable {
     }
 
     //Edit
-    public TaskClass(Integer taskID, ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, BigDecimal taskbudget, String taskstartdate, String taskenddate, String taskdatecompleted, String taskstatus, String taskduration) {
+    public TaskClass(Integer taskID, ProjectClass projectID, String taskname, String taskdesc, String taskphase, String taskheader, BigDecimal taskbudget, String taskstartdate, String taskenddate, String taskdatestarted, BigDecimal tasktotalspent, String taskdatecompleted, String taskstatus, String taskduration) {
         this.taskID = taskID;
         this.projectID = projectID;
         this.taskname = taskname;
@@ -59,6 +52,8 @@ public class TaskClass implements Serializable {
         this.taskbudget = taskbudget;
         this.taskstartdate = taskstartdate;
         this.taskenddate = taskenddate;
+        this.taskdatestarted = taskdatestarted;
+        this.tasktotalspent = tasktotalspent;
         this.taskdatecompleted = taskdatecompleted;
         this.taskstatus = taskstatus;
         this.taskduration = taskduration;
@@ -78,6 +73,30 @@ public class TaskClass implements Serializable {
         this.taskdatecompleted = taskdatecompleted;
         this.taskstatus = taskstatus;
         this.taskduration = taskduration;
+    }
+
+    public String getTaskdatestarted() {
+        return taskdatestarted;
+    }
+
+    public void setTaskdatestarted(String taskdatestarted) {
+        this.taskdatestarted = taskdatestarted;
+    }
+
+    public BigDecimal getTasktotalspent() {
+        return tasktotalspent;
+    }
+
+    public void setTasktotalspent(BigDecimal tasktotalspent) {
+        this.tasktotalspent = tasktotalspent;
+    }
+
+    public BigDecimal getTaskbudget() {
+        return taskbudget;
+    }
+
+    public void setTaskbudget(BigDecimal taskbudget) {
+        this.taskbudget = taskbudget;
     }
 
     public Integer getTaskID() {

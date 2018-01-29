@@ -29,6 +29,7 @@ import com.mjm.workflowkami.Fragments.POrderFragment;
 import com.mjm.workflowkami.Fragments.PRequestFragment;
 import com.mjm.workflowkami.Fragments.ProjTeam;
 import com.mjm.workflowkami.Fragments.TaskFragment;
+import com.mjm.workflowkami.Fragments.WorkerFragment;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 
@@ -198,9 +199,12 @@ public class Workflow extends AppCompatActivity implements NavigationView.OnNavi
                     ProjTeam projeTeam = new ProjTeam();
                     return projeTeam;
                 case 2:
+                    WorkerFragment projeTeamw = new WorkerFragment();
+                    return projeTeamw;
+                case 3:
                     PRequestFragment preq = new PRequestFragment();
                     return preq;
-                case 3:
+                case 4:
                     POrderFragment pord = new POrderFragment();
                     return pord;
                 default:
@@ -211,7 +215,7 @@ public class Workflow extends AppCompatActivity implements NavigationView.OnNavi
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 4;
+            return 5;
         }
     }
 }

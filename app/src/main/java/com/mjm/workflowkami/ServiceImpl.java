@@ -182,6 +182,8 @@ public class ServiceImpl {
                                     taskClassList.get(i).getTaskbudget(),
                                     taskClassList.get(i).getTaskstartdate(),
                                     taskClassList.get(i).getTaskenddate(),
+                                    taskClassList.get(i).getTaskdatestarted(),
+                                    taskClassList.get(i).getTasktotalspent(),
                                     taskClassList.get(i).getTaskdatecompleted(),
                                     taskClassList.get(i).getTaskstatus(),
                                     taskClassList.get(i).getTaskduration()));

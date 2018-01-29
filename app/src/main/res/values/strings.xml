@@ -180,19 +180,24 @@
     <string name="tab_text_1">Purchase Request</string>
     <string name="tab_text_2">Purchase Order</string>
     <string name="tab_text_3">Add Item</string>
+    <string name="tab_text_preq1">Approval</string>
+    <string name="tab_text_preq2">Show Items</string>
+    <string name="tab_text_preq3">Add Item</string>
+
     <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="tab1">Project Team</string>
     <string name="tab2">Time In</string>
     <string name="tab3">Time Out</string>
-    <string name="team">Team</string>
+    <string name="team">Team Users</string>
     <string name="workers">Attendannce</string>
 
     <string name="tab11">Tasks</string>
     <string name="tab12">Project Team</string>
-    <string name="tab13">Purchase Request</string>
-    <string name="tab14">Purchase Order</string>
+    <string name="tab15">Team Workers</string>
+    <string name="tab13">PR</string>
+    <string name="tab14">PO</string>
     <string name="workflow">Workflow</string>
 
 

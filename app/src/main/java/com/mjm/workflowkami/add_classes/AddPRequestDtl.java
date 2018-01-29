@@ -108,6 +108,16 @@ public class AddPRequestDtl extends ListFragment {
             new PRequestTask().execute();
 //        }
 
+//        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_add_preq_dtl_item);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent add = new Intent(getActivity(), AddPRequest.class);
+//                startActivity(add);
+//            }
+//        });
+//        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
+
 
         layout = (PullRefreshLayout) rootView.findViewById(R.id.refreshprdtl);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
