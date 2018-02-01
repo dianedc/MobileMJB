@@ -115,6 +115,15 @@
             android:name=".impl_classes.Form"
             android:label="@string/title_activity_form"
             android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".impl_classes.TaskAssigned"
+            android:label="@string/task_assigned"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".add_classes.AddMoveWorker"
+            android:label="@string/task_assigned"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

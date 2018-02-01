@@ -38,11 +38,14 @@ public class PurchaseRequestAdapter extends ArrayAdapter<PurchaseRequestClass> {
         View view = layoutInflater.inflate(R.layout.list_item_prequest, parent, false);
 
         TextView txtProjID = (TextView) view.findViewById(R.id.preqID);
+//        txtProjID.setText(preqs.get(position).getPreqstatus());
         try {
             if (preqs != null && preqs.get(position).getPreqstatus() == true) {
                 txtProjID.setText("Approved");
-            } else {
+            } else if (preqs != null && preqs.get(position).getPreqstatus()== false){
                 txtProjID.setText("Waiting");
+            } else {
+                txtProjID.setText(String.valueOf(preqs.get(position).getPreqID()));
             }
         } catch (Exception eo) {
             eo.printStackTrace();

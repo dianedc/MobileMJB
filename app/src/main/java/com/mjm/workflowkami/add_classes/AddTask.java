@@ -124,6 +124,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                 }
             }
             taskBudget.setText(String.valueOf(taskIntent.getTaskbudget()));
+            totalAmountSpent.setText(String.valueOf(taskIntent.getTasktotalspent()));
             taskHeader.setText(taskIntent.getTaskheader());
             fromDate.setText(taskIntent.getTaskstartdate());
             toDate.setText(taskIntent.getTaskenddate());

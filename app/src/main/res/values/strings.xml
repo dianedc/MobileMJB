@@ -190,12 +190,12 @@
     <string name="tab1">Project Team</string>
     <string name="tab2">Time In</string>
     <string name="tab3">Time Out</string>
-    <string name="team">Team Users</string>
+    <string name="team">Users</string>
     <string name="workers">Attendannce</string>
 
     <string name="tab11">Tasks</string>
     <string name="tab12">Project Team</string>
-    <string name="tab15">Team Workers</string>
+    <string name="tab15">Worker</string>
     <string name="tab13">PR</string>
     <string name="tab14">PO</string>
     <string name="workflow">Workflow</string>
@@ -211,5 +211,6 @@
     <string name="dismiss">Dismiss</string>
     <string name="save">Save</string>
     <string name="title_activity_form">Form</string>
+    <string name="task_assigned">Assigned Workers</string>
 
 </resources>

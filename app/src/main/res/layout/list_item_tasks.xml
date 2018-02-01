@@ -68,6 +68,18 @@
         android:layout_height="match_parent">
 
         <Button
+            android:id="@+id/btnAssignWorker"
+            android:layout_width="85dp"
+            android:layout_height="47dp"
+            android:layout_alignBaseline="@+id/btnStartTask"
+            android:layout_alignBottom="@+id/btnStartTask"
+            android:layout_toStartOf="@+id/btnStartTask"
+            android:background="@drawable/rounded_button"
+            android:drawableTop="@drawable/ic_transfer_within_a_station_black_24px"
+            android:text="Assign"
+            android:textSize="5pt" />
+
+        <Button
             android:id="@+id/btnStartTask"
             android:layout_width="85dp"
             android:layout_height="47dp"

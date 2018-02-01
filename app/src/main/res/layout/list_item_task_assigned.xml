@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/task_worker_name"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="22dp"
+        android:text="tesxt"
+        android:textColor="#000000"
+        android:textSize="9pt"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/task_assigned_role"
+        android:layout_width="250dp"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/task_worker_name"
+        android:layout_below="@+id/task_worker_name"
+        android:text="TextView"
+        android:textSize="6pt" />
+
+    <Button
+        android:id="@+id/btnMoveWorker"
+        android:layout_width="85dp"
+        android:layout_height="47dp"
+        android:layout_alignBaseline="@+id/task_assigned_role"
+        android:layout_alignBottom="@+id/task_assigned_role"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/rounded_button"
+        android:drawableTop="@drawable/ic_repeat_black_24px"
+        android:text="Transfer"
+        android:textSize="5pt" />
+
+
+</RelativeLayout>

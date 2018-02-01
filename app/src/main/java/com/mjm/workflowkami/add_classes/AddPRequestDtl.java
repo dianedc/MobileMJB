@@ -76,9 +76,10 @@ public class AddPRequestDtl extends ListFragment {
             do {
                 if (preq != null) {
                     serviceImpl.GetAllPReqItemList(preqIntent.getPreqID());
+//                    serviceImpl.GetAllPReqItemList();
                 }
                 try  {
-                    Thread.sleep(15000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -107,17 +108,6 @@ public class AddPRequestDtl extends ListFragment {
 //            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/prequest/"+preq.getPreqID()+"/item";
             new PRequestTask().execute();
 //        }
-
-//        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_add_preq_dtl_item);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent add = new Intent(getActivity(), AddPRequest.class);
-//                startActivity(add);
-//            }
-//        });
-//        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
-
 
         layout = (PullRefreshLayout) rootView.findViewById(R.id.refreshprdtl);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
@@ -157,32 +147,32 @@ public class AddPRequestDtl extends ListFragment {
         super.onListItemClick(l, v, position, id);
     }
 
-    public void UpdateItem(int preqid, int item, PurchaseRequestItemClass pi) {
-        Call<Void> edtItem = pItemService.editPReqItem(item, pi);
-
-        edtItem.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-//                    Toast.makeText(AddUserr.this, "User has been successfully edited!", Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-                    alertDialogBuilder.setMessage("Purchase item has been successfully edited!");
-                    alertDialogBuilder.setCancelable(true);
-                    alertDialogBuilder.show();
-
-                    Intent u = new Intent(getActivity(), AddPRequestDtl.class);
-                    startActivity(u);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getActivity(), "An error has been encountered while editing purchase item", Toast.LENGTH_SHORT);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-                alertDialogBuilder.setMessage(t.toString());
-                alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.show();
-            }
-        });
-    }
+//    public void UpdateItem(int preqid, int item, PurchaseRequestItemClass pi) {
+//        Call<Void> edtItem = pItemService.editPReqItem(item, pi);
+//
+//        edtItem.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                if (response.isSuccessful()) {
+////                    Toast.makeText(AddUserr.this, "User has been successfully edited!", Toast.LENGTH_SHORT).show();
+//                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+//                    alertDialogBuilder.setMessage("Purchase item has been successfully edited!");
+//                    alertDialogBuilder.setCancelable(true);
+//                    alertDialogBuilder.show();
+//
+//                    Intent u = new Intent(getActivity(), AddPRequestDtl.class);
+//                    startActivity(u);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                Toast.makeText(getActivity(), "An error has been encountered while editing purchase item", Toast.LENGTH_SHORT);
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+//                alertDialogBuilder.setMessage(t.toString());
+//                alertDialogBuilder.setCancelable(true);
+//                alertDialogBuilder.show();
+//            }
+//        });
+//    }
 }
