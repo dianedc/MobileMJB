@@ -19,7 +19,10 @@ import android.widget.Toast;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
+import com.mjm.workflowkami.add_classes.AddMoveWorker;
 import com.mjm.workflowkami.add_classes.AddTask;
+import com.mjm.workflowkami.impl_classes.TaskAssigned;
+import com.mjm.workflowkami.impl_classes.TaskAssigned;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.service_classes.TaskService;
 
@@ -39,7 +42,7 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
     private List<TaskClass> tasks;
     private ProgressDialog progressDialog;
     private TaskService taskService = API.getInstance().getTaskService();
-    private Button btnCompleteTask, btnCompleteTaskDone, btnStartTask, btnStartTaskDone, btnEditTask;
+    private Button btnCompleteTask, btnCompleteTaskDone, btnStartTask, btnStartTaskDone, btnEditTask, btnAssignWorker;
 
     public TaskClassAdapter(Context context, List<TaskClass> tasks) {
         super(context, R.layout.list_item_tasks, tasks);
@@ -57,6 +60,7 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
         btnCompleteTaskDone = (Button) view.findViewById(R.id.btnCompleteTaskDone);
         btnStartTask = (Button) view.findViewById(R.id.btnStartTask);
         btnStartTaskDone = (Button) view.findViewById(R.id.btnStartTaskDone);
+        btnAssignWorker = (Button) view.findViewById(R.id.btnAssignWorker);
 //        initialState();
         try {
             if (tasks != null) {
@@ -214,6 +218,18 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                 });
                 AlertDialog alert = mBuilder.create();
                 alert.show();
+            }
+        });
+
+        btnAssignWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TaskClass taskClass = tasks.get(position);
+
+                Intent i = new Intent(context, TaskAssigned.class);
+
+                i.putExtra("assignworker", taskClass);
+                context.startActivity(i);
             }
         });
 

@@ -12,6 +12,7 @@ import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.model_classes.PurchaseOrderClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
+import com.mjm.workflowkami.model_classes.TaskAssignedClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.model_classes.WorkerClass;
@@ -20,6 +21,7 @@ import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.PurchaseOrderService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
+import com.mjm.workflowkami.service_classes.TaskAssignedService;
 import com.mjm.workflowkami.service_classes.TaskService;
 import com.mjm.workflowkami.service_classes.UserService;
 import com.mjm.workflowkami.service_classes.WorkerService;
@@ -47,6 +49,7 @@ public class ServiceImpl {
     private PurchaseRequestItemService pItemService = API.getInstance().getPurchaseRequestItemService();
     private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
     private WorkerService workerService = API.getInstance().getWorkerService();
+    private TaskAssignedService taskAssignedService = API.getInstance().getTaskAssignedService();
 
     private PurchaseOrderService purchaseOrderService = API.getInstance().getPurchaseOrderService();
 
@@ -61,7 +64,9 @@ public class ServiceImpl {
     public List<PurchaseRequestClass> prList = new ArrayList<PurchaseRequestClass>();
     public List<PurchaseRequestItemClass> pItemList = new ArrayList<PurchaseRequestItemClass>();
     public List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
+    public List<ProjectTeamClass> pTeamWorkerList = new ArrayList<ProjectTeamClass>();
     public List<WorkerClass> workerList = new ArrayList<WorkerClass>();
+    public List<TaskAssignedClass> taskAssignedList = new ArrayList<TaskAssignedClass>();
 
     public List<UserClass> GetAllUsers() {
 
@@ -319,6 +324,7 @@ public class ServiceImpl {
     }
 
     public List<PurchaseRequestClass> GetAllPreqByProj(int projID) {
+        prList = new ArrayList<PurchaseRequestClass>();
 
         Call<List<PurchaseRequestClass>> getPurchaseRequests = purchaseRequestService.getAllPreqByProj(projID);
 
@@ -370,7 +376,7 @@ public class ServiceImpl {
         getPords.enqueue(new Callback<List<PurchaseOrderClass>>() {
             @Override
             public void onResponse(Call<List<PurchaseOrderClass>> call, Response<List<PurchaseOrderClass>> response) {
-                if (response.isSuccessful( )) {
+                if (response.isSuccessful()) {
                     List<PurchaseOrderClass> po = response.body();
 //                        preqList = response.body();
                     for (int i = 0; i < po.size(); i++) {
@@ -392,6 +398,7 @@ public class ServiceImpl {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<List<PurchaseOrderClass>> call, Throwable t) {
                 t.printStackTrace();
@@ -404,6 +411,7 @@ public class ServiceImpl {
 
         pItemList = new ArrayList<PurchaseRequestItemClass>();
         Call<List<PurchaseRequestItemClass>> getitems = pItemService.getItemByPReqId(i);
+//        Call<List<PurchaseRequestItemClass>> getitems = pItemService.getAllPReqItems();
 
         getitems.enqueue(new Callback<List<PurchaseRequestItemClass>>() {
             @Override
@@ -566,7 +574,7 @@ public class ServiceImpl {
     }
 
     public List<ProjectTeamClass> GetWorkersTeamById(int projID) {
-        pTeamList = new ArrayList<ProjectTeamClass>();
+        pTeamWorkerList = new ArrayList<ProjectTeamClass>();
         Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getWorkerTeamById(projID);
 
         getProjTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
@@ -578,7 +586,7 @@ public class ServiceImpl {
 
                     try {
                         for (int i = 0; i < projectTeamClassList.size(); i++) {
-                            pTeamList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
+                            pTeamWorkerList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
                                     projectTeamClassList.get(i).getProjectsprojID(),
                                     projectTeamClassList.get(i).getUserID(),
                                     projectTeamClassList.get(i).getWorkersworkersID()));
@@ -595,7 +603,7 @@ public class ServiceImpl {
             }
         });
 
-        return pTeamList;
+        return pTeamWorkerList;
     }
 
     public List<ProjectTeamClass> GetAllProjTeams() {
@@ -629,5 +637,38 @@ public class ServiceImpl {
         });
 
         return pTeamList;
+    }
+
+    public List<TaskAssignedClass> GetAllWorkersAssigned(int projID, int taskID) {
+        taskAssignedList = new ArrayList<TaskAssignedClass>();
+        Call<List<TaskAssignedClass>> getTasksAssigned = taskAssignedService.getAllWorkersAssigned(projID, taskID);
+
+        getTasksAssigned.enqueue(new Callback<List<TaskAssignedClass>>() {
+            @Override
+            public void onResponse(Call<List<TaskAssignedClass>> call, Response<List<TaskAssignedClass>> response) {
+                if (response.isSuccessful()) {
+                    List<TaskAssignedClass> tsList = response.body();
+
+                    try {
+                        for (int i = 0; i < tsList.size(); i++) {
+                            taskAssignedList.add(new TaskAssignedClass(tsList.get(i).getTaskassignedID(),
+                                    tsList.get(i).getProjectID(),
+                                    tsList.get(i).getTaskID(),
+                                    tsList.get(i).getAssignedID()));
+                        }
+
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TaskAssignedClass>> call, Throwable t) {
+                t.printStackTrace();
+
+            }
+        });
+        return taskAssignedList;
     }
 }

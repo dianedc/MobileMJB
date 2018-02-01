@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,15 @@ import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.service_classes.ProjectTeamService;
+import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
+import com.mjm.workflowkami.service_classes.PurchaseRequestService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by admin on 26 Nov 2017.
@@ -40,8 +47,8 @@ public class PRequestFragment extends ListFragment {
     private ListView listofPteams;
     private ServiceImpl serviceImpl = new ServiceImpl();
     private ProjectTeamClass prjteam = new ProjectTeamClass();
-    private List<ProjectTeamClass> projList = new ArrayList<ProjectTeamClass>();
-    private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
+    private List<PurchaseRequestClass> projList = new ArrayList<PurchaseRequestClass>();
+    private PurchaseRequestService preqService = API.getInstance().getPurchaseRequestService();
     private ProgressDialog progressDialog;
     private ProjectClass projectIntent = new ProjectClass();
 
@@ -66,11 +73,12 @@ public class PRequestFragment extends ListFragment {
 //                serviceImpl.GetAllProjTeams();
                 if (projectIntent != null) {
                     try  {
-                        Thread.sleep(1000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     serviceImpl.GetAllPreqByProj(projectIntent.getProjID());
+
                 } else {
                     Toast.makeText(getActivity(), "No Content", Toast.LENGTH_SHORT).show();
                 }

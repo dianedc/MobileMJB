@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.mjm.workflowkami.impl_classes.Projects"
+    tools:showIn="@layout/app_bar_projects">
+
+    <!--<com.baoyz.widget.PullRefreshLayout-->
+        <!--android:id="@+id/refreshProject"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <ListView
+            android:id="@+id/lstTaskAssigned"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    <!--</com.baoyz.widget.PullRefreshLayout>-->
+
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/bottom_navigation"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--app:itemBackground="@color/colorWhite"-->
+        <!--app:itemIconTint="@color/colorPrimary"-->
+        <!--app:itemTextColor="@color/colorPrimary"-->
+        <!--app:menu="@menu/navigation"-->
+        <!--android:hapticFeedbackEnabled="true"-->
+        <!--android:nestedScrollingEnabled="true">-->
+
+    <!--</android.support.design.widget.BottomNavigationView>-->
+
+</RelativeLayout>

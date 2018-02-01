@@ -1,10 +1,7 @@
 package com.mjm.workflowkami.impl_classes;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -25,11 +22,10 @@ import org.springframework.http.HttpBasicAuthentication;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
@@ -46,14 +42,14 @@ import retrofit2.Response;
  */
 public class LoginActivity extends AppCompatActivity {
 
-
-
     // UI references.
     private EditText mPasswordView, mEmailView;
     private EditText txtEmail;
     private EditText txtPassword;
     private View mProgressView;
     private View mLoginFormView;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private String email, password;
 //    private SpotsDialog loader;
     Toast t;
     Intent i;
@@ -68,34 +64,28 @@ public class LoginActivity extends AppCompatActivity {
 
         txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
-//        loader = new SpotsDialog(LoginActivity.this);
-        // Set up the login form.
+
     }
 
     public void singInButtonOnClick (View v) {
-//        loader.show();
-        if (!"".equals(txtPassword.getText().toString()) && !"".equals(txtEmail.getText().toString())) {
-            user = new UserClass();
-            user.setEmail(txtEmail.getText().toString().trim());
-            user.setPassword(txtPassword.getText().toString().trim());
+        email = txtEmail.getText().toString().trim();
+        password = txtPassword.getText().toString().trim();
 
-            Call<UserClass> viewUser = userService.getUserByEmailPassword(user.getEmail(), user.getPassword());
+        if (!"".equals(txtPassword.getText().toString()) && !"".equals(txtEmail.getText().toString())) {
+
+            Call<UserClass> viewUser = userService.getUserByEmailPassword(email, password);
             viewUser.enqueue(new Callback<UserClass>() {
                 @Override
                 public void onResponse(Call<UserClass> call, Response<UserClass> response) {
 
                     if (response.isSuccessful()) {
+//                        Toast.makeText(LoginActivity.this, response.toString(), Toast.LENGTH_LONG).show();
 //                        loader.dismiss();
                         Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
                         i = new Intent(LoginActivity.this, Dashboard.class);
                         startActivity(i);
                     } else {
-//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-//                        alertDialogBuilder.setMessage("");
-//                        alertDialogBuilder.setCancelable(true);
-//                        alertDialogBuilder.show();
-//                        loader.dismiss();
-                        Toast.makeText(LoginActivity.this, "Invalid Username/Password!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -103,31 +93,19 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<UserClass> call, Throwable t) {
 
-                    Toast.makeText(LoginActivity.this, "Error!", Toast.LENGTH_LONG).show();
-//                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-//                    alertDialogBuilder.setMessage(t.toString());
-//                    alertDialogBuilder.setCancelable(true);
-//                    alertDialogBuilder.show();
-//                    loader.dismiss();
+                    Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_LONG).show();
                 }
 
             });
         } else {
-
-//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-//            alertDialogBuilder.setMessage("Invalid Email/Password! Please try again.");
-//            alertDialogBuilder.setCancelable(true);
-//            alertDialogBuilder.show();
-//            loader.dismiss();
-            Toast.makeText(LoginActivity.this, "Invalid Email/Password! Please try again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_LONG).show();
         }
-//        alertDialog.dismiss();
     }
 }
 //public class LoginActivity extends LoaderAsync {
 //
 //    protected static final String TAG = LoginActivity.class.getSimpleName();
-////    private SpotsDialog loader;
+//    //    private SpotsDialog loader;
 //    Toast t;
 //    Intent i;
 //    private UserClass user;
@@ -140,11 +118,12 @@ public class LoginActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_login);
 //
 //
+//
 ////        loader = new SpotsDialog(LoginActivity.this);
 //        // Set up the login form.
 //    }
 //
-//    public void singInButtonOnClick (View v) {
+//    public void singInButtonOnClick(View v) {
 ////        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/user/signin/"+txtEmail.getText().toString().trim()+"/"+txtPassword.getText().toString().trim();
 //        new LoginTask().execute();
 //
@@ -171,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
 //
 //        @Override
 //        protected UserClass doInBackground(Void... voids) {
-//            final String url = getString(R.string.base_url)+"login";
+//            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/user/signin/"+email+"/"+password;
 //
 //            // Populate the HTTP Basic Authentitcation header with the username and password
 //            HttpAuthentication authHeader = new HttpBasicAuthentication(email, password);
@@ -196,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
 ////                ResponseEntity<UserClass> response = restTemplate.exchange(url, HttpMethod.GET, entity, UserClass.class);
 ////                return response;
 //
-//                ResponseEntity<UserClass> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(requestHeaders), UserClass.class);
+//                ResponseEntity<UserClass> response = restTemplate.exchange(uri, HttpMethod.GET, new HttpEntity<Object>(requestHeaders), UserClass.class);
 //                UserClass u = response.getBody();
 //                return u;
 //
@@ -210,8 +189,7 @@ public class LoginActivity extends AppCompatActivity {
 ////                a.show();
 //
 //                return null;
-//            }
-//            catch (ResourceAccessException e) {
+//            } catch (ResourceAccessException e) {
 //                Log.e(TAG, e.getLocalizedMessage(), e);
 ////                return new ResponseEntity<UserClass>(0, e.getClass().getSimpleName(), e.getLocalizedMessage());
 ////                AlertDialog.Builder mBuilder = new AlertDialog.Builder(LoginActivity.this);
@@ -241,6 +219,7 @@ public class LoginActivity extends AppCompatActivity {
 ////            }
 //        }
 //    }
+//}
 
 
 
