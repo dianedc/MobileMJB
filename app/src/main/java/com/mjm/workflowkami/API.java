@@ -9,6 +9,7 @@ import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.PurchaseOrderService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
+import com.mjm.workflowkami.service_classes.RoleService;
 import com.mjm.workflowkami.service_classes.TaskAssignedService;
 import com.mjm.workflowkami.service_classes.TaskService;
 import com.mjm.workflowkami.service_classes.UserService;
@@ -25,11 +26,12 @@ public class API {
 //    public final String BASE_URL = "http://192.168.2.123:8083/rest/";
 //    public final String BASE_URL = "http://10.1.12.136:8083/rest/";
 //    public final String BASE_URL = "http://192.168.0.22:8083/rest/";
-//    public final String BASE_URL = "http://192.168.2.107:8083/rest/";
+    public final String BASE_URL = "http://192.168.2.147:8083/rest/";
+//    public final String BASE_URL = "http://192.168.1.4:8083/rest/";
 //    public final String BASE_URL = "http://192.168.250.26:8083/rest/";
 //    public final String BASE_URL = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/";
 //    public final String BASE_URL = "http://192.168.2.144:8080/";
-    public final String BASE_URL = "http://172.20.10.5:8083/rest/";
+//    public final String BASE_URL = "http://172.20.10.5:8083/rest/";
     //    public final String BASE_URL = "http://10.1.15.97:8081/rest/";
 //    public final String BASE_URL = "http://192.168.254.108:8083/rest/";
 //    public final String BASE_URL = "http://192.168.2.144:8083/";
@@ -45,6 +47,7 @@ public class API {
     private WorkerService workerService;
     private AttendanceService attendanceService;
     private TaskAssignedService taskAssignedService;
+    private RoleService roleService;
 
     public static API getInstance() {
         if (instance == null) {
@@ -71,6 +74,7 @@ public class API {
         this.workerService = retrofit.create(WorkerService.class);
         this.attendanceService = retrofit.create(AttendanceService.class);
         this.taskAssignedService = retrofit.create(TaskAssignedService.class);
+        this.roleService = retrofit.create(RoleService.class);
 
     }
 
@@ -103,4 +107,6 @@ public class API {
     public AttendanceService getAttendanceService() { return this.attendanceService; }
 
     public TaskAssignedService getTaskAssignedService() { return this.taskAssignedService; }
+
+    public RoleService getRoleService() { return this.roleService; }
 }

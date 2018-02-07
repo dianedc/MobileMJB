@@ -121,6 +121,11 @@ public class Workers extends AppCompatActivity
                 Intent p = new Intent(Workers.this, Projects.class);
                 startActivity(p);
                 break;
+
+            case R.id.nav_purchaseRequest:
+                Intent f = new Intent(Workers.this, Forms.class);
+                startActivity(f);
+                break;
             case R.id.nav_team:
 //                loader.show();
                 Intent x = new Intent(Workers.this, AttendanceNav.class);

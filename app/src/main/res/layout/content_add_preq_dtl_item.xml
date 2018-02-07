@@ -8,7 +8,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="45dp" />
+        android:layout_height="60dp" />
 
     <EditText
         android:id="@+id/preq_id_dtl"
@@ -40,7 +40,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="10dp"
         android:visibility="visible" />
 
     <android.support.design.widget.TextInputLayout

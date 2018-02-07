@@ -3,10 +3,6 @@ package com.mjm.workflowkami.add_classes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,14 +10,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.mjm.workflowkami.impl_classes.Forms;
-import com.mjm.workflowkami.impl_classes.Dashboard;
-import com.mjm.workflowkami.impl_classes.Files;
-
-import com.mjm.workflowkami.impl_classes.Projects;
 import com.mjm.workflowkami.R;
-import com.mjm.workflowkami.impl_classes.Reports;
-import com.mjm.workflowkami.impl_classes.Users;
 
 import java.text.SimpleDateFormat;
 
@@ -154,8 +143,8 @@ public class AddPurchaseRequest extends AppCompatActivity
 //    }
 
     public void onClickCancel(View view) {
-        Intent cancel = new Intent(AddPurchaseRequest.this, Forms.class);
-        startActivity(cancel);
+//        Intent cancel = new Intent(AddPurchaseRequest.this, Forms.class);
+//        startActivity(cancel);
     }
 
     public void onClickSavePrequest(View view){

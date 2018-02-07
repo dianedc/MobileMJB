@@ -18,6 +18,7 @@ import retrofit2.http.Path;
 
 public interface TaskAssignedService {
 
+    //RETURNS WORKERS
     @Headers("Content-Type: application/json")
     @GET("project/{projectID}/task/{taskID}/assigned")
     Call<List<TaskAssignedClass>> getAllWorkersAssigned(@Path("projectID") int projectID, @Path("taskID") int taskID);
@@ -34,6 +35,7 @@ public interface TaskAssignedService {
     @GET("project/assigned")
     Call<List<TaskAssignedClass>> getAllAssignedTasks();
 
+    //RETURNS TASK ASSIGNED
     @GET("project/{projectID}/task/{taskID}/assigned/{assignedID}")
     Call<TaskAssignedClass> getTaskAssignedByProjectAndTask(@Path("projectID") int projectID, @Path("taskID") int taskID, @Path("assignedID") int assignedID);
 }

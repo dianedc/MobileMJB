@@ -174,6 +174,11 @@ public class Users extends LoaderAsync
                 startActivity(p);
                 break;
 
+            case R.id.nav_purchaseRequest:
+                Intent f = new Intent(Users.this, Forms.class);
+                startActivity(f);
+                break;
+
             case R.id.nav_team:
 //                loader.show();
                 Intent x = new Intent(Users.this, AttendanceNav.class);

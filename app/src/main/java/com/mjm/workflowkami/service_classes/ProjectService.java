@@ -38,5 +38,8 @@ public interface ProjectService {
     Call<Void> workerTimeOut(@Path("projID") int proj_id, @Path("projteamID") int projteamID);
 
     @GET("project/projects/active")
+    Call<List<ProjectClass>> getCountActiveProjects();
+
+    @GET("project/projects/show/active")
     Call<List<ProjectClass>> getAllActiveProjects();
 }

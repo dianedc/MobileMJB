@@ -48,17 +48,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tab15" />
 
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab13" />
+            <!--<android.support.design.widget.TabItem-->
+                <!--android:id="@+id/tabItem13"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/tab13" />-->
 
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab14" />
+            <!--<android.support.design.widget.TabItem-->
+                <!--android:id="@+id/tabItem14"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/tab14" />-->
 
         </android.support.design.widget.TabLayout>
 

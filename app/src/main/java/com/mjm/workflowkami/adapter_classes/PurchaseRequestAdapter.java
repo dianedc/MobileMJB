@@ -38,14 +38,9 @@ public class PurchaseRequestAdapter extends ArrayAdapter<PurchaseRequestClass> {
         View view = layoutInflater.inflate(R.layout.list_item_prequest, parent, false);
 
         TextView txtProjID = (TextView) view.findViewById(R.id.preqID);
-//        txtProjID.setText(preqs.get(position).getPreqstatus());
         try {
-            if (preqs != null && preqs.get(position).getPreqstatus() == true) {
-                txtProjID.setText("Approved");
-            } else if (preqs != null && preqs.get(position).getPreqstatus()== false){
-                txtProjID.setText("Waiting");
-            } else {
-                txtProjID.setText(String.valueOf(preqs.get(position).getPreqID()));
+            if (preqs != null) {
+                txtProjID.setText(checkStatus(preqs.get(position).getPreqstatus().toString()));
             }
         } catch (Exception eo) {
             eo.printStackTrace();
@@ -72,6 +67,18 @@ public class PurchaseRequestAdapter extends ArrayAdapter<PurchaseRequestClass> {
 //        txtofficeengr.setText("SAMPLE1");
 
         return view;
+
+    }
+    public String checkStatus(String stat) {
+
+        switch(stat) {
+            case "true":
+                return "Approved";
+            case "false":
+                return "Declined";
+            default:
+                return "Waiting";
+        }
 
     }
 }

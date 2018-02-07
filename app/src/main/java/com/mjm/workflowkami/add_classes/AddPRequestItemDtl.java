@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class AddPRequestItemDtl extends Fragment {
     private TextView preq_dtl_line_tot;
     private Button btnCancel, btnSavePreqDtlItem;
     private BigDecimal lineTot;
+    private Spinner preq_dtl_gendesc;
 
     private PurchaseRequestClass pr = new PurchaseRequestClass();
     private PurchaseRequestItemClass piIntent = new PurchaseRequestItemClass();
@@ -61,6 +63,7 @@ public class AddPRequestItemDtl extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_add_prequest_dtl_item, container, false);
         preq_id = (EditText) rootView.findViewById(R.id.preq_id);
         preq_id_dtl = (EditText) rootView.findViewById(R.id.preq_id_dtl);
+        preq_dtl_gendesc = (Spinner) rootView.findViewById(R.id.preq_dtl_gendesc);
         preq_dtl_desc = (EditText) rootView.findViewById(R.id.preq_dtl_desc);
         preq_dtl_qty = (EditText) rootView.findViewById(R.id.preq_dtl_qty);
         preq_dtl_unit = (EditText) rootView.findViewById(R.id.preq_dtl_unit);
@@ -88,6 +91,12 @@ public class AddPRequestItemDtl extends Fragment {
 
         if (piIntent != null) {
             preq_id_dtl.setText(String.valueOf(piIntent.getPreqItemID()));
+            for (int i = 0; i < preq_dtl_gendesc.getCount(); i++) {
+                if (preq_dtl_gendesc.getItemAtPosition(i).toString().equals(piIntent.getPreqgendesc())) {
+                    preq_dtl_gendesc.setSelection(i);
+                    break;
+                }
+            }
             preq_dtl_desc.setText(piIntent.getPreqdesc());
             preq_dtl_qty.setText(String.valueOf(piIntent.getPreqqty()));
             preq_dtl_unit.setText(piIntent.getPrequnit());
@@ -121,12 +130,14 @@ public class AddPRequestItemDtl extends Fragment {
         btnSavePreqDtlItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText(getActivity(), preq_dtl_gendesc.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 if (!preq_id_dtl.getText().toString().matches("")) {
                     //update
                     pItem = new PurchaseRequestItemClass(Integer.valueOf(preq_id_dtl.getText().toString()),
                             piIntent.getPrequestID(),
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
+                            preq_dtl_gendesc.getSelectedItem().toString(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),
@@ -137,6 +148,7 @@ public class AddPRequestItemDtl extends Fragment {
                     pItem = new PurchaseRequestItemClass(pr,
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
+                            preq_dtl_gendesc.getSelectedItem().toString(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),

@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mjm.workflowkami.impl_classes.Form$PlaceholderFragment">
+    tools:context="com.mjm.workflowkami.impl_classes.Forms">
 
     <TextView
         android:id="@+id/section_label"

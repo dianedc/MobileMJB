@@ -1,7 +1,6 @@
 package com.mjm.workflowkami.adapter_classes;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.mjm.workflowkami.R;
+import com.mjm.workflowkami.model_classes.RoleClass;
+import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.model_classes.UserClass;
 
 import java.util.List;
@@ -19,12 +20,12 @@ import java.util.List;
  * Created by Jasper on 21 Oct 2017.
  */
 
-public class SpinnerAdapter extends ArrayAdapter<UserClass> {
+public class ProjManSpinnerAdapter extends ArrayAdapter<UserClass> {
     private Context context;
     private List<UserClass> values;
 
-    public SpinnerAdapter(@NonNull Context context, @LayoutRes int textViewResourceId, List<UserClass> values) {
-        super(context, textViewResourceId, values);
+    public ProjManSpinnerAdapter(@NonNull Context context, List<UserClass> values) {
+        super(context, R.layout.spinner_list, values);
         this.context = context;
         this.values = values;
     }
@@ -52,7 +53,7 @@ public class SpinnerAdapter extends ArrayAdapter<UserClass> {
         TextView textView_id = (TextView) customView.findViewById(R.id.spinner_item_id);
         TextView textView_lastname = (TextView) customView.findViewById(R.id.spinner_item_lastname);
 
-        textView_id.setText(String.valueOf(values.get(position).getUserID()));
+        textView_id.setText(String.valueOf(values.get(position).getFirstname()));
         textView_lastname.setText(values.get(position).getLastname());
         return customView;
 

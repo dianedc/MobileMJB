@@ -51,6 +51,9 @@ public class AddUserr extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAddUser);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         userID = (EditText) findViewById(R.id.user_id);
         userFName = (EditText) findViewById(R.id.user_fname);
         userLName = (EditText) findViewById(R.id.user_lname);
@@ -118,7 +121,7 @@ public class AddUserr extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.add_userr, menu);
+//        getMenuInflater().inflate(R.menu.add_userr, menu);
         return true;
     }
 
@@ -127,16 +130,13 @@ public class AddUserr extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.action_back:
-                startActivity(new Intent(this, Users.class));
-                return true;
-//            case R.id.action_settings:
-//                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
 
+        if (id == android.R.id.home) {
+            this.finish();
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void AddUser(UserClass u) {

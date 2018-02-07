@@ -1,19 +1,34 @@
 package com.mjm.workflowkami.impl_classes;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.util.Base64;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.LoaderAsync;
 import com.mjm.workflowkami.R;
+import com.mjm.workflowkami.auth_classes.SpringBootClient;
+import com.mjm.workflowkami.auth_classes.SpringIdentity;
 import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.UserService;
 
@@ -30,7 +45,12 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
@@ -40,99 +60,65 @@ import retrofit2.Response;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends LoaderAsync {
 
-    // UI references.
-    private EditText mPasswordView, mEmailView;
-    private EditText txtEmail;
-    private EditText txtPassword;
-    private View mProgressView;
-    private View mLoginFormView;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    private String email, password;
-//    private SpotsDialog loader;
+    protected static final String TAG = LoginActivity.class.getSimpleName();
+    //    private SpotsDialog loader;
     Toast t;
     Intent i;
     private UserClass user;
     private UserService userService = API.getInstance().getUserService();
-
+    private WebView webView;
+    private String LOGIN_URL = "http://192.168.2.147:8080/caps/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        webView = (WebView) findViewById(R.id.webview);
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.loadUrl("http://192.168.2.147:8080/caps/login");
 
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+
+//        loader = new SpotsDialog(LoginActivity.this);
+        // Set up the login form.
     }
 
-    public void singInButtonOnClick (View v) {
-        email = txtEmail.getText().toString().trim();
-        password = txtPassword.getText().toString().trim();
+    private class MyWebViewClient extends WebViewClient {
 
-        if (!"".equals(txtPassword.getText().toString()) && !"".equals(txtEmail.getText().toString())) {
-
-            Call<UserClass> viewUser = userService.getUserByEmailPassword(email, password);
-            viewUser.enqueue(new Callback<UserClass>() {
-                @Override
-                public void onResponse(Call<UserClass> call, Response<UserClass> response) {
-
-                    if (response.isSuccessful()) {
-//                        Toast.makeText(LoginActivity.this, response.toString(), Toast.LENGTH_LONG).show();
-//                        loader.dismiss();
-                        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
-                        i = new Intent(LoginActivity.this, Dashboard.class);
-                        startActivity(i);
-                    } else {
-                        Toast.makeText(LoginActivity.this, response.toString(), Toast.LENGTH_LONG).show();
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<UserClass> call, Throwable t) {
-
-                    Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_LONG).show();
-                }
-
-            });
-        } else {
-            Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_LONG).show();
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            if(url.equals("http://192.168.2.147:8080/caps/")){
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                startActivity(intent);
+            }
         }
     }
-}
-//public class LoginActivity extends LoaderAsync {
-//
-//    protected static final String TAG = LoginActivity.class.getSimpleName();
-//    //    private SpotsDialog loader;
-//    Toast t;
-//    Intent i;
-//    private UserClass user;
-//    private UserService userService = API.getInstance().getUserService();
-//
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
-//
-//
-//
-////        loader = new SpotsDialog(LoginActivity.this);
-//        // Set up the login form.
-//    }
-//
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 //    public void singInButtonOnClick(View v) {
 ////        final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/user/signin/"+txtEmail.getText().toString().trim()+"/"+txtPassword.getText().toString().trim();
 //        new LoginTask().execute();
 //
 //    }
-//
-//    private void displayResponse(UserClass response) {
-//        Toast.makeText(this, (CharSequence) response, Toast.LENGTH_LONG).show();
-//    }
-//
+
+    private void displayResponse(UserClass response) {
+        Toast.makeText(this, (CharSequence) response, Toast.LENGTH_LONG).show();
+    }
+}
+
 //    private class LoginTask extends AsyncTask<Void, Void, UserClass> {
 //
 //        private String email, password;
@@ -150,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
 //
 //        @Override
 //        protected UserClass doInBackground(Void... voids) {
-//            final String uri = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/user/signin/"+email+"/"+password;
+//            final String uri = "http:///signin/"+email+"/"+password;
 //
 //            // Populate the HTTP Basic Authentitcation header with the username and password
 //            HttpAuthentication authHeader = new HttpBasicAuthentication(email, password);
@@ -220,6 +206,8 @@ public class LoginActivity extends AppCompatActivity {
 //        }
 //    }
 //}
+
+
 
 
 

@@ -13,6 +13,7 @@ public class PurchaseRequestItemClass implements Serializable{
     private PurchaseRequestClass prequestID;
     private int preqqty;
     private String prequnit;
+    private String preqgendesc;
     private String preqdesc;
     private String preqjob;
     private Double prequnitprice;
@@ -20,24 +21,34 @@ public class PurchaseRequestItemClass implements Serializable{
 
     public PurchaseRequestItemClass() {   }
 
-    public PurchaseRequestItemClass(int preqitemID, PurchaseRequestClass prequestID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, BigDecimal preqlinetotal) {
+    public PurchaseRequestItemClass(int preqitemID, PurchaseRequestClass prequestID, int preqqty, String prequnit, String preqgendesc, String preqdesc, String preqjob, Double prequnitprice, BigDecimal preqlinetotal) {
         this.preqitemID = preqitemID;
         this.prequestID = prequestID;
         this.preqqty = preqqty;
         this.prequnit = prequnit;
+        this.preqgendesc = preqgendesc;
         this.preqdesc = preqdesc;
         this.preqjob = preqjob;
         this.prequnitprice = prequnitprice;
         this.preqlinetotal = preqlinetotal;
     }
-    public PurchaseRequestItemClass(PurchaseRequestClass prequestID, int preqqty, String prequnit, String preqdesc, String preqjob, Double prequnitprice, BigDecimal preqlinetotal) {
+    public PurchaseRequestItemClass(PurchaseRequestClass prequestID, int preqqty, String prequnit, String preqgendesc, String preqdesc, String preqjob, Double prequnitprice, BigDecimal preqlinetotal) {
         this.prequestID = prequestID;
         this.preqqty = preqqty;
         this.prequnit = prequnit;
+        this.preqgendesc = preqgendesc;
         this.preqdesc = preqdesc;
         this.preqjob = preqjob;
         this.prequnitprice = prequnitprice;
         this.preqlinetotal = preqlinetotal;
+    }
+
+    public String getPreqgendesc() {
+        return preqgendesc;
+    }
+
+    public void setPreqgendesc(String preqgendesc) {
+        this.preqgendesc = preqgendesc;
     }
 
     public int getPreqItemID() {
