@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class AddPrequestDtlItem extends AppCompatActivity {
     private EditText preq_dtl_id, preq_dtl_desc, preq_dtl_qty, preq_dtl_unit, preq_dtl_job, preq_dtl_uni_price, preq_id_dtl;
     private TextView preq_dtl_line_tot;
     private Button btnCancel, btnSavePreqDtlItem;
+    private Spinner preq_dtl_gendesc;
 
     private PurchaseRequestClass pr = new PurchaseRequestClass();
     private PurchaseRequestItemClass pi = new PurchaseRequestItemClass();
@@ -52,6 +54,7 @@ public class AddPrequestDtlItem extends AppCompatActivity {
 
         preq_id_dtl = (EditText) findViewById(R.id.preq_id_dtl);
         preq_dtl_id = (EditText) findViewById(R.id.preq_dtl_id);
+        preq_dtl_gendesc = (Spinner) findViewById(R.id.preq_dtl_gendesc);
         preq_dtl_desc = (EditText) findViewById(R.id.preq_dtl_desc);
         preq_dtl_qty = (EditText) findViewById(R.id.preq_dtl_qty);
         preq_dtl_unit = (EditText) findViewById(R.id.preq_dtl_unit);
@@ -79,6 +82,12 @@ public class AddPrequestDtlItem extends AppCompatActivity {
 
         if (pi != null) {
             preq_dtl_id.setText(String.valueOf(pi.getPreqItemID()));
+            for (int i = 0; i < preq_dtl_gendesc.getCount(); i++) {
+                if (preq_dtl_gendesc.getItemAtPosition(i).toString().equals(pi.getPreqgendesc())) {
+                    preq_dtl_gendesc.setSelection(i);
+                    break;
+                }
+            }
             preq_dtl_desc.setText(pi.getPreqdesc());
             preq_dtl_qty.setText(String.valueOf(pi.getPreqqty()));
             preq_dtl_unit.setText(pi.getPrequnit());
@@ -113,12 +122,14 @@ public class AddPrequestDtlItem extends AppCompatActivity {
         btnSavePreqDtlItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText(AddPrequestDtlItem.this, preq_dtl_gendesc.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 if (!preq_dtl_id.getText().toString().matches("")) {
                     //update
                     pi = new PurchaseRequestItemClass(Integer.valueOf(pi.getPreqItemID()),
                             pi.getPrequestID(),
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
+                            preq_dtl_gendesc.getSelectedItem().toString(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),
@@ -131,6 +142,7 @@ public class AddPrequestDtlItem extends AppCompatActivity {
                     pi = new PurchaseRequestItemClass(pi.getPrequestID(),
                             Integer.valueOf(preq_dtl_qty.getText().toString()),
                             preq_dtl_unit.getText().toString().trim(),
+                            preq_dtl_gendesc.getSelectedItem().toString(),
                             preq_dtl_desc.getText().toString().trim(),
                             preq_dtl_job.getText().toString().trim(),
                             Double.valueOf(preq_dtl_uni_price.getText().toString()),

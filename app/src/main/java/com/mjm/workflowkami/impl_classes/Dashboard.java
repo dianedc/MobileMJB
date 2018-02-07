@@ -70,7 +70,7 @@ public class Dashboard extends LoaderAsync
         @Override
         protected List<ProjectClass> doInBackground(String... strings) {
             do {
-                Call<List<ProjectClass>> projactive = projService.getAllActiveProjects();
+                Call<List<ProjectClass>> projactive = projService.getCountActiveProjects();
                 projactive.enqueue(new Callback<List<ProjectClass>>() {
                     @Override
                     public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
@@ -278,8 +278,8 @@ public class Dashboard extends LoaderAsync
         txtprojects = (TextView) findViewById(R.id.txtProjects);
         txttasks = (TextView) findViewById(R.id.txtTasks);
 
-        final String uri = "http://192.168.2.123:8083/rest/project/projects/active";
-            new ProjCountTask().execute(uri);
+//        final String uri = "http://192.168.2.123:8083/rest/project/projects/show/active";
+            new ProjCountTask().execute();
         final String uri1 = "http://192.168.2.123:8083/rest/project/task/tasks/active";
         new TaskActive().execute(uri1);
         final String uri2 = "http://192.168.2.123:8083/rest/project/task/tasks/completed";
@@ -287,7 +287,7 @@ public class Dashboard extends LoaderAsync
         final String uri3 = "http://192.168.2.123:8083/rest/project/task/tasks/pending";
         new TaskPending().execute(uri3);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dashboard);
                 setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_dashboard);
@@ -296,7 +296,7 @@ public class Dashboard extends LoaderAsync
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_dashboard);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -336,6 +336,11 @@ public class Dashboard extends LoaderAsync
             case R.id.nav_project:
                 Intent p = new Intent(Dashboard.this, Projects.class);
                 startActivity(p);
+                break;
+
+            case R.id.nav_purchaseRequest:
+                Intent f = new Intent(Dashboard.this, Forms.class);
+                startActivity(f);
                 break;
 
             case R.id.nav_team:

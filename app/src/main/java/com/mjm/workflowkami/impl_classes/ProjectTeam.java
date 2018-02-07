@@ -95,36 +95,36 @@ public class ProjectTeam extends LoaderAsync
             new ProjTeamTask().execute();
         }
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_team);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.navigation_task:
-                        Intent n = new Intent(ProjectTeam.this, Tasks.class);
-                        startActivity(n);
-                        break;
-
-                    case R.id.navigation_team:
-//                        loader.show();
-                        Intent te = new Intent(ProjectTeam.this, ProjectTeam.class);
-                        startActivity(te);
-                        return true;
-
-                    case R.id.navigation_pr:
-                        Intent p = new Intent(ProjectTeam.this, Forms.class);
-                        startActivity(p);
-                        break;
-
-                    case R.id.navigation_po:
-                        Intent po =  new Intent(ProjectTeam.this, PurchaseOrder.class);
-                        startActivity(po);
-                        break;
-                }
-                return true;
-            }
-        });
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_team);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId())
+//                {
+//                    case R.id.navigation_task:
+//                        Intent n = new Intent(ProjectTeam.this, Tasks.class);
+//                        startActivity(n);
+//                        break;
+//
+//                    case R.id.navigation_team:
+////                        loader.show();
+//                        Intent te = new Intent(ProjectTeam.this, ProjectTeam.class);
+//                        startActivity(te);
+//                        return true;
+//
+//                    case R.id.navigation_pr:
+//                        Intent p = new Intent(ProjectTeam.this, Forms.class);
+//                        startActivity(p);
+//                        break;
+//
+//                    case R.id.navigation_po:
+//                        Intent po =  new Intent(ProjectTeam.this, PurchaseOrder.class);
+//                        startActivity(po);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -200,6 +200,11 @@ public class ProjectTeam extends LoaderAsync
             case R.id.nav_project:
                 Intent p = new Intent(ProjectTeam.this, Projects.class);
                 startActivity(p);
+                break;
+
+            case R.id.nav_purchaseRequest:
+                Intent f = new Intent(ProjectTeam.this, Forms.class);
+                startActivity(f);
                 break;
             case R.id.nav_team:
 //                loader.show();

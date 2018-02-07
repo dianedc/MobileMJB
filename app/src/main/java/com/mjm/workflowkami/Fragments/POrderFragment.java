@@ -54,16 +54,10 @@ public class POrderFragment extends ListFragment {
 
         @Override
         protected List<PurchaseOrderClass> doInBackground(String... strings) {
-            Intent intent = getActivity().getIntent();
-            projectIntent = (ProjectClass) intent.getSerializableExtra("projects");
 
             do {
 
                 serviceImpl.GetAllPurchaseOrder();
-//                serviceImpl.GetAllProjTeams();
-//                if (projectIntent != null) {
-//                    serviceImpl.GetTaskByProjId(projectIntent.getProjID());
-//                }
                 try  {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {

@@ -5,19 +5,13 @@ import android.os.Bundle;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.text.InputType;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,32 +20,19 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
-import com.mjm.workflowkami.impl_classes.Forms;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.R;
-import com.mjm.workflowkami.adapter_classes.SpinnerAdapter;
-import com.mjm.workflowkami.impl_classes.Dashboard;
-import com.mjm.workflowkami.impl_classes.Files;
 
-import com.mjm.workflowkami.impl_classes.Projects;
-import com.mjm.workflowkami.impl_classes.PurchaseOrder;
-import com.mjm.workflowkami.impl_classes.Reports;
 import com.mjm.workflowkami.impl_classes.Tasks;
 import com.mjm.workflowkami.impl_classes.Users;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
-import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.TaskService;
-import com.mjm.workflowkami.service_classes.UserService;
 
-import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
-import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -167,6 +167,11 @@ public class Projects extends LoaderAsync
             case R.id.nav_project:
                 break;
 
+            case R.id.nav_purchaseRequest:
+                Intent f = new Intent(Projects.this, Forms.class);
+                startActivity(f);
+                break;
+
             case R.id.nav_team:
 //                loader.show();
                 Intent x = new Intent(Projects.this, AttendanceNav.class);

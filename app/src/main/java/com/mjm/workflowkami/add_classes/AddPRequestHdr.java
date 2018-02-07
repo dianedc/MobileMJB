@@ -1,6 +1,7 @@
 package com.mjm.workflowkami.add_classes;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,21 +12,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mjm.workflowkami.API;
 import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
+import com.mjm.workflowkami.adapter_classes.OfficeEngSpinnerAdapter;
+import com.mjm.workflowkami.adapter_classes.ProjManSpinnerAdapter;
+import com.mjm.workflowkami.adapter_classes.ProjectSpinnerAdapter;
+import com.mjm.workflowkami.adapter_classes.PurchaseOfficerSpinnerAdapter;
+import com.mjm.workflowkami.adapter_classes.ReqBYSpinnerAdapter;
 import com.mjm.workflowkami.adapter_classes.UserClassAdapter;
 //import com.mjm.workflowkami.impl_classes.PurchaseRequest;
 import com.mjm.workflowkami.impl_classes.Users;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
+import com.mjm.workflowkami.model_classes.RoleClass;
 import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
+import com.mjm.workflowkami.service_classes.RoleService;
+import com.mjm.workflowkami.service_classes.UserService;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -45,53 +56,314 @@ import retrofit2.Response;
  */
 
 public class AddPRequestHdr extends Fragment {
-
+//      preqProjMan  preqOfficeEng preqPOfficer  requestedby_preq
 //    private EditText  preqID,  projectID,  preqapproveddate,  preqrequesteddate,  preqrequestedby,  preqstatus,  preqprojman,  preqpmdate,  isapprovedpm,  preqpurchofficer,  preqpodate, isapprovedpo, preqofficeengr,  preqoedate,  isapprovedoe, preqsubtotal, preqsalestax, preqtotal;
-    private EditText preqID, preqProjID, preq_daterequested, preq_dateapproved, preqProjMan, projman_dateapproved, preqOfficeEng, officeengineer_dateapproved, preqPOfficer,
-            dateauthorized_purchase, requestedby_preq, preqStatus;
+    private EditText preqID, preqProjID, preq_daterequested, preq_dateapproved,  projman_dateapproved, officeengineer_dateapproved, dateauthorized_purchase, preqStatus;
     private TextView requestedby_preq_id, preqProjMan_id, preqOfficeEng_id, preqPOfficer_id,  preq_sub_total, preq_sales_tax, preq_total;
+    private TextView isApproved, isWaiting, isDeclined;
     private RadioGroup rdogrppm, rdogrppo, rdogrpoe, rdogrpstat;
     private RadioButton rdopm, rdostat, rdooe, rdopo, sstat, spm, soe, spo;
     private Button btnSavePReq;
+    private SpinnerDialog reqDialog, pmDialog, poDialog, oeDialog;
+    private Spinner preq_reqby, preq_proj_man, preq_office_eng, preq_po, preq_proj_name;
+
     private ServiceImpl serviceImpl = new ServiceImpl();
     private PurchaseRequestClass preqIntent = new PurchaseRequestClass();
     private PurchaseRequestClass addPreq = new PurchaseRequestClass();
     private ProjectClass projs = new ProjectClass();
     private PurchaseRequestService preqService = API.getInstance().getPurchaseRequestService();
-    private SpinnerDialog reqDialog, pmDialog, poDialog, oeDialog;
-    private String selectedReqBy, selectedpm, selectedoe, selectedpo;
+
+    private ProgressDialog progressDialog;
+
     private UserClass req, pm, po, oe;
+    private ProjectClass projects;
     private Boolean isstat, ispm, ispo, isoe;
-    private Boolean checked;
-//    private BigDecimal subTotal, total;
     private DateFormat dateFormat;
 
+    private UserClass roleUsers;
+    private List<UserClass> pmrole,reqrole, porole, oerole;
+    private UserService userService = API.getInstance().getUserService();
+    private List<ProjectClass> proj;
 
+    private class ReqByRole extends AsyncTask<String, Void, List<UserClass>> {
+
+        @Override
+        protected void onPreExecute() {
+//            progressDialog = new ProgressDialog(getActivity());
+//            progressDialog.setMessage("Loading. Please wait... ");
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected List<UserClass> doInBackground(String... strings) {
+
+            do {
+                serviceImpl.GetAllUsers();
+
+                try  {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (serviceImpl.usersList == null);
+            return serviceImpl.usersList;
+        }
+        @Override
+        protected void onPostExecute(List<UserClass> workerClassResponseEntity) {
+//            progressDialog.dismiss();
+            ReqBYSpinnerAdapter adapter = new ReqBYSpinnerAdapter(getActivity(), workerClassResponseEntity);
+            preq_reqby.setAdapter(adapter);
+        }
+    }
+
+    private class ProjManRole extends AsyncTask<String, Void, List<UserClass>> {
+
+        @Override
+        protected void onPreExecute() {
+//            progressDialog = new ProgressDialog(getActivity());
+//            progressDialog.setMessage("Loading. Please wait... ");
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected List<UserClass> doInBackground(String... strings) {
+
+            do {
+                Call<List<UserClass>> getRolesList = userService.getByRoles(3);
+                getRolesList.enqueue(new Callback<List<UserClass>>() {
+                    @Override
+                    public void onResponse(Call<List<UserClass>> call, Response<List<UserClass>> response) {
+                        List<UserClass> roles = response.body();
+
+                        try {
+                            for (int i = 0; i < roles.size(); i++) {
+                                pmrole.add(new UserClass(roles.get(i).getUserID(),
+                                        roles.get(i).getFirstname(),
+                                        roles.get(i).getLastname(),
+                                        roles.get(i).getMiddlename(),
+                                        roles.get(i).getEmail(),
+                                        roles.get(i).getPassword(),
+                                        roles.get(i).getUserstatus()));
+                            }
+                        } catch (final Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<UserClass>> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
+                try  {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (pmrole == null);
+            return pmrole;
+        }
+        @Override
+        protected void onPostExecute(List<UserClass> workerClassResponseEntity) {
+//            progressDialog.dismiss();
+            ProjManSpinnerAdapter adapter = new ProjManSpinnerAdapter(getActivity(), workerClassResponseEntity);
+            preq_proj_man.setAdapter(adapter);
+        }
+    }
+
+    private class OfficeEngRole extends AsyncTask<String, Void, List<UserClass>> {
+
+        @Override
+        protected void onPreExecute() {
+//            progressDialog = new ProgressDialog(getActivity());
+//            progressDialog.setMessage("Loading. Please wait... ");
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected List<UserClass> doInBackground(String... strings) {
+
+            do {
+                Call<List<UserClass>> getRolesList = userService.getByRoles(6);
+                getRolesList.enqueue(new Callback<List<UserClass>>() {
+                    @Override
+                    public void onResponse(Call<List<UserClass>> call, Response<List<UserClass>> response) {
+                        List<UserClass> roles = response.body();
+
+                        try {
+                            for (int i = 0; i < roles.size(); i++) {
+                                oerole.add(new UserClass(roles.get(i).getUserID(),
+                                        roles.get(i).getFirstname(),
+                                        roles.get(i).getLastname(),
+                                        roles.get(i).getMiddlename(),
+                                        roles.get(i).getEmail(),
+                                        roles.get(i).getPassword(),
+                                        roles.get(i).getUserstatus()));
+                            }
+                        } catch (final Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<UserClass>> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
+                try  {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (oerole == null);
+            return oerole;
+        }
+        @Override
+        protected void onPostExecute(List<UserClass> workerClassResponseEntity) {
+//            progressDialog.dismiss();
+            OfficeEngSpinnerAdapter adapter = new OfficeEngSpinnerAdapter(getActivity(), workerClassResponseEntity);
+            preq_office_eng.setAdapter(adapter);
+        }
+    }
+
+    private class PORole extends AsyncTask<String, Void, List<UserClass>> {
+
+        @Override
+        protected void onPreExecute() {
+//            progressDialog = new ProgressDialog(getActivity());
+//            progressDialog.setMessage("Loading. Please wait... ");
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected List<UserClass> doInBackground(String... strings) {
+
+            do {
+                Call<List<UserClass>> getRolesList = userService.getByRoles(5);
+                getRolesList.enqueue(new Callback<List<UserClass>>() {
+                    @Override
+                    public void onResponse(Call<List<UserClass>> call, Response<List<UserClass>> response) {
+                        List<UserClass> roles = response.body();
+
+                        try {
+                            for (int i = 0; i < roles.size(); i++) {
+                                porole.add(new UserClass(roles.get(i).getUserID(),
+                                        roles.get(i).getFirstname(),
+                                        roles.get(i).getLastname(),
+                                        roles.get(i).getMiddlename(),
+                                        roles.get(i).getEmail(),
+                                        roles.get(i).getPassword(),
+                                        roles.get(i).getUserstatus()));
+                            }
+                        } catch (final Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<UserClass>> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
+                try  {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } while (porole == null);
+            return porole;
+        }
+        @Override
+        protected void onPostExecute(List<UserClass> workerClassResponseEntity) {
+//            progressDialog.dismiss();
+            PurchaseOfficerSpinnerAdapter adapter = new PurchaseOfficerSpinnerAdapter(getActivity(), workerClassResponseEntity);
+            preq_po.setAdapter(adapter);
+        }
+    }
+
+    public class ShowProjects extends AsyncTask<String, Void, List<ProjectClass>> {
+
+//        List<ProjectClass> cached;
+        @Override
+        protected void onPreExecute() {
+//            if (cached == null) {
+//                showLoadingDialog();
+//            } else {
+//                super.onPostExecute(cached);
+//            }
+        }
+
+        @Override
+        protected List<ProjectClass> doInBackground(String... strings) {
+
+            do {
+                serviceImpl.GetAllActiveProjects();
+                try  {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (serviceImpl.projectsList ==null);
+
+            return serviceImpl.projectsList;
+        }
+
+        @Override
+        protected void onPostExecute(List<ProjectClass> projectClassResponseEntity) {
+//            dismissProgressDialog();
+            preq_proj_name.setAdapter(new ProjectSpinnerAdapter(getActivity(), projectClassResponseEntity));
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_prequest, container, false);
+
+        pmrole = new ArrayList<UserClass>();
+        reqrole = new ArrayList<UserClass>();
+        porole = new ArrayList<UserClass>();
+        oerole = new ArrayList<UserClass>();
+        proj = new ArrayList<ProjectClass>();
+
+        new ProjManRole().execute();
+        new PORole().execute();
+        new ReqByRole().execute();
+        new OfficeEngRole().execute();
+        new ShowProjects().execute();
+
         serviceImpl.GetAllUserId();
         serviceImpl.GetAllUsers();
         req = new UserClass();
         pm = new UserClass();
         po = new UserClass();
         oe = new UserClass();
+        projects = new ProjectClass();
 
         dateFormat = new SimpleDateFormat("yyyy-dd-MM");
 
-        rdogrpstat = (RadioGroup) rootView.findViewById(R.id.rdogrpstat);//
-        int selected0 = rdogrpstat.getCheckedRadioButtonId();
-        rdostat = (RadioButton) rootView.findViewById(selected0);
-        sstat = (RadioButton) rootView.findViewById(R.id.statt);
-
-        sstat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                preq_dateapproved.setText(dateFormat.format(new Date()));
-            }
-        });
+//        rdogrpstat = (RadioGroup) rootView.findViewById(R.id.rdogrpstat);//
+//        int selected0 = rdogrpstat.getCheckedRadioButtonId();
+//        rdostat = (RadioButton) rootView.findViewById(selected0);
+//        sstat = (RadioButton) rootView.findViewById(R.id.statt);
+//
+//        sstat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                preq_dateapproved.setText(dateFormat.format(new Date()));
+//            }
+//        });
 
         rdogrppm = (RadioGroup) rootView.findViewById(R.id.rdogrppm);
         int selected1 = rdogrppm.getCheckedRadioButtonId();
@@ -130,37 +402,37 @@ public class AddPRequestHdr extends Fragment {
         });
 
         //Spinner Dialog
-        requestedby_preq = (EditText) rootView.findViewById(R.id.requestedby_preq);//
-        requestedby_preq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reqDialog.showSpinerDialog();
-            }
-        });
-
-        preqProjMan = (EditText) rootView.findViewById(R.id.preqProjMan);
-        preqProjMan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pmDialog.showSpinerDialog();
-            }
-        });
-
-        preqOfficeEng = (EditText) rootView.findViewById(R.id.preqOfficeEng);
-        preqOfficeEng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oeDialog.showSpinerDialog();
-            }
-        });
-
-        preqPOfficer = (EditText) rootView.findViewById(R.id.preqPOfficer);
-        preqPOfficer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                poDialog.showSpinerDialog();
-            }
-        });
+//        requestedby_preq = (EditText) rootView.findViewById(R.id.requestedby_preq);//
+//        requestedby_preq.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                reqDialog.showSpinerDialog();
+//            }
+//        });
+//
+//        preqProjMan = (EditText) rootView.findViewById(R.id.preqProjMan);
+//        preqProjMan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pmDialog.showSpinerDialog();
+//            }
+//        });
+//
+//        preqOfficeEng = (EditText) rootView.findViewById(R.id.preqOfficeEng);
+//        preqOfficeEng.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                oeDialog.showSpinerDialog();
+//            }
+//        });
+//
+//        preqPOfficer = (EditText) rootView.findViewById(R.id.preqPOfficer);
+//        preqPOfficer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                poDialog.showSpinerDialog();
+//            }
+//        });
 
         preqID = (EditText) rootView.findViewById(R.id.preq_id);
         preqProjID = (EditText) rootView.findViewById(R.id.preq_proj_id);
@@ -179,6 +451,17 @@ public class AddPRequestHdr extends Fragment {
         preqOfficeEng_id = (TextView) rootView.findViewById(R.id.preqOfficeEng_id);
         preqPOfficer_id = (TextView) rootView.findViewById(R.id.preqPOfficer_id);
 
+        preq_reqby = (Spinner) rootView.findViewById(R.id.preq_reqby);
+        preq_proj_man = (Spinner) rootView.findViewById(R.id.preq_proj_man);
+        preq_po = (Spinner) rootView.findViewById(R.id.preq_po);
+        preq_office_eng = (Spinner) rootView.findViewById(R.id.preq_office_eng);
+        preq_proj_name = (Spinner) rootView.findViewById(R.id.preq_proj_name);
+
+        isApproved = (TextView) rootView.findViewById(R.id.textViewappr);
+        isWaiting = (TextView) rootView.findViewById(R.id.textViewwait);
+        isDeclined = (TextView) rootView.findViewById(R.id.textViewdec);
+
+
         Intent intent = getActivity().getIntent();
         preqIntent = (PurchaseRequestClass) intent.getSerializableExtra("preqs");
         Intent projsintent = getActivity().getIntent();
@@ -194,28 +477,67 @@ public class AddPRequestHdr extends Fragment {
                 preqProjID.setText(String.valueOf(preqIntent.getProjectID().getProjID()));
 //                preqProjID.setText(String.valueOf(projs.getProjID()));
                 preq_dateapproved.setText(preqIntent.getPreqapproveddate());
-                requestedby_preq.setText(preqIntent.getPreqrequestedby().getLastname() + ", " + preqIntent.getPreqrequestedby().getFirstname());
+
+                //Set Spinner
+                for (int i = 0; i < preq_reqby.getCount(); i++) {
+                    if (preq_reqby.getItemAtPosition(i).toString().equals(preqIntent.getPreqrequestedby())) {
+                        preq_reqby.setSelection(i);
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < preq_proj_name.getCount(); i++) {
+                    if (preq_proj_name.getItemAtPosition(i).toString().equals(preqIntent.getProjectID())) {
+                        preq_proj_name.setSelection(i);
+                        break;
+                    }
+                }
+//                requestedby_preq.setText(preqIntent.getPreqrequestedby().getLastname() + ", " + preqIntent.getPreqrequestedby().getFirstname());
                 requestedby_preq_id.setText(String.valueOf(preqIntent.getPreqrequestedby().getUserID()));
                 preq_daterequested.setText(preqIntent.getPreqrequesteddate());
-                preqProjMan.setText(preqIntent.getPreqprojman().getLastname() +", "+ preqIntent.getPreqprojman().getFirstname());
+
+                for (int i = 0; i < preq_proj_man.getCount(); i++) {
+                    if (preq_proj_man.getItemAtPosition(i).toString().equals(preqIntent.getPreqprojman())) {
+                        preq_proj_man.setSelection(i);
+                        break;
+                    }
+                }
+//                preqProjMan.setText(preqIntent.getPreqprojman().getLastname() +", "+ preqIntent.getPreqprojman().getFirstname());
                 preqProjMan_id.setText(String.valueOf(preqIntent.getPreqprojman().getUserID()));
                 projman_dateapproved.setText(preqIntent.getPreqpmdate());
-                preqOfficeEng.setText(preqIntent.getPreqofficeengr().getLastname() + ", " + preqIntent.getPreqofficeengr().getFirstname());
+
+                for (int i = 0; i < preq_office_eng.getCount(); i++) {
+                    if (preq_office_eng.getItemAtPosition(i).toString().equals(preqIntent.getPreqofficeengr())) {
+                        preq_office_eng.setSelection(i);
+                        break;
+                    }
+                }
+
+//                preqOfficeEng.setText(preqIntent.getPreqofficeengr().getLastname() + ", " + preqIntent.getPreqofficeengr().getFirstname());
                 preqOfficeEng_id.setText(String.valueOf(preqIntent.getPreqofficeengr().getUserID()));
                 dateauthorized_purchase.setText(preqIntent.getPreqpodate());
                 officeengineer_dateapproved.setText(preqIntent.getPreqoedate());
-                preqPOfficer.setText(preqIntent.getPreqpurchofficer().getLastname() + ", " + preqIntent.getPreqpurchofficer().getFirstname());
+
+                for (int i = 0; i < preq_po.getCount(); i++) {
+                    if (preq_po.getItemAtPosition(i).toString().equals(preqIntent.getPreqpurchofficer())) {
+                        preq_po.setSelection(i);
+                        break;
+                    }
+                }
+
+//                preqPOfficer.setText(preqIntent.getPreqpurchofficer().getLastname() + ", " + preqIntent.getPreqpurchofficer().getFirstname());
                 preqPOfficer_id.setText(String.valueOf(preqIntent.getPreqpurchofficer().getUserID()));
 
                 preq_sub_total.setText(String.valueOf(preqIntent.getPreqsubtotal()));
                 preq_sales_tax.setText(String.valueOf(preqIntent.getPreqsalestax()));
                 preq_total.setText(String.valueOf(preqIntent.getPreqtotal()));
 
-                if (preqIntent.getPreqstatus() == null) {
-
-                } else if (preqIntent.getPreqstatus() == true) {
-                    rdogrpstat.check(R.id.statt);
-                }
+//                if (preqIntent.getPreqstatus() == null) {
+//
+//                } else if (preqIntent.getPreqstatus() == true) {
+//                    rdogrpstat.check(R.id.statt);
+//                }
+                checkStatus(String.valueOf(preqIntent.getPreqstatus()));
                 if (preqIntent.getIsapprovedpo() == null) {
 
                 } else if (preqIntent.getIsapprovedpo() == true) {
@@ -232,11 +554,12 @@ public class AddPRequestHdr extends Fragment {
                     rdogrppm.check(R.id.isapprovedpmt);
                 }
 
-                requestedby_preq.setEnabled(false);
+                preq_reqby.setEnabled(false);
+                preq_proj_name.setEnabled(false);
                 preq_daterequested.setEnabled(false);
-                preqProjMan.setEnabled(false);
-                preqPOfficer.setEnabled(false);
-                preqOfficeEng.setEnabled(false);
+                preq_proj_man.setEnabled(false);
+                preq_po.setEnabled(false);
+                preq_office_eng.setEnabled(false);
                 dateauthorized_purchase.setEnabled(false);
                 officeengineer_dateapproved.setEnabled(false);
                 projman_dateapproved.setEnabled(false);
@@ -247,58 +570,66 @@ public class AddPRequestHdr extends Fragment {
         }
 
         //Dialog
-        reqDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
-        reqDialog.bindOnSpinerListener(new OnSpinerItemClick() {
-            @Override
-            public void onClick(String s, int i) {
-                selectedReqBy = s;
-                requestedby_preq.setText(s+ " "+
-                        serviceImpl.usersList.get(i).getLastname() + ", " +
-                        serviceImpl.usersList.get(i).getFirstname());
-            }
-        });
+//        reqDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
+//        reqDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+//            @Override
+//            public void onClick(String s, int i) {
+//                selectedReqBy = s;
+//                requestedby_preq.setText(s+ " "+
+//                        serviceImpl.usersList.get(i).getLastname() + ", " +
+//                        serviceImpl.usersList.get(i).getFirstname());
+//            }
+//        });
 
 
-        pmDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
-        pmDialog.bindOnSpinerListener(new OnSpinerItemClick() {
-            @Override
-            public void onClick(String s, int i) {
-                selectedpm = s;
-                preqProjMan.setText(s + " "+
-                        serviceImpl.usersList.get(i).getLastname() + ", " +
-                        serviceImpl.usersList.get(i).getFirstname());
-            }
-        });
+//        pmDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
+//        pmDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+//            @Override
+//            public void onClick(String s, int i) {
+//                selectedpm = s;
+//                preqProjMan.setText(s + " "+
+//                        serviceImpl.usersList.get(i).getLastname() + ", " +
+//                        serviceImpl.usersList.get(i).getFirstname());
+//            }
+//        });
 
 
-        poDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
-        poDialog.bindOnSpinerListener(new OnSpinerItemClick() {
-            @Override
-            public void onClick(String s, int i) {
-                selectedpo = s;
-                preqPOfficer.setText(s+ " "+
-                        serviceImpl.usersList.get(i).getLastname() + ", " +
-                        serviceImpl.usersList.get(i).getFirstname());
-//                Toast.makeText(getActivity(), String.valueOf(selectedReqBy), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        poDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
+//        poDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+//            @Override
+//            public void onClick(String s, int i) {
+//                selectedpo = s;
+//                preqPOfficer.setText(s+ " "+
+//                        serviceImpl.usersList.get(i).getLastname() + ", " +
+//                        serviceImpl.usersList.get(i).getFirstname());
+////                Toast.makeText(getActivity(), String.valueOf(selectedReqBy), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
-        oeDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
-        oeDialog.bindOnSpinerListener(new OnSpinerItemClick() {
-            @Override
-            public void onClick(String s, int i) {
-                selectedoe = s;
-                preqOfficeEng.setText(s+ " "+
-                        serviceImpl.usersList.get(i).getLastname() + ", " +
-                        serviceImpl.usersList.get(i).getFirstname());
-            }
-        });
+//        oeDialog = new SpinnerDialog(getActivity(), serviceImpl.userIDList, "Select User");
+//        oeDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+//            @Override
+//            public void onClick(String s, int i) {
+//                selectedoe = s;
+//                preqOfficeEng.setText(s+ " "+
+//                        serviceImpl.usersList.get(i).getLastname() + ", " +
+//                        serviceImpl.usersList.get(i).getFirstname());
+//            }
+//        });
 
 
         btnSavePReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                req = (UserClass) preq_reqby.getSelectedItem();
+                pm = (UserClass) preq_proj_man.getSelectedItem();
+                po = (UserClass) preq_po.getSelectedItem();
+                oe = (UserClass) preq_office_eng.getSelectedItem();
+                projects = (ProjectClass) preq_proj_name.getSelectedItem();
+
+                /////// REAL CODE
                 if(spo.isChecked()) {
                     ispo = true;
                 } else {
@@ -314,11 +645,11 @@ public class AddPRequestHdr extends Fragment {
                 } else {
                     ispm = false;
                 }
-                if(sstat.isChecked()) {
-                    isstat =true;
-                } else {
-                    isstat=false;
-                }
+//                if(sstat.isChecked()) {
+//                    isstat =true;
+//                } else {
+//                    isstat=false;
+//                }
                 BigDecimal subTotal, total;
                 Double salTax;
                 String subtotals = preq_sub_total.getText().toString().trim();
@@ -345,38 +676,39 @@ public class AddPRequestHdr extends Fragment {
                 } else {
                     salTax = new Double(salesTax);
                 }
-                for (UserClass u : serviceImpl.usersList) {
-                    if (u.getUserID().equals(Integer.valueOf(requestedby_preq_id.getText().toString()))) {
-                        req = u;
-                    }
-                }
-//                Toast.makeText(getActivity(), req.toString(), Toast.LENGTH_LONG).show();
-                for (UserClass u : serviceImpl.usersList) {
-                    if (u.getUserID().equals(Integer.valueOf(preqProjMan_id.getText().toString()))) {
-                        pm = u;
-                    }
-                }
 
-//                Toast.makeText(getActivity(), pm.toString(), Toast.LENGTH_LONG).show();
-                for (UserClass u : serviceImpl.usersList) {
-                    if (u.getUserID().equals(Integer.valueOf(preqOfficeEng_id.getText().toString()))) {
-                        oe = u;
-                    }
-                }
-//                Toast.makeText(getActivity(), oe.toString(), Toast.LENGTH_LONG).show();
-                for (UserClass u : serviceImpl.usersList) {
-                    if (u.getUserID().equals(Integer.valueOf(preqPOfficer_id.getText().toString()))) {
-                        po = u;
-                    }
-                }
+//                for (UserClass u : serviceImpl.usersList) {
+//                    if (u.getUserID().equals(Integer.valueOf(requestedby_preq_id.getText().toString()))) {
+//                        req = u;
+//                    }
+//                }
+////                Toast.makeText(getActivity(), req.toString(), Toast.LENGTH_LONG).show();
+//                for (UserClass u : serviceImpl.usersList) {
+//                    if (u.getUserID().equals(Integer.valueOf(preqProjMan_id.getText().toString()))) {
+//                        pm = u;
+//                    }
+//                }
+//
+////                Toast.makeText(getActivity(), pm.toString(), Toast.LENGTH_LONG).show();
+//                for (UserClass u : serviceImpl.usersList) {
+//                    if (u.getUserID().equals(Integer.valueOf(preqOfficeEng_id.getText().toString()))) {
+//                        oe = u;
+//                    }
+//                }
+////                Toast.makeText(getActivity(), oe.toString(), Toast.LENGTH_LONG).show();
+//                for (UserClass u : serviceImpl.usersList) {
+//                    if (u.getUserID().equals(Integer.valueOf(preqPOfficer_id.getText().toString()))) {
+//                        po = u;
+//                    }
+//                }
 
                 if(!preqID.getText().toString().matches("")) {
                     addPreq = new PurchaseRequestClass(preqIntent.getPreqID(),
-                            preqIntent.getProjectID(),
+                            projects,
                             preq_dateapproved.getText().toString().trim(),
                             preq_daterequested.getText().toString().trim(),
                             req,
-                            isstat,
+                            preqIntent.getPreqstatus(),
                             pm,
                             projman_dateapproved.getText().toString().trim(),
                             ispm,
@@ -396,11 +728,11 @@ public class AddPRequestHdr extends Fragment {
 
 //                    Toast.makeText(getActivity(), po.toString(), Toast.LENGTH_LONG).show();
 //                Toast.makeText(getActivity(), projs.toString(), Toast.LENGTH_LONG).show();
-                    addPreq = new PurchaseRequestClass(projs,
+                    addPreq = new PurchaseRequestClass(projects,
                             preq_dateapproved.getText().toString().trim(),
                             preq_daterequested.getText().toString().trim(),
                             req,
-                            isstat,
+                            preqIntent.getPreqstatus(),
                             pm,
                             projman_dateapproved.getText().toString().trim(),
                             ispm,
@@ -416,6 +748,7 @@ public class AddPRequestHdr extends Fragment {
 
                     SavePReq(addPreq);
                 }
+                ////////// REAL CODE
             }
         });
         return rootView;
@@ -530,6 +863,24 @@ public class AddPRequestHdr extends Fragment {
 
     public void onClickCancel(View v) {
         getActivity().finish();
+
+    }
+
+    public void checkStatus(String stat) {
+
+        switch(stat) {
+            case "true":
+                isApproved.setVisibility(View.VISIBLE);
+//                return true;
+                break;
+            case "false":
+                isDeclined.setVisibility(View.VISIBLE);
+//                return false;
+                break;
+            default:
+                isWaiting.setVisibility(View.VISIBLE);
+                break;
+        }
 
     }
 }

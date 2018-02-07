@@ -33,4 +33,7 @@ public interface UserService {
     @POST("user/update/{user_id}")
     Call<Void> editUser(@Path("user_id") int user_id, @Body UserClass user);
 
+    @GET("role/roles/all/{roleID}")
+    Call<List<UserClass>> getByRoles(@Path("roleID") int roleID);
+
 }

@@ -3,6 +3,7 @@ package com.mjm.workflowkami;
 
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mjm.workflowkami.impl_classes.PurchaseOrder;
@@ -12,6 +13,7 @@ import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.model_classes.PurchaseOrderClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestClass;
 import com.mjm.workflowkami.model_classes.PurchaseRequestItemClass;
+import com.mjm.workflowkami.model_classes.RoleClass;
 import com.mjm.workflowkami.model_classes.TaskAssignedClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.model_classes.UserClass;
@@ -21,6 +23,7 @@ import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.PurchaseOrderService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestItemService;
 import com.mjm.workflowkami.service_classes.PurchaseRequestService;
+import com.mjm.workflowkami.service_classes.RoleService;
 import com.mjm.workflowkami.service_classes.TaskAssignedService;
 import com.mjm.workflowkami.service_classes.TaskService;
 import com.mjm.workflowkami.service_classes.UserService;
@@ -50,8 +53,8 @@ public class ServiceImpl {
     private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
     private WorkerService workerService = API.getInstance().getWorkerService();
     private TaskAssignedService taskAssignedService = API.getInstance().getTaskAssignedService();
-
     private PurchaseOrderService purchaseOrderService = API.getInstance().getPurchaseOrderService();
+    private RoleService roleService = API.getInstance().getRoleService();
 
     public List<UserClass> usersList;
     public ArrayList<String> userIDList = new ArrayList<String>();
@@ -66,7 +69,8 @@ public class ServiceImpl {
     public List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
     public List<ProjectTeamClass> pTeamWorkerList = new ArrayList<ProjectTeamClass>();
     public List<WorkerClass> workerList = new ArrayList<WorkerClass>();
-    public List<TaskAssignedClass> taskAssignedList = new ArrayList<TaskAssignedClass>();
+    public ArrayList<TaskAssignedClass> taskAssignedList = new ArrayList<TaskAssignedClass>();
+    public List<UserClass> roleList = new ArrayList<UserClass>();
 
     public List<UserClass> GetAllUsers() {
 
@@ -277,6 +281,92 @@ public class ServiceImpl {
         return projectsList;
     }
 
+    public List<ProjectClass> GetAllActiveProjects() {
+
+        projectsList = new ArrayList<ProjectClass>();
+        Call<List<ProjectClass>> getProjects = projectService.getAllActiveProjects();
+
+        getProjects.enqueue(new Callback<List<ProjectClass>>() {
+            @Override
+            public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectClass> projectClassList = response.body();
+
+                    try {
+                        for (int i = 0; i < projectClassList.size(); i++) {
+                            projectsList.add(new ProjectClass(projectClassList.get(i).getProjID(),
+                                    projectClassList.get(i).getProjname(),
+                                    projectClassList.get(i).getProjclient(),
+                                    projectClassList.get(i).getProjdesc(),
+                                    projectClassList.get(i).getProjtype(),
+                                    projectClassList.get(i).getProjstartdate(),
+                                    projectClassList.get(i).getProjenddate(),
+                                    projectClassList.get(i).getProjdatecompleted(),
+                                    projectClassList.get(i).getProjstatus(),
+                                    projectClassList.get(i).getProjmanager(),
+                                    projectClassList.get(i).getProjcontractbudget(),
+                                    projectClassList.get(i).getProjtargetbudget(),
+                                    projectClassList.get(i).getProjprogress(),
+                                    projectClassList.get(i).getProjduration()));
+                        }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProjectClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        return projectsList;
+    }
+
+    public List<ProjectClass> GetCountActiveProjects() {
+
+        projectsList = new ArrayList<ProjectClass>();
+        Call<List<ProjectClass>> getProjects = projectService.getCountActiveProjects();
+
+        getProjects.enqueue(new Callback<List<ProjectClass>>() {
+            @Override
+            public void onResponse(Call<List<ProjectClass>> call, Response<List<ProjectClass>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectClass> projectClassList = response.body();
+
+                    try {
+                        for (int i = 0; i < projectClassList.size(); i++) {
+                            projectsList.add(new ProjectClass(projectClassList.get(i).getProjID(),
+                                    projectClassList.get(i).getProjname(),
+                                    projectClassList.get(i).getProjclient(),
+                                    projectClassList.get(i).getProjdesc(),
+                                    projectClassList.get(i).getProjtype(),
+                                    projectClassList.get(i).getProjstartdate(),
+                                    projectClassList.get(i).getProjenddate(),
+                                    projectClassList.get(i).getProjdatecompleted(),
+                                    projectClassList.get(i).getProjstatus(),
+                                    projectClassList.get(i).getProjmanager(),
+                                    projectClassList.get(i).getProjcontractbudget(),
+                                    projectClassList.get(i).getProjtargetbudget(),
+                                    projectClassList.get(i).getProjprogress(),
+                                    projectClassList.get(i).getProjduration()));
+                        }
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProjectClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        return projectsList;
+    }
+
     public List<PurchaseRequestClass> GetAllPurchaseRequests() {
 
         Call<List<PurchaseRequestClass>> getPurchaseRequests = purchaseRequestService.getAllPreq();
@@ -370,6 +460,39 @@ public class ServiceImpl {
         return prList;
     }
 
+    public List<UserClass> GetByRoles(int roleID) {
+        roleList = new ArrayList<>();
+
+        Call<List<UserClass>> getRolesList = userService.getByRoles(roleID);
+        getRolesList.enqueue(new Callback<List<UserClass>>() {
+            @Override
+            public void onResponse(Call<List<UserClass>> call, Response<List<UserClass>> response) {
+                List<UserClass> roles = response.body();
+
+                try {
+                    for (int i = 0; i < roles.size(); i++) {
+                        roleList.add(new UserClass(roles.get(i).getUserID(),
+                                roles.get(i).getFirstname(),
+                                roles.get(i).getLastname(),
+                                roles.get(i).getMiddlename(),
+                                roles.get(i).getEmail(),
+                                roles.get(i).getPassword(),
+                                roles.get(i).getUserstatus()));
+                    }
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<UserClass>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        return roleList;
+    }
+
     public List<PurchaseOrderClass> GetAllPurchaseOrder() {
         Call<List<PurchaseOrderClass>> getPords = purchaseOrderService.getAllPord();
 
@@ -424,6 +547,7 @@ public class ServiceImpl {
                                 iList.get(i).getPrequestID(),
                                 iList.get(i).getPreqqty(),
                                 iList.get(i).getPrequnit(),
+                                iList.get(i).getPreqgendesc(),
                                 iList.get(i).getPreqdesc(),
                                 iList.get(i).getPreqjob(),
                                 iList.get(i).getPrequnitprice(),
@@ -639,7 +763,7 @@ public class ServiceImpl {
         return pTeamList;
     }
 
-    public List<TaskAssignedClass> GetAllWorkersAssigned(int projID, int taskID) {
+    public ArrayList<TaskAssignedClass> GetAllWorkersAssigned(int projID, int taskID) {
         taskAssignedList = new ArrayList<TaskAssignedClass>();
         Call<List<TaskAssignedClass>> getTasksAssigned = taskAssignedService.getAllWorkersAssigned(projID, taskID);
 

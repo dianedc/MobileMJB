@@ -11,10 +11,10 @@
             android:icon="@drawable/ic_menu_project"
             android:title="Projects" />
 
-        <!--<item-->
-        <!--android:id="@+id/nav_purchaseRequest"-->
-        <!--android:icon="@drawable/ic_menu_forms"-->
-        <!--android:title="Purchase Request" />-->
+        <item
+            android:id="@+id/nav_purchaseRequest"
+            android:icon="@drawable/ic_menu_forms"
+            android:title="@string/Forms" />
         <!--<item-->
         <!--android:id="@+id/nav_purchaseOrder"-->
         <!--android:icon="@drawable/ic_menu_forms"-->

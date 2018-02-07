@@ -128,6 +128,11 @@ public class Workflow extends AppCompatActivity implements NavigationView.OnNavi
                 Intent p = new Intent(Workflow.this, Projects.class);
                 startActivity(p);
                 break;
+
+            case R.id.nav_purchaseRequest:
+                Intent f = new Intent(Workflow.this, Forms.class);
+                startActivity(f);
+                break;
             case R.id.nav_team:
 //                loader.show();
                 Intent x = new Intent(Workflow.this, AttendanceNav.class);
@@ -201,12 +206,12 @@ public class Workflow extends AppCompatActivity implements NavigationView.OnNavi
                 case 2:
                     WorkerFragment projeTeamw = new WorkerFragment();
                     return projeTeamw;
-                case 3:
-                    PRequestFragment preq = new PRequestFragment();
-                    return preq;
-                case 4:
-                    POrderFragment pord = new POrderFragment();
-                    return pord;
+//                case 3:
+//                    PRequestFragment preq = new PRequestFragment();
+//                    return preq;
+//                case 4:
+//                    POrderFragment pord = new POrderFragment();
+//                    return pord;
                 default:
                     return null;
             }
@@ -215,7 +220,7 @@ public class Workflow extends AppCompatActivity implements NavigationView.OnNavi
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 5;
+            return 3;
         }
     }
 }

@@ -74,6 +74,31 @@
 
         <!--</android.support.design.widget.TextInputLayout>-->
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="35dp" />
+
+        <TextView
+            android:id="@+id/textViewprojname"
+            android:layout_width="278dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:drawablePadding="10dp"
+            android:text="@string/Projects"
+            android:textColor="#000"
+            android:textSize="6pt"
+            android:textStyle="normal" />
+
+        <Spinner
+            android:id="@+id/preq_proj_name"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" />
 
         <Space
             android:layout_width="match_parent"
@@ -81,25 +106,45 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="35dp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="35dp">
+        <TextView
+            android:id="@+id/textViewreq"
+            android:layout_width="278dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:drawablePadding="10dp"
+            android:text="Requested By"
+            android:textColor="#000"
+            android:textSize="6pt"
+            android:textStyle="normal" />
 
-            <EditText
-                android:id="@+id/requestedby_preq"
-                android:layout_width="275dp"
-                android:layout_height="43dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:drawablePadding="10dp"
-                android:hint="Requested By"
-                android:textSize="6pt" />
+        <Spinner
+            android:id="@+id/preq_reqby"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" />
 
-        </android.support.design.widget.TextInputLayout>
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:layout_editor_absoluteX="8dp"-->
+            <!--tools:layout_editor_absoluteY="35dp">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/requestedby_preq"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_user"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:hint="Requested By"-->
+                <!--android:textSize="6pt" />-->
+
+        <!--</android.support.design.widget.TextInputLayout>-->
 
         <TextView
             android:id="@+id/requestedby_preq_id"
@@ -166,28 +211,82 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
-        <RadioGroup
-            android:id="@+id/rdogrpstat"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <RadioButton
-                android:id="@+id/statt"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textViewappr"
+                android:layout_width="275dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.40"
-                android:text="Approved" />
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/colorGreen"
+                android:drawablePadding="10dp"
+                android:text="Approved"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="6pt"
+                android:textStyle="normal"
+                android:visibility="gone" />
 
-            <RadioButton
-                android:id="@+id/statf"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textViewwait"
+                android:layout_width="275dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Declined" />
-        </RadioGroup>
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/colorYellow"
+                android:drawablePadding="10dp"
+                android:text="Waiting"
+                android:textAlignment="center"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="6pt"
+                android:textStyle="normal"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textViewdec"
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/colorRed"
+                android:drawablePadding="10dp"
+                android:text="Declined"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="6pt"
+                android:textStyle="normal"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+
+        <!--<RadioGroup-->
+            <!--android:id="@+id/rdogrpstat"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/statt"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.40"-->
+                <!--android:text="Approved" />-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/statf"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Declined" />-->
+        <!--</RadioGroup>-->
 
         <Space
             android:layout_width="match_parent"
@@ -231,22 +330,46 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textViewpm"
+            android:layout_width="278dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:drawablePadding="10dp"
+            android:text="Project Manager"
+            android:textColor="#000"
+            android:textSize="6pt"
+            android:textStyle="normal" />
 
-            <EditText
-                android:id="@+id/preqProjMan"
-                android:layout_width="275dp"
-                android:layout_height="43dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:drawablePadding="10dp"
-                android:hint="Project Manager"
-                android:textSize="6pt" />
-        </android.support.design.widget.TextInputLayout>
+        <Spinner
+            android:id="@+id/preq_proj_man"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" />
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/preqProjMan"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_user"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:hint="Project Manager"-->
+                <!--android:textSize="6pt" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/preqProjMan_id"
@@ -254,10 +377,6 @@
             android:layout_height="match_parent"
             android:visibility="gone"/>
 
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
 
         <EditText
             android:id="@+id/projman_dateapproved"
@@ -321,27 +440,51 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
-        <android.support.design.widget.TextInputLayout
+        <TextView
+            android:id="@+id/textViewoe"
+            android:layout_width="278dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:drawablePadding="10dp"
+            android:text="Office Engineer"
+            android:textColor="#000"
+            android:textSize="6pt"
+            android:textStyle="normal" />
+
+        <Spinner
+            android:id="@+id/preq_office_eng"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" />
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/preqOfficeEng"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_user"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:hint="Office Engineer"-->
+                <!--android:textSize="6pt" />-->
+
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_weight="1" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/preqOfficeEng"
-                android:layout_width="275dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:drawablePadding="10dp"
-                android:hint="Office Engineer"
-                android:textSize="6pt" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_weight="1" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/preqOfficeEng_id"
@@ -406,27 +549,51 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
-        <android.support.design.widget.TextInputLayout
+        <TextView
+            android:id="@+id/textViewpo"
+            android:layout_width="278dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:drawablePadding="10dp"
+            android:text="Purchasing Officer"
+            android:textColor="#000"
+            android:textSize="6pt"
+            android:textStyle="normal" />
+
+        <Spinner
+            android:id="@+id/preq_po"
+            android:layout_width="275dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" />
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/preqPOfficer"-->
+                <!--android:layout_width="275dp"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:layout_marginEnd="30dp"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:drawableLeft="@drawable/ic_menu_user"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:hint="Purchasing Officer"-->
+                <!--android:textSize="6pt" />-->
+
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_weight="1" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/preqPOfficer"
-                android:layout_width="275dp"
-                android:layout_height="43dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:drawableLeft="@drawable/ic_menu_user"
-                android:drawablePadding="10dp"
-                android:hint="Purchasing Officer"
-                android:textSize="6pt" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_weight="1" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/preqPOfficer_id"

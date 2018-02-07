@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" app:layout_behavior="@string/appbar_scrolling_view_behavior"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.mjm.workflowkami.impl_classes.Forms"
     tools:showIn="@layout/app_bar_forms">
 
-    <com.baoyz.widget.PullRefreshLayout
-        android:id="@+id/refreshpr"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/bottom_navigation_worker"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginBottom="53dp"-->
+        <!--app:itemBackground="@color/colorWhite"-->
+        <!--app:itemIconTint="@drawable/bnv_tab_item_foreground"-->
+        <!--app:itemTextColor="@drawable/bnv_tab_item_foreground"-->
+        <!--app:menu="@menu/navigation"-->
+        <!--tools:layout_editor_absoluteX="0dp"-->
+        <!--tools:layout_editor_absoluteY="458dp">-->
 
-        <ListView
-            android:id="@+id/lstPreqs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.baoyz.widget.PullRefreshLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation_pr"
-        android:layout_gravity="start"
-        android:hapticFeedbackEnabled="true"
-        android:nestedScrollingEnabled="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorWhite"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/colorAccent"
-        app:menu="@menu/navigation">
-    </android.support.design.widget.BottomNavigationView>
+    <!--</android.support.design.widget.BottomNavigationView>-->
 
 </RelativeLayout>

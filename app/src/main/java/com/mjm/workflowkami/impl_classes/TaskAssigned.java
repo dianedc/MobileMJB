@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import com.baoyz.widget.PullRefreshLayout;
@@ -21,6 +23,7 @@ import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.ProjectClassAdapter;
 import com.mjm.workflowkami.adapter_classes.TaskAssignedAdapter;
+import com.mjm.workflowkami.add_classes.AddTaskAssigned;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.TaskAssignedClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
@@ -92,6 +95,17 @@ public class TaskAssigned extends LoaderAsync
         listOfTaskAssigned = (ListView) findViewById(R.id.lstTaskAssigned);
 
         new ProjectTask().execute();
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_task_assigned);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent add = new Intent(TaskAssigned.this, AddTaskAssigned.class);
+                startActivity(add);
+            }
+        });
+        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_task_assigned);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -143,6 +157,11 @@ public class TaskAssigned extends LoaderAsync
                 startActivity(d);
                 break;
             case R.id.nav_project:
+                break;
+
+            case R.id.nav_purchaseRequest:
+                Intent f = new Intent(TaskAssigned.this, Forms.class);
+                startActivity(f);
                 break;
 
             case R.id.nav_team:

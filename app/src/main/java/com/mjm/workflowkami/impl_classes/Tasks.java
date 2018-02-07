@@ -119,36 +119,36 @@ public class Tasks extends LoaderAsync
             }
         });
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_tasks);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.navigation_task:
-                        Intent n = new Intent(Tasks.this, Tasks.class);
-                        startActivity(n);
-                        break;
-
-                    case R.id.navigation_team:
-//                        loader.show();
-                        Intent te = new Intent(Tasks.this, ProjectTeam.class);
-                        startActivity(te);
-                        return true;
-
-                    case R.id.navigation_pr:
-                        Intent p = new Intent(Tasks.this, Forms.class);
-                        startActivity(p);
-                        break;
-
-                    case R.id.navigation_po:
-                        Intent po =  new Intent(Tasks.this, PurchaseOrder.class);
-                        startActivity(po);
-                        break;
-                }
-                return true;
-            }
-        });
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_tasks);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId())
+//                {
+//                    case R.id.navigation_task:
+//                        Intent n = new Intent(Tasks.this, Tasks.class);
+//                        startActivity(n);
+//                        break;
+//
+//                    case R.id.navigation_team:
+////                        loader.show();
+//                        Intent te = new Intent(Tasks.this, ProjectTeam.class);
+//                        startActivity(te);
+//                        return true;
+//
+//                    case R.id.navigation_pr:
+//                        Intent p = new Intent(Tasks.this, Forms.class);
+//                        startActivity(p);
+//                        break;
+//
+//                    case R.id.navigation_po:
+//                        Intent po =  new Intent(Tasks.this, PurchaseOrder.class);
+//                        startActivity(po);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_tasks);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -215,6 +215,11 @@ public class Tasks extends LoaderAsync
 //                loader.show();
                 Intent p = new Intent(Tasks.this, Projects.class);
                 startActivity(p);
+                break;
+
+            case R.id.nav_purchaseRequest:
+                Intent f = new Intent(Tasks.this, Forms.class);
+                startActivity(f);
                 break;
 
             case R.id.nav_team:

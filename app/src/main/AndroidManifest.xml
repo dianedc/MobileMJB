@@ -49,10 +49,6 @@
             android:label="@string/title_activity_schedule"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".impl_classes.Forms"
-            android:label="@string/title_activity_forms"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".impl_classes.Users"
             android:label="@string/title_activity_users"
             android:theme="@style/AppTheme" />
@@ -112,10 +108,6 @@
             android:label="@string/title_activity_workflow"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".impl_classes.Form"
-            android:label="@string/title_activity_form"
-            android:theme="@style/AppTheme"></activity>
-        <activity
             android:name=".impl_classes.TaskAssigned"
             android:label="@string/task_assigned"
             android:theme="@style/AppTheme" />
@@ -123,7 +115,14 @@
             android:name=".add_classes.AddMoveWorker"
             android:label="@string/task_assigned"
             android:theme="@style/AppTheme" />
-
+        <activity
+            android:name=".impl_classes.Forms"
+            android:label="@string/title_activity_forms"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".add_classes.AddTaskAssigned"
+            android:label="@string/task_assigned"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
