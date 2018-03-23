@@ -98,7 +98,8 @@
             android:hint="Task Name"
             android:drawableLeft="@drawable/ic_taskname"
             android:drawablePadding="10dp"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:enabled="false" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -106,6 +107,31 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/task_header"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_desc"
+                android:drawablePadding="10dp"
+                android:ems="14"
+                android:hint="General Description"
+                android:singleLine="true"
+                android:textSize="6pt"
+                android:enabled="false"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -121,7 +147,8 @@
                 android:ems="14"
                 android:hint="Description"
                 android:singleLine="true"
-                android:textSize="6pt" />
+                android:textSize="6pt"
+                android:enabled="false" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -147,30 +174,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:entries="@array/taskPhase" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/task_header"
-                android:layout_width="278dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:drawableLeft="@drawable/ic_desc"
-                android:drawablePadding="10dp"
-                android:ems="14"
-                android:hint="Header"
-                android:singleLine="true"
-                android:textSize="6pt" />
-
-        </android.support.design.widget.TextInputLayout>
+            android:entries="@array/taskPhase"
+            android:enabled="false"/>
 
         <Space
             android:layout_width="match_parent"
@@ -191,7 +196,8 @@
                 android:ems="14"
                 android:hint="Budget"
                 android:singleLine="true"
-                android:textSize="6pt" />
+                android:textSize="6pt"
+                android:enabled="false"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -225,7 +231,8 @@
                     android:inputType="date"
                     android:onClick="datePicker"
                     android:singleLine="true"
-                    android:textSize="6pt" />
+                    android:textSize="6pt"
+                    android:enabled="false"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -247,7 +254,8 @@
                     android:hint="Target End Date"
                     android:inputType="date"
                     android:singleLine="true"
-                    android:textSize="6pt" />
+                    android:textSize="6pt"
+                    android:enabled="false"/>
 
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
@@ -282,7 +290,8 @@
                     android:inputType="date"
                     android:onClick="datePicker"
                     android:singleLine="true"
-                    android:textSize="6pt" />
+                    android:textSize="6pt"
+                    android:enabled="false"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -304,7 +313,8 @@
                     android:hint="Actual End Date"
                     android:inputType="date"
                     android:singleLine="true"
-                    android:textSize="6pt" />
+                    android:textSize="6pt"
+                    android:enabled="false"/>
 
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
@@ -612,7 +622,8 @@
                 android:hint="Task Duration"
                 android:inputType="numberDecimal"
                 android:singleLine="true"
-                android:textSize="6pt" />
+                android:textSize="6pt"
+                android:enabled="false"/>
 
         </android.support.design.widget.TextInputLayout>
 

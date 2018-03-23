@@ -65,6 +65,7 @@ public class AddPRequestDtl extends ListFragment {
         @Override
         protected void onPreExecute() {
             progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setCancelable(false);
             progressDialog.setMessage("Loading. Please wait... ");
             progressDialog.show();
         }

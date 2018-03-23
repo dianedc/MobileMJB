@@ -17,6 +17,8 @@ import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.model_classes.WorkerClass;
 import com.mjm.workflowkami.service_classes.ProjectService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -51,27 +53,35 @@ public class AttendanceClassAdapter extends ArrayAdapter<ProjectTeamClass> {
         TextView txtworkersfirstname = (TextView) view.findViewById(R.id.workerfirstnamea);
          txtworkersfirstname.setText(attendance.get(position).getWorkersworkersID().getWorkersfirstname()
                 + " " + attendance.get(position).getWorkersworkersID().getWorkerslastname());
+
 //        txtworkersfirstname.setText(String.valueOf(projteamid));
         TextView txtworkersrole = (TextView) view.findViewById(R.id.workersrolea);
         txtworkersrole.setText(attendance.get(position).getWorkersworkersID().getWorkersrole());
 
-        Button btnTimeOut = (Button) view.findViewById(R.id.btnTimeOut);
+        final Button btnTimeOut = (Button) view.findViewById(R.id.btnTimeOut);
         btnTimeOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Call<Void> timeOut = attendanceService.workerTimeOut(attendance.get(position).getProjectsprojID().getProjID(),
                         attendance.get(position).getProjteamID());
                 timeOut.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                            SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            String format = s.format(new Date());
+
+                            Toast.makeText(context, "Attendance Out at: " + format, Toast.LENGTH_LONG).show();
+                            btnTimeOut.setVisibility(View.GONE);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
+                        t.printStackTrace();
                     }
                 });
             }

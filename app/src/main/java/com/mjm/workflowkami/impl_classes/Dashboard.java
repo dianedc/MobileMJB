@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class Dashboard extends LoaderAsync
     private CountClassAdapter adapter;
     private ProjCountClassAdapter projAdapter;
     private PullRefreshLayout layout;
+    private TextView email;
 
     private ListView mListView, taskListView, pListView, cListView;
 
@@ -273,19 +275,13 @@ public class Dashboard extends LoaderAsync
         cListView = (ListView) findViewById(R.id.listViewTasks2) ;
         pListView = (ListView) findViewById(R.id.listViewTasks3) ;
 
-
-
         txtprojects = (TextView) findViewById(R.id.txtProjects);
         txttasks = (TextView) findViewById(R.id.txtTasks);
 
-//        final String uri = "http://192.168.2.123:8083/rest/project/projects/show/active";
-            new ProjCountTask().execute();
-        final String uri1 = "http://192.168.2.123:8083/rest/project/task/tasks/active";
-        new TaskActive().execute(uri1);
-        final String uri2 = "http://192.168.2.123:8083/rest/project/task/tasks/completed";
-        new TaskCompleted().execute(uri2);
-        final String uri3 = "http://192.168.2.123:8083/rest/project/task/tasks/pending";
-        new TaskPending().execute(uri3);
+        new ProjCountTask().execute();
+        new TaskActive().execute();
+        new TaskCompleted().execute();
+        new TaskPending().execute();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dashboard);
                 setSupportActionBar(toolbar);
@@ -298,6 +294,13 @@ public class Dashboard extends LoaderAsync
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_dashboard);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Intent intent = getIntent();
+        String tIntent = (String) intent.getSerializableExtra("cred");
+
+        View headerView = navigationView.getHeaderView(0);
+        email = (TextView) headerView.findViewById(R.id.logged_in_email);
+        email.setText(tIntent);
     }
 
     public void setSupportActionBar(Toolbar supportActionBar) {
@@ -344,35 +347,16 @@ public class Dashboard extends LoaderAsync
                 break;
 
             case R.id.nav_team:
-//                loader.show();
                 Intent x = new Intent(Dashboard.this, AttendanceNav.class);
                 startActivity(x);
                 break;
 
-//            case R.id.nav_files:
-//                loader.show();
-//                Intent fi = new Intent(Dashboard.this, Files.class);
-//                startActivity(fi);
-//                break;
-//            case R.id.nav_reports:
-//                loader.show();
-//                Intent r = new Intent(Dashboard.this, Reports.class);
-//                startActivity(r);
-//                break;
             case R.id.nav_users:
-//                loader.show();
                 Intent u = new Intent(Dashboard.this, Users.class);
                 startActivity(u);
                 break;
 
-//            case R.id.nav_settings:
-//                loader.show();
-//                Intent s = new Intent(Dashboard.this, Settings.class);
-//                startActivity(s);
-//                break;
-
             case R.id.nav_logout:
-//                loader.show();
                 Intent l = new Intent(Dashboard.this, LoginActivity.class);
                 startActivity(l);
                 break;

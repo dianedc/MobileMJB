@@ -87,7 +87,6 @@ public class AddPurchaseOrder extends AppCompatActivity{
     }
 
     public void onClickCancel(View view) {
-        Intent cancel = new Intent(AddPurchaseOrder.this, PurchaseOrder.class);
-        startActivity(cancel);
+        AddPurchaseOrder.this.finish();
     }
 }

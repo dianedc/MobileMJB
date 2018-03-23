@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.mjm.workflowkami.API;
@@ -49,7 +50,8 @@ public class TaskAssigned extends LoaderAsync
     private List<String> strings = new ArrayList<String>();
     private ProjectClassAdapter adapter;
     private Toolbar supportActionBar;
-    private TaskClass taskIntent = new TaskClass();
+    private TaskClass taskIntent;
+    private TaskClass taskIntent2;
 
     private class ProjectTask extends AsyncTask<String, Void, List<TaskAssignedClass>> {
 
@@ -62,6 +64,9 @@ public class TaskAssigned extends LoaderAsync
         protected List<TaskAssignedClass> doInBackground(String... strings) {
             Intent intent = getIntent();
             taskIntent = (TaskClass) intent.getSerializableExtra("assignworker");
+            taskIntent2 = (TaskClass) intent.getSerializableExtra("assignworker");
+
+
             do {
                 serviceImpl.GetAllWorkersAssigned(taskIntent.getProjectID().getProjID(), taskIntent.getTaskID());
                 try  {
@@ -87,6 +92,8 @@ public class TaskAssigned extends LoaderAsync
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_task_assigned);
         setTitle("Assigned Workers");
         setSupportActionBar(toolbar);
+        taskIntent = new TaskClass();
+        taskIntent2 = new TaskClass();
 
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -95,16 +102,22 @@ public class TaskAssigned extends LoaderAsync
         listOfTaskAssigned = (ListView) findViewById(R.id.lstTaskAssigned);
 
         new ProjectTask().execute();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_task_assigned);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent add = new Intent(TaskAssigned.this, AddTaskAssigned.class);
-                startActivity(add);
-            }
-        });
-        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_task_assigned);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Intent add = new Intent(TaskAssigned.this, AddTaskAssigned.class);
+////                startActivity(add);
+//
+////                UserClass userClass = users.get(position);
+////
+//                Intent i = new Intent(TaskAssigned.this, AddTaskAssigned.class);
+////
+//                i.putExtra("assignworker2", taskIntent2);
+//                startActivity(i);
+//            }
+//        });
+//        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_task_assigned);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

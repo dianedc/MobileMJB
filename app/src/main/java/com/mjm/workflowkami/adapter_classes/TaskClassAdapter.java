@@ -60,8 +60,7 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
         btnCompleteTaskDone = (Button) view.findViewById(R.id.btnCompleteTaskDone);
         btnStartTask = (Button) view.findViewById(R.id.btnStartTask);
         btnStartTaskDone = (Button) view.findViewById(R.id.btnStartTaskDone);
-        btnAssignWorker = (Button) view.findViewById(R.id.btnAssignWorker);
-//        initialState();
+//        btnAssignWorker = (Button) view.findViewById(R.id.btnAssignWorker);
         try {
             if (tasks != null) {
                 TextView txtTaskname = (TextView) view.findViewById(R.id.taskName);
@@ -80,50 +79,18 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                     btnStartTask.setVisibility(View.INVISIBLE);
                     btnStartTaskDone.setVisibility(View.VISIBLE);
 
-//                    btnCompleteTask.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Toast.makeText(context, "Task has been completed", Toast.LENGTH_LONG).show();
-//                        }
-//                    });
-//                    btnStartTask.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Toast.makeText(context, "Task has been completed", Toast.LENGTH_LONG).show();
-//                        }
-//                    });
-
                 }
 
                 if (tasks.get(position).getTaskstatus().equals("Active")) {
                     btnStartTask.setVisibility(View.INVISIBLE);
                     btnStartTaskDone.setVisibility(View.VISIBLE);
 
-//                    btnCompleteTask.setEnabled(true);
-
-//                    btnStartTask.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Toast.makeText(context, "Task is already active", Toast.LENGTH_LONG).show();
-//                        }
-//                    });
-
                 }
 
                 if (tasks.get(position).getTaskstatus().equals("Waiting")) {
-//                    btnStartTask.setEnabled(true);
-                    btnCompleteTask.setVisibility(View.INVISIBLE);
+                    btnCompleteTask.setVisibility(View.VISIBLE);
+                    btnCompleteTask.setEnabled(false);
                     btnStartTask.setVisibility(View.VISIBLE);
-
-
-
-//                    btnCompleteTask.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Toast.makeText(context, "Task should be started", Toast.LENGTH_LONG).show();
-//                        }
-//                    });
-
                 }
             }
 
@@ -161,6 +128,8 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                                 if (response.isSuccessful()){
                                     Toast.makeText(context, "Task has been successfully completed!", Toast.LENGTH_LONG).show();
                                     btnCompleteTask.setVisibility(View.INVISIBLE);
+                                    btnCompleteTask.setEnabled(false);
+                                    btnCompleteTaskDone.setVisibility(View.VISIBLE);
                                 }
                             }
 
@@ -200,6 +169,8 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
                                 if (response.isSuccessful()){
                                     Toast.makeText(context, "Task has been successfully started!", Toast.LENGTH_LONG).show();
                                     btnStartTask.setVisibility(View.INVISIBLE);
+                                    btnStartTask.setEnabled(false);
+                                    btnStartTaskDone.setVisibility(View.VISIBLE);
                                 }
                             }
 
@@ -221,17 +192,17 @@ public class TaskClassAdapter extends ArrayAdapter<TaskClass> {
             }
         });
 
-        btnAssignWorker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TaskClass taskClass = tasks.get(position);
-
-                Intent i = new Intent(context, TaskAssigned.class);
-
-                i.putExtra("assignworker", taskClass);
-                context.startActivity(i);
-            }
-        });
+//        btnAssignWorker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TaskClass taskClass = tasks.get(position);
+//
+//                Intent i = new Intent(context, TaskAssigned.class);
+//
+//                i.putExtra("assignworker", taskClass);
+//                context.startActivity(i);
+//            }
+//        });
 
         return view;
 

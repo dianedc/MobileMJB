@@ -78,6 +78,7 @@ dependencies {
     compile 'com.thoughtbot:expandablecheckrecyclerview:1.4'
     compile 'ivb.com.materialstepper:material-stepper:0.0.2'
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
+    compile 'com.nex3z:notification-badge:0.3.0'
 
     //Spring REST
     compile fileTree(dir: 'libs', include: ['*.jar'])

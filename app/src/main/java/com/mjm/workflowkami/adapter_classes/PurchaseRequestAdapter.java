@@ -38,9 +38,11 @@ public class PurchaseRequestAdapter extends ArrayAdapter<PurchaseRequestClass> {
         View view = layoutInflater.inflate(R.layout.list_item_prequest, parent, false);
 
         TextView txtProjID = (TextView) view.findViewById(R.id.preqID);
+//        TextView txt_preq_id  = (TextView) view.findViewById(R.id.txt_preq_id);
         try {
             if (preqs != null) {
-                txtProjID.setText(checkStatus(preqs.get(position).getPreqstatus().toString()));
+                txtProjID.setText(checkStatus(preqs.get(position).getPreqstatus()));
+//                txt_preq_id.setText("PR "+String.valueOf(preqs.get(position).getPreqID()));
             }
         } catch (Exception eo) {
             eo.printStackTrace();
@@ -69,15 +71,14 @@ public class PurchaseRequestAdapter extends ArrayAdapter<PurchaseRequestClass> {
         return view;
 
     }
-    public String checkStatus(String stat) {
+    public String checkStatus(boolean stat) {
 
-        switch(stat) {
-            case "true":
-                return "Approved";
-            case "false":
-                return "Declined";
-            default:
-                return "Waiting";
+        if (stat == true) {
+            return "Approved";
+        } else if (stat == false) {
+            return "Declined";
+        } else {
+            return "Waiting";
         }
 
     }

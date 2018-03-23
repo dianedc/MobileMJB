@@ -103,7 +103,7 @@ public class Tasks extends LoaderAsync
 
         listofTasks = (ListView) findViewById(R.id.lstTasks);
         if (projID != 0) {
-            final String uri = "http://192.168.2.107:8083/rest/project/" + projID + "/task";
+            final String uri = "http://10.1.11.213:8084/rest/project/" + projID + "/task";
             new ProjectTask().execute(uri);
         }
         layout = (PullRefreshLayout) findViewById(R.id.refreshTask);

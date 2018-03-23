@@ -81,15 +81,15 @@ public class PRequestFragment extends ListFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_preq, container, false);
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_preq);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent add = new Intent(getActivity(), AddPRequest.class);
-                startActivity(add);
-            }
-        });
-        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
+//        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_preq);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent add = new Intent(getActivity(), AddPRequest.class);
+//                startActivity(add);
+//            }
+//        });
+//        fab.setBackgroundTintList(getResources().getColorStateList(R.color.colorLightBlue));
 
         new ProjPReq().execute();
         return rootView;

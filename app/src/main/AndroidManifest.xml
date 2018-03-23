@@ -118,11 +118,12 @@
         <activity
             android:name=".impl_classes.Forms"
             android:label="@string/title_activity_forms"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".add_classes.AddTaskAssigned"
             android:label="@string/task_assigned"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Notifications"></activity>
     </application>
 
 </manifest>

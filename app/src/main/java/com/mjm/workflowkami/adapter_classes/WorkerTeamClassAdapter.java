@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mjm.workflowkami.R;
@@ -40,7 +41,6 @@ public class WorkerTeamClassAdapter extends ArrayAdapter<ProjectTeamClass>{
         txtworkersfirstname.setText(workers.get(position).getWorkersworkersID().getWorkersfirstname() + " " +
                                     workers.get(position).getWorkersworkersID().getWorkerslastname());
         workersID.setText(workers.get(position).getWorkersworkersID().getWorkersrole());
-
 
         return view;
 

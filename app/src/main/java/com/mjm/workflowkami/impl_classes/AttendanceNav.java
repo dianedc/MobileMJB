@@ -100,7 +100,7 @@ public class AttendanceNav extends LoaderAsync
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_attendance);
         navigationView.setNavigationItemSelectedListener(this);
     }
 

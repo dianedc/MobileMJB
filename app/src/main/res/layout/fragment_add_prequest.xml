@@ -4,6 +4,10 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="80dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.mjm.workflowkami.add_classes.AddPRequestHdr">
 
     <LinearLayout
@@ -205,7 +209,8 @@
             android:ems="14"
             android:hint="Date Approved"
             android:inputType="date"
-            android:textSize="6pt" />
+            android:textSize="6pt"
+            android:enabled="false"/>
 
         <Space
             android:layout_width="match_parent"
@@ -649,7 +654,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
-                android:text="Approved" />
+                android:text="Approved"/>
 
             <RadioButton
                 android:id="@+id/isapprovedpof"

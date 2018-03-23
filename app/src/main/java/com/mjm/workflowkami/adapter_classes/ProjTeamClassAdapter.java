@@ -43,7 +43,7 @@ public class ProjTeamClassAdapter extends ArrayAdapter<ProjectTeamClass>{
         txtworkersfirstname.setText(workers.get(position).getUserID().getFirstname() + " " +
         workers.get(position).getUserID().getLastname());
         TextView workersID = (TextView) view.findViewById(R.id.workersID);
-        workersID.setText(" ");
+        workersID.setVisibility(View.GONE);
 //        txtworkersfirstname.setText(String.valueOf(workers.get(position).getProjteamID()));
     
 //        TextView txtworkersrole = (TextView) view.findViewById(R.id.workersrolew);

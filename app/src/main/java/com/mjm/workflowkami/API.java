@@ -22,19 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class API {
-//    public final String BASE_URL = "http://192.168.2.108:8081/rest/";
-//    public final String BASE_URL = "http://192.168.2.123:8083/rest/";
-//    public final String BASE_URL = "http://10.1.12.136:8083/rest/";
-//    public final String BASE_URL = "http://192.168.0.22:8083/rest/";
-    public final String BASE_URL = "http://192.168.2.147:8083/rest/";
-//    public final String BASE_URL = "http://192.168.1.4:8083/rest/";
-//    public final String BASE_URL = "http://192.168.250.26:8083/rest/";
-//    public final String BASE_URL = "http://servicemjm-env.ap-southeast-1.elasticbeanstalk.com/";
-//    public final String BASE_URL = "http://192.168.2.144:8080/";
-//    public final String BASE_URL = "http://172.20.10.5:8083/rest/";
-    //    public final String BASE_URL = "http://10.1.15.97:8081/rest/";
-//    public final String BASE_URL = "http://192.168.254.108:8083/rest/";
-//    public final String BASE_URL = "http://192.168.2.144:8083/";
+    public final String BASE_URL = "http://10.1.11.213:8084/rest/";
     private static API instance = null;
 
     private UserService userService;

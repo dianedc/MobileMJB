@@ -83,8 +83,8 @@ public class Users extends LoaderAsync
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users2);
         loader = new SpotsDialog(Users.this);
-        loggedInUser = (TextView) findViewById(R.id.loggedInUsername);
-        loggedInEmail = (TextView) findViewById(R.id.loggedInUseremail);
+//        loggedInUser = (TextView) findViewById(R.id.loggedInUsername);
+//        loggedInEmail = (TextView) findViewById(R.id.loggedInUseremail);
         listOfUsers = (ListView) findViewById(R.id.lstUsers);
 
         serviceImpl.GetAllUsers();
@@ -92,7 +92,7 @@ public class Users extends LoaderAsync
 
         new Users.UserTask().execute();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_users);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -111,7 +111,7 @@ public class Users extends LoaderAsync
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_users);
         navigationView.setNavigationItemSelectedListener(this);
     }
 

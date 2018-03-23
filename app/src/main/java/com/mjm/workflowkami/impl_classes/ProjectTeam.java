@@ -91,7 +91,6 @@ public class ProjectTeam extends LoaderAsync
 
         listofTeam = (ListView) findViewById(R.id.lstTeams);
         if (projectIntent != null) {
-//            final String uri = "http://192.168.2.107:8083/rest/project/" + projectIntent.getProjID() + "/task";
             new ProjTeamTask().execute();
         }
 

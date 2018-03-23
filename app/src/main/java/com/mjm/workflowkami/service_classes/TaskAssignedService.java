@@ -23,11 +23,11 @@ public interface TaskAssignedService {
     @GET("project/{projectID}/task/{taskID}/assigned")
     Call<List<TaskAssignedClass>> getAllWorkersAssigned(@Path("projectID") int projectID, @Path("taskID") int taskID);
 
-    @POST("project/{projectID}/task/{taskID}/assigned")
+    @POST("project/{projectID}/task/{taskID}/assigned/add")
     Call<TaskAssignedClass> addTaskAssigned(@Path("projectID") int projectID, @Path("taskID") int taskID, @Body TaskAssignedClass assigned);
 
     @POST("project/task/assigned/update/{assignedID}")
-    Call<Void> addTaskAssigned(@Path("assignedID") int assignedID, @Body TaskAssignedClass assigned);
+    Call<Void> updateTaskAssigned(@Path("assignedID") int assignedID, @Body TaskAssignedClass assigned);
 
     @GET("project/assigned/{assignedID}")
     Call<TaskAssignedClass> getTaskAssignedByID(@Path("assignedID") int assignedID);

@@ -49,6 +49,7 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
     private ProjectClass projIntent = new ProjectClass();
     private TaskClass task;
     private TaskService taskService = API.getInstance().getTaskService();
+    private BigDecimal budget, spent;
 
 
     @Override
@@ -104,9 +105,11 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
                     break;
                 }
             }
+//            Toast.makeText(AddTask.this, taskIntent.getTaskphase(), Toast.LENGTH_LONG).show();
             taskBudget.setText(String.valueOf(taskIntent.getTaskbudget()));
             totalAmountSpent.setText(String.valueOf(taskIntent.getTasktotalspent()));
             taskHeader.setText(taskIntent.getTaskheader());
+            dateStarted.setText(taskIntent.getTaskdatestarted());
             fromDate.setText(taskIntent.getTaskstartdate());
             toDate.setText(taskIntent.getTaskenddate());
 
@@ -119,9 +122,10 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
             }
             taskDuration.setText(taskIntent.getTaskduration());
         }
-        final BigDecimal budget = new BigDecimal(taskBudget.getText().toString());
+        budget = new BigDecimal(taskBudget.getText().toString());
 
-        final BigDecimal spent = new BigDecimal(totalAmountSpent.getText().toString());
+//        Toast.makeText(AddTask.this, taskBudget.getText().toString(), Toast.LENGTH_LONG).show();
+        spent = new BigDecimal(totalAmountSpent.getText().toString());
 
         saveTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,8 +133,8 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
 
                 if (!taskID.getText().toString().matches("")) {
                     //update
-                    Toast.makeText(AddTask.this, String.valueOf(taskIntent.getProjectID().getProjID()), Toast.LENGTH_LONG).show();
-                    Toast.makeText(AddTask.this, taskID.getText().toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(AddTask.this, String.valueOf(taskIntent.getProjectID().getProjID()), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(AddTask.this, taskID.getText().toString(), Toast.LENGTH_LONG).show();
                     task = new TaskClass(Integer.valueOf(taskID.getText().toString()),
                             taskIntent.getProjectID(),
                             taskName.getText().toString().trim(),
@@ -259,9 +263,9 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
         addTask.enqueue(new Callback<TaskClass>() {
             @Override
             public void onResponse(Call<TaskClass> call, Response<TaskClass> response) {
-                Toast.makeText(AddTask.this, response.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(AddTask.this, response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
-                    Toast.makeText(AddTask.this, "Task has been successfully added!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(AddTask.this, "Task has been successfully added!", Toast.LENGTH_SHORT).show();
 
                     Intent u = new Intent(AddTask.this, Tasks.class);
                     startActivity(u);
@@ -269,7 +273,8 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
             }
             @Override
             public void onFailure(Call<TaskClass> call, Throwable t) {
-                Toast.makeText(AddTask.this, "An error has been encountered while adding task", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddTask.this, "An error has been encountered while adding task", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
             }
         });
     }
@@ -281,9 +286,9 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
         addTask.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(AddTask.this, response.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(AddTask.this, response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
-                    Toast.makeText(AddTask.this, "Task has been successfully edited!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(AddTask.this, "Task has been successfully edited!", Toast.LENGTH_SHORT).show();
 
                     Intent u = new Intent(AddTask.this, Users.class);
                     startActivity(u);
@@ -292,8 +297,8 @@ public class AddTask extends AppCompatActivity implements OnClickListener {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
-                Toast.makeText(AddTask.this, "An error has been encountered while editing task", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+//                Toast.makeText(AddTask.this, "An error has been encountered while editing task", Toast.LENGTH_SHORT).show();
             }
         });
     }

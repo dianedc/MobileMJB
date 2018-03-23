@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,15 @@ import com.mjm.workflowkami.impl_classes.Tasks;
 import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.ProjectTeamClass;
 import com.mjm.workflowkami.model_classes.WorkerClass;
+import com.mjm.workflowkami.service_classes.ProjectTeamService;
 import com.mjm.workflowkami.service_classes.WorkerService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by admin on 21 Nov 2017.
@@ -35,6 +41,8 @@ public class Worker extends ListFragment {
     private WorkerClass work = new WorkerClass();
     private ProgressDialog progressDialog;
     private ProjectClass proj = new ProjectClass();
+    private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
+    private List<ProjectTeamClass> pTeamWorkerList;
 
     private class WorkerTask extends AsyncTask<String, Void, List<ProjectTeamClass>> {
 
@@ -52,7 +60,32 @@ public class Worker extends ListFragment {
                 Intent pIntent = getActivity().getIntent();
                 proj = (ProjectClass) pIntent.getSerializableExtra("projects");
                 if (proj != null) {
-                    serviceImpl.GetWorkersTeamById(proj.getProjID());
+                    Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getWorkerTeamById(proj.getProjID());
+
+                    getProjTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
+                        @Override
+                        public void onResponse(Call<List<ProjectTeamClass>> call, Response<List<ProjectTeamClass>> response) {
+                            if (response.isSuccessful()) {
+                                List<ProjectTeamClass> projectTeamClassList = response.body();
+
+                                try {
+                                    for (int i = 0; i < projectTeamClassList.size(); i++) {
+                                        pTeamWorkerList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
+                                                projectTeamClassList.get(i).getProjectsprojID(),
+                                                projectTeamClassList.get(i).getUserID(),
+                                                projectTeamClassList.get(i).getWorkersworkersID()));
+                                    }
+                                } catch (final Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
                 }
                 try  {
                     Thread.sleep(5000);
@@ -60,8 +93,8 @@ public class Worker extends ListFragment {
                     e.printStackTrace();
                 }
 
-            } while (serviceImpl.pTeamList == null);
-            return serviceImpl.pTeamList;
+            } while (pTeamWorkerList == null);
+            return pTeamWorkerList;
         }
         @Override
         protected void onPostExecute(List<ProjectTeamClass> workerClassResponseEntity) {
@@ -74,12 +107,8 @@ public class Worker extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_worker, container, false);
+        pTeamWorkerList = new ArrayList<ProjectTeamClass>();
         new WorkerTask().execute();
-        Intent intent = getActivity().getIntent();
-        work = (WorkerClass) intent.getSerializableExtra("workers");
-
-        serviceImpl.GetAllWorkers();
-
         return rootView;
     }
 
@@ -90,14 +119,5 @@ public class Worker extends ListFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        WorkerClass worker = (WorkerClass) this.getListAdapter().getItem(position);
-        Intent i = new Intent(getContext(), Worker.class);
-
-        i.putExtra("item", worker);
-        getContext().startActivity(i);
-        super.onListItemClick(l, v, position, id);
-    }
 }
 

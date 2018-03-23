@@ -39,12 +39,22 @@
         android:inputType="textPersonName"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/task_assigned_proj"
+        android:layout_toStartOf="@+id/task_assigned_proj"
+        android:text="Projects" />
+
     <Spinner
         android:id="@+id/task_assigned_proj"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/space" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/space"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="48dp" />
 
     <!--</android.support.design.widget.TextInputLayout>-->
 
@@ -55,19 +65,28 @@
 
     <!--</android.support.design.widget.TextInputLayout>-->
 
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/task_assigned_task"
+        android:layout_toStartOf="@+id/task_assigned_proj"
+        android:text="Task" />
+
     <Spinner
         android:id="@+id/task_assigned_task"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/task_assigned_proj" />
+        android:layout_alignStart="@+id/btnLoadTasks"
+        android:layout_below="@+id/btnLoadTasks" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/task_assigned_task">
+        android:layout_below="@+id/task_assigned_task"
+        android:layout_marginTop="64dp">
 
         <Button
             android:id="@+id/btnCancel"
@@ -100,6 +119,15 @@
             android:textStyle="normal|bold" />
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnLoadTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/task_assigned_proj"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@+id/textView11"
+        android:text="Load Tasks" />
 
 
 </RelativeLayout>

@@ -42,7 +42,7 @@ public class Attendance extends ListFragment {
     private ProgressDialog progressDialog;
     private ProjectClass proj = new ProjectClass();
     private ProjectTeamService projectTeamService = API.getInstance().getProjectTeamService();
-    private List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
+    private List<ProjectTeamClass> pTeamList;
 
     private class WorkerTask extends AsyncTask<String, Void, List<ProjectTeamClass>> {
 
@@ -60,7 +60,33 @@ public class Attendance extends ListFragment {
                 Intent pIntent = getActivity().getIntent();
                 proj = (ProjectClass) pIntent.getSerializableExtra("projects");
                 if (proj != null) {
-                    serviceImpl.GetWorkersTeamById(proj.getProjID());
+                    Call<List<ProjectTeamClass>> getProjTeams = projectTeamService.getWorkerTeamById(proj.getProjID());
+
+                    getProjTeams.enqueue(new Callback<List<ProjectTeamClass>>() {
+                        @Override
+                        public void onResponse(Call<List<ProjectTeamClass>> call, Response<List<ProjectTeamClass>> response) {
+                            if (response.isSuccessful()) {
+                                List<ProjectTeamClass> projectTeamClassList = response.body();
+                                Log.d(TAG, response.toString());
+
+                                try {
+                                    for (int i = 0; i < projectTeamClassList.size(); i++) {
+                                        pTeamList.add(new ProjectTeamClass(projectTeamClassList.get(i).getProjteamID(),
+                                                projectTeamClassList.get(i).getProjectsprojID(),
+                                                projectTeamClassList.get(i).getUserID(),
+                                                projectTeamClassList.get(i).getWorkersworkersID()));
+                                    }
+                                } catch (final Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<ProjectTeamClass>> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
                 }
 
                 try  {
@@ -69,8 +95,8 @@ public class Attendance extends ListFragment {
                     e.printStackTrace();
                 }
 
-            } while (serviceImpl.pTeamList == null);
-            return serviceImpl.pTeamList;
+            } while (pTeamList == null);
+            return pTeamList;
         }
         @Override
         protected void onPostExecute(List<ProjectTeamClass> attendanceClassResponseEntity) {
@@ -83,33 +109,17 @@ public class Attendance extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_attendance, container, false);
-        Intent pIntent = getActivity().getIntent();
-        proj = (ProjectClass) pIntent.getSerializableExtra("projects");
-        Intent intent = getActivity().getIntent();
-        work = (WorkerClass) intent.getSerializableExtra("workers");
-//        final String uri = "http://192.168.2.123:8083/rest/project/"+proj.getProjID()+"/team";
+        pTeamList = new ArrayList<ProjectTeamClass>();
         new WorkerTask().execute();
-//        Toast.makeText(getActivity(), proj.toString(), Toast.LENGTH_LONG).show();
-//        serviceImpl.GetAllWorkers();
-
 
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        AttendanceClassAdapter adapter = new AttendanceClassAdapter(getActivity(), pTeamList);
-//        setListAdapter(adapter);
+        AttendanceClassAdapter adapter = new AttendanceClassAdapter(getActivity(), pTeamList);
+        setListAdapter(adapter);
         super.onActivityCreated(savedInstanceState);
     }
 
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id) {
-//        WorkerClass worker = (WorkerClass) this.getListAdapter().getItem(position);
-//        Intent i = new Intent(getContext(), Worker.class);
-//
-//        i.putExtra("item", worker);
-//        getContext().startActivity(i);
-//        super.onListItemClick(l, v, position, id);
-//    }
 }

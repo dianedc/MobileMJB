@@ -57,21 +57,17 @@ public class PurchaseRequestClass implements Serializable{
         else{ this.preqtotal = new BigDecimal("0.0");};
     }
 
-    public PurchaseRequestClass(ProjectClass projectID, String preqapproveddate, String preqrequesteddate, UserClass preqrequestedby, Boolean preqstatus, UserClass preqprojman, String preqpmdate, Boolean isapprovedpm, UserClass preqpurchofficer, String preqpodate, Boolean isapprovedpo, UserClass preqofficeengr, String preqoedate, Boolean isapprovedoe, BigDecimal preqsubtotal, double preqsalestax, BigDecimal preqtotal) {
+    public PurchaseRequestClass(ProjectClass projectID, String preqapproveddate, String preqrequesteddate, UserClass preqrequestedby, UserClass preqprojman, String preqpmdate, UserClass preqpurchofficer, String preqpodate, UserClass preqofficeengr, String preqoedate, BigDecimal preqsubtotal, double preqsalestax, BigDecimal preqtotal) {
         this.projectID = projectID;
         this.preqapproveddate = preqapproveddate;
         this.preqrequesteddate = preqrequesteddate;
         this.preqrequestedby = preqrequestedby;
-        this.preqstatus = preqstatus;
         this.preqprojman = preqprojman;
         this.preqpmdate = preqpmdate;
-        this.isapprovedpm = isapprovedpm;
         this.preqpurchofficer = preqpurchofficer;
         this.preqpodate = preqpodate;
-        this.isapprovedpo = isapprovedpo;
         this.preqofficeengr = preqofficeengr;
         this.preqoedate = preqoedate;
-        this.isapprovedoe = isapprovedoe;
         if(preqsubtotal!=null)
         {this.preqsubtotal = preqsubtotal;}
         else{ this.preqsubtotal = new BigDecimal("0.0");};

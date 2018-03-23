@@ -22,6 +22,7 @@ import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.adapter_classes.MoveWorkerAdapter;
 import com.mjm.workflowkami.adapter_classes.ProjectSpinnerAdapter;
+import com.mjm.workflowkami.adapter_classes.ProjectSpinnerMoveAdapter;
 import com.mjm.workflowkami.adapter_classes.TaskSpinnerAdapter;
 import com.mjm.workflowkami.impl_classes.TaskAssigned;
 import com.mjm.workflowkami.impl_classes.Workers;
@@ -29,6 +30,7 @@ import com.mjm.workflowkami.model_classes.ProjectClass;
 import com.mjm.workflowkami.model_classes.TaskAssignedClass;
 import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.model_classes.WorkerClass;
+import com.mjm.workflowkami.service_classes.TaskAssignedService;
 import com.mjm.workflowkami.service_classes.WorkerService;
 
 import java.util.List;
@@ -45,10 +47,11 @@ public class AddMoveWorker extends LoaderAsync
     private Button btnSaveTransfer;
     private TaskAssignedClass taskAssignedClass = new TaskAssignedClass();
     private TaskAssignedClass tIntent;
-    private WorkerService ws = API.getInstance().getWorkerService();
+    private TaskAssignedService taskAssignedService = API.getInstance().getTaskAssignedService();
     private ServiceImpl serviceImpl = new ServiceImpl();
     private ProjectClass projSelected;
     private TaskClass taskSelected;
+    private Button btnLoadTasks;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -85,11 +88,12 @@ public class AddMoveWorker extends LoaderAsync
         @Override
         protected void onPostExecute(List<ProjectClass> projectClassResponseEntity) {
             dismissProgressDialog();
-            task_assigned_proj.setAdapter(new ProjectSpinnerAdapter(AddMoveWorker.this, projectClassResponseEntity));
+            ProjectSpinnerMoveAdapter adapter = new ProjectSpinnerMoveAdapter(AddMoveWorker.this, projectClassResponseEntity);
+            task_assigned_proj.setAdapter(adapter);
         }
     }
 
-    public class MoveWorkerShowTask extends AsyncTask<String, Void, List<TaskClass>> {
+    public class MoveWorkerShowTask extends AsyncTask<Integer, Void, List<TaskClass>> {
 
         List<TaskClass> cached;
         @Override
@@ -102,11 +106,13 @@ public class AddMoveWorker extends LoaderAsync
         }
 
         @Override
-        protected List<TaskClass> doInBackground(String... strings) {
+        protected List<TaskClass> doInBackground(Integer... strings) {
+
+
 
             do {
                 if (projSelected != null) {
-                    serviceImpl.GetTaskByProjId(projSelected.getProjID());
+                    serviceImpl.GetTaskByProjId(strings[0]);
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
@@ -146,6 +152,7 @@ public class AddMoveWorker extends LoaderAsync
         task_assigned_pteam_id = (EditText) findViewById(R.id.task_assigned_pteam_id);
         task_assigned_proj = (Spinner) findViewById(R.id.task_assigned_proj);
         task_assigned_task = (Spinner) findViewById(R.id.task_assigned_task);
+        btnLoadTasks = (Button) findViewById(R.id.btnLoadTasks);
         btnSaveTransfer = (Button) findViewById(R.id.btnSaveTransfer);
         new MoveWorkerShowProjects().execute();
 
@@ -167,28 +174,41 @@ public class AddMoveWorker extends LoaderAsync
         }
 
         projSelected = (ProjectClass) task_assigned_proj.getSelectedItem();
-        new MoveWorkerShowTask().execute();
+//        final int projID = projSelected.getProjID();
+
+        btnLoadTasks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(AddMoveWorker.this, String.valueOf(projID), Toast.LENGTH_LONG).show();
+                new MoveWorkerShowTask().execute(projSelected.getProjID());
+            }
+        });
+//        new MoveWorkerShowTask().execute();
 
         btnSaveTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(AddMoveWorker.this, projSelected.getProjname(), Toast.LENGTH_LONG).show();
 //                if (!task_assigned_id.getText().toString().matches("")) {
-//                    taskAssignedClass = new TaskAssignedClass(tIntent.getTaskassignedID(),
-//                            task_assigned_proj.getSelectedItem(),
-//                            task_assigned_task.getSelectedItem(),
-//                            tIntent.getAssignedID());
-//                    EditWorker(wIntent.getWorkersID(), wor);
+////                    taskAssignedClass = new TaskAssignedClass(tIntent.getTaskassignedID(),
+////                            (ProjectClass) task_assigned_proj.getSelectedItem(),
+////                            (TaskClass) task_assigned_task.getSelectedItem(),
+////                            tIntent.getAssignedID());
+////                    EditWorker(tIntent.getTaskassignedID(), taskAssignedClass);
+//
+//                    Toast.makeText(AddMoveWorker.this, "Content Unavailable", Toast.LENGTH_LONG).show();
 //                } else {
-//                    wor = new WorkerClass(workerFName.getText().toString().trim(),
-//                            workerLName.getText().toString().trim(),
-//                            workerRole.getSelectedItem().toString());
-//                    SaveWorker(wor);
+//                    taskAssignedClass = new TaskAssignedClass(tIntent.getTaskassignedID(),
+//                            projSelected,
+//                            (TaskClass) task_assigned_task.getSelectedItem(),
+//                            tIntent.getAssignedID());
+//                    SaveMoveWorker(tIntent.getProjectID().getProjID(), tIntent.getTaskID().getTaskID(), taskAssignedClass);
 //                }
-                taskSelected = (TaskClass) task_assigned_task.getSelectedItem();
+//                taskSelected = (TaskClass) task_assigned_task.getSelectedItem();
 
 
 
-                Toast.makeText(AddMoveWorker.this, String.valueOf(taskSelected.getTaskID()), Toast.LENGTH_LONG).show();
+//                Toast.makeText(AddMoveWorker.this, String.valueOf(taskSelected.getTaskID()), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -202,22 +222,20 @@ public class AddMoveWorker extends LoaderAsync
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_back_worker:
-                startActivity(new Intent(this, Workers.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
 
+        if (id == android.R.id.home) {
+            this.finish();
         }
+        return super.onOptionsItemSelected(item);
     }
 
-    public void SaveWorker(WorkerClass w){
-        Call<WorkerClass> addWorker = ws.addWorker(w);
+    public void SaveMoveWorker(int projid, int taskid, TaskAssignedClass ta){
+        Call<TaskAssignedClass> addMoveWorker = taskAssignedService.addTaskAssigned(projid, taskid, ta);
 
-        addWorker.enqueue(new Callback<WorkerClass>() {
+        addMoveWorker.enqueue(new Callback<TaskAssignedClass>() {
             @Override
-            public void onResponse(Call<WorkerClass> call, Response<WorkerClass> response) {
+            public void onResponse(Call<TaskAssignedClass> call, Response<TaskAssignedClass> response) {
                 if (response.isSuccessful()) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddMoveWorker.this);
                     alertDialogBuilder.setMessage("Worker has been successfully added!");
@@ -230,44 +248,43 @@ public class AddMoveWorker extends LoaderAsync
             }
 
             @Override
-            public void onFailure(Call<WorkerClass> call, Throwable t) {
+            public void onFailure(Call<TaskAssignedClass> call, Throwable t) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddMoveWorker.this);
-                alertDialogBuilder.setMessage("An error has been encountered while adding worker");
+                alertDialogBuilder.setMessage("An error has been encountered while moving worker");
                 alertDialogBuilder.setCancelable(true);
                 alertDialogBuilder.show();
             }
         });
     }
-    public void EditWorker(int id, WorkerClass w) {
-        Call<Void> editWorker = ws.editWork(id, w);
-        editWorker.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddMoveWorker.this);
-                    alertDialogBuilder.setMessage("Worker has been successfully edited!");
-                    alertDialogBuilder.setCancelable(true);
-                    alertDialogBuilder.show();
-
-                    Intent u = new Intent(AddMoveWorker.this, Worker.class);
-                    startActivity(u);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddMoveWorker.this);
-                alertDialogBuilder.setMessage("An error has been encountered while adding worker");
-                alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.show();
-            }
-        });
-
-    }
+//    public void EditWorker(int id, WorkerClass w) {
+//        Call<Void> editWorker = ws.editWork(id, w);
+//        editWorker.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                if (response.isSuccessful()) {
+//                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddMoveWorker.this);
+//                    alertDialogBuilder.setMessage("Worker has been successfully moved!");
+//                    alertDialogBuilder.setCancelable(true);
+//                    alertDialogBuilder.show();
+//
+//                    Intent u = new Intent(AddMoveWorker.this, Worker.class);
+//                    startActivity(u);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddMoveWorker.this);
+//                alertDialogBuilder.setMessage("An error has been encountered while moving worker");
+//                alertDialogBuilder.setCancelable(true);
+//                alertDialogBuilder.show();
+//            }
+//        });
+//
+//    }
 
     public void onClickCancel(View v) {
-        Intent cancel = new Intent(AddMoveWorker.this, TaskAssigned.class);
-        startActivity(cancel);
+        AddMoveWorker.this.finish();
 
     }
 }

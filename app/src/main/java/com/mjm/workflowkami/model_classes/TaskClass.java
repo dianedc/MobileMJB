@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 public class TaskClass implements Serializable {
 
-    private Integer taskID;
+    private int taskID;
     private ProjectClass projectID;
     private String taskname;
     private String taskdesc;
@@ -23,7 +23,6 @@ public class TaskClass implements Serializable {
     private String taskdatecompleted;
     private String taskstatus;
     private String taskduration;
-
     private String Count;
 
     public TaskClass() {

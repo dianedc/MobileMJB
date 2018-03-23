@@ -19,9 +19,9 @@
 
     <string-array name="taskPhase">
         <item>Select Phase</item>
-        <item>Pre-Construction</item>
-        <item>Construction</item>
-        <item>Post-Construction</item>
+        <item>Pre-Construction Phase</item>
+        <item>Construction Phase</item>
+        <item>Post-Construction Phase</item>
     </string-array>
     <!-- END TASK -->
 

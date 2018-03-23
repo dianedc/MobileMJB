@@ -20,7 +20,9 @@ import com.mjm.workflowkami.model_classes.WorkerClass;
 import com.mjm.workflowkami.service_classes.AttendanceService;
 import com.mjm.workflowkami.service_classes.ProjectService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,10 +36,6 @@ import retrofit2.Response;
 public class WorkerClassAdapter extends ArrayAdapter<ProjectTeamClass>{
     private Context context;
     private List<ProjectTeamClass> workers;
-    private ServiceImpl serviceImpl = new ServiceImpl();
-    private String TAG = ServiceImpl.class.getSimpleName();
-    private ProjectTeamClass projteamIntent = new ProjectTeamClass();
-    public List<ProjectTeamClass> pTeamList = new ArrayList<ProjectTeamClass>();
     private ProjectService attendanceService = API.getInstance().getProjectService();
     private WorkerClass w = new WorkerClass();
     private int projid, projteamid;
@@ -65,11 +63,11 @@ public class WorkerClassAdapter extends ArrayAdapter<ProjectTeamClass>{
         txtworkersrole.setText(String.valueOf(workers.get(position).getWorkersworkersID().getWorkersrole()));
 
 
-       Button btnTimeIn = (Button) view.findViewById(R.id.btnTimeIn);
+       final Button btnTimeIn = (Button) view.findViewById(R.id.btnTimeIn);
         btnTimeIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, String.valueOf(workers.get(position).getWorkersworkersID().getWorkersID()), Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, String.valueOf(workers.get(position).getWorkersworkersID().getWorkersID()), Toast.LENGTH_LONG).show();
 
                 Call<Void> timeIn = attendanceService.workerTimeIn(workers.get(position).getProjectsprojID().getProjID(),
                         workers.get(position).getProjteamID());
@@ -77,13 +75,20 @@ public class WorkerClassAdapter extends ArrayAdapter<ProjectTeamClass>{
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                            SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            String format = s.format(new Date());
+
+                            Toast.makeText(context, "Attendance In at: " + format, Toast.LENGTH_LONG).show();
+                            btnTimeIn.setVisibility(View.GONE);
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
                         Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
+                        t.printStackTrace();
                     }
                 });
             }

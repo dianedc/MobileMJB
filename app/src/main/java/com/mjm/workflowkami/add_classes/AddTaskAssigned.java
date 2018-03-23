@@ -19,6 +19,7 @@ import com.mjm.workflowkami.R;
 import com.mjm.workflowkami.ServiceImpl;
 import com.mjm.workflowkami.impl_classes.TaskAssigned;
 import com.mjm.workflowkami.impl_classes.Users;
+import com.mjm.workflowkami.model_classes.TaskClass;
 import com.mjm.workflowkami.model_classes.UserClass;
 import com.mjm.workflowkami.service_classes.UserService;
 
@@ -32,6 +33,7 @@ public class AddTaskAssigned extends AppCompatActivity {
     private Button btnSaveTaskAssigned;
     private ServiceImpl serviceImpl = new ServiceImpl();
     private UserService userService = API.getInstance().getUserService();
+    private TaskClass taskIntent = new TaskClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +45,14 @@ public class AddTaskAssigned extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+//        Intent intent = getIntent();
+//        taskIntent = (TaskClass) intent.getSerializableExtra("assignworker2");
+
         task_assigned_add_proj = (Spinner) findViewById(R.id.task_assigned_add_proj);
         task_assigned_add_task = (Spinner) findViewById(R.id.task_assigned_add_task);
         task_assigned_add_worker = (Spinner) findViewById(R.id.task_assigned_add_worker);
         btnSaveTaskAssigned = (Button) findViewById(R.id.btnSaveTaskAssigned);
+//        Toast.makeText(AddTaskAssigned.this, taskIntent.toString(), Toast.LENGTH_LONG).show();
 
 //        Intent intent = getIntent();
 //        userIntent = (UserClass) intent.getSerializableExtra("users");

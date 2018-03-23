@@ -62,14 +62,14 @@ public class AddPRequestHdr extends Fragment {
     private TextView requestedby_preq_id, preqProjMan_id, preqOfficeEng_id, preqPOfficer_id,  preq_sub_total, preq_sales_tax, preq_total;
     private TextView isApproved, isWaiting, isDeclined;
     private RadioGroup rdogrppm, rdogrppo, rdogrpoe, rdogrpstat;
-    private RadioButton rdopm, rdostat, rdooe, rdopo, sstat, spm, soe, spo;
+    private RadioButton rdopm, rdooe, rdopo, spm, soe, spo, fpm, foe, fpo;
     private Button btnSavePReq;
     private SpinnerDialog reqDialog, pmDialog, poDialog, oeDialog;
     private Spinner preq_reqby, preq_proj_man, preq_office_eng, preq_po, preq_proj_name;
 
     private ServiceImpl serviceImpl = new ServiceImpl();
     private PurchaseRequestClass preqIntent = new PurchaseRequestClass();
-    private PurchaseRequestClass addPreq = new PurchaseRequestClass();
+    private PurchaseRequestClass addPreq;
     private ProjectClass projs = new ProjectClass();
     private PurchaseRequestService preqService = API.getInstance().getPurchaseRequestService();
 
@@ -345,6 +345,7 @@ public class AddPRequestHdr extends Fragment {
 
         serviceImpl.GetAllUserId();
         serviceImpl.GetAllUsers();
+        addPreq = new PurchaseRequestClass();
         req = new UserClass();
         pm = new UserClass();
         po = new UserClass();
@@ -369,6 +370,7 @@ public class AddPRequestHdr extends Fragment {
         int selected1 = rdogrppm.getCheckedRadioButtonId();
         rdopm = (RadioButton) rootView.findViewById(selected1);
         spm = (RadioButton) rootView.findViewById(R.id.isapprovedpmt);
+        fpm = (RadioButton) rootView.findViewById(R.id.isapprovedpmf);
 
         spm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -381,6 +383,7 @@ public class AddPRequestHdr extends Fragment {
         int selected2 = rdogrpoe.getCheckedRadioButtonId();
         rdooe = (RadioButton) rootView.findViewById(selected2);
         soe = (RadioButton) rootView.findViewById(R.id.isapprovedoet);
+        foe = (RadioButton) rootView.findViewById(R.id.isapprovedoef);
 
         soe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -393,6 +396,7 @@ public class AddPRequestHdr extends Fragment {
         int selected3 = rdogrppo.getCheckedRadioButtonId();
         rdopo = (RadioButton) rootView.findViewById(selected3);
         spo = (RadioButton) rootView.findViewById(R.id.isapprovedpot);
+        fpo = (RadioButton) rootView.findViewById(R.id.isapprovedpof);
 
         spo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -537,21 +541,28 @@ public class AddPRequestHdr extends Fragment {
 //                } else if (preqIntent.getPreqstatus() == true) {
 //                    rdogrpstat.check(R.id.statt);
 //                }
-                checkStatus(String.valueOf(preqIntent.getPreqstatus()));
+                checkStatus(preqIntent.getPreqstatus());
                 if (preqIntent.getIsapprovedpo() == null) {
 
                 } else if (preqIntent.getIsapprovedpo() == true) {
                     rdogrppo.check(R.id.isapprovedpot);
+                    spo.setEnabled(false);
+                    fpo.setEnabled(false);
+
                 }
                 if (preqIntent.getIsapprovedoe() == null) {
 
                 } else if (preqIntent.getIsapprovedoe() == true) {
                     rdogrpoe.check(R.id.isapprovedoet);
+                    foe.setEnabled(false);
+                    soe.setEnabled(false);
                 }
                 if (preqIntent.getIsapprovedpm() == null) {
 
                 } else if (preqIntent.getIsapprovedpm() == true) {
                     rdogrppm.check(R.id.isapprovedpmt);
+                    spm.setEnabled(false);
+                    fpm.setEnabled(false);
                 }
 
                 preq_reqby.setEnabled(false);
@@ -563,6 +574,10 @@ public class AddPRequestHdr extends Fragment {
                 dateauthorized_purchase.setEnabled(false);
                 officeengineer_dateapproved.setEnabled(false);
                 projman_dateapproved.setEnabled(false);
+            } else {
+                if (preqIntent.getPreqstatus() == null) {
+                    preqIntent.setPreqstatus(null);
+                }
             }
         } catch (Exception eo) {
 //            Toast.makeText(getActivity(), eo.toString(), Toast.LENGTH_LONG).show();
@@ -732,16 +747,12 @@ public class AddPRequestHdr extends Fragment {
                             preq_dateapproved.getText().toString().trim(),
                             preq_daterequested.getText().toString().trim(),
                             req,
-                            preqIntent.getPreqstatus(),
                             pm,
                             projman_dateapproved.getText().toString().trim(),
-                            ispm,
                             po,
                             dateauthorized_purchase.getText().toString().trim(),
-                            ispo,
                             oe,
                             officeengineer_dateapproved.getText().toString().trim(),
-                            isoe,
                             subTotal,
                             salTax,
                             total);
@@ -817,6 +828,8 @@ public class AddPRequestHdr extends Fragment {
 //
 //    }
 
+
+
     public void SavePReq(PurchaseRequestClass pr) {
 
         Call<PurchaseRequestClass> addPreq = preqService.addPreq(pr);
@@ -826,7 +839,8 @@ public class AddPRequestHdr extends Fragment {
             public void onResponse(Call<PurchaseRequestClass> call, Response<PurchaseRequestClass> response) {
 //                Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
-                    Toast.makeText(getActivity(), "Request has been successfully added!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(), "Request has been successfully added!", Toast.LENGTH_SHORT).show();
 
                     getActivity().finish();
                 }
@@ -834,7 +848,8 @@ public class AddPRequestHdr extends Fragment {
 
             @Override
             public void onFailure(Call<PurchaseRequestClass> call, Throwable t) {
-                Toast.makeText(getActivity(), "An error has been encountered while adding request", Toast.LENGTH_SHORT);
+                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "An error has been encountered while adding request", Toast.LENGTH_SHORT);
             }
         });
     }
@@ -866,20 +881,14 @@ public class AddPRequestHdr extends Fragment {
 
     }
 
-    public void checkStatus(String stat) {
+    public void checkStatus(boolean stat) {
 
-        switch(stat) {
-            case "true":
-                isApproved.setVisibility(View.VISIBLE);
-//                return true;
-                break;
-            case "false":
-                isDeclined.setVisibility(View.VISIBLE);
-//                return false;
-                break;
-            default:
-                isWaiting.setVisibility(View.VISIBLE);
-                break;
+        if (stat == true) {
+            isApproved.setVisibility(View.VISIBLE);
+        } else if (stat == false) {
+            isDeclined.setVisibility(View.VISIBLE);
+        } else {
+            isWaiting.setVisibility(View.VISIBLE);
         }
 
     }

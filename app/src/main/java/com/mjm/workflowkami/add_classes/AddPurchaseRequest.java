@@ -31,7 +31,7 @@ public class AddPurchaseRequest extends AppCompatActivity
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        savePReq = (Button) findViewById(R.id.btnSavePReq);
+//        savePReq = (Button) findViewById(R.id.btnSavePReq);
 //        preq_daterequested = (EditText) findViewById(R.id.preq_daterequested);
         dateFormat= new SimpleDateFormat("yyyy-dd-MM");
 //        preq_daterequested.setText(dateFormat.format(new Date()));

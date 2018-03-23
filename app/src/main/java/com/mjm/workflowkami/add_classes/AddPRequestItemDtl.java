@@ -118,11 +118,11 @@ public class AddPRequestItemDtl extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                int input = Integer.valueOf(preq_dtl_uni_price.getText().toString());
-                int input2 = Integer.valueOf(preq_dtl_qty.getText().toString());
-                int res = input * input2;
-                preq_dtl_line_tot.setText(String.valueOf(res));
-                lineTot = new BigDecimal(preq_dtl_line_tot.getText().toString());
+//                int input = Integer.valueOf(preq_dtl_uni_price.getText().toString());
+//                int input2 = Integer.valueOf(preq_dtl_qty.getText().toString());
+//                int res = input * input2;
+//                preq_dtl_line_tot.setText(String.valueOf(res));
+//                lineTot = new BigDecimal(preq_dtl_line_tot.getText().toString());
             }
         });
 

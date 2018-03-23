@@ -115,7 +115,7 @@ public class Projects extends LoaderAsync
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_projects);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
